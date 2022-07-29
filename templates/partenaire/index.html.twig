@@ -36,30 +36,74 @@
                         <td>{{ partenaire.name }}</td>
                         <td>{{ partenaire.email }}</td>
                         <td>{{ partenaire.password }}</td>
-                        {# <td>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
-                            </div>
-                        </td> #}
-                        <td data-label = "Planning" class="field-boolean has-switch">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" role="switch" type="checkbox" id="flexSwitchCheckDefault">{{ (partenaire.Planning) }}
-                                <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                            </div>
+                     
+                        <td>
+                            {% if partenaire.planning == true %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                                </div>
+                                {% else %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                                {% endif %}
                         </td>
-                        <td>{{ partenaire.newsletter }}</td>
-                        <td>{{ partenaire.boissons }}</td>
-                        <td>{{ partenaire.sms }}</td>
-                        <td>{{ partenaire.promotions }}</td>
-                        <td>{{ partenaire.concours }}</td>
+                        <td>
+                            {% if partenaire.newsletter == true %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                                </div>
+                                {% else %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if partenaire.boissons == true %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                                </div>
+                                {% else %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if partenaire.sms == true %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                                </div>
+                                {% else %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if partenaire.promotions == true %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                                </div>
+                                {% else %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if partenaire.concours == true %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                                </div>
+                                {% else %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                                {% endif %}
+                        </td>
 
                         <td>
-                    <a class="btn btn-secondary mx-2" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}">Show</a>
-                    <a class="btn btn-primary mx-2" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}">Edit</a>
-                    <a class="btn btn-danger mx-2" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}">Delete</a>
-                </td>
+                            <a class="btn btn-secondary mx-2" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}">Voir</a>
+                            <a class="btn btn-primary mx-2" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}">Editer</a>
+                            <a class="btn btn-danger mx-2" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}">Supprimer</a>
+                        </td>
                     </tr>
-
                     
                 {% endfor %}
                 
