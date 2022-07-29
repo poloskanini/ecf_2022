@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Partenaire index{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1>Partenaires :</h1>
+
+    {# Flash message "Correctement ajouté" #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+        <a class="btn btn-success" href="{{ path('app_partenaire_new') }}">Créer un partenaire </a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Planning</th>
+                    <th scope="col">Newsletter</th>
+                    <th scope="col">Boissons</th>
+                    <th scope="col">Sms</th>
+                    <th scope="col">Promotions</th>
+                    <th scope="col">Concours</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for partenaire in partenaires %}
+                    <tr class="">
+                        <th scope="row">{{ partenaire.id }}</th>
+                        <td>{{ partenaire.name }}</td>
+                        <td>{{ partenaire.email }}</td>
+                        <td>{{ partenaire.password }}</td>
+                        {# <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                            </div>
+                        </td> #}
+                        <td data-label = "Planning" class="field-boolean has-switch">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">{{ partenaire.planning }}</label>
+                            </div>
+                        </td>
+                        <td>{{ partenaire.newsletter }}</td>
+                        <td>{{ partenaire.boissons }}</td>
+                        <td>{{ partenaire.sms }}</td>
+                        <td>{{ partenaire.promotions }}</td>
+                        <td>{{ partenaire.concours }}</td>
+
+                        <td>
+                    <a class="btn btn-secondary" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}">Edit</a>
+                    <a class="btn btn-warning" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}">Delete</a>
+                </td>
+                    </tr>
+
+                    
+                {% endfor %}
+                
+            </tbody>
+        
+        </table>
+</div>
+
+{% endblock %}
