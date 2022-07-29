@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau Partenaire{% endblock %}
+{% block title %}Créer un nouveau Partenaire{% endblock %}
 
-{% block body %}
+{% block content %}
 <div class="container">
 
-    <h1 class="my-4">Création d'un nouveau partenaire</h1>
+    <h1 class="my-4">Créer un nouveau partenaire</h1>
 
     {{ form_start(form) }}
     <div class="form-error">
@@ -30,43 +30,48 @@
         {{ form_errors(form.password)}}
     </div>
 
-    <div class="form-group">
+    <div class="global-functions">
+        <div class="form-group form-functions">
         {{ form_label(form.Planning)}}
         {{ form_widget(form.Planning)}}
         {{ form_errors(form.Planning)}}
+        </div>
+
+        <div class="form-group form-functions">
+            {{ form_label(form.Newsletter)}}
+            {{ form_widget(form.Newsletter)}}
+            {{ form_errors(form.Newsletter)}}
+        </div>
+
+        <div class="form-group form-functions">
+            {{ form_label(form.Boissons)}}
+            {{ form_widget(form.Boissons)}}
+            {{ form_errors(form.Boissons)}}
+        </div>
+
+        <div class="form-group form-functions">
+            {{ form_label(form.SMS)}}
+            {{ form_widget(form.SMS)}}
+            {{ form_errors(form.SMS)}}
+        </div>
+
+        <div class="form-group form-functions">
+            {{ form_label(form.Promotions)}}
+            {{ form_widget(form.Promotions)}}
+            {{ form_errors(form.Promotions)}}
+        </div>
+
+        <div class="form-group form-functions">
+            {{ form_label(form.Concours)}}
+            {{ form_widget(form.Concours)}}
+            {{ form_errors(form.Concours)}}
+        </div>
     </div>
 
-    <div class="form-group">
-        {{ form_label(form.Newsletter)}}
-        {{ form_widget(form.Newsletter)}}
-        {{ form_errors(form.Newsletter)}}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.Boissons)}}
-        {{ form_widget(form.Boissons)}}
-        {{ form_errors(form.Boissons)}}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.SMS)}}
-        {{ form_widget(form.SMS)}}
-        {{ form_errors(form.SMS)}}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.Promotions)}}
-        {{ form_widget(form.Promotions)}}
-        {{ form_errors(form.Promotions)}}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.Concours)}}
-        {{ form_widget(form.Concours)}}
-        {{ form_errors(form.Concours)}}
-    </div>
-    
+    {{ form_row(form.Submit, { 'label': 'Créer un nouveau partenaire' }) }}
     {{ form_end(form) }}
 
 </div>
+
+    {# {{ form(form)}} #}
 {% endblock %}

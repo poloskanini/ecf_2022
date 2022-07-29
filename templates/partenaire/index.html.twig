@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Partenaire index{% endblock %}
-
-{% block body %}
+{% block content %}
 
 <div class="container">
 
@@ -14,8 +12,6 @@
             {{ message }}
         </div>
     {% endfor %}
-
-        <a class="btn btn-success" href="{{ path('app_partenaire_new') }}">Créer un partenaire </a>
 
         <table class="table">
             <thead>
@@ -47,8 +43,8 @@
                         </td> #}
                         <td data-label = "Planning" class="field-boolean has-switch">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">{{ partenaire.planning }}</label>
+                                <input class="form-check-input" role="switch" type="checkbox" id="flexSwitchCheckDefault">{{ (partenaire.Planning) }}
+                                <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                             </div>
                         </td>
                         <td>{{ partenaire.newsletter }}</td>
@@ -58,9 +54,9 @@
                         <td>{{ partenaire.concours }}</td>
 
                         <td>
-                    <a class="btn btn-secondary" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}">Edit</a>
-                    <a class="btn btn-warning" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}">Delete</a>
+                    <a class="btn btn-secondary mx-2" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}">Show</a>
+                    <a class="btn btn-primary mx-2" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}">Edit</a>
+                    <a class="btn btn-danger mx-2" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}">Delete</a>
                 </td>
                     </tr>
 
@@ -70,6 +66,9 @@
             </tbody>
         
         </table>
+
+        <a class="btn btn-success" href="{{ path('app_partenaire_new') }}">Créer un partenaire </a>
+
 </div>
 
 {% endblock %}

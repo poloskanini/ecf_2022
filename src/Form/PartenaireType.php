@@ -50,7 +50,7 @@ class PartenaireType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
-                'label' => 'Votre mot de passe',
+                'label' => false,
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -85,7 +85,8 @@ class PartenaireType extends AbstractType
             ])
             ->add('SMS', CheckboxType::class, [
                 'attr' => ['class' => 'form-widget form-switch form-check form-check-input mb-4'],
-                'required' => false
+                'required' => false,
+                'label' => 'SMS'
             ])
             ->add('Promotions', CheckboxType::class, [
                 'attr' => ['class' => 'form-widget form-switch form-check form-check-input mb-4'],
