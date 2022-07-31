@@ -40,6 +40,9 @@ class Partenaire
     #[ORM\Column(nullable: true)]
     private ?bool $concours = null;
 
+    #[ORM\Column]
+    private ?bool $isActive = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -149,6 +152,18 @@ class Partenaire
     public function setConcours(?bool $concours): self
     {
         $this->concours = $concours;
+
+        return $this;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

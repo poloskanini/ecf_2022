@@ -72,6 +72,10 @@ class PartenaireType extends AbstractType
                     ],
                 ]
             ])
+            ->add('isActive', CheckboxType::class, [
+                'label' => 'Actif',
+                'attr' => ['class' => 'form-widget form-check form-check-input form-switch mb-4'],
+            ])
             ->add('Planning', CheckboxType::class, [
                 'attr' => ['class' => 'form-widget form-check form-check-input form-switch mb-4'],
                 'required' => false,

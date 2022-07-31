@@ -34,8 +34,8 @@ class PartenaireController extends AbstractController
     
             $this->addFlash(
                 'success',
-                'Votre partenaire a été correctement ajouté'
-                );
+                'Le partenaire "' .$partenaire->getName(). '" a été ajouté avec succès'
+            );
 
             return $this->redirectToRoute('app_partenaire_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -65,8 +65,8 @@ class PartenaireController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre partenaire a été correctement modifié'
-                );
+                'Le partenaire "' .$partenaire->getName(). '" a été modifié avec succès'
+            );
 
             return $this->redirectToRoute('app_partenaire_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -102,8 +102,8 @@ class PartenaireController extends AbstractController
 
         $this->addFlash(
             'success',
-            'Votre partenaire a été supprimé avec succès'
-            );
+            'Le partenaire "' .$partenaire->getName(). '" a été supprimé avec succès'
+        );
 
         return $this->redirectToRoute('app_partenaire_index', [], Response::HTTP_SEE_OTHER);
     }

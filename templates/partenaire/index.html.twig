@@ -20,6 +20,7 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
                     <th scope="col">Mot de passe</th>
+                    <th scope="col">Actif</th>
                     <th scope="col">Planning</th>
                     <th scope="col">Newsletter</th>
                     <th scope="col">Boissons</th>
@@ -36,7 +37,17 @@
                         <td>{{ partenaire.name }}</td>
                         <td>{{ partenaire.email }}</td>
                         <td>{{ partenaire.password }}</td>
-                     
+
+                        <td>
+                            {% if partenaire.isActive == true %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                                </div>
+                                {% else %}
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                                {% endif %}
+                        </td>
                         <td>
                             {% if partenaire.planning == true %}
                                 <div class="form-check form-switch">
