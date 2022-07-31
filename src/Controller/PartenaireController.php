@@ -46,7 +46,7 @@ class PartenaireController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_partenaire_show', methods: ['GET'])]
+    #[Route('/{id}/show', name: 'app_partenaire_show', methods: ['GET'])]
     public function show(Partenaire $partenaire): Response
     {
         return $this->render('partenaire/show.html.twig', [
@@ -77,12 +77,33 @@ class PartenaireController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_partenaire_delete', methods: ['POST'])]
-    public function delete(Request $request, Partenaire $partenaire, PartenaireRepository $partenaireRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$partenaire->getId(), $request->request->get('_token'))) {
-            $partenaireRepository->remove($partenaire, true);
+    #[Route('/{id}/delete', name: 'app_partenaire_delete', methods: ['GET'])]
+    // public function delete(Request $request, Partenaire $partenaire, PartenaireRepository $partenaireRepository): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$partenaire->getId(), $request->request->get('_token'))) {
+    //         $partenaireRepository->remove($partenaire, true);
+    //     }
+
+    //     return $this->redirectToRoute('app_partenaire_index', [], Response::HTTP_SEE_OTHER);
+    // }
+    public function delete(EntityManagerInterface $manager, Partenaire $partenaire) {
+        
+        if(!$partenaire) {
+            $this->addFlash(
+                'warning',
+                'Le partenaire n\'a pas été trouvé'
+                );
+
+                return $this->redirectToRoute('app_partenaire_index', [], Response::HTTP_SEE_OTHER);
         }
+        
+        $manager->remove($partenaire);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Votre partenaire a été supprimé avec succès'
+            );
 
         return $this->redirectToRoute('app_partenaire_index', [], Response::HTTP_SEE_OTHER);
     }

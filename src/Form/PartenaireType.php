@@ -22,6 +22,7 @@ class PartenaireType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'attr' => [
+                    'placeholder' => 'Votre nom',
                     'class' => 'form-control mb-4',
                     'minlength' => '2',
                     'maxlength' => '50'
@@ -37,7 +38,7 @@ class PartenaireType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'placeholder' => 'Merci de saisir votre adresse email',
+                    'placeholder' => 'Merci de saisir votre email',
                     'class' => 'form-control mb-4'
                 ],
                 'label' => 'Votre email',
@@ -72,8 +73,8 @@ class PartenaireType extends AbstractType
                 ]
             ])
             ->add('Planning', CheckboxType::class, [
-                'attr' => ['class' => 'form-widget form-switch form-check form-check-input mb-4'],
-                'required' => false
+                'attr' => ['class' => 'form-widget form-check form-check-input form-switch mb-4'],
+                'required' => false,
             ])
             ->add('Newsletter', CheckboxType::class, [
                 'attr' => ['class' => 'form-widget form-switch form-check form-check-input mb-4'],

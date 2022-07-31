@@ -1,4 +1,7 @@
-
+/* body {
+  background-image: url("../../assets/img/55393237_m.jpg");
+  background-size: cover;
+} */
 
 @media (min-width: 991.98px) {
   main {
@@ -50,4 +53,22 @@
   flex-direction: column;
   align-items: center;
   margin: 0 2rem;
+}
+
+/* Buttons */
+.crud-button,
+.back-button {
+  text-decoration: none;
+}
+
+.back-button::before {
+  padding-right: .3rem;
+}
+
+.see-button {
+  color: green;
+}
+
+.delete-button {
+  color: rgb(232, 24, 24);
 }

@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Partenaire{% endblock %}
+{% block title %}Voir un Partenaire{% endblock %}
 
 {% block content %}
 
 <div class="container">
-    <h1>Partenaire</h1>
+    <a class="back-button fa fa-arrow-circle-left" href="{{ path('app_partenaire_index') }}">Retour</a>
+    
+    <h1 class="my-4">Voir un partenaire</h1>
 
     <table class="table">
         <tbody>
@@ -52,8 +54,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_partenaire_index') }}">back to list</a>
-    <a href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}">edit</a>
 </div>
     
 {% endblock %}

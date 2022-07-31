@@ -5,10 +5,12 @@
 {% block content %}
 <div class="container">
 
+    <a class="back-button fa fa-arrow-circle-left" href="{{ path('app_partenaire_index') }}">Retour</a>
+
     <h1 class="my-4">Créer un nouveau partenaire</h1>
 
     {{ form_start(form) }}
-    <div class="form-error">
+    <div class="form-error is-invalid">
         {{ form_errors(form) }}
     </div>
 

@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <h1>Partenaires :</h1>
+    <h1 class="my-4">Partenaires :</h1>
 
     {# Flash message "Correctement ajouté" #}
     {% for message in app.flashes('success') %}
@@ -13,13 +13,13 @@
         </div>
     {% endfor %}
 
-        <table class="table">
+        <table class="table table-hover">
             <thead>
-                <tr>
+                <tr class="">
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Nom</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
+                    <th scope="col">Mot de passe</th>
                     <th scope="col">Planning</th>
                     <th scope="col">Newsletter</th>
                     <th scope="col">Boissons</th>
@@ -99,9 +99,10 @@
                         </td>
 
                         <td>
-                            <a class="btn btn-secondary mx-2" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}">Voir</a>
-                            <a class="btn btn-primary mx-2" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}">Editer</a>
-                            <a class="btn btn-danger mx-2" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}">Supprimer</a>
+                            <a class="crud-button edit-button fa fa-pen-square mx-2 fs-5" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}"></a>
+                            <a class="crud-button see-button fa fa-eye mx-2 fs-5" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}"></a>
+                            {# <a class="crud-button delete-button fa fa-trash mx-2 fs-5" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}"></a> #}
+                            <a class="crud-button delete-button fa fa-trash mx-2 fs-5" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer cet ingrédient ?')"></a>
                         </td>
                     </tr>
                     
@@ -111,7 +112,7 @@
         
         </table>
 
-        <a class="btn btn-success" href="{{ path('app_partenaire_new') }}">Créer un partenaire </a>
+        <a class="btn btn-success" href="{{ path('app_partenaire_new') }}">Créer un nouveau partenaire </a>
 
 </div>
 
