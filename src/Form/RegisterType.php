@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,6 +19,11 @@ class RegisterType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
+                'required' => true,
+                'constraints' => new Length([
+                    'min' => 2,
+                    'max' => 60
+                ]),
                 'attr' => [
                     'placeholder' => 'Merci de saisir une adresse email'
                 ]
@@ -25,14 +31,21 @@ class RegisterType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
-                'required' => true,
                 'label' => 'Votre mot de passe',
-                'first_options' => [ 'label' => 'Mot de passe'],
-                'second_options' => [ 'label' => 'Confirmez votre mot de passe'],
+                'required' => true,
+                'first_options' => [
+                    'label' => 'Mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Merci de saisir votre mot de passe'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'Confirmez votre mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Merci de saisir un mot de passe'
+                    ]
+                ],
 
-                'attr' => [
-                    'placeholder' => 'Merci de saisir un mot de passe'
-                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => "S'inscrire"

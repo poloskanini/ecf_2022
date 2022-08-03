@@ -40,7 +40,7 @@ class Partenaire
     #[ORM\Column(nullable: true)]
     private ?bool $concours = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $isActive = true;
 
     public function getId(): ?int
