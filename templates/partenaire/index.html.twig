@@ -15,117 +15,120 @@
         </div>
     {% endfor %}
 
-        <table class="table table-hover">
-            <thead>
+    <table class="table table-hover text-center">
+        <thead>
+            <tr class="">
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mot de passe</th>
+                <th scope="col">Actif</th>
+                <th scope="col">Planning</th>
+                <th scope="col">Newsletter</th>
+                <th scope="col">Boissons</th>
+                <th scope="col">Sms</th>
+                <th scope="col">Promotions</th>
+                <th scope="col">Concours</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partenaire in partenaires %}
                 <tr class="">
-                    <th scope="col">ID</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Mot de passe</th>
-                    <th scope="col">Actif</th>
-                    <th scope="col">Planning</th>
-                    <th scope="col">Newsletter</th>
-                    <th scope="col">Boissons</th>
-                    <th scope="col">Sms</th>
-                    <th scope="col">Promotions</th>
-                    <th scope="col">Concours</th>
+                    <td scope="row">{{ partenaire.id }}</td>
+                    <td>{{ partenaire.name }}</td>
+                    <td>{{ partenaire.email }}</td>
+                    <td>{{ partenaire.password }}</td>
+                    {# <td>
+                        {% if partenaire.isActive == true %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                            </div>
+                            {% else %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                            {% endif %}
+                    </td> #}
+                    <td>
+                        {% if partenaire.isActive == true %}
+                                <div class="form-check-active">Actif</div>
+                            {% else %}
+                                <div class="form-check-inactive">Inactif</div>
+                            {% endif %}
+                    </td>
+                    <td>
+                        {% if partenaire.planning == true %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                            </div>
+                            {% else %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                            {% endif %}
+                    </td>
+                    <td>
+                        {% if partenaire.newsletter == true %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                            </div>
+                            {% else %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                            {% endif %}
+                    </td>
+                    <td>
+                        {% if partenaire.boissons == true %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                            </div>
+                            {% else %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                            {% endif %}
+                    </td>
+                    <td>
+                        {% if partenaire.sms == true %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                            </div>
+                            {% else %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                            {% endif %}
+                    </td>
+                    <td>
+                        {% if partenaire.promotions == true %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                            </div>
+                            {% else %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                            {% endif %}
+                    </td>
+                    <td>
+                        {% if partenaire.concours == true %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
+                            </div>
+                            {% else %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
+                            {% endif %}
+                    </td>
+                    <td>
+                        <a class="crud-button edit-button fa fa-pen-square mx-2 fs-5" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}"></a>
+                        <a class="crud-button see-button fa fa-eye mx-2 fs-5" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}"></a>
+                        {# <a class="crud-button delete-button fa fa-trash mx-2 fs-5" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}"></a> #}
+                        <a class="crud-button delete-button fa fa-trash mx-2 fs-5 confirm-action" data-bs-toggle="modal" data-bs-target="#modal-confirm" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}"onclick="return confirm('Voulez-vous vraiment supprimer ?')"></a>
+                    </td>
                 </tr>
-            </thead>
-
-            <tbody>
-                {% for partenaire in partenaires %}
-                    <tr class="">
-                        <th scope="row">{{ partenaire.id }}</th>
-                        <td>{{ partenaire.name }}</td>
-                        <td>{{ partenaire.email }}</td>
-                        <td>{{ partenaire.password }}</td>
-
-                        <td>
-                            {% if partenaire.isActive == true %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
-                                </div>
-                                {% else %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
-                                {% endif %}
-                        </td>
-                        <td>
-                            {% if partenaire.planning == true %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
-                                </div>
-                                {% else %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
-                                {% endif %}
-                        </td>
-                        <td>
-                            {% if partenaire.newsletter == true %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
-                                </div>
-                                {% else %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
-                                {% endif %}
-                        </td>
-                        <td>
-                            {% if partenaire.boissons == true %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
-                                </div>
-                                {% else %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
-                                {% endif %}
-                        </td>
-                        <td>
-                            {% if partenaire.sms == true %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
-                                </div>
-                                {% else %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
-                                {% endif %}
-                        </td>
-                        <td>
-                            {% if partenaire.promotions == true %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
-                                </div>
-                                {% else %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
-                                {% endif %}
-                        </td>
-                        <td>
-                            {% if partenaire.concours == true %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="1" checked="checked" disabled>
-                                </div>
-                                {% else %}
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" role="switch" id="check" name="etat" type="checkbox" value="0" disabled>
-                                {% endif %}
-                        </td>
-
-                        <td>
-                            <a class="crud-button edit-button fa fa-pen-square mx-2 fs-5" href="{{ path('app_partenaire_edit', {'id': partenaire.id}) }}"></a>
-                            <a class="crud-button see-button fa fa-eye mx-2 fs-5" href="{{ path('app_partenaire_show', {'id': partenaire.id}) }}"></a>
-                            {# <a class="crud-button delete-button fa fa-trash mx-2 fs-5" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}"></a> #}
-                            <a class="crud-button delete-button fa fa-trash mx-2 fs-5 confirm-action" data-bs-toggle="modal" data-bs-target="#modal-confirm" href="{{ path('app_partenaire_delete', {'id': partenaire.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer ?')"></a>
-                        </td>
-                    </tr>
-                    
-                {% endfor %}
                 
-            </tbody>
-        
-        </table>
-
-        <a class="btn btn-success" href="{{ path('app_partenaire_new') }}">Créer un nouveau partenaire </a>
+            {% endfor %}
+            
+        </tbody>
+    
+    </table>
+    <a class="btn btn-primary" href="{{ path('app_partenaire_new') }}">Créer un nouveau partenaire </a>
 
 </div>
 

@@ -77,3 +77,19 @@
 .delete-button {
   color: rgb(232, 24, 24);
 }
+
+.form-check-active {
+  background-color: green;
+  color: #FFF;
+  text-align: center;
+  border-radius: 10px;
+  padding: .3rem;
+}
+
+.form-check-inactive {
+  background-color: rgb(200, 8, 8);
+  color: #FFF;
+  text-align: center;
+  border-radius: 10px;
+  padding: .3rem;
+}
