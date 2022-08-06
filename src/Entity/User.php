@@ -27,6 +27,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActive = true;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isNewsletter = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isPlanning = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isBoissons = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isSMS = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isConcours = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,5 +116,89 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(?bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function isIsNewsletter(): ?bool
+    {
+        return $this->isNewsletter;
+    }
+
+    public function setIsNewsletter(?bool $isNewsletter): self
+    {
+        $this->isNewsletter = $isNewsletter;
+
+        return $this;
+    }
+
+    public function isIsPlanning(): ?bool
+    {
+        return $this->isPlanning;
+    }
+
+    public function setIsPlanning(?bool $isPlanning): self
+    {
+        $this->isPlanning = $isPlanning;
+
+        return $this;
+    }
+
+    public function isIsBoissons(): ?bool
+    {
+        return $this->isBoissons;
+    }
+
+    public function setIsBoissons(?bool $isBoissons): self
+    {
+        $this->isBoissons = $isBoissons;
+
+        return $this;
+    }
+
+    public function isIsSMS(): ?bool
+    {
+        return $this->isSMS;
+    }
+
+    public function setIsSMS(?bool $isSMS): self
+    {
+        $this->isSMS = $isSMS;
+
+        return $this;
+    }
+
+    public function isIsConcours(): ?bool
+    {
+        return $this->isConcours;
+    }
+
+    public function setIsConcours(?bool $isConcours): self
+    {
+        $this->isConcours = $isConcours;
+
+        return $this;
     }
 }

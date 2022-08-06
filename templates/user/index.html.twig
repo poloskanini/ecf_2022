@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h1 class="my-4">Utilisateurs :</h1>
+
+    {# Flash message "Correctement ajouté" #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+
+    <div class="responsive-table-line">
+
+        <table class="table table-hover text-center">
+            <thead>
+                <tr class="">
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actif</th>
+                    <th scope="col">Planning</th>
+                    <th scope="col">Newsletter</th>
+                    <th scope="col">Boissons</th>
+                    <th scope="col">Sms</th>
+                    <th scope="col">Concours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr class="">
+                        <td data-title="ID :">{{ user.id }}</td>
+                        <td data-title="Nom :">{{ user.name }}</td>
+                        <td data-title="Email :">{{ user.email }}</td>
+                        <td>
+                            {% if user.isActive == true %}
+                                    <div class="form-check-active">Actif</div>
+                                {% else %}
+                                    <div class="form-check-inactive">Inactif</div>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if user.isPlanning == true %}
+                                    <div class="form-check-active">Planning</div>
+                                {% else %}
+                                    <div class="form-check-inactive">Planning</div>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if user.isNewsletter == true %}
+                                    <div class="form-check-active">Newsletter</div>
+                                {% else %}
+                                    <div class="form-check-inactive">Newsletter</div>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if user.isBoissons == true %}
+                                    <div class="form-check-active">Boissons</div>
+                                {% else %}
+                                    <div class="form-check-inactive">Boissons</div>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if user.isSMS == true %}
+                                    <div class="form-check-active">SMS</div>
+                                {% else %}
+                                    <div class="form-check-inactive">SMS</div>
+                                {% endif %}
+                        </td>
+                        <td>
+                            {% if user.isConcours == true %}
+                                    <div class="form-check-active">Concours</div>
+                                {% else %}
+                                    <div class="form-check-inactive">Concours</div>
+                                {% endif %}
+                        </td>
+                        
+                        <td class="">
+                            <a class="crud-button link-primary fa fa-pen-square mx-2 fs-5" href="{{ path('app_user_edit', {'id': user.id}) }}"></a>
+                            <a class="crud-button link-success fa fa-eye mx-2 fs-5" href="{{ path('app_user_show', {'id': user.id}) }}"></a>
+                            <a class="crud-button link-danger fa fa-trash mx-2 fs-5 confirm-action" data-bs-toggle="modal" data-bs-target="#modal-confirm" href="{{ path('app_user_delete', {'id': user.id}) }}"onclick="return confirm('Voulez-vous vraiment supprimer ?')"></a>
+                        </td>
+                    </tr>
+                    
+                {% endfor %}
+                
+            </tbody>
+        
+        </table>
+    </div>
+    
+    {# <a class="btn btn-primary" href="{{ path('app_partenaire_new') }}">Créer un nouveau partenaire </a> #}
+
+</div>
+
+{% endblock %}

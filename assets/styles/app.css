@@ -3,17 +3,15 @@
   background-size: cover;
 } */
 
-@media (min-width: 991.98px) {
-  main {
-    padding-left: 240px;
-  }
+body {
+  font-size: 14px;
 }
 
 .container {
-  margin-top: 4rem;
+  margin-top: 6rem;
 }
 
-/* Sidebar */
+/** SideBar **/
 .sidebar {
   position: fixed;
   top: 0;
@@ -60,7 +58,7 @@
   margin: 0 2rem;
 }
 
-/* Buttons */
+/** Buttons **/
 .crud-button,
 .back-button {
   text-decoration: none;
@@ -68,14 +66,6 @@
 
 .back-button::before {
   padding-right: .3rem;
-}
-
-.see-button {
-  color: green;
-}
-
-.delete-button {
-  color: rgb(232, 24, 24);
 }
 
 .form-check-active {
@@ -87,9 +77,47 @@
 }
 
 .form-check-inactive {
-  background-color: rgb(200, 8, 8);
+  background-color: rgb(208, 83, 83);
   color: #FFF;
   text-align: center;
   border-radius: 10px;
   padding: .3rem;
+}
+
+/** Responsive Table Line **/
+@media (max-width: 800px) {
+  .responsive-table-line td:before { content: attr(data-title); }
+  .responsive-table-line table, 
+  .responsive-table-line thead, 
+  .responsive-table-line tbody, 
+  .responsive-table-line th, 
+  .responsive-table-line td, 
+  .responsive-table-line tr { display: block; }
+   
+  .responsive-table-line thead tr { 
+    display: none;
+  }
+
+  .responsive-table-line td { 
+    position: relative;
+    white-space: normal;
+    text-align: right; 
+  }
+
+  .responsive-table-line td:last-child { 
+    text-align: center; 
+  }
+   
+  .responsive-table-line td:before { 
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding-right: 15px; 
+    height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    text-align: left;
+    padding: 2px;
+  }
 }
