@@ -2,6 +2,7 @@
 
 {% block header %}{% endblock %}
 {% block topbar %}{% endblock %}
+{% block searchBar %}{% endblock %}
 
 {% block content %}
 
@@ -24,6 +25,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Role</th>
                     <th scope="col">Actif</th>
                     <th scope="col">Planning</th>
                     <th scope="col">Newsletter</th>
@@ -38,6 +40,7 @@
                         <td data-title="ID :">{{ user.id }}</td>
                         <td data-title="Nom :">{{ user.name }}</td>
                         <td data-title="Email :">{{ user.email }}</td>
+                        <td data-title="Role :">XXX</td>
                         <td data-title="Actif :" class="align-middle">
                             {% if user.isActive == true %}
                                     <div class="form-check-active">Actif</div>

@@ -3,14 +3,15 @@
 {% block title %}ECF Décembre 2022{% endblock %}
 
 {% block header %}{% endblock %}
+{% block topbar %}{% endblock %}
 
 {% block content %}
-    <div class="container mt-6">
-        <div class="jumbotron">
-            <h1 class="display-4">HOME / Projet ECF Décembre 2022</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <div class="home-container">
+        <div class="container home-title">
+            <div class="jumbotron">
+                <h2>Bienvenue {{ app.user.email}}</h2>
+                <h3>Vous êtes dans l'administration de "STUDI FITNESS"</h3>
+            </div>
         </div>
     </div>
 

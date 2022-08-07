@@ -22,14 +22,13 @@ body, html {
   background-color: #f4f4f4;
 }
 
-/** MY SIDEBAR **/
+/** SIDEBAR **/
 header {
   font-family: 'Roboto', 'sans-serif';
   position: relative;
   width: 100%;
 }
 
-/*** STOP !!!! */
 .navigation {
   position: fixed;
   width: 300px;
@@ -112,7 +111,7 @@ header {
   white-space: nowrap;
 }
 
-/* Main **/
+/** MAIN **/
 main {
   position: absolute;
   width: calc(100% - 300px);
@@ -127,6 +126,7 @@ main.active {
   left: 80px;
 }
 
+/** TOPBAR **/
 .topbar {
   width: 100%;
   height: 60px;
@@ -136,7 +136,7 @@ main.active {
   padding: 0 10px;
 }
 
-/* Toggle Button */
+/** TOGGLE BUTTON **/
 .toggle {
   position: relative;
   top: 0;
@@ -151,12 +151,12 @@ main.active {
 }
 
 .toggle.active::before {
-  transform: translateY(0px) rotate(45deg);
-  box-shadow: 0 0px 0 var(--blue);
+  transform: translateY(-8px);
+  box-shadow: 5px 8px 0 var(--blue);
 }
 
 .toggle.active::after {
-  transform: translateY(0px) rotate(-45deg);
+  transform: translateY(8px);
 }
 
 .toggle::before {
@@ -166,8 +166,8 @@ main.active {
   height: 2px;
   background-color: var(--blue);
   transition: .2s;
-  transform: translateY(-8px);
-  box-shadow: 5px 8px 0 var(--blue);
+  transform: translateY(0px) rotate(45deg);
+  box-shadow: 0 0px 0 var(--blue);
 }
 
 .toggle::after {
@@ -177,10 +177,10 @@ main.active {
   height: 2px;
   background-color: var(--blue);
   transition: .2s;
-  transform: translateY(8px);
+  transform: translateY(0px) rotate(-45deg);
 }
 
-/* Search Bar */
+/** SEARCHBAR **/
 .search {
   position: relative;
   width: 200px;
@@ -232,8 +232,53 @@ main.active {
     left: 0;
   }
 
-  main.active {
-    left: 300px;
+  .toggle {
+    position: relative;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: .2s;
+  }
+  
+  .toggle.active::before {
+    transform: translateY(0px) rotate(45deg);
+    box-shadow: 0 0px 0 var(--blue);
+  }
+  
+  .toggle.active::after {
+    transform: translateY(0px) rotate(-45deg);
+  }
+
+  main.active .toggle {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+  
+  .toggle::before {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 2px;
+    background-color: var(--blue);
+    transition: .2s;
+    transform: translateY(-8px);
+    box-shadow: 5px 8px 0 var(--blue);
+  }
+  
+  .toggle::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 2px;
+    background-color: var(--blue);
+    transition: .2s;
+    transform: translateY(8px);
   }
 }
 
@@ -276,25 +321,7 @@ main.active {
   }
 }
 
-.user {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.user img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* LOGIN-LOGOUT */
+/** LOGIN-LOGOUT BUTTON **/
 .login-logout .profile {
   position: relative;
   width: 40px;
@@ -452,7 +479,7 @@ main.active {
   }
 }
 
-/* ###########  Première version de la sideBar Boostrap MDN  ########################### */
+/*^ ###########  Première version de la sideBar Boostrap MDN  ########################### */
 /** SideBar First **/
 .sidebar {
   position: fixed;
