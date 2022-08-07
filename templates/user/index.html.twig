@@ -15,7 +15,6 @@
         </div>
     {% endfor %}
     
-
     <div class="responsive-table-line">
 
         <table class="table table-hover text-center">
@@ -38,42 +37,42 @@
                         <td data-title="ID :">{{ user.id }}</td>
                         <td data-title="Nom :">{{ user.name }}</td>
                         <td data-title="Email :">{{ user.email }}</td>
-                        <td>
+                        <td class="align-middle">
                             {% if user.isActive == true %}
                                     <div class="form-check-active">Actif</div>
                                 {% else %}
                                     <div class="form-check-inactive">Inactif</div>
                                 {% endif %}
                         </td>
-                        <td>
+                        <td class="align-middle">
                             {% if user.isPlanning == true %}
                                     <div class="form-check-active">Planning</div>
                                 {% else %}
                                     <div class="form-check-inactive">Planning</div>
                                 {% endif %}
                         </td>
-                        <td>
+                        <td class="align-middle">
                             {% if user.isNewsletter == true %}
                                     <div class="form-check-active">Newsletter</div>
                                 {% else %}
                                     <div class="form-check-inactive">Newsletter</div>
                                 {% endif %}
                         </td>
-                        <td>
+                        <td class="align-middle">
                             {% if user.isBoissons == true %}
                                     <div class="form-check-active">Boissons</div>
                                 {% else %}
                                     <div class="form-check-inactive">Boissons</div>
                                 {% endif %}
                         </td>
-                        <td>
+                        <td class="align-middle">
                             {% if user.isSMS == true %}
                                     <div class="form-check-active">SMS</div>
                                 {% else %}
                                     <div class="form-check-inactive">SMS</div>
                                 {% endif %}
                         </td>
-                        <td>
+                        <td class="align-middle">
                             {% if user.isConcours == true %}
                                     <div class="form-check-active">Concours</div>
                                 {% else %}
@@ -81,7 +80,7 @@
                                 {% endif %}
                         </td>
                         
-                        <td class="">
+                        <td class="align-middle">
                             <a class="crud-button link-primary fa fa-pen-square mx-2 fs-5" href="{{ path('app_user_edit', {'id': user.id}) }}"></a>
                             <a class="crud-button link-success fa fa-eye mx-2 fs-5" href="{{ path('app_user_show', {'id': user.id}) }}"></a>
                             <a class="crud-button link-danger fa fa-trash mx-2 fs-5 confirm-action" data-bs-toggle="modal" data-bs-target="#modal-confirm" href="{{ path('app_user_delete', {'id': user.id}) }}"onclick="return confirm('Voulez-vous vraiment supprimer ?')"></a>

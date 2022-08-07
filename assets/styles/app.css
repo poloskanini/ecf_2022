@@ -1,15 +1,140 @@
-/* body {
-  background-image: url("../../assets/img/55393237_m.jpg");
-  background-size: cover;
+/** Basic Resets **/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #2a2185;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --gray2: #999;
+}
+
+body, html {
+  font-size: 14px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* background-image: url("../../assets/img/55393237_m.jpg");
+  background-size: cover; */
+}
+
+/** HEADER **/
+header {
+  font-family: 'Roboto', 'sans-serif';
+  position: relative;
+  width: 100%;
+}
+
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: var(--blue);
+  border-left: 10px solid var(--blue);
+  transition: .5s;
+  overflow: hidden;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 1rem;
+}
+
+.navigation li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.navigation li:hover,
+.navigation li.hovered {
+  background-color: #FFF;
+}
+
+.brand-logo {
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation li a {
+  position: relative;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: #FFF;
+}
+
+
+.navigation li:hover a,
+.navigation li.hovered a {
+  color: var(--blue);
+}
+
+.navigation .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 70px;
+  text-align: center;
+}
+
+.navigation .icon i {
+  font-size: 1.7rem;
+}
+
+.navigation .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+/* .navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 35px 35px 0 10px #FFF;
+}
+
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after  {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 35px -35px 0 10px #FFF;
 } */
 
-body {
-  font-size: 14px;
+/** Main **/
+main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  transition: .5s;
 }
 
-.container {
-  margin-top: 6rem;
-}
 
 /** SideBar **/
 .sidebar {
@@ -101,7 +226,7 @@ body {
   .responsive-table-line td { 
     position: relative;
     white-space: normal;
-    text-align: right; 
+    text-align: right;
   }
 
   .responsive-table-line td:last-child { 
