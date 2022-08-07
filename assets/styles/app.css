@@ -7,17 +7,19 @@
 
 :root {
   --blue: #667eea;
+  --blue2: #3f60f7;
   --gray: #f5f5f5;
   --black1: #222;
   --gray2: #999;
 }
 
 body, html {
-  font-size: 14px;
+  font-size: 16px;
   min-height: 100vh;
   overflow-x: hidden;
   /* background-image: url("../../assets/img/55393237_m.jpg");
   background-size: cover; */
+  background-color: #f4f4f4;
 }
 
 /** MY SIDEBAR **/
@@ -33,7 +35,12 @@ header {
   width: 300px;
   height: 100%;
   background: #667eea;
-  background: linear-gradient(to bottom, rgba(67, 100, 247, 0.8), rgba(118, 75, 162, 0.5));
+  background: linear-gradient(to bottom, rgba(67, 100, 247, 0.8), rgba(208, 179, 236, 0.5));
+  /* background: #6179e6;
+  background-image: url('../../assets/images/23829913_s.jpg');
+  background-position: left;
+  background-size: cover;
+  background-blend-mode: soft-light; */
   transition: .5s;
   overflow: hidden;
 }
@@ -66,6 +73,7 @@ header {
 .brand-logo {
   margin-bottom: 40px;
   pointer-events: none;
+  font-size: 1.2rem;
 }
 
 .navigation li a {
@@ -209,7 +217,7 @@ main.active {
 }
 
 /** SIDEBAR Responsive Design **/
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1024px) {
   .navigation {
     left: -300px;
   }
@@ -262,9 +270,20 @@ main.active {
   main.active .toggle::after {
     background-color: #FFF;
   }
+
+  .search {
+    visibility: hidden;
+  }
 }
 
-/* User */
+/* Login-logout / User */
+/* .login-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+} */
+
 .user {
   position: relative;
   width: 40px;
@@ -281,6 +300,97 @@ main.active {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+
+/* LOGIN-LOGOUT */
+.login-logout .profile {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.login-logout .profile img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-logout .menu {
+  position: absolute;
+  top: 100px;
+  right: 5px;
+  background: #FFF;
+  width: 200px;
+  border-radius: 15px;
+  transition: .5s;
+  color: rgb(65, 65, 65);
+  color: var(--blue);
+  z-index: 2;
+  transition: .3s;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.login-logout .menu.active {
+  visibility: visible;
+  opacity: 1;
+  top: 60px;
+}
+
+.login-logout .menu ul {
+  margin: 0;
+  padding: 0;
+}
+
+.login-logout .menu ul li {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  position: relative;
+  z-index: 10;
+}
+
+.login-logout .menu li i {
+  margin-right: 10px;
+  transition: .2s;
+  opacity: .5;
+}
+
+.login-logout .menu ul li:first-child {
+  border-bottom: .5px solid rgba(0,0,0,0.10);
+  pointer-events: none;
+}
+
+.login-logout .menu ul li,
+.login-logout .menu ul li a {
+  color: #555;
+}
+
+.login-logout .menu ul li a:hover,
+.login-logout .menu ul li:hover i {
+  color: var(--blue2);
+  opacity: 1;
+}
+
+.login-logout .menu::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  background: #FFF;
+  z-index: 1;
 }
 
 /* ###########  Première version de la sideBar Boostrap MDN  ########################### */

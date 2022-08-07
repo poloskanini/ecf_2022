@@ -207,8 +207,29 @@
           </label>
         </div>
 
-        <div class="user">
-          <img src="{{ asset('build/images/Jim-Morrison.jpeg') }}" alt="">
+        {# <div class="login-logout">
+          {{ app.user.email }} | <a href="{{ path('app_logout') }}">Déconnexion</a>
+          <div class="user">
+            <img src="{{ asset('build/images/Jim-Morrison.jpeg') }}" alt="">
+          </div>
+        </div> #}
+
+        <div class="login-logout">
+          <div class="profile">
+            <img src="{{ asset('build/images/Jim-Morrison.jpeg') }}" alt="">
+          </div>
+          <div class="menu">
+            <ul>
+              <li>
+              <i class="fa-solid fa-circle-user"></i>
+                {{ app.user.email }}
+              </li>
+              <li class="disconnect">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+              </li>
+            </ul>
+          </div>
         </div>
 
       </div>
