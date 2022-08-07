@@ -145,7 +145,7 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{{ path('home') }}">
               <span class="icon">
                 <i class="fas fa-tachometer-alt"></i>
               </span>
@@ -153,7 +153,7 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{{ path('app_user_index') }}">
               <span class="icon">
                 <i class="fa fa-users"></i>
               </span>
@@ -161,7 +161,7 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{{ path('app_partenaire_index') }}">
               <span class="icon">
                 <i class="fa fa-handshake"></i>
               </span>
@@ -192,6 +192,7 @@
 
     <main>
 
+    {% if block('topbar') is defined %}
     {# Top Bar #}
       <div class="topbar">
         {# <div class="toggle">
@@ -222,7 +223,6 @@
             <ul>
               <li>
               <i class="fa-solid fa-circle-user"></i>
-                {{ app.user.email }}
               </li>
               <li class="disconnect">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -233,6 +233,7 @@
         </div>
 
       </div>
+      {% endif %}
         
 
       {% block content %}
