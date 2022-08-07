@@ -37,42 +37,42 @@
                         <td data-title="ID :">{{ user.id }}</td>
                         <td data-title="Nom :">{{ user.name }}</td>
                         <td data-title="Email :">{{ user.email }}</td>
-                        <td class="align-middle">
+                        <td data-title="Actif :" class="align-middle">
                             {% if user.isActive == true %}
                                     <div class="form-check-active">Actif</div>
                                 {% else %}
                                     <div class="form-check-inactive">Inactif</div>
                                 {% endif %}
                         </td>
-                        <td class="align-middle">
+                        <td data-title="Planning :" class="align-middle">
                             {% if user.isPlanning == true %}
                                     <div class="form-check-active">Planning</div>
                                 {% else %}
                                     <div class="form-check-inactive">Planning</div>
                                 {% endif %}
                         </td>
-                        <td class="align-middle">
+                        <td data-title="Newsletter :" class="align-middle">
                             {% if user.isNewsletter == true %}
                                     <div class="form-check-active">Newsletter</div>
                                 {% else %}
                                     <div class="form-check-inactive">Newsletter</div>
                                 {% endif %}
                         </td>
-                        <td class="align-middle">
+                        <td data-title="Boissons :" class="align-middle">
                             {% if user.isBoissons == true %}
                                     <div class="form-check-active">Boissons</div>
                                 {% else %}
                                     <div class="form-check-inactive">Boissons</div>
                                 {% endif %}
                         </td>
-                        <td class="align-middle">
+                        <td data-title="SMS :" class="align-middle">
                             {% if user.isSMS == true %}
                                     <div class="form-check-active">SMS</div>
                                 {% else %}
                                     <div class="form-check-inactive">SMS</div>
                                 {% endif %}
                         </td>
-                        <td class="align-middle">
+                        <td data-title="Concours :" class="align-middle">
                             {% if user.isConcours == true %}
                                     <div class="form-check-active">Concours</div>
                                 {% else %}

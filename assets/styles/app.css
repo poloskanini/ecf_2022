@@ -6,7 +6,7 @@
 }
 
 :root {
-  --blue: #2a2185;
+  --blue: #667eea;
   --gray: #f5f5f5;
   --black1: #222;
   --gray2: #999;
@@ -20,7 +20,7 @@ body, html {
   background-size: cover; */
 }
 
-/** HEADER **/
+/** MY SIDEBAR **/
 header {
   font-family: 'Roboto', 'sans-serif';
   position: relative;
@@ -29,12 +29,16 @@ header {
 
 .navigation {
   position: fixed;
-  width: 300px;
+  width: 80px;
   height: 100%;
-  background: var(--blue);
-  border-left: 10px solid var(--blue);
+  background: #667eea;
+  background: linear-gradient(to bottom, rgba(67, 100, 247, 0.8), rgba(118, 75, 162, 0.5));
   transition: .5s;
   overflow: hidden;
+}
+
+.navigation.active {
+  width: 300px;
 }
 
 .navigation ul {
@@ -71,7 +75,6 @@ header {
   color: #FFF;
 }
 
-
 .navigation li:hover a,
 .navigation li.hovered a {
   color: var(--blue);
@@ -100,43 +103,130 @@ header {
   white-space: nowrap;
 }
 
-/* .navigation ul li:hover a::before,
-.navigation ul li.hovered a::before {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: -50px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  pointer-events: none;
-  box-shadow: 35px 35px 0 10px #FFF;
-}
-
-.navigation ul li:hover a::after,
-.navigation ul li.hovered a::after  {
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: -50px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  pointer-events: none;
-  box-shadow: 35px -35px 0 10px #FFF;
-} */
-
 /** Main **/
 main {
   position: absolute;
-  width: calc(100% - 300px);
-  left: 300px;
+  width: calc(100% - 80px);
+  left: 80px;
   min-height: 100vh;
   transition: .5s;
 }
 
+main.active {
+  width: calc(100% - 300px);
+  left: 300px;
+}
 
-/** SideBar **/
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+/* Toggle Button */
+.toggle {
+  position: relative;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.toggle.active::before {
+  transform: translateY(0px) rotate(45deg);
+  box-shadow: 0 0px 0 var(--blue);
+}
+
+.toggle.active::after {
+  transform: translateY(0px) rotate(-45deg);
+}
+
+.toggle::before {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 2px;
+  background-color: var(--blue);
+  transition: .2s;
+  transform: translateY(-8px);
+  box-shadow: 5px 8px 0 var(--blue);
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 2px;
+  background-color: var(--blue);
+  transition: .2s;
+  transform: translateY(8px);
+}
+
+/* Search Bar */
+.search {
+  position: relative;
+  width: 200px;
+  margin: 0 10px;
+}
+
+.search label {
+  position: relative;
+  width: 100%;
+}
+
+.search input {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  font-size: 18px;
+  outline: none;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+}
+
+.search input::placeholder {
+  color: var(--blue);
+}
+
+.search i {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  font-size: 1.2rem;
+  color: var(--blue);
+}
+
+/* User */
+.user {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ###########  Première version de la sideBar Boostrap MDN  ########################### */
+/** SideBar First **/
 .sidebar {
   position: fixed;
   top: 0;
@@ -148,6 +238,7 @@ main {
   z-index: 600;
 }
 
+/** SIDEBAR First */
 @media (max-width: 991.98px) {
   .sidebar {
     width: 100%;
@@ -182,6 +273,7 @@ main {
   align-items: center;
   margin: 0 2rem;
 }
+/* ################################################################# */
 
 /** Buttons **/
 .crud-button,
@@ -209,7 +301,7 @@ main {
   padding: .3rem;
 }
 
-/** Responsive Table Line **/
+/** Responsive Table Line **/  
 @media (max-width: 800px) {
   .responsive-table-line td:before { content: attr(data-title); }
   .responsive-table-line table, 
@@ -235,7 +327,6 @@ main {
    
   .responsive-table-line td:before { 
     position: absolute;
-    top: 0px;
     left: 0px;
     padding-right: 15px; 
     height: 100%;
@@ -244,5 +335,10 @@ main {
     overflow: hidden !important;
     text-align: left;
     padding: 2px;
+  }
+
+  .form-check-active,
+  .form-check-inactive {
+    display: inline-block;
   }
 }

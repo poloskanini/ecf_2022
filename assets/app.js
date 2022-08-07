@@ -12,4 +12,4 @@ import './styles/app.css';
 import './bootstrap';
 
 // Dashboard.js
-import './dashboard.js'
+import './dashboard.js';
