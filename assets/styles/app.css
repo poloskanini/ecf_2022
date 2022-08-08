@@ -466,20 +466,31 @@ main.active {
   padding-right: .3rem;
 }
 
-.form-check-active {
-  background-color: green;
-  color: #FFF;
+.form-check {
   text-align: center;
   border-radius: 10px;
   padding: .3rem;
+  color: #FFF;
+}
+
+.form-check-active {
+  background-color: green;
 }
 
 .form-check-inactive {
   background-color: rgb(208, 83, 83);
-  color: #FFF;
-  text-align: center;
-  border-radius: 10px;
-  padding: .3rem;
+}
+
+.form-check-admin {
+  background-color: rgb(148, 148, 11);
+}
+
+.form-check-partner {
+  background-color: rgb(44, 127, 182);
+}
+
+.form-check-structure {
+  background-color: rgb(206, 48, 184);
 }
 
 /** Responsive Table Line **/  
