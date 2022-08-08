@@ -17,15 +17,13 @@ body, html {
   font-size: 16px;
   min-height: 100vh;
   overflow-x: hidden;
-  /* background-image: url("../../assets/img/55393237_m.jpg");
-  background-size: cover; */
   background-color: #f4f4f4;
 }
 
 /*** LOGIN */
 .section-login {
   height: 100vh;
-  background-color: #9A616D;
+  min-height: 100vh;
   background-image: url('../../assets/images/85057747_m.jpg');
   background-size: cover;
 }

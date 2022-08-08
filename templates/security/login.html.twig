@@ -29,11 +29,9 @@
 </head>
 
 <body>
-    
-</body>
 
 <form method="post">
-{% if error %}
+    {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
@@ -42,50 +40,51 @@
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
+
     <section class="section-login">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-xl-10">
-                <div class="card" style="border-radius: 1rem;">
-                <div class="row g-0">
-                    <div class="col-md-6 col-lg-5 d-none d-md-block left-picture">
-                    </div>
-                    <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                    <div class="card-body p-4 p-lg-5 text-black">
+                <div class="col col-xl-10">
+                    <div class="card" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block left-picture"></div>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
 
-                        <form>
+                                    <form>
 
-                        <div class="d-flex align-items-center mb-3 pb-1 fs-3 login-title">
-                            <i class="fa fa-dumbbell mr-2" style="color: #667eea";></i>
-                            <span class="h1 fw-bold mb-0">STUDI FITNESS GROUP</span>
+                                    <div class="d-flex align-items-center mb-3 pb-1 fs-3 login-title">
+                                        <i class="fa fa-dumbbell mr-2" style="color: #667eea";></i>
+                                        <span class="h1 fw-bold mb-0">STUDI FITNESS GROUP</span>
+                                    </div>
+
+                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez-vous à votre compte</h5>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="inputEmail" class="form-label">Votre email</label>
+                                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Votre adresse email" required autofocus>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="inputPassword" class="form-label">Votre mot de passe</label>
+                                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Votre mot de passe" required>
+                                    </div>
+
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Se connecter</button>
+                                    </div>
+
+                                    <a class="small text-muted" href="#!">Mot de passe oublié ?</a>
+                                    
+                                    </form>
+
+                                </div>
+                            </div>
                         </div>
-
-                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez-vous à votre compte</h5>
-
-                        <div class="form-outline mb-4">
-                            <label for="inputEmail" class="form-label">Votre email</label>
-                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Votre adresse email" required autofocus>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="inputPassword" class="form-label">Votre mot de passe</label>
-                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Votre mot de passe" required>
-                        </div>
-
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                        <div class="pt-1 mb-4">
-                            <button class="btn btn-dark btn-lg btn-block" type="submit">Se connecter</button>
-                        </div>
-
-                        <a class="small text-muted" href="#!">Mot de passe oublié ?</a>
-                        </form>
-
-                    </div>
                     </div>
                 </div>
-                </div>
-            </div>
             </div>
         </div>
     </section>
