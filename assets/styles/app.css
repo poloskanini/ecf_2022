@@ -49,7 +49,6 @@ body, html {
 }
 
 .alert-danger {
-  position: absolute;
   width: 100%;
   margin: 0;
 }
@@ -455,11 +454,11 @@ main.active {
   z-index: 1;
 }
 
-/** Buttons **/
+/** Buttons Form and notifications**/
 .crud-button,
 .back-button {
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .back-button::before {
@@ -491,6 +490,10 @@ main.active {
 
 .form-check-structure {
   background-color: rgb(206, 48, 184);
+}
+
+.form-error-icon {
+  color: red;
 }
 
 /** Responsive Table Line **/  
@@ -529,8 +532,7 @@ main.active {
     padding: 2px;
   }
 
-  .form-check-active,
-  .form-check-inactive {
+  .form-check {
     display: inline-block;
   }
 }

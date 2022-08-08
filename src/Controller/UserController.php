@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,11 +26,11 @@ class UserController extends AbstractController
     public function new(Request $request, UserRepository $userRepository): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user); //TODO: Créer un UserType Form
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $$userRepository->add($user, true);
+            $userRepository->add($user, true);
     
             $this->addFlash(
                 'success',
@@ -39,7 +40,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/new.html.twig', [ //TODO: Créer un template user/new.html.twig
+        return $this->renderForm('user/_new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -92,7 +93,7 @@ class UserController extends AbstractController
         $manager->flush();
 
         $this->addFlash(
-            'success',
+            'danger',
             'L\'utilisateur "' .$user->getName(). '" a été supprimé avec succès'
         );
 
