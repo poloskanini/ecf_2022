@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <!-- Boostrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
   {# WebPack Encore Scripts (include My own CSS Styles on App.CSS + JS Scripts on App.js (assets/styles)) #}
@@ -134,7 +135,7 @@
     {#*** MY SIDE BAR ***#}
     <header class="header">
       <nav class="navigation">
-        <ul>
+        <ul class="list">
           <li class="brand-logo">
             <a href="">
               <span class="icon">
@@ -145,7 +146,7 @@
               </span>
             </a>
           </li>
-          <li>
+          <li class="">
             <a href="{{ path('home') }}">
               <span class="icon">
                 <i class="fas fa-tachometer-alt"></i>
@@ -218,8 +219,10 @@
           <div class="menu">
             <ul>
               <li>
+              {% if app.user %}
               <i class="fa-solid fa-circle-user"></i>
               {{ app.user.email }}
+              {% endif %}
               </li>
               <li class="disconnect">
                 <i class="fa-solid fa-power-off"></i>
@@ -235,5 +238,6 @@
       {% block content %}{% endblock %}
       
     </main>
+
   </body>
 </html>

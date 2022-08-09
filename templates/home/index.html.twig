@@ -8,7 +8,9 @@
 {% block content %}
         <div class="container-fluid home-title">
             <h1 class="my-4">Dashboard</h1>
+            {% if app.user %}
             <h5>Bienvenue {{ app.user.email}}.</h>
+            {% endif %}
             <h6>Vous êtes dans l'administration de "STUDI FITNESS GROUP".</h6>
         </div>
 
