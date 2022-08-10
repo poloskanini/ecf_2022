@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserShowType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,8 +92,10 @@ class UserController extends AbstractController
     #[Route('/{id}/show', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', [
+        $form = $this->createForm(UserShowType::class, $user);
+        return $this->renderForm('user/_show.html.twig', [
             'user' => $user,
+            'form' => $form,
         ]);
     }
 
@@ -113,55 +116,34 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/edit.html.twig', [
+        return $this->renderForm('user/_edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
-
-    // #[Route('/{id}/delete', name: 'app_user_delete', methods: ['GET'])]
-    // public function delete(EntityManagerInterface $manager, User $user) {
-        
-    //     if(!$user) {
-    //         $this->addFlash(
-    //             'warning',
-    //             'L\utilisateur n\'a pas été trouvé'
-    //             );
-
-    //             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-    //     }
-        
-    //     $manager->remove($user);
-    //     $manager->flush();
-
-    //     $this->addFlash(
-    //         'danger',
-    //         'L\'utilisateur "' .$user->getName(). '" a été supprimé avec succès'
-    //     );
-
-    //     return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-    // }
 
     #[Route('/{id}/delete', name: 'app_user_delete', methods: ['GET'])]
-    public function delete(Request $request, User $user, UserRepository $userRepository): Response
-    {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->remove($user, true);
-
+    public function delete(EntityManagerInterface $manager, User $user) {
+        
+        if(!$user) {
             $this->addFlash(
-                'success',
+                'warning',
+                'L\utilisateur n\'a pas été trouvé'
+                );
+                return $this->render('user/_delete.html.twig', [
+                    'user' => $user,
+                ]);
+            }
+            
+            $manager->remove($user);
+            $manager->flush();
+            
+            $this->addFlash(
+                'danger',
                 'L\'utilisateur "' .$user->getName(). '" a été supprimé avec succès'
-            );
+        );
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('user/_delete.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

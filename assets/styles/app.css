@@ -67,7 +67,7 @@ header {
   width: 300px;
   height: 100%;
   background: #667eea;
-  background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgba(208, 179, 236, 1));
+  background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgb(179, 181, 236));
   /* background: #6179e6;
   background-image: url('../../assets/images/23829913_s.jpg');
   background-position: left;
@@ -504,6 +504,9 @@ main.active {
   font-size: 5rem;
 }
 
+.btn:focus {
+  outline: none !important;
+}
 /** Modals **/
 
 .modal-content {

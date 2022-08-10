@@ -15,12 +15,13 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class UserType extends AbstractType
+class UserShowType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class, [
+                'disabled' => true,
                 'label' => 'Votre nom',
                 'required' => true,
                 'constraints' => new Length([
@@ -32,6 +33,7 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('email', EmailType::class, [
+                'disabled' => true,
                 'label' => 'Votre email',
                 'required' => true,
                 'constraints' => new Length([
@@ -43,6 +45,7 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('password', RepeatedType::class, [
+                'disabled' => true,
                 'type' => PasswordType::class,
                 'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
                 'label' => false,
@@ -61,6 +64,7 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('roles', ChoiceType::class, [
+                'disabled' => true,
                 'label' => 'Type de client',
                 'required' => true,
                 'multiple' => false,
@@ -74,31 +78,37 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('isActive', CheckboxType::class, [
+                'disabled' => true,
                 'label' => 'Actif',
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isPlanning', CheckboxType::class, [
+                'disabled' => true,
                 'label' => 'Planning',
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isNewsletter', CheckboxType::class, [
+                'disabled' => true,
                 'label' => 'Newsletter',
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isBoissons', CheckboxType::class, [
+                'disabled' => true,
                 'label' => 'Boissons',
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isSMS', CheckboxType::class, [
+                'disabled' => true,
                 'label' => 'SMS',
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isConcours', CheckboxType::class, [
+                'disabled' => true,
                 'label' => 'Concours',
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,

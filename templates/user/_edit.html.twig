@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{parent() }} | Ajouter un nouvel utilisateur{% endblock %}
+{% block title %} {{parent() }} | Modifier l' utilisateur{% endblock %}
 
 {% block header %}{% endblock %}
 {% block topbar %}{% endblock %}
@@ -10,8 +10,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col col-xl-8">
-
-            <h1 class="my-4">Ajouter un nouvel utilisateur</h1>
+            <h1 class="my-4">Modifier un utilisateur</h1>
 
             {{ form_start(form) }}
 
@@ -78,7 +77,7 @@
                 </div>
 
                 <a href="{{ path('app_user_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>
-                <button type="submit" class="btn btn-primary my-4" value="Enregistrer" onclick="return confirm('Êtes-vous sûr de vouloir créer ce nouvel utilisateur ?')">Confirmer</button>
+                <button type="submit" class="btn btn-primary my-4 " value="Enregistrer" onclick="return confirm('Êtes-vous sûr de vouloir modifier cet utilisateur ?')">Confirmer</button>
 
                 {{ form_end(form) }}
             </div>
