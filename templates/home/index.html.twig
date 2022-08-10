@@ -12,13 +12,16 @@
             <h5>Bienvenue {{ app.user.email}}.</h>
             {% endif %}
             <h6>Vous êtes dans l'administration de "STUDI FITNESS GROUP".</h6>
+            <p>Tu t'appelles {{ app.user.name }}, ton adresse mail est {{ app.user.email }}, tu possèdes l'ID {{ app.user.id }} et ton compte est {% if app.user.isActive == 1 %} Actif {% else %}
+                Inactif {% endif %}
+            </p>
         </div>
 
         <div class="boxes">
             <div class="box">
                 <i class="fa fa-users"></i>
                 <div class="box-data">
-                    <h3>63</h3>
+                    <h3></h3>
                     Nombre d'utilisateurs
                 </div>
             </div>
@@ -38,7 +41,67 @@
                     Nombre de Structures
                 </div>
             </div>
+            
+        </div>
 
+        <div class="toggle-permissions text-center my-5">
+            <h4>Fonctionnalités activées</h4>
+
+            <div class="toggle-permissions-wrapper d-flex justify-content-around my-4">
+                <div class="row">
+                <div class="col permission newsletter">
+                    <h6 class="permission-title">Planning</h6>
+                    <label class="switch">
+                        <input type="checkbox" {% if app.user.isPlanning == 1 %} checked {% endif %} disabled>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col permission newsletter">
+                    <h6 class="permission-title">Newsletter</h6>
+                    <label class="switch">
+                        <input type="checkbox" {% if app.user.isNewsletter == 1 %} checked {% endif %} disabled>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col permission newsletter">
+                    <h6 class="permission-title">Boissons</h6>
+                    <label class="switch">
+                        <input type="checkbox" {% if app.user.isBoissons == 1 %} checked {% endif %} disabled>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col permission newsletter">
+                    <h6 class="permission-title">SMS</h6>
+                    <label class="switch">
+                        <input type="checkbox" {% if app.user.isSMS == 1 %} checked {% endif %} disabled>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col permission newsletter">
+                    <h6 class="permission-title">Concours</h6>
+                    <label class="switch">
+                        <input type="checkbox" {% if app.user.isConcours == 1 %} checked {% endif %} disabled>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            </div>
+
+            
+            </div>
         </div>
 
 {% endblock %}
