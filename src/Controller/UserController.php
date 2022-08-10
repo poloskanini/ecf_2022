@@ -119,26 +119,49 @@ class UserController extends AbstractController
         ]);
     }
 
+    // #[Route('/{id}/delete', name: 'app_user_delete', methods: ['GET'])]
+    // public function delete(EntityManagerInterface $manager, User $user) {
+        
+    //     if(!$user) {
+    //         $this->addFlash(
+    //             'warning',
+    //             'L\utilisateur n\'a pas été trouvé'
+    //             );
+
+    //             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    //     }
+        
+    //     $manager->remove($user);
+    //     $manager->flush();
+
+    //     $this->addFlash(
+    //         'danger',
+    //         'L\'utilisateur "' .$user->getName(). '" a été supprimé avec succès'
+    //     );
+
+    //     return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    // }
+
     #[Route('/{id}/delete', name: 'app_user_delete', methods: ['GET'])]
-    public function delete(EntityManagerInterface $manager, User $user) {
-        
-        if(!$user) {
+    public function delete(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->remove($user, true);
+
             $this->addFlash(
-                'warning',
-                'L\utilisateur n\'a pas été trouvé'
-                );
+                'success',
+                'L\'utilisateur "' .$user->getName(). '" a été supprimé avec succès'
+            );
 
-                return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
-        
-        $manager->remove($user);
-        $manager->flush();
 
-        $this->addFlash(
-            'danger',
-            'L\'utilisateur "' .$user->getName(). '" a été supprimé avec succès'
-        );
-
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->renderForm('user/_delete.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
     }
 }
