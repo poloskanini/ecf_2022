@@ -182,6 +182,7 @@ main.active {
   font-size: 2.5rem;
   cursor: pointer;
   transition: .2s;
+  z-index: 1000000000;
 }
 
 .toggle.active::before {
@@ -214,7 +215,16 @@ main.active {
   transform: translateY(0px) rotate(-45deg);
 }
 
-/* Toggles Fonctionnalities */
+/* Toggles Permissions EDIT */
+
+.switch-custom {
+	display: inline-block;
+	position: relative;
+	width: 70px;
+	height: 40px;
+	cursor: pointer;
+	overflow: hidden;
+}
 
 .switch {
   position: relative;
@@ -265,6 +275,51 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
+
+/*Toggle Permissions NEW */
+.custom-control-input,
+.custom-control label {
+  cursor: pointer;
+}
+
+.custom-control label {
+  display: inline-block;
+  height: 30px;
+  width: 50px;
+  background-color: #ccc;
+  position: relative;
+  transition: all .3s;
+  border-radius: 15px;
+}
+
+.custom-control label:after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-color: #FFF;
+  position: absolute;
+  top: 5px;
+  left: 5px ;
+  transition: all .3s;
+  border-radius: 50%;
+}
+
+.custom-control-input:checked + label:after {
+  transform: translateX(20px) !important;
+}
+
+.custom-control-input:checked + label {
+  background: #2196F3;
+}
+
+.custom-control-input:checked + .is-active-btn {
+  background: #bada55;
+}
+
+.custom-control input {
+  display: none;
+}
+
 
 /* Rounded sliders */
 .slider.round {
@@ -351,9 +406,9 @@ input:checked + .slider:before {
   }
 
   main.active .toggle {
-    position: absolute;
-    right: 5px;
-    top: 5px;
+    position: fixed;
+    top: 0;
+    left: 300px;
   }
   
   .toggle::before {

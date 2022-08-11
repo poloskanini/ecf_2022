@@ -74,32 +74,32 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('isActive', CheckboxType::class, [
-                'label' => 'Actif',
-                'label_attr' => ['class' => 'switch-custom'],
+                'label' => false,
+                'label_attr' => ['class' => 'switch-custom is-active-btn'],
                 'required' => false,
             ])
             ->add('isPlanning', CheckboxType::class, [
-                'label' => 'Planning',
+                'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isNewsletter', CheckboxType::class, [
-                'label' => 'Newsletter',
+                'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isBoissons', CheckboxType::class, [
-                'label' => 'Boissons',
+                'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isSMS', CheckboxType::class, [
-                'label' => 'SMS',
+                'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])
             ->add('isConcours', CheckboxType::class, [
-                'label' => 'Concours',
+                'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
             ])

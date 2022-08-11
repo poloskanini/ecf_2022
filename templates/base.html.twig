@@ -146,14 +146,23 @@
             </a>
           </li>
           <li class="">
+            {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('home') }}">
               <span class="icon">
                 <i class="fas fa-tachometer-alt"></i>
               </span>
               <span class="title">Dashboard</span>
             </a>
+            {% else %}
+            <a href="{{ path('home') }}">
+              <span class="icon">
+                <i class="fa-solid fa-house"></i>
+              </span>
+              <span class="title">Mon profil</span>
+            </a>
           </li>
-          {# {% if is_granted('ROLE_ADMIN') %} #}
+          {% endif %}
+          {% if is_granted('ROLE_ADMIN') %}
           <li>
             <a href="{{ path('app_user_index') }}">
               <span class="icon">
@@ -162,7 +171,6 @@
               <span class="title">Utilisateurs</span>
             </a>
           </li>
-          {# {% endif %} #}
           <li>
             <a href="{{ path('app_partenaire_index') }}">
               <span class="icon">
@@ -179,6 +187,7 @@
               <span class="title">Structures</span>
             </a>
           </li>
+          {% endif %}
           <li>
             <a href="{{ path('app_logout') }}">
               <span class="icon">

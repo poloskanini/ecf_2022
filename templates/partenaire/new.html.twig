@@ -12,7 +12,8 @@
 
     <h1 class="my-4">Créer un nouveau partenaire</h1>
 
-    {{ form_start(form) }}
+{{ form(form) }}
+    {# {{ form_start(form) }}
     <div class="form-error is-invalid">
         {{ form_errors(form) }}
     </div>
@@ -74,7 +75,7 @@
     </div>
 
     {{ form_row(form.Submit, { 'label': 'Créer un nouveau partenaire' }) }}
-    {{ form_end(form) }}
+    {{ form_end(form) }} #}
 
 </div>
 

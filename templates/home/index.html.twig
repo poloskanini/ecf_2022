@@ -7,7 +7,11 @@
 
 {% block content %}
         <div class="container-fluid home-title">
+            {% if is_granted('ROLE_ADMIN') %}
             <h1 class="my-4">Dashboard</h1>
+            {% else %}
+            <h1 class="my-4">Mon profil</h1>
+            {% endif %}
             {% if app.user %}
             <h5>Bienvenue {{ app.user.email}}.</h>
             {% endif %}
@@ -44,18 +48,19 @@
             
         </div>
 
+        {% if not is_granted('ROLE_ADMIN') %}
         <div class="container-fluid py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
                     <div class="card" style="border-radius: 1rem;">
                         <div class="col d-flex align-items-center">
                             <div class="card-body text-black text-center">
-                                <div class="d-flex align-items-center justify-content-center mb-3 pb-1 fs-3 ">
+                                <div class="d-flex flex-column align-items-center justify-content-center mb-3 pb-1">
                                     <h4>Vos fonctionnalités activées</h4>
+                                    <small><i>Pour modifier ces fonctionnalités, merci de contacter un administrateur</i></small>
                                 </div>
                                 <div class="toggle-permissions text-center my-5">
                                     <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
-                                        <div class="row">
                                         <div class="col permission newsletter">
                                             <i class="fa-solid fa-calendar-days"></i>
                                             <h6 class="permission-title">Planning</h6>
@@ -64,9 +69,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
                                         <div class="col permission newsletter">
                                             <i class="fa-solid fa-envelope"></i>
                                             <h6 class="permission-title">Newsletter</h6>
@@ -75,9 +78,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
                                         <div class="col permission newsletter">
                                             <i class="fas fa-cocktail"></i>
                                             <h6 class="permission-title">Boissons</h6>
@@ -86,9 +87,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
                                         <div class="col permission newsletter">
                                             <i class="fa-solid fa-comment-sms"></i>
                                             <h6 class="permission-title">SMS</h6>
@@ -97,9 +96,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
                                         <div class="col permission newsletter">
                                             <i class="fa-solid fa-trophy"></i>
                                             <h6 class="permission-title">Concours</h6>
@@ -108,7 +105,6 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -116,6 +112,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
 
        
         </div>
