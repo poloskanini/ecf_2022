@@ -67,7 +67,7 @@ header {
   width: 300px;
   height: 100%;
   background: #667eea;
-  background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgb(179, 181, 236));
+  background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgb(97, 99, 168));
   /* background: #6179e6;
   background-image: url('../../assets/images/23829913_s.jpg');
   background-position: left;
@@ -152,7 +152,7 @@ main {
   left: 300px;
   min-height: 100vh;
   transition: .5s;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 main.active {
@@ -187,7 +187,7 @@ main.active {
 
 .toggle.active::before {
   transform: translateY(-8px);
-  box-shadow: 5px 8px 0 var(--blue);
+  box-shadow: 6px 8px 0 var(--blue);
 }
 
 .toggle.active::after {
@@ -215,8 +215,7 @@ main.active {
   transform: translateY(0px) rotate(-45deg);
 }
 
-/* Toggles Permissions EDIT */
-
+/** Toggles Permissions HOME PAGE (user) **/
 .switch-custom {
 	display: inline-block;
 	position: relative;
@@ -276,7 +275,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/*Toggle Permissions NEW */
+/** Toggle Permissions NEW (admin) **/
 .custom-control-input,
 .custom-control label {
   cursor: pointer;
@@ -320,7 +319,6 @@ input:checked + .slider:before {
   display: none;
 }
 
-
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px;
@@ -329,7 +327,6 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
 
 /** SEARCHBAR **/
 .search {
@@ -624,8 +621,8 @@ input:checked + .slider:before {
 .btn:focus {
   outline: none !important;
 }
-/** Modals **/
 
+/** Modals **/
 .modal-content {
   color: #636363;
 }
