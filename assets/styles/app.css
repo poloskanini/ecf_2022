@@ -67,9 +67,10 @@ header {
   width: 300px;
   height: 100%;
   background: #667eea;
-  background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgb(97, 99, 168));
-  /* background: #6179e6;
-  background-image: url('../../assets/images/23829913_s.jpg');
+  /* background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgb(219, 220, 255));  Dégradé bleu/violet : OPTION 1 */
+  /* background: #6179e6; */
+  background: linear-gradient(to bottom, rgba(59, 92, 241, 0.9), rgba(219, 220, 255, .1));
+  /*background-image: url('../../assets/images/23829913_s.jpg');
   background-position: left;
   background-size: cover;
   background-blend-mode: soft-light; */
@@ -245,6 +246,7 @@ main.active {
   right: 0;
   bottom: 0;
   background-color: #ccc;
+  /* background-color: var(--red2); */
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -500,11 +502,10 @@ input:checked + .slider:before {
 
 .login-logout .menu {
   position: absolute;
-  top: 100px;
+  top: 40px;
   right: 5px;
   background: #FFF;
   width: 200px;
-  border-radius: 15px;
   transition: .5s;
   color: rgb(65, 65, 65);
   color: var(--blue);

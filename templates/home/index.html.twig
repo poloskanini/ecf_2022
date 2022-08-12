@@ -12,13 +12,15 @@
             {% else %}
             <h1 class="my-4">Mon profil</h1>
             {% endif %}
-            {% if app.user %}
-            <h5>Bienvenue {{ app.user.email}}.</h>
-            {% endif %}
+            {% if is_granted('ROLE_USER') %}
+            <h5>Bienvenue {{ app.user.name }}.</h>
             <h6>Vous êtes dans l'administration de "STUDI FITNESS GROUP".</h6>
-            <p>Tu t'appelles {{ app.user.name }}, ton adresse mail est {{ app.user.email }}, tu possèdes l'ID {{ app.user.id }} et ton compte est {% if app.user.isActive == 1 %} Actif {% else %}
+            <p>Votre adresse mail est {{ app.user.email }}, tu possèdes l'ID {{ app.user.id }} et ton compte est {% if app.user.isActive == 1 %} Actif {% else %}
                 Inactif {% endif %}
             </p>
+            {% else %}
+                <p>Vous êtes deconnecté. <a href="{{ path('app_login') }}">Cliquez ici pour vous authentifier</a>
+            {% endif %}
         </div>
 
         <div class="boxes container-fluid">
@@ -57,7 +59,7 @@
                             <div class="card-body text-black text-center">
                                 <div class="d-flex flex-column align-items-center justify-content-center mb-3 pb-1">
                                     <h4>Vos fonctionnalités activées</h4>
-                                    <small><i>Pour modifier ces fonctionnalités, merci de contacter un administrateur</i></small>
+                                    <small><i>Pour modifier ces fonctionnalités, <a href="#">veuillez contacter un administrateur STUDI FITNESS</a></i></small>
                                 </div>
                                 <div class="toggle-permissions text-center my-5">
                                     <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">

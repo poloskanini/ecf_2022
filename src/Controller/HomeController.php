@@ -14,5 +14,4 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig');
     }
 
-    // Méthode pour récupérer les données de la DB et les insérer dans les cards
 }

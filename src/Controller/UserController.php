@@ -110,7 +110,7 @@ class UserController extends AbstractController
             
             $password = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
-            $userRepository->add($user, true);
+            $userRepository->add($user, true); // ADD
 
             $this->addFlash(
                 'success',
@@ -139,7 +139,7 @@ class UserController extends AbstractController
                 ]);
             }
             
-            $manager->remove($user);
+            $manager->remove($user); //REMOVE
             $manager->flush();
             
             $this->addFlash(
