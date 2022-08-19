@@ -77,7 +77,7 @@ class StructureController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'L\'utilisateur "' .$user->getName(). '" a été ajouté avec succès'
+                'La structure "' .$user->getName(). '" a été ajouté avec succès'
             );
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);

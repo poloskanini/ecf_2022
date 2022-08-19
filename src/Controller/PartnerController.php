@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Partner;
-use App\Form\CreatePartnerType;
 use App\Form\UserType;
+use App\Entity\Partner;
+use App\Form\PartnerType;
+use App\Form\CreatePartnerType;
 use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
@@ -39,7 +40,7 @@ class PartnerController extends AbstractController
         $user = new User(); // J'instancie ma classe User()
         $partner = new Partner(); // J'instancie ma classe User()
         
-        $form = $this->createForm(UserType::class, $user); // Mon formulaire UserType
+        $form = $this->createForm(PartnerType::class, $user); // Mon formulaire UserType
 
         $form->handleRequest($request); // Écoute la requête entrante
 
