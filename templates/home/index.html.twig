@@ -23,11 +23,14 @@
             {% endif %}
         </div>
 
+        {{ dump(users) }}
+
         <div class="boxes container-fluid">
             <div class="box">
                 <i class="fa fa-users"></i>
                 <div class="box-data">
-                    <h3>1</h3>
+                    <h3>{{ users|length - 1 }}</h3>
+                    {# On enlève l'admin en faisant -1 #}
                     Nombre d'utilisateurs
                 </div>
             </div>
@@ -35,7 +38,7 @@
             <div class="box">
                 <i class="fa fa-handshake"></i>
                 <div class="box-data">
-                    <h3>1</h3>
+                    <h3>{{ partners|length }}</h3>
                     Nombre de Partenaires
                 </div>
             </div>
@@ -43,7 +46,7 @@
             <div class="box">
                 <i class="fa fa-building"></i>
                 <div class="box-data">
-                    <h3>23</h3>
+                    <h3>XXX</h3>
                     Nombre de Structures
                 </div>
             </div>
