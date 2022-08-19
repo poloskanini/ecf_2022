@@ -22,12 +22,12 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class UserType extends AbstractType
+class StructureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('roles', ChoiceType::class, [
+         ->add('roles', ChoiceType::class, [
                 'label' => 'Type de client',
                 'required' => true,
                 'multiple' => false,
@@ -37,22 +37,22 @@ class UserType extends AbstractType
                     'placeholder' => 'Type de client'
                 ],
                 'choices'  => [
-                        'Partenaire' => 'ROLE_PARTENAIRE',
+                        'Structure' => 'ROLE_STRUCTURE',
                 ],
             ])
             ->add('name', TextType::class, [
-                'label' => 'Nom du partenaire',
+                'label' => 'Nom du Gérant de la structure',
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 30
                 ]),
                 'attr' => [
-                    'placeholder' => 'Merci de saisir votre nom'
+                    'placeholder' => 'Merci de saisir le nom du gérant de la structure'
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email du partenaire',
+                'label' => 'Email du Gérant de la structure',
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
@@ -80,77 +80,40 @@ class UserType extends AbstractType
                     ]
                 ],
             ])
-            ->add('partnerName', TextType::class, [
-                'mapped' => false,                  
-                
-                'label' => 'Nom de l\'établissement Partenaire',
+            ->add('postalAdress', TextType::class, [
+                'mapped' => false,
+                'label' => 'Adresse postale de la structure',
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 30
                 ]),
                 'attr' => [
-                    'placeholder' => 'Merci de saisir le nom du Partenaire',
-                    'mapped' => false
+                    'placeholder' => 'Saisissez l\'adresse postale de la structure'
                 ]
-            ])
+                ]);
 
-            ->add('isPlanning', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-
-            ])
-            ->add('isNewsletter', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-
-            ])
-            ->add('isBoissons', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-
-            ])
-            ->add('isSms', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-
-            ])
-            ->add('isConcours', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-
-            ])
-            // ->add('submit', SubmitType::class)
+            // A insérer dans le StructureType, qui est relié au StructureController
             
-
-
-            // A insérer dans le StructureType, qui sera relié au StructureController
-            
-            // $builder->add('postalAdress', EntityType::class, [
-            //     'class' => Partner::class,
-            //     'query_builder' => function (PartnerRepository $pr) {
-            //         return $pr->createQueryBuilder('u')
-            //             ->orderBy('u.name', 'ASC');
-            //     },
-            //     'label' => 'Nom du partenaire rattaché à la structure :',
-            //     'mapped' => false
-            // ])
+            $builder->add('id', EntityType::class, [
+                'class' => Partner::class,
+                'query_builder' => function (PartnerRepository $pr) {
+                    return $pr->createQueryBuilder('u')
+                        ->orderBy('u.name', 'ASC');
+                },
+                'label' => 'Nom du partenaire rattaché à la structure :',
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'form-select',
+                ],
+            ])
       
         ;
 
-            // $builder->get('postalAdress')->addEventListener(
+            // $builder->get('id')->addEventListener(
             //     FormEvents::POST_SUBMIT,
             //     function (FormEvent $event) {
+           
             //         $form = $event->getForm();
             //         $form->getParent()->add('isPlanning', EntityType::class, [
             //             'class' => 'App\Entity\Partner',

@@ -3,21 +3,14 @@
 namespace App\Form;
 
 use App\Entity\User;
-use App\Entity\Partner;
-use App\Form\PartnerType;
-use App\Repository\PartnerRepository;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -27,21 +20,8 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('roles', ChoiceType::class, [
-                'label' => 'Type de client',
-                'required' => true,
-                'multiple' => false,
-                'disabled' => true,
-                'attr' => [
-                    'class' => 'form-select',
-                    'placeholder' => 'Type de client'
-                ],
-                'choices'  => [
-                        'Partenaire' => 'ROLE_PARTENAIRE',
-                ],
-            ])
             ->add('name', TextType::class, [
-                'label' => 'Nom du partenaire',
+                'label' => 'Votre nom',
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
@@ -52,7 +32,7 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email du partenaire',
+                'label' => 'Votre email',
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
@@ -80,99 +60,63 @@ class UserType extends AbstractType
                     ]
                 ],
             ])
-            ->add('partnerName', TextType::class, [
-                'mapped' => false,                  
-                
-                'label' => 'Nom de l\'établissement Partenaire',
+            ->add('roles', ChoiceType::class, [
+                'label' => 'Type de client',
                 'required' => true,
-                'constraints' => new Length([
-                    'min' => 2,
-                    'max' => 30
-                ]),
+                'multiple' => false,
                 'attr' => [
-                    'placeholder' => 'Merci de saisir le nom du Partenaire',
-                    'mapped' => false
-                ]
+                    'class' => 'form-select',
+                    'placeholder' => 'Type de client'
+                ],
+                'choices'  => [
+                        'Partenaire' => 'ROLE_PARTNER',
+                        'Structure' => 'ROLE_STRUCTURE',
+                ],
             ])
-
-            ->add('isPlanning', CheckboxType::class, [
-                'mapped' => false,
+            ->add('isActive', CheckboxType::class, [
+                'label' => false,
+                'label_attr' => ['class' => 'switch-custom is-active-btn'],
                 'required' => false,
+            ])
+            ->add('isPlanning', CheckboxType::class, [
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
-
+                'required' => false,
             ])
             ->add('isNewsletter', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
-
+                'required' => false,
             ])
             ->add('isBoissons', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
-
+                'required' => false,
             ])
-            ->add('isSms', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
+            ->add('isSMS', CheckboxType::class, [
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
-
+                'required' => false,
             ])
             ->add('isConcours', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
-
+                'required' => false,
             ])
-            // ->add('submit', SubmitType::class)
-            
-
-
-            // A insérer dans le StructureType, qui sera relié au StructureController
-            
-            // $builder->add('postalAdress', EntityType::class, [
-            //     'class' => Partner::class,
-            //     'query_builder' => function (PartnerRepository $pr) {
-            //         return $pr->createQueryBuilder('u')
-            //             ->orderBy('u.name', 'ASC');
-            //     },
-            //     'label' => 'Nom du partenaire rattaché à la structure :',
-            //     'mapped' => false
-            // ])
-      
         ;
-
-            // $builder->get('postalAdress')->addEventListener(
-            //     FormEvents::POST_SUBMIT,
-            //     function (FormEvent $event) {
-            //         $form = $event->getForm();
-            //         $form->getParent()->add('isPlanning', EntityType::class, [
-            //             'class' => 'App\Entity\Partner',
-            //             'placeholder' => 'Sélectionnez votre partenaire',
-            //             'mapped' => false,
-            //             'required' => false,
-            //             'choices' => $form->getData()->getPermissions()
-            //         ]);
-            //     }
-            // );
 
         // Data transformer for Roles array
         $builder->get('roles')
             ->addModelTransformer(new CallbackTransformer(
                 function ($rolesArray) {
+                     // transform the array to a string
                      return count($rolesArray)? $rolesArray[0]: null;
                 },
                 function ($rolesString) {
+                     // transform the string back to an array
                      return [$rolesString];
                 }
         ));
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

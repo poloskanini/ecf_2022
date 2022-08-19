@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -13,10 +13,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+    private ?string $email;
 
     #[ORM\Column]
     private array $roles = [];
@@ -25,28 +25,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null;
+    private ?string $password;
 
-    #[ORM\Column(nullable: true)]
-    private ?string $name = null;
+    #[ORM\Column(length: 255)]
+    private ?string $name;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $isActive = true;
+    #[ORM\Column]
+    private bool $isActive = true;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $isNewsletter = null;
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Partner $partner;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $isPlanning = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $isBoissons = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $isSMS = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $isConcours = null;
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Structure $structure;
 
     public function getId(): ?int
     {
@@ -109,6 +100,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+     public function isIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
@@ -130,74 +133,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isIsActive(): ?bool
+    public function getPartner(): ?Partner
     {
-        return $this->isActive;
+        return $this->partner;
     }
 
-    public function setIsActive(?bool $isActive): self
+    public function setPartner(Partner $partner): self
     {
-        $this->isActive = $isActive;
+        // set the owning side of the relation if necessary
+        // if ($partner->getUser() !== $this) {
+        //     $partner->setUser($this);
+        // }
+
+        $this->partner = $partner;
 
         return $this;
     }
 
-    public function isIsNewsletter(): ?bool
+    public function getStructure(): ?Structure
     {
-        return $this->isNewsletter;
+        return $this->structure;
     }
 
-    public function setIsNewsletter(?bool $isNewsletter): self
+    public function setStructure(Structure $structure): self
     {
-        $this->isNewsletter = $isNewsletter;
+        // set the owning side of the relation if necessary
+        if ($structure->getUser() !== $this) {
+            $structure->setUser($this);
+        }
 
-        return $this;
-    }
-
-    public function isIsPlanning(): ?bool
-    {
-        return $this->isPlanning;
-    }
-
-    public function setIsPlanning(?bool $isPlanning): self
-    {
-        $this->isPlanning = $isPlanning;
-
-        return $this;
-    }
-
-    public function isIsBoissons(): ?bool
-    {
-        return $this->isBoissons;
-    }
-
-    public function setIsBoissons(?bool $isBoissons): self
-    {
-        $this->isBoissons = $isBoissons;
-
-        return $this;
-    }
-
-    public function isIsSMS(): ?bool
-    {
-        return $this->isSMS;
-    }
-
-    public function setIsSMS(?bool $isSMS): self
-    {
-        $this->isSMS = $isSMS;
-
-        return $this;
-    }
-
-    public function isIsConcours(): ?bool
-    {
-        return $this->isConcours;
-    }
-
-    public function setIsConcours(?bool $isConcours): self
-    {
-        $this->isConcours = $isConcours;
+        $this->structure = $structure;
 
         return $this;
     }
