@@ -10,11 +10,11 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $partenaire = new Partenaire();
-        $partenaire
-            ->setName('Partenaire');
+        // $partenaire = new Partenaire();
+        // $partenaire
+        //     ->setName('Partenaire');
 
 
-        $manager->flush();
+        // $manager->flush();
     }
 }
