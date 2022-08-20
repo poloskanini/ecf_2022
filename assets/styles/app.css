@@ -580,7 +580,7 @@ input:checked + .slider:before {
 .crud-button,
 .back-button {
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 
 .back-button::before {

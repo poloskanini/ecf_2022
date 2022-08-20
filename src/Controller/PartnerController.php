@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Entity\Partner;
 use App\Form\PartnerType;
 use App\Form\CreatePartnerType;
+use Doctrine\ORM\Mapping\Entity;
 use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
@@ -29,7 +30,7 @@ class PartnerController extends AbstractController
     public function index(PartnerRepository $partnerRepository): Response
     {
         return $this->render('partner/index.html.twig', [
-            'partenaires' => $partnerRepository->findAll(),
+            'partners' => $partnerRepository->findAll(),
         ]);
     }
 
@@ -38,9 +39,9 @@ class PartnerController extends AbstractController
     {
 
         $user = new User(); // J'instancie ma classe User()
-        $partner = new Partner(); // J'instancie ma classe User()
+        $partner = new Partner(); // J'instancie ma classe Partner()
         
-        $form = $this->createForm(PartnerType::class, $user); // Mon formulaire UserType
+        $form = $this->createForm(PartnerType::class, $user); // Mon formulaire PartnerType
 
         $form->handleRequest($request); // Écoute la requête entrante
 
@@ -77,7 +78,7 @@ class PartnerController extends AbstractController
                 'L\'utilisateur "' .$user->getName(). '" a été ajouté avec succès'
             );
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('partner/_new.html.twig', [
@@ -86,24 +87,53 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
-    public function show(Partner $partner)
+    #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
+    #[Entity('partner', options: ['id' => 'partner_id'])]
+    public function edit(Request $request, User $user, Partner $partner, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
-        // $structures = $partner->getStructures();
-        // foreach ($structures as $structure) {
-        //     dd($structure);
-        // }
+        $form = $this->createForm(PartnerType::class, $partner); // Mon formulaire PartnerType
 
-        // return $this->render('partner/_show.html.twig', [
-        //     'partner' => $partner,
-        //     'structures' => $structures
-        // ]);
+        $form->handleRequest($request); // Écoute la requête entrante
 
-        $structures = $partner->getStructures();
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Injecte dans mon objet User() toutes les données qui sont récupérées du formulaire
+            $user = $form->getData();
+            
+            // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
+            $password = $passwordHasher->hashPassword($user, $user->getPassword());
+            // Je réinjecte $password qui est crypté dans l'objet User()
+            $user->setPassword($password);
 
-        return $this->render('partner/_show.html.twig', [
-            'partner' => $partner,
-            'structures' => $structures
+            // Je définis que le partenaire de mon User est $partner
+            $user->setPartner($partner);
+            $partner->setUser($user);
+
+            // Je récupère les données "non mappée" du formulaire UserType et les injecte dans mon instance de Partner.
+            $partner->setName($form->get('partnerName')->getData());
+
+            // Je définis que la nouvelle donnée aura pas défaut le ['ROLE_PARTENAIRE]
+            $user->setRoles(['ROLE_PARTENAIRE']);
+
+            $partner->setIsPlanning($form->get('isPlanning')->getData());
+            $partner->setIsNewsletter($form->get('isNewsletter')->getData());
+            $partner->setIsBoissons($form->get('isBoissons')->getData());
+            $partner->setIsSms($form->get('isSms')->getData());
+            $partner->setIsConcours($form->get('isConcours')->getData());
+
+            $userRepository->add($user, true);
+            $partnerRepository->add($partner, true);
+
+            $this->addFlash(
+                'success',
+                'L\'utilisateur "' .$user->getName(). '" a été ajouté avec succès'
+            );
+
+            return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('partner/_edit.html.twig', [
+             'user' => $user,
+             'form' => $form,
         ]);
     }
 
