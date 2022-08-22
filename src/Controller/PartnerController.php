@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Entity\Partner;
 use App\Form\PartnerType;
 use App\Form\CreatePartnerType;
+use App\Form\PartnerForm;
 use Doctrine\ORM\Mapping\Entity;
 use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
@@ -41,7 +42,7 @@ class PartnerController extends AbstractController
         $user = new User(); // J'instancie ma classe User()
         $partner = new Partner(); // J'instancie ma classe Partner()
         
-        $form = $this->createForm(PartnerType::class, $user); // Mon formulaire PartnerType
+        $form = $this->createForm(PartnerForm::class, ['user' => $user, 'partner' => $partner]);
 
         $form->handleRequest($request); // Écoute la requête entrante
 
@@ -88,9 +89,9 @@ class PartnerController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    #[Entity('partner', options: ['id' => 'partner_id'])]
     public function edit(Request $request, User $user, Partner $partner, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
+
         $form = $this->createForm(PartnerType::class, $partner); // Mon formulaire PartnerType
 
         $form->handleRequest($request); // Écoute la requête entrante
@@ -131,7 +132,7 @@ class PartnerController extends AbstractController
             return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('partner/_edit.html.twig', [
+        return $this->renderForm('partner/_new.html.twig', [
              'user' => $user,
              'form' => $form,
         ]);

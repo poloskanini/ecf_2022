@@ -26,7 +26,8 @@ class PartnerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('roles', ChoiceType::class, [
+            ->add('roles', EntityType::class, [
+                'class' => User::class,
                 'label' => 'Type de client',
                 'required' => true,
                 'multiple' => false,
@@ -183,7 +184,7 @@ class PartnerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Partner::class,
         ]);
     }
 	/**
