@@ -1,13 +1,15 @@
-# API Fitness
+# Studi Fitness
 
-Projet réalisé dans le cadre de l'ECF.
+Projet réalisé dans le cadre de l'ECF Décembre 2022.
 
 
 ## Tech Stack
 
-**Frontend:** Twig, Bootstrap 5
-
+**Frontend:** HTML / CSS / JavaScript / Bootstrap 5
+***Moteur de Template:** Twig
 **Backend:** PHP, Symfony 6
+**Base de données :** MySql
+**Serveur local :** MAMP
 
 
 ## Authors
@@ -19,8 +21,9 @@ Projet réalisé dans le cadre de l'ECF.
 
 - PHP >= 8.0
 - Composer >= 2
-- Yarn (ou Npm)
+- Npm (ou Yarn)
 - MySql
+- WebPack Encore
 
 
 ## Installation
@@ -34,14 +37,14 @@ Suivez les étapes ci-dessous pour installer localement mon projet et le tester.
   git clone git@github.com:poloskanini/ecf_2022.git
 ```
 
-### Allez dans le répertoire du projet
+### Aller dans le répertoire du projet
 
 ```bash
 cd ecf_2022
 ```
 
 
-## Installation des dépendences
+## Installation des dépendances
 
 ### 1. Symfony
 
@@ -58,7 +61,7 @@ cd ecf_2022
   yarn
 ```
 
-### 3. Complier les Assets
+### 3. Compiler les Assets
 
 ```bash
   # Avec npm
@@ -67,13 +70,13 @@ cd ecf_2022
   yarn build
 ```
 
-## Création de la base de donnée
+## Création de la base de données
 
-Pour créer la base de données, il faut au préalable démarrer le server MySql si il ne l'est pas.
+Pour créer la base de données, il faut au préalable démarrer le serveur MySql si il ne l'est pas.
 
 > 👍 Info
 
-> Le mot clef `symfony console`peut être remplacé par `php bin/console`si vous n'utilisez pas le CLI de Symfony.
+> Le mot clef `symfony console` peut être remplacé par `php bin/console` si vous n'utilisez pas le CLI de Symfony.
 
 
 ```bash
@@ -81,7 +84,7 @@ symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
 ```
 
-### Charger des data en base de données
+### Charger des datas en base de données
 
 ```bash
 symfony console doctrine:fixtures:load -n
@@ -100,4 +103,3 @@ Pour démarrer l'application
 | Email                               | Mot de passe | Role       | Description                               |
 |-------------------------------------|--------------|------------|-------------------------------------------|
 | admin@admin.fr                      | admin        | ADMIN      | Administrateur principal de l'application |
-| orangebleuedunkerque@direction.fr   | dunkerque    | PARTENAIRE | Directeur de l'Orange bleue de Dunkerque  |
