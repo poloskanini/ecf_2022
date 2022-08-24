@@ -5,11 +5,11 @@ Projet réalisé dans le cadre de l'ECF Décembre 2022.
 
 ## Tech Stack
 
-**Frontend:** HTML / CSS / JavaScript / Bootstrap 5
-**Moteur de Template:** Twig
-**Backend:** PHP, Symfony 6
-**Base de données :** MySql
-**Serveur local :** MAMP
+- **Frontend:** HTML / CSS / JavaScript / Bootstrap 5
+- **Moteur de Template:** Twig
+- **Backend:** PHP, Symfony 6
+- **Base de données :** MySql
+- **Serveur local :** MAMP
 
 
 ## Authors
