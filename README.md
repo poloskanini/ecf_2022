@@ -14,7 +14,9 @@ Projet réalisé dans le cadre de l'ECF Décembre 2022.
 
 ## Authors
 
-- [@Nicolas Barthès](https://github.com/poloskanini)
+Nicolas Barthès
+- [Github](https://github.com/poloskanini)
+- [Portfolio](https://www.nicolasbarthes.com)
 
 
 ## Pré-Requis
