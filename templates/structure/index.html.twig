@@ -38,20 +38,23 @@
 
                 <tr class="">
                     <td data-title="ID :">{{ structure.id }}</td>
-                    <td data-title="Actif :" class="align-middle">
+                    <td class="align-middle">
                         {% if structure.user.isActive == true %}
                             <div class="form-check form-check-active">Actif</div>
                             {% else %}
                             <div class="form-check form-check-inactive">Inactif</div>
                         {% endif %}
                     </td>
-                    <td data-title="Adresse postale">
+                    <td>
                         <div class="form-check form-check-structure">
                             {{ structure.postalAdress }}
                         </div>
                     </td>
                     {# <td data-title="Gérant :">{{ structure.user.name }}</td> #}
-                    <td data-title="Partenaire :">{{ structure.partner }}</td>
+                    <td>
+                        <i class="fa fa-building"></i>
+                        {{ structure.partner }}
+                    </td>
                     <td data-title="Planning :" class="align-middle">
                         {% if structure.isPlanning == true %}
                             <div class="custom-control custom-switch">

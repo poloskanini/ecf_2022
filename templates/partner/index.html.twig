@@ -37,19 +37,19 @@
 
                 <tr class="">
                     <td data-title="ID :">{{ partner.id }}</td>
-                    <td data-title="Actif :" class="align-middle">
+                    <td class="align-middle">
                         {% if partner.user.isActive == true %}
                             <div class="form-check form-check-active">Actif</div>
                             {% else %}
                             <div class="form-check form-check-inactive">Inactif</div>
                         {% endif %}
                     </td>
-                    <td data-title="Nom :">
+                    <td>
                         <div class="form-check form-check-partner">
                             {{ partner.name }}
                         </div>
                     </td>
-                    <td data-title="Email :">{{ partner.user.email }}</td>
+                    <td data-title="Mail :">{{ partner.user.email }}</td>
                     <td data-title="Planning :" class="align-middle">
                         {% if partner.isPlanning == true %}
                             <div class="custom-control custom-switch">

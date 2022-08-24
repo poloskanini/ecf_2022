@@ -27,19 +27,19 @@ class StructureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        //  ->add('roles', ChoiceType::class, [
-        //         'label' => 'Type de client',
-        //         'required' => true,
-        //         'multiple' => false,
-        //         'disabled' => true,
-        //         'attr' => [
-        //             'class' => 'form-select',
-        //             'placeholder' => 'Type de client'
-        //         ],
-        //         'choices'  => [
-        //                 'Structure' => 'ROLE_STRUCTURE',
-        //         ],
-        //     ])
+         ->add('roles', ChoiceType::class, [
+                'label' => 'Type de client',
+                'required' => true,
+                'multiple' => false,
+                'disabled' => true,
+                'attr' => [
+                    'class' => 'form-select',
+                    'placeholder' => 'Type de client'
+                ],
+                'choices'  => [
+                        'Structure' => 'ROLE_STRUCTURE',
+                ],
+            ])
             ->add('name', TextType::class, [
                 'label' => 'Nom du Gérant de la structure',
                 'required' => true,

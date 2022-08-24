@@ -66,9 +66,12 @@ cd ecf_2022
 ```bash
   # Avec npm
   npm run build
+  npm run watch
   # Avec yarn
   yarn build
+  yarn watch
 ```
+
 
 ## Création de la base de données
 
