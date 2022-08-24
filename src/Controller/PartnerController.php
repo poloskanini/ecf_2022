@@ -99,18 +99,15 @@ class PartnerController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    /**
-    * @ParamConverter("partner", options={"mapping": {"partner_id": "id"}})
-    */
-    public function edit(Request $request, User $user, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
+    public function edit(Request $request, Partner $partner, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $form = $this->createForm(PartnerType::class, $user); // Mon formulaire PartnerType
+        $form = $this->createForm(PartnerType::class, $partner); // Mon formulaire PartnerType
 
         $form->handleRequest($request); // Écoute la requête entrante
 
 
         return $this->renderForm('partner/_edit.html.twig', [
-            'user' => $user,
+            'partner' => $partner,
             'form' => $form,
         ]);
     }

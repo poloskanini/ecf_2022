@@ -10,6 +10,21 @@
 
 <div class="container-fluid index">
 
+    {# Flash message "Correctement ajouté" #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <h1 class="my-4">Partenaires :</h1>
 
     <div class="responsive-table-line">
@@ -135,6 +150,7 @@
     
     </table>
     <a class="btn btn-primary" href="{{ path('app_partner_new') }}">Créer un nouveau partenaire </a>
+    <sub>👈🏼 <b>Création d'un USER + PARTENAIRE (2 entités dans le même formulaire PartnerType) : OK</b> / 🚨 Mais impossible d'ÉDITER ("The form's view data is expected to be a "App\Entity\User", but it is a "App\Entity\Partner". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "App\Entity\Partner" to an instance of "App\Entity\User"</sub>
 </div> 
     
 

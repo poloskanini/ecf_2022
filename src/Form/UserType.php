@@ -28,17 +28,15 @@ class UserType extends AbstractType
     {
         $builder
             ->add('roles', ChoiceType::class, [
-                'label' => 'Type de client',
+                'label' => 'Type d\'utilisateur',
                 'required' => true,
                 'multiple' => false,
                 'attr' => [
                     'class' => 'form-select',
-                    'placeholder' => 'Type de client'
                 ],
                 'choices'  => [
-                        'Admin' => 'ROLE_ADMIN',
                         'Partenaire' => 'ROLE_PARTENAIRE',
-                        'Structure' => 'ROLE_STRUCTURE',
+                        'Structure' => 'ROLE_STRUCTURE'
                 ],
             ])
             ->add('name', TextType::class, [

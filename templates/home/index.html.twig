@@ -23,16 +23,16 @@
             <hr>
             
             {% if is_granted('ROLE_PARTENAIRE') %}
+
             <h6 class=" form-check form-check-partner d-inline">Vous disposez d'un contrat "Partenaire"</h6>
             <p>
                 <i class="fa fa-handshake"></i>
                 Nom de votre franchise : {{ app.user.partner.name }}
             </p>
+            <hr>
+
             <h5>Vos structures :</h5>
             {% for structure in app.user.partner.structures %}
-            <ul>
-                <li> {{ structure }}</li>
-            </ul>
             <p>
                 <i class="fa fa-building"></i>
                 Nom du gérant de structure : {{ structure.user.name }}
@@ -41,7 +41,12 @@
                 <i class="fa fa-envelope"></i>
                 Contact du gérant de structure : <a href="mailto:{{ structure.user.email }}">{{ structure.user.email }}</a>
             </p>
-            {# {{ dump(structure) }} #}
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Adresse postale de la structure : {{ structure.postalAdress }}
+            </p>
+            <hr>
+
             {% endfor %}
 
             {% endif %}
@@ -49,10 +54,13 @@
 
             {% if is_granted('ROLE_STRUCTURE') %}
             <h6 class=" form-check form-check-structure d-inline">Vous disposez d'un contrat "Structure"</h6>
+            <hr>
+
             <p>
                 <i class="fa-solid fa-location-dot"></i>
                 Adresse postale de votre structure : {{ app.user.structure.postalAdress }}
             </p>
+            
             <p>
                 <i class="fa fa-handshake"></i>
                 Nom de votre partenaire : {{ app.user.structure.partner.name }}

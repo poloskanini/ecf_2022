@@ -18,8 +18,6 @@
         </div>
     {% endfor %}
 
-   
-
     {% for message in app.flashes('danger') %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
@@ -86,6 +84,11 @@
             </tbody>
         
         </table>
+
+        <a class="btn btn-primary" href="{{ path('app_user_new') }}">Créer un nouvel utilisateur </a>
+        <sub>👈🏼 <b>ATTENTION ->INCOMPLET</b> : Ce bouton crée uniquement une instance de USER / L'utilisateur n'est pas relié à une entité Partner ou une entité Structure. Elle en a juste le ROLE (user), qui apparait dans l'index.</sub>
+
+
     </div>
     
 

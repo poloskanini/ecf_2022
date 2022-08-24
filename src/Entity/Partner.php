@@ -108,10 +108,7 @@ class Partner
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->name;
-    }
+
 
     public function isIsPlanning(): ?bool
     {
@@ -171,5 +168,10 @@ class Partner
         $this->isConcours = $isConcours;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

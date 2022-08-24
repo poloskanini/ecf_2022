@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Partner;
+use App\Entity\Structure;
 use App\Form\PartnerType;
 use App\Repository\PartnerRepository;
 use Symfony\Component\Form\FormEvent;
@@ -45,7 +46,7 @@ class StructureType extends AbstractType
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
-                    'max' => 30
+                    'max' => 60
                 ]),
                 'attr' => [
                     'placeholder' => 'Merci de saisir le nom du gérant de la structure'
@@ -131,6 +132,7 @@ class StructureType extends AbstractType
             // );
 
         // Data transformer for Roles array
+        
         // $builder->get('roles')
         //     ->addModelTransformer(new CallbackTransformer(
         //         function ($rolesArray) {

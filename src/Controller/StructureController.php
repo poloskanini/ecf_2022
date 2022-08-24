@@ -10,6 +10,7 @@ use App\Form\StructureType;
 use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -77,10 +78,10 @@ class StructureController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'La structure "' .$user->getName(). '" a été ajouté avec succès'
+                'La structure "' .$user->getName(). '" a été ajouté avec succès. Elle est rattachée au partenaire "' .$structure->getPartner(). '".'
             );
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('structure/_new.html.twig', [
@@ -102,9 +103,9 @@ class StructureController extends AbstractController
 
 
     #[Route('/edit/{id}', name: 'app_structure_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, StructureRepository $structureRepository, UserRepository $userRepository): Response
+    public function edit(Request $request, Structure $structure, StructureRepository $structureRepository, UserRepository $userRepository): Response
     {
-        $form = $this->createForm(StructureType::class, $user);
+        $form = $this->createForm(StructureType::class, $structure);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -114,17 +115,31 @@ class StructureController extends AbstractController
         }
 
         return $this->renderForm('structure/_edit.html.twig', [
-            'user' => $user,
+            'structure' => $structure,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_structure_delete', methods: ['POST'])]
-    public function delete(Request $request, Structure $structure, StructureRepository $structureRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$structure->getId(), $request->request->get('_token'))) {
-            $structureRepository->remove($structure, true);
-        }
+    #[Route('/{id}/delete', name: 'app_structure_delete', methods: ['GET'])]
+    public function delete(EntityManagerInterface $manager, Structure $structure) {
+        
+        if(!$structure) {
+            $this->addFlash(
+                'warning',
+                'L\utilisateur n\'a pas été trouvé'
+                );
+                return $this->render('user/_delete.html.twig', [
+                    'structure' => $structure,
+                ]);
+            }
+            
+            $manager->remove($structure); //REMOVE
+            $manager->flush();
+            
+            $this->addFlash(
+                'danger',
+                'L\'utilisateur "' .$structure->getPostalAdress(). '" a été supprimé avec succès'
+        );
 
         return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
     }

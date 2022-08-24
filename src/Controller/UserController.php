@@ -36,7 +36,40 @@ class UserController extends AbstractController
         ]);
     }
 
-    
+    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
+    {
+
+        $user = new User(); // J'instancie ma classe User()
+        
+        $form = $this->createForm(UserType::class, $user); // Mon formulaire PartnerType
+
+        $form->handleRequest($request); // Écoute la requête entrante
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Injecte dans mon objet User() toutes les données qui sont récupérées du formulaire
+            $user = $form->getData();
+            
+            // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
+            $password = $passwordHasher->hashPassword($user, $user->getPassword());
+            // Je réinjecte $password qui est crypté dans l'objet User()
+            $user->setPassword($password);
+
+            $userRepository->add($user, true);
+
+            $this->addFlash(
+                'success',
+                'L\'utilisateur "' .$user->getName(). '" a été ajouté avec succès'
+            );
+
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('user/_new.html.twig', [
+             'user' => $user,
+             'form' => $form,
+        ]);
+    }
 
 
     #[Route('/{id}/show', name: 'app_user_show', methods: ['GET'])]

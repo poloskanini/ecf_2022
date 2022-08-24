@@ -47,7 +47,7 @@ class PartnerType extends AbstractType
                     'max' => 30
                 ]),
                 'attr' => [
-                    'placeholder' => 'Merci de saisir votre nom'
+                    'placeholder' => 'Merci de saisir le nom du Partenaire'
                 ]
             ])
             ->add('email', EmailType::class, [
@@ -79,6 +79,13 @@ class PartnerType extends AbstractType
                     ]
                 ],
             ])
+
+            ->add('isActive', CheckboxType::class, [
+                'label' => false,
+                'label_attr' => ['class' => 'switch-custom is-active-btn'],
+                'required' => false,
+            ])
+            
             ->add('partnerName', TextType::class, [
                 'mapped' => false,                  
                 
@@ -92,12 +99,6 @@ class PartnerType extends AbstractType
                     'placeholder' => 'Merci de saisir le nom du Partenaire',
                     'mapped' => false
                 ]
-            ])
-
-            ->add('isActive', CheckboxType::class, [
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom is-active-btn'],
-                'required' => false,
             ])
 
             ->add('isPlanning', CheckboxType::class, [

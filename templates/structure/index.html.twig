@@ -10,6 +10,21 @@
 
 <div class="container-fluid index">
 
+    {# Flash message "Correctement ajouté" #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <h1 class="my-4">Structures :</h1>
 
     <div class="responsive-table-line">
@@ -34,7 +49,7 @@
         <tbody>
             {% for structure in structures %}
 
-            {{ dump (structure)}}
+            {# {{ dump (structure)}} #}
 
                 <tr class="">
                     <td data-title="ID :">{{ structure.id }}</td>
@@ -52,7 +67,7 @@
                     </td>
                     {# <td data-title="Gérant :">{{ structure.user.name }}</td> #}
                     <td>
-                        <i class="fa fa-building"></i>
+                        <i class="fa fa-handshake"></i>
                         {{ structure.partner }}
                     </td>
                     <td data-title="Planning :" class="align-middle">
@@ -141,6 +156,8 @@
     </table>
 </div>
     <a class="btn btn-primary" href="{{ path('app_structure_new') }}">Créer une nouvelle structure </a>
+    <sub>👈🏼 <b>Création d'un USER + STRUCTURE (2 entités dans le même formulaire StructureType) : OK</b> / 🚨Mais impossible d'ÉDITER ("The form's view data is expected to be a "App\Entity\User", but it is a "App\Entity\Structure". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "App\Entity\Structure" to an instance of "App\Entity\User"."</sub>
+
     
 
 </div>
