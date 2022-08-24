@@ -168,15 +168,15 @@ class PartnerType extends AbstractType
             // );
 
         // Data transformer for Roles array
-        $builder->get('roles')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($rolesArray) {
-                     return count($rolesArray)? $rolesArray[0]: null;
-                },
-                function ($rolesString) {
-                     return [$rolesString];
-                }
-        ));
+        // $builder->get('roles')
+        //     ->addModelTransformer(new CallbackTransformer(
+        //         function ($rolesArray) {
+        //              return count($rolesArray)? $rolesArray[0]: null;
+        //         },
+        //         function ($rolesString) {
+        //              return [$rolesString];
+        //         }
+        // ));
 
     }
 

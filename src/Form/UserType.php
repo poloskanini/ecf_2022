@@ -31,17 +31,18 @@ class UserType extends AbstractType
                 'label' => 'Type de client',
                 'required' => true,
                 'multiple' => false,
-                'disabled' => true,
                 'attr' => [
                     'class' => 'form-select',
                     'placeholder' => 'Type de client'
                 ],
                 'choices'  => [
+                        'Admin' => 'ROLE_ADMIN',
                         'Partenaire' => 'ROLE_PARTENAIRE',
+                        'Structure' => 'ROLE_STRUCTURE',
                 ],
             ])
             ->add('name', TextType::class, [
-                'label' => 'Nom du partenaire',
+                'label' => 'Nom de l\'utilisateur',
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
@@ -80,56 +81,62 @@ class UserType extends AbstractType
                     ]
                 ],
             ])
-            ->add('partnerName', TextType::class, [
-                'mapped' => false,                  
+            ->add('isActive', CheckboxType::class, [
+                'label' => false,
+                'label_attr' => ['class' => 'switch-custom is-active-btn'],
+                'required' => false,
+            ])
+
+            // ->add('partnerName', TextType::class, [
+            //     'mapped' => false,                  
                 
-                'label' => 'Nom de l\'établissement Partenaire',
-                'required' => true,
-                'constraints' => new Length([
-                    'min' => 2,
-                    'max' => 30
-                ]),
-                'attr' => [
-                    'placeholder' => 'Merci de saisir le nom du Partenaire',
-                    'mapped' => false
-                ]
-            ])
+            //     'label' => 'Nom de l\'établissement Partenaire',
+            //     'required' => true,
+            //     'constraints' => new Length([
+            //         'min' => 2,
+            //         'max' => 30
+            //     ]),
+            //     'attr' => [
+            //         'placeholder' => 'Merci de saisir le nom du Partenaire',
+            //         'mapped' => false
+            //     ]
+            // ])
 
-            ->add('isPlanning', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
+            // ->add('isPlanning', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
 
-            ])
-            ->add('isNewsletter', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
+            // ])
+            // ->add('isNewsletter', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
 
-            ])
-            ->add('isBoissons', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
+            // ])
+            // ->add('isBoissons', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
 
-            ])
-            ->add('isSms', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
+            // ])
+            // ->add('isSms', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
 
-            ])
-            ->add('isConcours', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
+            // ])
+            // ->add('isConcours', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
 
-            ])
+            // ])
             // ->add('submit', SubmitType::class)
             
 

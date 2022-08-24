@@ -79,41 +79,10 @@ class UserShowType extends AbstractType
             ])
             ->add('isActive', CheckboxType::class, [
                 'disabled' => true,
-                'label' => 'Actif',
+                'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
                 'required' => false,
-            ])
-            ->add('isPlanning', CheckboxType::class, [
-                'disabled' => true,
-                'label' => 'Planning',
-                'label_attr' => ['class' => 'switch-custom'],
-                'required' => false,
-            ])
-            ->add('isNewsletter', CheckboxType::class, [
-                'disabled' => true,
-                'label' => 'Newsletter',
-                'label_attr' => ['class' => 'switch-custom'],
-                'required' => false,
-            ])
-            ->add('isBoissons', CheckboxType::class, [
-                'disabled' => true,
-                'label' => 'Boissons',
-                'label_attr' => ['class' => 'switch-custom'],
-                'required' => false,
-            ])
-            ->add('isSMS', CheckboxType::class, [
-                'disabled' => true,
-                'label' => 'SMS',
-                'label_attr' => ['class' => 'switch-custom'],
-                'required' => false,
-            ])
-            ->add('isConcours', CheckboxType::class, [
-                'disabled' => true,
-                'label' => 'Concours',
-                'label_attr' => ['class' => 'switch-custom'],
-                'required' => false,
-            ])
-        ;
+            ]);
 
         // Data transformer for Roles array
         $builder->get('roles')

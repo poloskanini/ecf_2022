@@ -27,19 +27,19 @@ class StructureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-         ->add('roles', ChoiceType::class, [
-                'label' => 'Type de client',
-                'required' => true,
-                'multiple' => false,
-                'disabled' => true,
-                'attr' => [
-                    'class' => 'form-select',
-                    'placeholder' => 'Type de client'
-                ],
-                'choices'  => [
-                        'Structure' => 'ROLE_STRUCTURE',
-                ],
-            ])
+        //  ->add('roles', ChoiceType::class, [
+        //         'label' => 'Type de client',
+        //         'required' => true,
+        //         'multiple' => false,
+        //         'disabled' => true,
+        //         'attr' => [
+        //             'class' => 'form-select',
+        //             'placeholder' => 'Type de client'
+        //         ],
+        //         'choices'  => [
+        //                 'Structure' => 'ROLE_STRUCTURE',
+        //         ],
+        //     ])
             ->add('name', TextType::class, [
                 'label' => 'Nom du Gérant de la structure',
                 'required' => true,
@@ -86,12 +86,17 @@ class StructureType extends AbstractType
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
-                    'max' => 30
+                    'max' => 60
                 ]),
                 'attr' => [
                     'placeholder' => 'Saisissez l\'adresse postale de la structure'
                 ]
-                ]);
+                ])
+            ->add('isActive', CheckboxType::class, [
+                'label' => false,
+                'label_attr' => ['class' => 'switch-custom is-active-btn'],
+                'required' => false,
+            ]);
 
             // A insérer dans le StructureType, qui est relié au StructureController
             
@@ -126,15 +131,15 @@ class StructureType extends AbstractType
             // );
 
         // Data transformer for Roles array
-        $builder->get('roles')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($rolesArray) {
-                     return count($rolesArray)? $rolesArray[0]: null;
-                },
-                function ($rolesString) {
-                     return [$rolesString];
-                }
-        ));
+        // $builder->get('roles')
+        //     ->addModelTransformer(new CallbackTransformer(
+        //         function ($rolesArray) {
+        //              return count($rolesArray)? $rolesArray[0]: null;
+        //         },
+        //         function ($rolesString) {
+        //              return [$rolesString];
+        //         }
+        // ));
 
     }
 

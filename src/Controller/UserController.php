@@ -50,7 +50,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, Partner $partner, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(UserType::class, $user); // Mon formulaire UserType
 
@@ -65,28 +65,11 @@ class UserController extends AbstractController
             // Je réinjecte $password qui est crypté dans l'objet User()
             $user->setPassword($password);
 
-            // Je définis que le partenaire de mon User est $partner
-            $user->setPartner($partner);
-            $partner->setUser($user);
-
-            // Je récupère les données "non mappée" du formulaire UserType et les injecte dans mon instance de Partner.
-            $partner->setName($form->get('partnerName')->getData());
-
-            // Je définis que la nouvelle donnée aura pas défaut le ['ROLE_PARTENAIRE]
-            $user->setRoles(['ROLE_PARTENAIRE']);
-
-            $partner->setIsPlanning($form->get('isPlanning')->getData());
-            $partner->setIsNewsletter($form->get('isNewsletter')->getData());
-            $partner->setIsBoissons($form->get('isBoissons')->getData());
-            $partner->setIsSms($form->get('isSms')->getData());
-            $partner->setIsConcours($form->get('isConcours')->getData());
-
             $userRepository->add($user, true);
-            $partnerRepository->add($partner, true);
 
             $this->addFlash(
                 'success',
-                'L\'utilisateur "' .$user->getName(). '" a été ajouté avec succès'
+                'L\'utilisateur "' .$user->getName(). '" a été modifié avec succès'
             );
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);

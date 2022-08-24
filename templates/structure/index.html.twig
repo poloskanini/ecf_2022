@@ -20,7 +20,8 @@
                 <th scope="col">ID</th>
                 <th scope="col">Actif</th>
                 <th scope="col">Adresse postale</th>
-                <th scope="col">Nom du partenaire</th>
+                {# <th scope="col">Gérant</th> #}
+                <th scope="col">Partenaire</th>
                 <th scope="col">Planning</th>
                 <th scope="col">Newsletter</th>
                 <th scope="col">Boissons</th>
@@ -33,7 +34,7 @@
         <tbody>
             {% for structure in structures %}
 
-            {# {{ dump (structure)}} #}
+            {{ dump (structure)}}
 
                 <tr class="">
                     <td data-title="ID :">{{ structure.id }}</td>
@@ -49,7 +50,8 @@
                             {{ structure.postalAdress }}
                         </div>
                     </td>
-                    <td data-title="Nom du partenaire :">{{ structure.partner }}</td>
+                    {# <td data-title="Gérant :">{{ structure.user.name }}</td> #}
+                    <td data-title="Partenaire :">{{ structure.partner }}</td>
                     <td data-title="Planning :" class="align-middle">
                         {% if structure.isPlanning == true %}
                             <div class="custom-control custom-switch">
@@ -116,17 +118,17 @@
                         {% endif %}
                     </td>
                   
-                    {# <td class="align-middle">
-                        <a class="crud-button link-primary fa fa-pen-square mx-2" aria-label="Editer" href="{{ pat('app_user_edit', {'id': user.id}) }}"></a>
-                        <a class="crud-button link-success fa fa-eye mx-2" href="{{ path('app_user_show', {'id': user.id}) }}"></a>
-                        <a class="crud-button link-danger fa fa-trash mx-2 confirm-action" href="{{ path('app_user_delete', {'id':user.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></a>
-                    </td> #}
-
                     <td class="align-middle">
+                        <a class="crud-button link-primary fa fa-pen-square mx-2" aria-label="Editer" href="{{ path('app_structure_edit', {'id': structure.id}) }}"></a>
+                        <a class="crud-button link-success fa fa-eye mx-2" href="{{ path('app_structure_show', {'id': structure.id}) }}"></a>
+                        <a class="crud-button link-danger fa fa-trash mx-2 confirm-action" href="{{ path('app_structure_delete', {'id':structure.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></a>
+                    </td>
+
+                    {# <td class="align-middle">
                         <a class="crud-button link-primary fa fa-pen-square mx-2" aria-label="Editer" ></a>
                         <a class="crud-button link-success fa fa-eye mx-2"></a>
                         <a class="crud-button link-danger fa fa-trash mx-2 confirm-action" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></a>
-                    </td>
+                    </td> #}
                 </tr>
                 
             {% endfor %}

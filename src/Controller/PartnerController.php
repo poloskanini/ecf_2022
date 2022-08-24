@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/partner')]
@@ -41,7 +42,7 @@ class PartnerController extends AbstractController
         $user = new User(); // J'instancie ma classe User()
         $partner = new Partner(); // J'instancie ma classe Partner()
         
-        $form = $this->createForm(PartnerType::class, $user); // Mon formulaire PartnerType
+        $form = $this->createForm(PartnerType::class); // Mon formulaire PartnerType
 
         $form->handleRequest($request); // Écoute la requête entrante
 
@@ -86,18 +87,56 @@ class PartnerController extends AbstractController
              'form' => $form,
         ]);
     }
+    
+    #[Route('/{id}/show', name: 'app_partner_show', methods: ['GET'])]
+    public function show(Partner $partner): Response
+    {
+        $form = $this->createForm(UserShowType::class, $partner);
+        return $this->renderForm('user/_show.html.twig', [
+            'partner' => $partner,
+            'form' => $form,
+        ]);
+    }
 
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    #[Entity('partner', options: ['id' => 'partner_id'])]
-    public function edit(Request $request, Partner $partner, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
+    /**
+    * @ParamConverter("partner", options={"mapping": {"partner_id": "id"}})
+    */
+    public function edit(Request $request, User $user, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $form = $this->createForm(PartnerType::class, $partner); // Mon formulaire PartnerType
+        $form = $this->createForm(PartnerType::class, $user); // Mon formulaire PartnerType
 
-        
+        $form->handleRequest($request); // Écoute la requête entrante
+
 
         return $this->renderForm('partner/_edit.html.twig', [
-             'form' => $form,
+            'user' => $user,
+            'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}/delete', name: 'app_partner_delete', methods: ['GET'])]
+    public function delete(EntityManagerInterface $manager, Partner $partner) {
+        
+        if(!$partner) {
+            $this->addFlash(
+                'warning',
+                'L\utilisateur n\'a pas été trouvé'
+                );
+                return $this->render('user/_delete.html.twig', [
+                    'partner' => $partner,
+                ]);
+            }
+            
+            $manager->remove($partner); //REMOVE
+            $manager->flush();
+            
+            $this->addFlash(
+                'danger',
+                'L\'utilisateur "' .$partner->getName(). '" a été supprimé avec succès'
+        );
+
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
 }

@@ -6,7 +6,7 @@ Projet réalisé dans le cadre de l'ECF Décembre 2022.
 ## Tech Stack
 
 **Frontend:** HTML / CSS / JavaScript / Bootstrap 5
-***Moteur de Template:** Twig
+**Moteur de Template:** Twig
 **Backend:** PHP, Symfony 6
 **Base de données :** MySql
 **Serveur local :** MAMP
@@ -23,7 +23,7 @@ Projet réalisé dans le cadre de l'ECF Décembre 2022.
 - Composer >= 2
 - Npm (ou Yarn)
 - MySql
-- WebPack Encore
+- WebPack Encore (JS / CSS)
 
 
 ## Installation
@@ -74,8 +74,7 @@ cd ecf_2022
 
 Pour créer la base de données, il faut au préalable démarrer le serveur MySql si il ne l'est pas.
 
-> 👍 Info
-
+> 💡<b>INFO :</b>
 > Le mot clef `symfony console` peut être remplacé par `php bin/console` si vous n'utilisez pas le CLI de Symfony.
 
 
@@ -103,3 +102,7 @@ Pour démarrer l'application
 | Email                               | Mot de passe | Role       | Description                               |
 |-------------------------------------|--------------|------------|-------------------------------------------|
 | admin@admin.fr                      | admin        | ADMIN      | Administrateur principal de l'application |
+| orangebleuedunkerque@direction.fr   | orange       | PARTENAIRE | Partenaire possédant des structures       |
+| ruemontmartre@orangebleue.fr        | montmartre   | STRUCTURE  | Structure reliée à orangebleuedunkerque   |
+
+> Les Partenaires et Structures sont en LECTURE SEULE. Pour toute modification sur leurs fonctionnalités, ils doivent contacter l'administrateur qui a les pleins pouvoirs.

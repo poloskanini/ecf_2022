@@ -34,7 +34,7 @@ class StructureController extends AbstractController
         $user = new User(); // J'instancie ma classe User()
         $structure = new Structure(); // J'instancie ma classe User()
         
-        $form = $this->createForm(StructureType::class, $user); // Mon formulaire UserType
+        $form = $this->createForm(StructureType::class); // Mon formulaire UserType
 
         $form->handleRequest($request); // Écoute la requête entrante
 
@@ -101,10 +101,10 @@ class StructureController extends AbstractController
     }
 
 
-    #[Route('/{id}/edit', name: 'app_structure_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Structure $structure, StructureRepository $structureRepository): Response
+    #[Route('/edit/{id}', name: 'app_structure_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, User $user, StructureRepository $structureRepository, UserRepository $userRepository): Response
     {
-        $form = $this->createForm(StructureType::class, $structure);
+        $form = $this->createForm(StructureType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -113,8 +113,8 @@ class StructureController extends AbstractController
             return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('structure/edit.html.twig', [
-            'structure' => $structure,
+        return $this->renderForm('structure/_edit.html.twig', [
+            'user' => $user,
             'form' => $form,
         ]);
     }

@@ -33,7 +33,7 @@
         <tbody>
             {% for partner in partners %}
 
-            {{ dump (partner)}}
+            {# {{ dump (partner)}} #}
 
                 <tr class="">
                     <td data-title="ID :">{{ partner.id }}</td>
@@ -46,7 +46,7 @@
                     </td>
                     <td data-title="Nom :">
                         <div class="form-check form-check-partner">
-                            {{ partner.user.name }}
+                            {{ partner.name }}
                         </div>
                     </td>
                     <td data-title="Email :">{{ partner.user.email }}</td>
@@ -124,8 +124,8 @@
 
                     <td class="align-middle">
                         <a class="crud-button link-primary fa fa-pen-square mx-2" aria-label="Editer" href="{{ path('app_partner_edit', {'id': partner.id}) }}"></a>
-                        {# <a class="crud-button link-success fa fa-eye mx-2" href="{{ path('app_user_show', {'id': user.id}) }}"></a> #}
-                        {# <a class="crud-button link-danger fa fa-trash mx-2 confirm-action" href="{{ path('app_partner_delete', {'id':partenaire.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></a> #}
+                        <a class="crud-button link-success fa fa-eye mx-2" href="{{ path('app_partner_show', {'id': partner.id}) }}"></a>
+                        <a class="crud-button link-danger fa fa-trash mx-2 confirm-action" href="{{ path('app_partner_delete', {'id':partner.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></a>
                     </td>
                 </tr>
                 
