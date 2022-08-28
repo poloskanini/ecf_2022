@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col col-xl-8">
 
-            <h1 class="my-4">Modifier un partenaire</h1>
+            <h1 class="text-center my-4">MODIFIER UN PARTENAIRE</h1>
 
 
             {{ form_start(form) }}
@@ -20,40 +20,50 @@
                     {{ form_errors(form) }}
                 </div>
 
-                {# <div class="form-group">
-                {{ form_row(form.roles)}}
-                </div> #}
+                <h4>INFORMATIONS DE L'UTILISATEUR</h4>
 
                 <div class="form-group">
-                    {{ form_label(form.name)}}
-                    {{ form_widget(form.name)}}
-                    {{ form_errors(form.name)}}
-                </div>
-
-                {# <div class="form-group">
-                    {{ form_label(form.email)}}
-                    {{ form_widget(form.email)}}
-                    {{ form_errors(form.email)}}
+                {{ form_row(form.user.roles)}}
                 </div>
 
                 <div class="form-group">
-                    {{ form_label(form.password)}}
-                    {{ form_widget(form.password)}}
-                    {{ form_errors(form.password)}}
-                </div> #}
+                    {{ form_label(form.user.name)}}
+                    {{ form_widget(form.user.name)}}
+                    {{ form_errors(form.user.name)}}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.user.email)}}
+                    {{ form_widget(form.user.email)}}
+                    {{ form_errors(form.user.email)}}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.user.password)}}
+                    {{ form_widget(form.user.password)}}
+                    {{ form_errors(form.user.password)}}
+                </div>
+
+                    {{ form_label(form.user.isActive)}}
+                    {{ form_widget(form.user.isActive)}}
+                    {{ form_errors(form.user.isActive)}}
+                </div>
+
+                <hr>
+                <h4>INFORMATIONS DU PARTENAIRE</h4>
+
+                <div class="form-group">
+                    {{ form_label(form.partner.name)}}
+                    {{ form_widget(form.partner.name)}}
+                    {{ form_errors(form.partner.name)}}
+                </div>
 
                 {# <div class="form-group">
-                    {{ form_label(form.partnerName)}}
-                    {{ form_widget(form.partnerName)}}
-                    {{ form_errors(form.partnerName)}}
+                    {{ form_label(form.partner.user)}}
+                    {{ form_widget(form.partner.user)}}
+                    {{ form_errors(form.partner.user)}}
                 </div> #}
 
-                {# <div class="form-group">
-                <p class="m-0">Actif</p>
-                    {{ form_label(form.isActive)}}
-                    {{ form_widget(form.isActive)}}
-                    {{ form_errors(form.isActive)}}
-                </div> #}
 
                 <div class="container-fluid h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -71,8 +81,8 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-calendar-days"></i>
                                                         <p class="m-0">Planning</p>
-                                                            {{ form_widget(form.isPlanning)}}
-                                                            {{ form_errors(form.isPlanning)}}
+                                                            {{ form_widget(form.partner.isPlanning)}}
+                                                            {{ form_errors(form.partner.isPlanning)}}
                                                             
                                                         </div>                                                
                                                     </div>
@@ -81,9 +91,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-envelope"></i>
                                                         <p class="m-0">Newsletter</p>
-                                                            {{ form_label(form.isNewsletter)}}
-                                                            {{ form_widget(form.isNewsletter)}}
-                                                            {{ form_errors(form.isNewsletter)}}
+                                                            {{ form_label(form.partner.isNewsletter)}}
+                                                            {{ form_widget(form.partner.isNewsletter)}}
+                                                            {{ form_errors(form.partner.isNewsletter)}}
                                                         </div>                                         
                                                     </div>
 
@@ -91,9 +101,9 @@
                                                         <div class="form-group">
                                                         <i class="fas fa-cocktail"></i>
                                                         <p class="m-0">Boissons</p>
-                                                            {{ form_label(form.isBoissons)}}
-                                                            {{ form_widget(form.isBoissons)}}
-                                                            {{ form_errors(form.isBoissons)}}
+                                                            {{ form_label(form.partner.isBoissons)}}
+                                                            {{ form_widget(form.partner.isBoissons)}}
+                                                            {{ form_errors(form.partner.isBoissons)}}
                                                         </div>
                                                     </div>
 
@@ -101,9 +111,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-comment-sms"></i>
                                                         <p class="m-0">SMS</p>
-                                                            {{ form_label(form.isSms)}}
-                                                            {{ form_widget(form.isSms)}}
-                                                            {{ form_errors(form.isSms)}}
+                                                            {{ form_label(form.partner.isSms)}}
+                                                            {{ form_widget(form.partner.isSms)}}
+                                                            {{ form_errors(form.partner.isSms)}}
                                                         </div>
                                                     </div>
 
@@ -111,9 +121,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-trophy"></i>
                                                         <p class="m-0">Concours</p>
-                                                            {{ form_label(form.isConcours)}}
-                                                            {{ form_widget(form.isConcours)}}
-                                                            {{ form_errors(form.isConcours)}}
+                                                            {{ form_label(form.partner.isConcours)}}
+                                                            {{ form_widget(form.partner.isConcours)}}
+                                                            {{ form_errors(form.partner.isConcours)}}
                                                         </div>
                                                 </div>
                                             </div>
@@ -127,7 +137,7 @@
                 
 
                 <a href="{{ path('app_partner_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>
-                <button type="submit" class="btn btn-primary my-4" value="Enregistrer" onclick="return confirm('Êtes-vous sûr de vouloir créer ce nouvel utilisateur ?')">Confirmer</button>
+                <button type="submit" class="btn btn-success my-4" value="Enregistrer" onclick="return confirm('Êtes-vous sûr de vouloir modifier ce partenaire ?')">Sauvegarder</button>
 
                 {{ form_end(form) }}
             </div>
