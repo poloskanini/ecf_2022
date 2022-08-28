@@ -14,15 +14,15 @@
             <h1 class="my-4">Modifier un partenaire</h1>
 
 
-            {# {{ form_start(form) }}
+            {{ form_start(form) }}
 
                 <div class="form-error is-invalid">
                     {{ form_errors(form) }}
                 </div>
 
-                <div class="form-group">
+                {# <div class="form-group">
                 {{ form_row(form.roles)}}
-                </div>
+                </div> #}
 
                 <div class="form-group">
                     {{ form_label(form.name)}}
@@ -30,7 +30,7 @@
                     {{ form_errors(form.name)}}
                 </div>
 
-                <div class="form-group">
+                {# <div class="form-group">
                     {{ form_label(form.email)}}
                     {{ form_widget(form.email)}}
                     {{ form_errors(form.email)}}
@@ -40,20 +40,20 @@
                     {{ form_label(form.password)}}
                     {{ form_widget(form.password)}}
                     {{ form_errors(form.password)}}
-                </div>
+                </div> #}
 
-                <div class="form-group">
+                {# <div class="form-group">
                     {{ form_label(form.partnerName)}}
                     {{ form_widget(form.partnerName)}}
                     {{ form_errors(form.partnerName)}}
-                </div>
+                </div> #}
 
-                <div class="form-group">
+                {# <div class="form-group">
                 <p class="m-0">Actif</p>
                     {{ form_label(form.isActive)}}
                     {{ form_widget(form.isActive)}}
                     {{ form_errors(form.isActive)}}
-                </div>
+                </div> #}
 
                 <div class="container-fluid h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -129,7 +129,7 @@
                 <a href="{{ path('app_partner_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>
                 <button type="submit" class="btn btn-primary my-4" value="Enregistrer" onclick="return confirm('Êtes-vous sûr de vouloir créer ce nouvel utilisateur ?')">Confirmer</button>
 
-                {{ form_end(form) }} #}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

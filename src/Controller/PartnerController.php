@@ -15,6 +15,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\FormBuilderInterface;
+use App\Form\DataTransformer\PartnerToUserTransformer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -71,6 +73,7 @@ class PartnerController extends AbstractController
             $partner->setIsSms($form->get('isSms')->getData());
             $partner->setIsConcours($form->get('isConcours')->getData());
 
+
             $userRepository->add($user, true);
             $partnerRepository->add($partner, true);
 
@@ -84,6 +87,7 @@ class PartnerController extends AbstractController
 
         return $this->renderForm('partner/_new.html.twig', [
              'user' => $user,
+             'partner' => $partner,
              'form' => $form,
         ]);
     }
@@ -98,8 +102,9 @@ class PartnerController extends AbstractController
         ]);
     }
 
+
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Partner $partner, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
+    public function edit(Request $request, Partner $partner): Response
     {
         $form = $this->createForm(PartnerType::class, $partner); // Mon formulaire PartnerType
 
@@ -111,7 +116,7 @@ class PartnerController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    
     #[Route('/{id}/delete', name: 'app_partner_delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Partner $partner) {
         
@@ -133,7 +138,7 @@ class PartnerController extends AbstractController
                 'L\'utilisateur "' .$partner->getName(). '" a été supprimé avec succès'
         );
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
     }
 
 }
