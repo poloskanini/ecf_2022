@@ -153,24 +153,6 @@ class PartnerController extends AbstractController
         ]);
     }
 
-
-<<<<<<< HEAD
-    #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Partner $partner): Response
-    {
-        $form = $this->createForm(PartnerType::class, $partner); // Mon formulaire PartnerType
-
-        $form->handleRequest($request); // Écoute la requête entrante
-
-
-        return $this->renderForm('partner/_edit.html.twig', [
-            'partner' => $partner,
-            'form' => $form,
-        ]);
-    }
-    
-=======
->>>>>>> partnerFormType
     #[Route('/{id}/delete', name: 'app_partner_delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Partner $partner) {
         
