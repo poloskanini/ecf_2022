@@ -143,7 +143,7 @@ class PartnerController extends AbstractController
     }
 
     // EFFACER UN PARTENAIRE
-    #[Route('/delte/{id}', name: 'app_partner_delete', methods: ['GET'])]
+    #[Route('/delete/{id}', name: 'app_partner_delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Partner $partner) {
         
         if(!$partner) {
