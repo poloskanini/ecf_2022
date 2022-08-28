@@ -37,6 +37,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
+    // CRÉER UN NOUVEAU PARTENAIRE
     #[Route('/new', name: 'app_partner_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
@@ -92,6 +93,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
+    // ÉDITER UN PARTENAIRE
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
     public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher)
     {
@@ -129,21 +131,8 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    // #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    // public function edit(Request $request, Partner $partner, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
-    // {
-    //     $form = $this->createForm(PartnerType::class, $partner);
-
-    //     $form->handleRequest($request);
-
-
-    //     return $this->renderForm('partner/_edit.html.twig', [
-    //         'partner' => $partner,
-    //         'form' => $form,
-    //     ]);
-    // }
-
-    #[Route('/{id}/show', name: 'app_partner_show', methods: ['GET'])]
+    // SHOW UN PARTENAIRE
+    #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
     public function show(Partner $partner): Response
     {
         $form = $this->createForm(UserShowType::class, $partner);
@@ -153,7 +142,8 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_partner_delete', methods: ['GET'])]
+    // EFFACER UN PARTENAIRE
+    #[Route('/delte/{id}', name: 'app_partner_delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Partner $partner) {
         
         if(!$partner) {
