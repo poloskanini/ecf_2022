@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{parent() }} | Voir un partenaire {% endblock %}
+
+{% block header %}{% endblock %}
+{% block topbar %}{% endblock %}
+{% block searchBar %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-xl-8">
+
+            <h1 class="text-center my-4">VOIR UN PARTENAIRE</h1>
+
+            {{ form_start(form) }}
+
+                <div class="form-error is-invalid">
+                    {{ form_errors(form) }}
+                </div>
+
+                <h4>INFORMATIONS DE L'UTILISATEUR</h4>
+
+                <div class="form-group">
+                {{ form_row(form.user.roles)}}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.user.name)}}
+                    {{ form_widget(form.user.name)}}
+                    {{ form_errors(form.user.name)}}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.user.email)}}
+                    {{ form_widget(form.user.email)}}
+                    {{ form_errors(form.user.email)}}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.user.password)}}
+                    {{ form_widget(form.user.password)}}
+                    {{ form_errors(form.user.password)}}
+                </div>
+
+                <div class="form-group">
+                <p class="m-0">Actif</p>
+                    {{ form_label(form.user.isActive)}}
+                    {{ form_widget(form.user.isActive)}}
+                    {{ form_errors(form.user.isActive)}}
+                </div>
+
+                <hr>
+                <h4>INFORMATIONS DU PARTENAIRE</h4>
+
+                <div class="form-group">
+                    {{ form_label(form.partner.name)}}
+                    {{ form_widget(form.partner.name)}}
+                    {{ form_errors(form.partner.name)}}
+                </div>
+
+                <div class="container-fluid h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col col-xl-10">
+                            <div class="card" style="border-radius: 1rem;">
+                                <div class="col d-flex align-items-center">
+                                    <div class="card-body text-black text-center">
+                                        <div class="d-flex align-items-center justify-content-center mb-3 pb-1 fs-3 ">
+                                            <h4>Fonctionnalités activées</h4>
+                                        </div>
+                                        <div class="toggle-permissions text-center my-5">
+                                            <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
+                                                <div class="row">
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fa-solid fa-calendar-days"></i>
+                                                        <p class="m-0">Planning</p>
+                                                            {{ form_widget(form.partner.isPlanning)}}
+                                                            {{ form_errors(form.partner.isPlanning)}}
+                                                            
+                                                        </div>                                                
+                                                    </div>
+
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fa-solid fa-envelope"></i>
+                                                        <p class="m-0">Newsletter</p>
+                                                            {{ form_label(form.partner.isNewsletter)}}
+                                                            {{ form_widget(form.partner.isNewsletter)}}
+                                                            {{ form_errors(form.partner.isNewsletter)}}
+                                                        </div>                                         
+                                                    </div>
+
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fas fa-cocktail"></i>
+                                                        <p class="m-0">Boissons</p>
+                                                            {{ form_label(form.partner.isBoissons)}}
+                                                            {{ form_widget(form.partner.isBoissons)}}
+                                                            {{ form_errors(form.partner.isBoissons)}}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fa-solid fa-comment-sms"></i>
+                                                        <p class="m-0">SMS</p>
+                                                            {{ form_label(form.partner.isSms)}}
+                                                            {{ form_widget(form.partner.isSms)}}
+                                                            {{ form_errors(form.partner.isSms)}}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fa-solid fa-trophy"></i>
+                                                        <p class="m-0">Concours</p>
+                                                            {{ form_label(form.partner.isConcours)}}
+                                                            {{ form_widget(form.partner.isConcours)}}
+                                                            {{ form_errors(form.partner.isConcours)}}
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="{{ path('app_partner_index') }}" class="btn btn-secondary" value="OK">Retour</a>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

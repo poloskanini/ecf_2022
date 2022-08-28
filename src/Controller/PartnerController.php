@@ -6,9 +6,11 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Form\UserShowType;
 use App\Form\PartnerFormType;
 use App\Form\CreatePartnerType;
 use Doctrine\ORM\Mapping\Entity;
+use App\Form\PartnerFormShowType;
 use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
@@ -29,6 +31,7 @@ class PartnerController extends AbstractController
         $this->entityManager = $entityManager;
     }
     
+    // INDEX FOR ALL PARTNERS IN DB
     #[Route('/', name: 'app_partner_index', methods: ['GET'])]
     public function index(PartnerRepository $partnerRepository): Response
     {
@@ -37,7 +40,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    // CRÉER UN NOUVEAU PARTENAIRE
+    // CREATE A NEW PARTNER
     #[Route('/new', name: 'app_partner_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
@@ -93,15 +96,15 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    // ÉDITER UN PARTENAIRE
+    // EDIT A PARTNER
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
     public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher)
     {
-        $partner = $partnerRepository->findOneBy(['id' => $id]);
-        $partnerUser = $partner->getUser();
-        $items = ['user' => $partnerUser, 'partner' => $partner];
+        $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
+        $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
+        $items = ['user' => $partnerUser, 'partner' => $partner]; // Tableau regroupant les 2 entités
 
-        $form = $this->createFormBuilder($items)
+        $form = $this->createFormBuilder($items) // Formulaire regroupant les 2 entités
             ->add('user', UserType::class)
             ->add('partner', PartnerFormType::class)
             // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
@@ -131,18 +134,29 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    // SHOW UN PARTENAIRE
+    // SHOW A PARTNER
     #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
-    public function show(Partner $partner): Response
+    public function show(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher)
     {
-        $form = $this->createForm(UserShowType::class, $partner);
-        return $this->renderForm('user/_show.html.twig', [
+        $partner = $partnerRepository->findOneBy(['id' => $id]);
+        $partnerUser = $partner->getUser();
+        $items = ['user' => $partnerUser, 'partner' => $partner];
+
+        $form = $this->createFormBuilder($items)
+            ->add('user', UserShowType::class)
+            ->add('partner', PartnerFormShowType::class)
+            // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
+            ->getForm();
+
+            // $form->handleRequest($request);
+
+        return $this->renderForm('partner/_show.html.twig', [
             'partner' => $partner,
             'form' => $form,
         ]);
     }
-
-    // EFFACER UN PARTENAIRE
+ 
+    // DELETE A PARTNER
     #[Route('/delete/{id}', name: 'app_partner_delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Partner $partner) {
         
