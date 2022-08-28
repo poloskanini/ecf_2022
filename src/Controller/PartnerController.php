@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Form\PartnerFormType;
 use App\Form\CreatePartnerType;
 use Doctrine\ORM\Mapping\Entity;
 use App\Repository\UserRepository;
@@ -15,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -87,7 +89,58 @@ class PartnerController extends AbstractController
              'form' => $form,
         ]);
     }
+
+    #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
+    public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher)
+    {
+        $partner = $partnerRepository->findOneBy(['id' => $id]);
+        $partnerUser = $partner->getUser();
+        $items = ['user' => $partnerUser, 'partner' => $partner];
+
+        $form = $this->createFormBuilder($items)
+            ->add('user', UserType::class)
+            ->add('partner', PartnerFormType::class)
+            // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
+            ->getForm();
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
+                $password = $passwordHasher->hashPassword($partnerUser, $partnerUser->getPassword());
+                $partnerUser->setPassword($password);
     
+                $userRepository->add($partnerUser, true);
+                $partnerRepository->add($partner, true);
+    
+                $this->addFlash(
+                    'success',
+                    'L\'utilisateur "' .$partnerUser->getName(). '" a été modifié avec succès'
+                );
+    
+                return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
+            }
+
+        return $this->renderForm('partner/_edit.html.twig', [
+            'partner' => $partner,
+            'form' => $form,
+        ]);
+    }
+
+    // #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, Partner $partner, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
+    // {
+    //     $form = $this->createForm(PartnerType::class, $partner);
+
+    //     $form->handleRequest($request);
+
+
+    //     return $this->renderForm('partner/_edit.html.twig', [
+    //         'partner' => $partner,
+    //         'form' => $form,
+    //     ]);
+    // }
+
     #[Route('/{id}/show', name: 'app_partner_show', methods: ['GET'])]
     public function show(Partner $partner): Response
     {
@@ -98,19 +151,6 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Partner $partner, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
-    {
-        $form = $this->createForm(PartnerType::class, $partner); // Mon formulaire PartnerType
-
-        $form->handleRequest($request); // Écoute la requête entrante
-
-
-        return $this->renderForm('partner/_edit.html.twig', [
-            'partner' => $partner,
-            'form' => $form,
-        ]);
-    }
 
     #[Route('/{id}/delete', name: 'app_partner_delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Partner $partner) {

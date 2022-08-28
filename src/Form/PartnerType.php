@@ -106,7 +106,6 @@ class PartnerType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
-
             ])
             ->add('isNewsletter', CheckboxType::class, [
                 'mapped' => false,
@@ -134,7 +133,6 @@ class PartnerType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
-
             ])
             // ->add('submit', SubmitType::class)
             

@@ -30,6 +30,7 @@ class UserType extends AbstractType
             ->add('roles', ChoiceType::class, [
                 'label' => 'Type d\'utilisateur',
                 'required' => true,
+                'disabled' => true,
                 'multiple' => false,
                 'attr' => [
                     'class' => 'form-select',
