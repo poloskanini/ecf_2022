@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Entity\Partner;
 use App\Entity\Structure;
 use App\Form\StructureType;
+use App\Form\StructureFormType;
 use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
@@ -14,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -90,6 +92,64 @@ class StructureController extends AbstractController
         ]);
     }
 
+    #[Route('/edit/{id}', name: 'app_structure_edit', methods: ['GET', 'POST'])]
+    public function edit(int $id, Request $request, UserRepository $userRepository,  StructureRepository $structureRepository, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $structure = $structureRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
+        $structureUser = $structure->getUser(); // Catch l'utilisateur relié à ce partner
+        $items = ['user' => $structureUser, 'structure' => $structure]; // Tableau regroupant les 2 entités
+
+        $form = $this->createFormBuilder($items) // Formulaire regroupant les 2 entités
+            ->add('user', UserType::class)
+            ->add('structure', StructureFormType::class)
+            // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
+            ->getForm();
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
+                $password = $passwordHasher->hashPassword($structureUser, $structureUser->getPassword());
+                $structureUser->setPassword($password);
+    
+                $userRepository->add($structureUser, true);
+                $structureRepository->add($structure, true);
+    
+                $this->addFlash(
+                    'success',
+                    'L\'utilisateur "' .$structureUser->getName(). '" a été modifié avec succès'
+                );
+    
+                return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
+            }
+
+        return $this->renderForm('structure/_edit.html.twig', [
+            'structure' => $structure,
+            'form' => $form,
+        ]);
+
+    }
+
+
+    // #[Route('/edit/{id}', name: 'app_structure_edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, Structure $structure, StructureRepository $structureRepository, UserRepository $userRepository): Response
+    // {
+    //     $form = $this->createForm(StructureType::class, $structure);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $structureRepository->add($structure, true);
+
+    //         return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
+    //     }
+
+    //     return $this->renderForm('structure/_edit.html.twig', [
+    //         'structure' => $structure,
+    //         'form' => $form,
+    //     ]);
+    // }
+
+
     #[Route('/show/{id}', name: 'app_structure_show', methods: ['GET'])]
     public function show(Structure $structure, StructureRepository $structureRepository): Response
     {
@@ -101,24 +161,6 @@ class StructureController extends AbstractController
         ]);
     }
 
-
-    #[Route('/edit/{id}', name: 'app_structure_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Structure $structure, StructureRepository $structureRepository, UserRepository $userRepository): Response
-    {
-        $form = $this->createForm(StructureType::class, $structure);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $structureRepository->add($structure, true);
-
-            return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('structure/_edit.html.twig', [
-            'structure' => $structure,
-            'form' => $form,
-        ]);
-    }
 
     #[Route('/{id}/delete', name: 'app_structure_delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Structure $structure) {

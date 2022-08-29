@@ -42,18 +42,18 @@ class StructureType extends AbstractType
                 ],
             ])
             ->add('name', TextType::class, [
-                'label' => 'Nom du Gérant de la structure',
+                'label' => 'Nom de l\'utilisateur',
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 60
                 ]),
                 'attr' => [
-                    'placeholder' => 'Merci de saisir le nom du gérant de la structure'
+                    'placeholder' => 'Merci de saisir le nom de l\'utilisateur'
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email du Gérant de la structure',
+                'label' => 'Email de l\'utilisateur',
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
