@@ -85,7 +85,7 @@ class StructureController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'La structure "' .$user->getName(). '" a été ajouté avec succès. Elle est rattachée au partenaire "' .$structure->getPartner(). '".'
+                'La structure "' .$user->getName(). '" a été ajoutée avec succès. Elle est rattachée au partenaire "' .$structure->getPartner(). '".'
             );
 
             return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);

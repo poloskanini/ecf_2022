@@ -9,7 +9,7 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col col-xl-8">
+        <div class="col-xl-8">
 
             <h1 class="text-center my-4">VOIR UN PARTENAIRE</h1>
 
@@ -20,6 +20,13 @@
                 </div>
 
                 <h4>INFORMATIONS DE L'UTILISATEUR</h4>
+
+                <div class="form-group">
+                <p class="m-0">Actif</p>
+                    {{ form_label(form.user.isActive)}}
+                    {{ form_widget(form.user.isActive)}}
+                    {{ form_errors(form.user.isActive)}}
+                </div>
 
                 <div class="form-group">
                 {{ form_row(form.user.roles)}}
@@ -37,18 +44,11 @@
                     {{ form_errors(form.user.email)}}
                 </div>
 
-                <div class="form-group">
+                {# <div class="form-group">
                     {{ form_label(form.user.password)}}
                     {{ form_widget(form.user.password)}}
                     {{ form_errors(form.user.password)}}
-                </div>
-
-                <div class="form-group">
-                <p class="m-0">Actif</p>
-                    {{ form_label(form.user.isActive)}}
-                    {{ form_widget(form.user.isActive)}}
-                    {{ form_errors(form.user.isActive)}}
-                </div>
+                </div> #}
 
                 <hr>
                 <h4>INFORMATIONS DU PARTENAIRE</h4>
@@ -77,7 +77,6 @@
                                                         <p class="m-0">Planning</p>
                                                             {{ form_widget(form.partner.isPlanning)}}
                                                             {{ form_errors(form.partner.isPlanning)}}
-                                                            
                                                         </div>                                                
                                                     </div>
 
@@ -127,9 +126,30 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row d-flex justify-content-around h-100 mt-5">
+                        {% for structure in structures %}
+                        <div class="col mb-5">
+                            <div class="card">
+                            <h5 class="card-header text-center form-check form-check-structure">Structure</h5>
+                            <div class="card-body text-center">
+                                <h6 class="card-title">Nom du gérant :</h6>
+                                <p class="card-text">{{ structure.user.name }}</p>
+                                <hr>
+                                <h6 class="card-title">Adresse postale :</h6>
+                                <p class="card-text">{{ structure.postalAdress }}</p>
+                                <h6 class="card-title">Contact :</h6>
+                                <a href="mailto:{{ structure.user.email }}">{{ structure.user.email }}</a>
+                            </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
+
+           
                 
-                <a href="{{ path('app_partner_index') }}" class="btn btn-secondary" value="OK">Retour</a>
+                <a href="{{ path('app_partner_index') }}" class="btn btn-secondary mb-3" value="RetourOK">Retour</a>
 
                 {{ form_end(form) }}
             </div>

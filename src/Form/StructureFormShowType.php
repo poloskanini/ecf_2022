@@ -52,7 +52,6 @@ class StructureFormShowType extends AbstractType
                 'label_attr' => ['class' => 'switch-custom'],
                 'disabled' => true,
             ])
-            ->add('user')
             ->add('partner', TextType::class, [
                 'disabled' => true,
             ]);

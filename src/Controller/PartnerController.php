@@ -83,7 +83,7 @@ class PartnerController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'L\'utilisateur "' .$user->getName(). '" a été ajouté avec succès'
+                'Le partenaire "' .$user->getName(). '" a été ajouté avec succès'
             );
 
             return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
@@ -122,7 +122,7 @@ class PartnerController extends AbstractController
     
                 $this->addFlash(
                     'success',
-                    'L\'utilisateur "' .$partnerUser->getName(). '" a été modifié avec succès'
+                    'Le partenaire "' .$partnerUser->getName(). '" a été modifié avec succès'
                 );
     
                 return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
@@ -148,10 +148,13 @@ class PartnerController extends AbstractController
             // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
             ->getForm();
 
+            $structures = $partner->getStructures();
+
             // $form->handleRequest($request);
 
         return $this->renderForm('partner/_show.html.twig', [
             'partner' => $partner,
+            'structures' => $structures,
             'form' => $form,
         ]);
     }
@@ -175,7 +178,7 @@ class PartnerController extends AbstractController
             
             $this->addFlash(
                 'danger',
-                'L\'utilisateur "' .$partner->getName(). '" a été supprimé avec succès'
+                'Le partenaire "' .$partner->getName(). '" a été supprimé avec succès'
         );
 
         return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
