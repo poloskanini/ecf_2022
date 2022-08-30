@@ -16,7 +16,8 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            user_checker: App\Security\UserChecker
+            # J'ajoute le user_checker dans mon firewall pour que App\Security\UserChecker soit pris en compte
+            user_checker: App\Security\UserChecker 
             custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
@@ -34,8 +35,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/partenaires/*, roles: ROLE_USER }
-        # - { path: ^/structures/*, roles: ROLE_USER }
+        - { path: ^/partner/*, roles: ROLE_ADMIN }
+        - { path: ^/structure/*, roles: ROLE_ADMIN }
 
 when@test:
     security:
