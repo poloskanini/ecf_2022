@@ -136,7 +136,7 @@ class PartnerController extends AbstractController
 
     // SHOW A PARTNER
     #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
-    public function show(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher)
+    public function show(int $id, PartnerRepository $partnerRepository)
     {
         $partner = $partnerRepository->findOneBy(['id' => $id]);
         $partnerUser = $partner->getUser();
