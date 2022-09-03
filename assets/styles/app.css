@@ -16,7 +16,7 @@
 }
 
 body, html {
-  font-size: 16px;
+  font-size: 14px;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -316,6 +316,10 @@ input:checked + .slider:before {
 
 .custom-control-input:checked + label {
   background: #2196F3;
+}
+
+.custom-control-input + .is-active-btn {
+  background: rgb(208, 83, 83);
 }
 
 .custom-control-input:checked + .is-active-btn {

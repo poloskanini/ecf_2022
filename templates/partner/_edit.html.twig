@@ -44,11 +44,13 @@
                     {{ form_errors(form.user.email)}}
                 </div>
 
-                <div class="form-group">
-                    {{ form_label(form.user.password)}}
-                    {{ form_widget(form.user.password)}}
-                    {{ form_errors(form.user.password)}}
-                </div>
+                {% if form_form.user.password is defined %}
+                    <div class="form-group">
+                        {{ form_label(form.user.password)}}
+                        {{ form_widget(form.user.password)}}
+                        {{ form_errors(form.user.password)}}
+                    </div>
+                {% endif %}
 
                 <hr>
                 <h4>INFORMATIONS DU PARTENAIRE</h4>
@@ -77,7 +79,6 @@
                                                         <p class="m-0">Planning</p>
                                                             {{ form_widget(form.partner.isPlanning)}}
                                                             {{ form_errors(form.partner.isPlanning)}}
-                                                            
                                                         </div>                                                
                                                     </div>
 

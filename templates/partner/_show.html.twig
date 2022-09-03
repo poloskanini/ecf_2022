@@ -13,6 +13,14 @@
 
             <h1 class="text-center my-4">VOIR UN PARTENAIRE</h1>
 
+            {# {% for permission in permissions %} <br>
+                Planning :  {{ permission.isPlanning}} <br>
+                Newsletter {{ permission.isNewsletter}} <br>
+                Boissons {{ permission.isBoissons}} <br>
+                SMS {{ permission.isSms}} <br>
+                Concours {{ permission.isConcours}} <br>
+            {% endfor %} #}
+
             {{ form_start(form) }}
 
                 <div class="form-error is-invalid">

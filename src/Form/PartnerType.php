@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Partner;
+use App\Entity\Permissions;
 use App\Repository\PartnerRepository;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -134,9 +135,7 @@ class PartnerType extends AbstractType
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom'],
             ])
-            // ->add('submit', SubmitType::class)
             
-
 
             // A insérer dans le StructureType, qui sera relié au StructureController
             

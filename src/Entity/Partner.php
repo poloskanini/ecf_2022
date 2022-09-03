@@ -25,7 +25,7 @@ class Partner
     // #[ORM\OneToMany(mappedBy: 'partner', targetEntity: Structure::class)]
     // private Collection $structures;
 
-    #[ORM\OneToMany(targetEntity: 'App\Entity\Structure', mappedBy: 'partner')]
+    #[ORM\OneToMany(targetEntity: 'App\Entity\Structure', mappedBy: 'partner', orphanRemoval: true)]
     // private Collection $structures;
     private $structures;
 
@@ -44,9 +44,13 @@ class Partner
     #[ORM\Column]
     private bool $isConcours;
 
+    #[ORM\ManyToMany(targetEntity: Permissions::class, inversedBy: 'partners', cascade: ['persist'])]
+    private Collection $permissions;
+
     public function __construct()
     {
         $this->structures = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,8 +111,6 @@ class Partner
 
         return $this;
     }
-
-
 
     public function isIsPlanning(): ?bool
     {
@@ -173,5 +175,29 @@ class Partner
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Permissions>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permissions $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permissions $permission): self
+    {
+        $this->permissions->removeElement($permission);
+
+        return $this;
     }
 }

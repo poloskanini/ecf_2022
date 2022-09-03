@@ -80,7 +80,7 @@ class UserShowType extends AbstractType
             ->add('isActive', CheckboxType::class, [
                 'disabled' => true,
                 'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
+                'label_attr' => ['class' => 'switch-custom is-active-btn'],
                 'required' => false,
             ]);
 

@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Partner;
+use App\Entity\Permissions;
+use App\Repository\PermissionsRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -57,6 +59,7 @@ class PartnerFormType extends AbstractType
             //              ->setParameter('role', '%"ROLE_PARTENAIRE"%');
             //          },
             //     ])
+            
         ;
     }
 

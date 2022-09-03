@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
-use App\Repository\PartenaireRepository;
+use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
-use App\Repository\UserRepository;
+use App\Repository\PartenaireRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/accueil', name: 'home')]
+    #[IsGranted('ROLE_USER')]
     public function index(UserRepository $userRepository, PartnerRepository $partnerRepository, StructureRepository $structureRepository
     ): Response
     {

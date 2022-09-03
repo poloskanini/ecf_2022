@@ -18,10 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/structure')]
+#[IsGranted('ROLE_USER')]
 class StructureController extends AbstractController
 {
 
@@ -106,7 +108,9 @@ class StructureController extends AbstractController
         $items = ['user' => $structureUser, 'structure' => $structure]; // Tableau regroupant les 2 entités
 
         $form = $this->createFormBuilder($items) // Formulaire regroupant les 2 entités
-            ->add('user', UserType::class)
+            ->add('user', UserType::class, [
+                'isEdit' => true,
+            ])
             ->add('structure', StructureFormType::class)
             // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
             ->getForm();

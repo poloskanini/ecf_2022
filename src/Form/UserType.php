@@ -26,6 +26,12 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+        $user = $options['data'] ?? null;
+        $isEdit = $user && $user->getId();
+
+        $isEdit = $options['isEdit'];
+
         $builder
             ->add('roles', ChoiceType::class, [
                 'label' => 'Type d\'utilisateur',
@@ -62,29 +68,34 @@ class UserType extends AbstractType
                     'placeholder' => 'Merci de saisir une adresse email'
                 ]
             ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
-                'label' => false,
-                'required' => true,
-                'first_options' => [
-                    'label' => 'Mot de passe',
-                    'attr' => [
-                        'placeholder' => 'Merci de saisir votre mot de passe'
-                    ]
-                ],
-                'second_options' => [
-                    'label' => 'Confirmez votre mot de passe',
-                    'attr' => [
-                        'placeholder' => 'Merci de saisir un mot de passe'
-                    ]
-                ],
-            ])
             ->add('isActive', CheckboxType::class, [
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom is-active-btn'],
                 'required' => false,
-            ])
+            ]);
+
+            // Affichage conditionnel du Password.
+            // On vérifie si on se trouve dans le cas ou l’option isEdit est à true. Si ce n’est pas le cas, alors j’affiche l’édition du mot de passe sinon je l’ignore.
+            if (!$isEdit) {
+                $builder->add('password', RepeatedType::class, [
+                    'type' => PasswordType::class,
+                    'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
+                    'label' => false,
+                    'required' => true,
+                    'first_options' => [
+                        'label' => 'Mot de passe',
+                        'attr' => [
+                            'placeholder' => 'Merci de saisir votre mot de passe'
+                        ]
+                    ],
+                    'second_options' => [
+                        'label' => 'Confirmez votre mot de passe',
+                        'attr' => [
+                            'placeholder' => 'Merci de saisir un mot de passe'
+                        ]
+                    ],
+                ]);
+            }
 
             // ->add('partnerName', TextType::class, [
             //     'mapped' => false,                  
@@ -185,6 +196,9 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'isEdit' => false
         ]);
+
+        $resolver->setAllowedTypes('isEdit', 'bool');
     }
 }
