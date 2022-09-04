@@ -21,6 +21,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Entity\Permissions;
+use App\Repository\PermissionsRepository;
 
 #[Route('/structure')]
 #[IsGranted('ROLE_ADMIN')]
@@ -29,10 +31,12 @@ class StructureController extends AbstractController
 
     // INDEX FOR ALL STRUCTURES IN DB
     #[Route('/', name: 'app_structure_index', methods: ['GET'])]
-    public function index(StructureRepository $structureRepository): Response
+    public function index(StructureRepository $structureRepository, PermissionsRepository $permissionsRepository): Response
     {
         return $this->render('structure/index.html.twig', [
             'structures' => $structureRepository->findAll(),
+            'permissions' => $permissionsRepository->findAll(),
+
         ]);
     }
 
@@ -43,6 +47,7 @@ class StructureController extends AbstractController
 
         $user = new User(); // J'instancie ma classe User()
         $structure = new Structure(); // J'instancie ma classe User()
+        $permissions = new Permissions();
         
         $form = $this->createForm(StructureType::class); // Mon formulaire UserType
 

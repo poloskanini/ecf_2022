@@ -47,10 +47,9 @@
         </thead>
         <tbody>
             {% for partner in partners %}
+            {{ dump(partner)}}
                 {% for permission in partner.permissions %}
                     
-                    {{ dump(permission)}}
-
                 <tr class="">
                     <td data-title="ID :">{{ partner.id }}</td>
                     <td class="align-middle">

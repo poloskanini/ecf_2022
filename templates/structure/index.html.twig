@@ -48,8 +48,7 @@
         </thead>
         <tbody>
             {% for structure in structures %}
-
-            {# {{ dump (structure)}} #}
+                {% for permission in structure.partner.permissions %}
 
                 <tr class="">
                     <td data-title="ID :">{{ structure.id }}</td>
@@ -71,7 +70,7 @@
                         {{ structure.partner }}
                     </td>
                     <td data-title="Planning :" class="align-middle">
-                        {% if structure.isPlanning == true %}
+                        {% if permission.isPlanning == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isPlanning" name="user[isPlanning]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isPlanning"></label>
@@ -84,7 +83,7 @@
                         {% endif %}
                     </td>
                     <td data-title="Newsletter :" class="align-middle">
-                        {% if structure.isNewsletter == true %}
+                        {% if permission.isNewsletter == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
@@ -97,7 +96,7 @@
                         {% endif %}
                     </td>
                     <td data-title="Boissons :" class="align-middle">
-                        {% if structure.isBoissons == true %}
+                        {% if permission.isBoissons == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isBoissons" name="user[isBoissons]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isBoissons"></label>
@@ -110,7 +109,7 @@
                         {% endif %}
                     </td>
                     <td data-title="SMS :" class="align-middle">
-                        {% if structure.isSms == true %}
+                        {% if permission.isSms == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isSms" name="user[isSms]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isSms"></label>
@@ -123,7 +122,7 @@
                         {% endif %}
                     </td>
                     <td data-title="Concours :" class="align-middle">
-                        {% if structure.isConcours == true %}
+                        {% if permission.isConcours == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isConcours" name="user[isConcours]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isConcours"></label>
@@ -150,6 +149,8 @@
                 </tr>
                 
             {% endfor %}
+            {% endfor %}
+
             
         </tbody>
     

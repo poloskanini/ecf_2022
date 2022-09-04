@@ -79,11 +79,11 @@ class PartnerController extends AbstractController
             // Je définis que la nouvelle donnée aura pas défaut le ['ROLE_PARTENAIRE]
             $user->setRoles(['ROLE_PARTENAIRE']);
 
-            $partner->setIsPlanning($form->get('isPlanning')->getData());
-            $partner->setIsNewsletter($form->get('isNewsletter')->getData());
-            $partner->setIsBoissons($form->get('isBoissons')->getData());
-            $partner->setIsSms($form->get('isSms')->getData());
-            $partner->setIsConcours($form->get('isConcours')->getData());
+            // $partner->setIsPlanning($form->get('isPlanning')->getData());
+            // $partner->setIsNewsletter($form->get('isNewsletter')->getData());
+            // $partner->setIsBoissons($form->get('isBoissons')->getData());
+            // $partner->setIsSms($form->get('isSms')->getData());
+            // $partner->setIsConcours($form->get('isConcours')->getData());
 
             // Je récupère les données non mappées du formulaire et les injecte dans mon objet Permissions
             $permissions->setIsPlanning($form->get('isPlanning')->getData());
