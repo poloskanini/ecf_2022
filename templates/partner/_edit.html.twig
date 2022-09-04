@@ -60,15 +60,17 @@
                     {{ form_widget(form.partner.name)}}
                     {{ form_errors(form.partner.name)}}
                 </div>
+                
 
-                <div class="container-fluid h-100">
+                {# Permissions du Partenaire #}
+                {# <div class="container-fluid h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col col-xl-10">
                             <div class="card" style="border-radius: 1rem;">
                                 <div class="col d-flex align-items-center">
                                     <div class="card-body text-black text-center">
                                         <div class="d-flex align-items-center justify-content-center mb-3 pb-1 fs-3 ">
-                                            <h4>Fonctionnalités activées</h4>
+                                            <h4>Fonctionnalités activées Partenaire</h4>
                                         </div>
                                         <div class="toggle-permissions text-center my-5">
                                             <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
@@ -119,6 +121,75 @@
                                                             {{ form_label(form.partner.isConcours)}}
                                                             {{ form_widget(form.partner.isConcours)}}
                                                             {{ form_errors(form.partner.isConcours)}}
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> #}
+
+                <div class="container-fluid h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col col-xl-10">
+                            <div class="card" style="border-radius: 1rem;">
+                                <div class="col d-flex align-items-center">
+                                    <div class="card-body text-black text-center">
+                                        <div class="d-flex align-items-center justify-content-center mb-3 pb-1 fs-3 ">
+                                            <h4>Fonctionnalités activées Permissions</h4>
+                                        </div>
+                                        <div class="toggle-permissions text-center my-5">
+                                            <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
+                                                <div class="row">
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fa-solid fa-calendar-days"></i>
+                                                        <p class="m-0">Planning</p>
+                                                            {{ form_widget(form.permissions.isPlanning)}}
+                                                            {{ form_errors(form.permissions.isPlanning)}}
+                                                        </div>                                                
+                                                    </div>
+
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fa-solid fa-envelope"></i>
+                                                        <p class="m-0">Newsletter</p>
+                                                            {{ form_label(form.permissions.isNewsletter)}}
+                                                            {{ form_widget(form.permissions.isNewsletter)}}
+                                                            {{ form_errors(form.permissions.isNewsletter)}}
+                                                        </div>                                         
+                                                    </div>
+
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fas fa-cocktail"></i>
+                                                        <p class="m-0">Boissons</p>
+                                                            {{ form_label(form.permissions.isBoissons)}}
+                                                            {{ form_widget(form.permissions.isBoissons)}}
+                                                            {{ form_errors(form.permissions.isBoissons)}}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fa-solid fa-comment-sms"></i>
+                                                        <p class="m-0">SMS</p>
+                                                            {{ form_label(form.permissions.isSms)}}
+                                                            {{ form_widget(form.permissions.isSms)}}
+                                                            {{ form_errors(form.permissions.isSms)}}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col permission newsletter">
+                                                        <div class="form-group">
+                                                        <i class="fa-solid fa-trophy"></i>
+                                                        <p class="m-0">Concours</p>
+                                                            {{ form_label(form.permissions.isConcours)}}
+                                                            {{ form_widget(form.permissions.isConcours)}}
+                                                            {{ form_errors(form.permissions.isConcours)}}
                                                         </div>
                                                 </div>
                                             </div>

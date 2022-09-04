@@ -18,6 +18,7 @@ use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PermissionsRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,6 +54,7 @@ class PartnerController extends AbstractController
 
         $user = new User(); // J'instancie ma classe User()
         $partner = new Partner(); // J'instancie ma classe Partner()
+        $permissions = new Permissions();
         
         $form = $this->createForm(PartnerType::class); // Mon formulaire PartnerType
 
@@ -84,15 +86,15 @@ class PartnerController extends AbstractController
             $partner->setIsConcours($form->get('isConcours')->getData());
 
             // Je récupère les données non mappées du formulaire et les injecte dans mon objet Permissions
-            // $permissions->setIsPlanning($form->get('isPlanning')->getData());
-            // $permissions->setIsNewsletter($form->get('isNewsletter')->getData());
-            // $permissions->setIsBoissons($form->get('isBoissons')->getData());
-            // $permissions->setIsSms($form->get('isSms')->getData());
-            // $permissions->setIsConcours($form->get('isConcours')->getData());
+            $permissions->setIsPlanning($form->get('isPlanning')->getData());
+            $permissions->setIsNewsletter($form->get('isNewsletter')->getData());
+            $permissions->setIsBoissons($form->get('isBoissons')->getData());
+            $permissions->setIsSms($form->get('isSms')->getData());
+            $permissions->setIsConcours($form->get('isConcours')->getData());
 
             // Je déclare que mon partenaire a de nouvelles permissions et que cet objet permissions a un nouveau partenaire
-            // $partner->addPermission($permissions);
-            // $permissions->addPartner($partner);
+            $partner->addPermission($permissions);
+            $permissions->addPartner($partner);
 
             $userRepository->add($user, true);
             $partnerRepository->add($partner, true);
@@ -116,18 +118,29 @@ class PartnerController extends AbstractController
 
     // EDIT A PARTNER
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, PermissionsRepository $permissionsRepository, UserPasswordHasherInterface $passwordHasher)
+    public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine)
     {
         $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
 
-        $items = ['user' => $partnerUser, 'partner' => $partner]; // Tableau regroupant les 2 entités
+        // Récupérer les permissions du partenaire
+        $permArray = ($partner->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+        foreach ($permArray as $p) {
+            $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+        }
+
+        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
+        
+        // dd($userPermissions);
+
+        $items = ['user' => $partnerUser, 'partner' => $partner, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
         $form = $this->createFormBuilder($items) // Formulaire regroupant les 2 entités
             ->add('user', UserType::class, [
                 'isEdit' => true,
             ])
             ->add('partner', PartnerFormType::class)
+            ->add('permissions', PermissionsType::class)
             ->getForm();
 
             $form->handleRequest($request);
@@ -136,6 +149,15 @@ class PartnerController extends AbstractController
                 // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
                 $password = $passwordHasher->hashPassword($partnerUser, $partnerUser->getPassword());
                 $partnerUser->setPassword($password);
+
+                // $partner->setIsPlanning($userPermissions->isIsPlanning());
+                // $partner->setIsNewsletter($userPermissions->isIsNewsletter());
+                // $partner->setIsBoissons($userPermissions->isIsBoissons());
+                // $partner->setIsSms($userPermissions->isIsSms());
+                // $partner->setIsConcours($userPermissions->isIsConcours());
+
+                $partner->addPermission($userPermissions);
+                $userPermissions->addPartner($partner);
 
                 $userRepository->add($partnerUser, true);
                 $partnerRepository->add($partner, true);
@@ -151,6 +173,7 @@ class PartnerController extends AbstractController
         return $this->renderForm('partner/_edit.html.twig', [
             'partner' => $partner,
             'form' => $form,
+            'permissions' => $userPermissions
         ]);
     }
 

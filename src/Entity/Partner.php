@@ -82,10 +82,8 @@ class Partner
         return $this;
     }
 
-    /**
-     * @return Collection<int, Structure>
-     */
-    public function getStructures(): Collection
+   
+    public function getStructures()
     {
         return $this->structures;
     }
@@ -177,10 +175,8 @@ class Partner
         return $this->name;
     }
 
-    /**
-     * @return Collection<int, Permissions>
-     */
-    public function getPermissions(): Collection
+    
+    public function getPermissions()
     {
         return $this->permissions;
     }
