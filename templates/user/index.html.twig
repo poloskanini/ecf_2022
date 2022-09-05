@@ -38,15 +38,13 @@
                     <th scope="col">Role</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                     <tr class="">
                         <td data-title="ID :">{{ user.id }}</td>
-                        <td data-title="Actif :" class="align-middle">
+                        <td class="align-middle">
                             {% if user.isActive == true %}
                                     <div class="form-check form-check-active">Actif</div>
                                 {% else %}
@@ -55,15 +53,15 @@
                         </td>
                         {% for role in user.roles %}
                             {% if role == 'ROLE_ADMIN' %}
-                                <td data-title="Role :">
+                                <td>
                                     <div class="form-check form-check-admin">Admin</div>
                                 </td>
                                 {% elseif role == 'ROLE_PARTENAIRE' %}
-                                <td data-title="Role :">
+                                <td>
                                     <div class="form-check form-check-partner">Partenaire</div>
                                 </td>
                                 {% elseif role == 'ROLE_STRUCTURE' %}
-                                <td data-title="Role :">
+                                <td>
                                     <div class="form-check form-check-structure">Structure</div>
                                 </td>
                             {% endif %}

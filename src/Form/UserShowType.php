@@ -19,6 +19,11 @@ class UserShowType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $user = $options['data'] ?? null;
+        $isEdit = $user && $user->getId();
+
+        $isEdit = $options['isEdit'];
+        
         $builder
             ->add('name', TextType::class, [
                 'disabled' => true,
@@ -102,6 +107,10 @@ class UserShowType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'isEdit' => false
         ]);
+
+        $resolver->setAllowedTypes('isEdit', 'bool');
+
     }
 }

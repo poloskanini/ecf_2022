@@ -123,7 +123,6 @@ class PartnerController extends AbstractController
         $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
 
-        //TODO: to refactoring...
         // Récupérer les permissions du partenaire
         $permArray = ($partner->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
         foreach ($permArray as $p) {
@@ -183,28 +182,48 @@ class PartnerController extends AbstractController
 
     // SHOW A PARTNER
     #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
-    public function show(int $id, PartnerRepository $partnerRepository)
+    public function show(int $id,Request $request, PartnerRepository $partnerRepository, StructureRepository $structureRepository, ManagerRegistry $doctrine, EntityManagerInterface $em)
     {
-        $partner = $partnerRepository->findOneBy(['id' => $id]);
-        $partnerUser = $partner->getUser();
-        $items = ['user' => $partnerUser, 'partner' => $partner];
+        // $partner = $partnerRepository->findOneBy(['id' => $id]);
+        // $partnerUser = $partner->getUser();
+        // $items = ['user' => $partnerUser, 'partner' => $partner];
 
-        $form = $this->createFormBuilder($items)
-            ->add('user', UserShowType::class)
+        // $form = $this->createFormBuilder($items)
+        //     ->add('user', UserShowType::class)
+        //     ->add('partner', PartnerFormShowType::class)
+        //     ->getForm();
+
+        //     $structures = $partner->getStructures();
+        //     $permissions = $partner->getPermissions();
+        // Récupérer les permissions du partenaire
+        $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
+        $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
+        $permArray = ($partner->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+        foreach ($permArray as $p) {
+            $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+        }
+
+        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
+        
+        // dd($userPermissions);
+
+        $items = ['user' => $partnerUser, 'partner' => $partner, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
+
+        $form = $this->createFormBuilder($items) // Formulaire regroupant les 2 entités
+            ->add('user', UserShowType::class, [
+                'isEdit' => true,
+            ])
             ->add('partner', PartnerFormShowType::class)
-            // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
+            ->add('permissions', PermissionsType::class)
             ->getForm();
 
-            $structures = $partner->getStructures();
-            $permissions = $partner->getPermissions();
-
-            // $form->handleRequest($request);
+            $form->handleRequest($request);
 
         return $this->renderForm('partner/_show.html.twig', [
             'partner' => $partner,
-            'structures' => $structures,
             'form' => $form,
-            'permissions' => $permissions
+            'permissions' => $userPermissions,
+            'structures' => $structureRepository->findAll(),
         ]);
     }
  

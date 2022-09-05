@@ -58,8 +58,6 @@
                     {{ form_errors(form.user.password)}}
                 </div> #}
 
-                <hr>
-                <h4>INFORMATIONS DU PARTENAIRE</h4>
 
                 <div class="form-group">
                     {{ form_label(form.partner.name)}}
@@ -67,7 +65,23 @@
                     {{ form_errors(form.partner.name)}}
                 </div>
 
-                <div class="container-fluid h-100">
+                <div class="row d-flex justify-content-around h-100 mt-5">
+                        {% for structure in structures %}
+                        <div class="col mb-5">
+                            <div class="card">
+                            <h5 class="card-header text-center form-check form-check-structure">{{ structure.user.name }}</h5>
+                            <div class="card-body text-center">
+                                <h6 class="card-title">Adresse postale :</h6>
+                                <p class="card-text">{{ structure.postalAdress }}</p>
+                                <h6 class="card-title">Contact :</h6>
+                                <a href="mailto:{{ structure.user.email }}">{{ structure.user.email }}</a>
+                            </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                <div class="container-fluid h-100 p-0">
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col col-xl-10">
                             <div class="card" style="border-radius: 1rem;">
@@ -80,11 +94,11 @@
                                             <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
                                                 <div class="row">
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group">
+                                                        <div class="form-group cursor-na    ">
                                                         <i class="fa-solid fa-calendar-days"></i>
                                                         <p class="m-0">Planning</p>
-                                                            {{ form_widget(form.partner.isPlanning)}}
-                                                            {{ form_errors(form.partner.isPlanning)}}
+                                                            {{ form_widget(form.permissions.isPlanning)}}
+                                                            {{ form_errors(form.permissions.isPlanning)}}
                                                         </div>                                                
                                                     </div>
 
@@ -92,9 +106,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-envelope"></i>
                                                         <p class="m-0">Newsletter</p>
-                                                            {{ form_label(form.partner.isNewsletter)}}
-                                                            {{ form_widget(form.partner.isNewsletter)}}
-                                                            {{ form_errors(form.partner.isNewsletter)}}
+                                                            {{ form_label(form.permissions.isNewsletter)}}
+                                                            {{ form_widget(form.permissions.isNewsletter)}}
+                                                            {{ form_errors(form.permissions.isNewsletter)}}
                                                         </div>                                         
                                                     </div>
 
@@ -102,9 +116,9 @@
                                                         <div class="form-group">
                                                         <i class="fas fa-cocktail"></i>
                                                         <p class="m-0">Boissons</p>
-                                                            {{ form_label(form.partner.isBoissons)}}
-                                                            {{ form_widget(form.partner.isBoissons)}}
-                                                            {{ form_errors(form.partner.isBoissons)}}
+                                                            {{ form_label(form.permissions.isBoissons)}}
+                                                            {{ form_widget(form.permissions.isBoissons)}}
+                                                            {{ form_errors(form.permissions.isBoissons)}}
                                                         </div>
                                                     </div>
 
@@ -112,9 +126,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-comment-sms"></i>
                                                         <p class="m-0">SMS</p>
-                                                            {{ form_label(form.partner.isSms)}}
-                                                            {{ form_widget(form.partner.isSms)}}
-                                                            {{ form_errors(form.partner.isSms)}}
+                                                            {{ form_label(form.permissions.isSms)}}
+                                                            {{ form_widget(form.permissions.isSms)}}
+                                                            {{ form_errors(form.permissions.isSms)}}
                                                         </div>
                                                     </div>
 
@@ -122,9 +136,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-trophy"></i>
                                                         <p class="m-0">Concours</p>
-                                                            {{ form_label(form.partner.isConcours)}}
-                                                            {{ form_widget(form.partner.isConcours)}}
-                                                            {{ form_errors(form.partner.isConcours)}}
+                                                            {{ form_label(form.permissions.isConcours)}}
+                                                            {{ form_widget(form.permissions.isConcours)}}
+                                                            {{ form_errors(form.permissions.isConcours)}}
                                                         </div>
                                                 </div>
                                             </div>
@@ -135,27 +149,9 @@
                         </div>
                     </div>
 
-                    <div class="row d-flex justify-content-around h-100 mt-5">
-                        {% for structure in structures %}
-                        <div class="col mb-5">
-                            <div class="card">
-                            <h5 class="card-header text-center form-check form-check-structure">Structure</h5>
-                            <div class="card-body text-center">
-                                <h6 class="card-title">Nom du gérant :</h6>
-                                <p class="card-text">{{ structure.user.name }}</p>
-                                <hr>
-                                <h6 class="card-title">Adresse postale :</h6>
-                                <p class="card-text">{{ structure.postalAdress }}</p>
-                                <h6 class="card-title">Contact :</h6>
-                                <a href="mailto:{{ structure.user.email }}">{{ structure.user.email }}</a>
-                            </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
                 </div>
                 
-                <a href="{{ path('app_partner_index') }}" class="btn btn-secondary mb-3" value="RetourOK">Retour</a>
+                <a href="{{ path('app_partner_index') }}" class="btn btn-secondary my-4 me-3" value="RetourOK">Retour</a>
 
                 {{ form_end(form) }}
             </div>

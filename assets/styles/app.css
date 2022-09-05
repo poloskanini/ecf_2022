@@ -607,7 +607,8 @@ input:checked + .slider:before {
 }
 
 .form-check-admin {
-  background-color: rgb(148, 148, 11);
+  /* background-color: rgb(148, 148, 11); */
+  background-color: rgb(191, 191, 0, 1);
 }
 
 .form-check-partner {

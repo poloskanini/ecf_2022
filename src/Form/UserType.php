@@ -26,7 +26,6 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $user = $options['data'] ?? null;
         $isEdit = $user && $user->getId();
 

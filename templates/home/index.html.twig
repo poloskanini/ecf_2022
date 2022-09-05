@@ -8,7 +8,7 @@
 {% block content %}
         <div class="container-fluid home-title">
             {% if is_granted('ROLE_ADMIN') %}
-            <h1 class="my-4">Dashboard</h1>
+            <h1 class="my-4">DASHBOARD</h1>
             {% else %}
             <h1 class="my-4">Mon profil</h1>
             {% endif %}
@@ -52,10 +52,10 @@
                                 <div class="col col-xl-4 permission planning text-center">
                                     <i class="fa-solid fa-calendar-days"></i>
                                     <h6 class="permission-title">Planning</h6>
-                                    <label class="switch switch-custom is-active-btn">
+                                    {# <label class="switch switch-custom is-active-btn">
                                         <input type="checkbox" checked disabled>
                                         <span class="slider round"></span>
-                                    </label>
+                                    </label> #}
                                 </div>
                             {% endif %}
 
@@ -63,10 +63,10 @@
                                 <div class="col col-xl-4 permission newsletter text-center">
                                     <i class="fa-solid fa-envelope"></i>
                                     <h6 class="permission-title">Newsletter</h6>
-                                    <label class="switch">
+                                    {# <label class="switch">
                                         <input type="checkbox" checked disabled>
                                         <span class="slider round"></span>
-                                    </label>
+                                    </label> #}
                                 </div>
                             {% endif %}
 
@@ -74,10 +74,10 @@
                                 <div class="col col-xl-4 permission boissons text-center">
                                     <i class="fas fa-cocktail"></i>
                                     <h6 class="permission-title">Boissons</h6>
-                                    <label class="switch">
+                                    {# <label class="switch">
                                         <input type="checkbox" checked disabled>
                                         <span class="slider round"></span>
-                                    </label>
+                                    </label> #}
                                 </div>
                             {% endif %}
 
@@ -85,10 +85,10 @@
                                 <div class="col col-xl-4 permission sms text-center">
                                     <i class="fa-solid fa-comment-sms"></i>
                                     <h6 class="permission-title">SMS</h6>
-                                    <label class="switch">
+                                    {# <label class="switch">
                                         <input type="checkbox" checked disabled>
                                         <span class="slider round"></span>
-                                    </label>
+                                    </label> #}
                                 </div>
                             {% endif %}
 
@@ -96,10 +96,10 @@
                                 <div class="col col-xl-4 permission concours text-center">
                                     <i class="fa-solid fa-trophy"></i>
                                     <h6 class="permission-title">Concours</h6>
-                                    <label class="switch">
+                                    {# <label class="switch">
                                         <input type="checkbox" checked disabled>
                                         <span class="slider round"></span>
-                                    </label>
+                                    </label> #}
                                 </div>
                             {% endif %}
 
