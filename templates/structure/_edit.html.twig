@@ -66,14 +66,6 @@
                     {{ form_widget(form.structure.postalAdress)}}
                     {{ form_errors(form.structure.postalAdress)}}
                 </div>
-
-                {# {{ dump(structure.partner.permissions)}} #}
-                    Planning {{ (partnerPermissions.isPlanning) }} <br>
-                    Newsletter {{ (partnerPermissions.isNewsletter) }} <br>
-                    Boissons {{ (partnerPermissions.isBoissons) }} <br>
-                    Sms {{ (partnerPermissions.isSms) }} <br>
-                    Concours {{ (partnerPermissions.isConcours) }} <br>
-
                 
 
                 <div class="container-fluid h-100">
@@ -82,9 +74,10 @@
                             <div class="card" style="border-radius: 1rem;">
                                 <div class="col d-flex align-items-center">
                                     <div class="card-body text-black text-center">
-                                        <div class="d-flex align-items-center justify-content-center mb-3 pb-1 fs-3 ">
+                                        <div class="d-flex align-items-center justify-content-center pb-1 fs-3 ">
                                             <h4>Fonctionnalités activées</h4>
                                         </div>
+                                        <small><i>(Ces fonctionnalités sont celles du contrat du partenaire. Vous pouvez les activer ou désactiver).</i></small>
                                         <div class="toggle-permissions text-center my-5">
                                             <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
                                                 <div class="row">

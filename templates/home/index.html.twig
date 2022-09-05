@@ -33,20 +33,84 @@
 
             <h5>Vos structures :</h5>
 
-            <div class="row d-flex justify-content-around h-100 mt-3">
+            <div class="row d-flex h-100 mt-3">
                {% for structure in app.user.partner.structures %}
-               <div class="col mb-5">
+                {% for permission in structure.permissions %}
+               <div class="col col-12 col-xl-3">
                    <div class="card">
-                   <h5 class="card-header text-center form-check form-check-structure">{{ structure.user.name }}</h5>
-                   <div class="card-body text-center">
-                       <h6 class="card-title"><i class="fa-solid fa-location-dot"></i> Adresse postale :</h6>
-                       <p class="card-text">{{ structure.postalAdress }}</p>
-                       <h6 class="card-title"><i class="fa fa-envelope"></i> Contact :</h6>
-                       <a href="mailto:{{ structure.user.email }}">{{ structure.user.email }}</a>
-                   </div>
+                        <h5 class="card-header text-center form-check form-check-structure">{{ structure.user.name }}</h5>
+                        <div class="card-body text-center">
+                            <h6 class="card-title"><i class="fa-solid fa-location-dot"></i> Adresse postale :</h6>
+                            <p class="card-text">{{ structure.postalAdress }}</p>
+                            <h6 class="card-title"><i class="fa fa-envelope"></i> Contact :</h6>
+                            <a href="mailto:{{ structure.user.email }}">{{ structure.user.email }}</a>
+                        </div>
+                        <div class="card-footer d-flex flex-wrap justify-content-center">
+                            
+                            {% if permission.isPlanning == 1 %}
+                                <div class="col col-xl-4 permission planning text-center">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <h6 class="permission-title">Planning</h6>
+                                    <label class="switch">
+                                        <input type="checkbox" checked disabled>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            {% endif %}
+
+                            {% if permission.isNewsletter == 1 %}
+                                <div class="col col-xl-4 permission newsletter text-center">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <h6 class="permission-title">Newsletter</h6>
+                                    <label class="switch">
+                                        <input type="checkbox" checked disabled>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            {% endif %}
+
+                            {% if permission.isBoissons == 1 %}
+                                <div class="col col-xl-4 permission boissons text-center">
+                                    <i class="fas fa-cocktail"></i>
+                                    <h6 class="permission-title">Boissons</h6>
+                                    <label class="switch">
+                                        <input type="checkbox" checked disabled>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            {% endif %}
+
+                            {% if permission.isSms == 1 %}
+                                <div class="col col-xl-4 permission sms text-center">
+                                    <i class="fa-solid fa-comment-sms"></i>
+                                    <h6 class="permission-title">SMS</h6>
+                                    <label class="switch">
+                                        <input type="checkbox" checked disabled>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            {% endif %}
+
+                            {% if permission.isConcours == 1 %}
+                                <div class="col col-xl-4 permission concours text-center">
+                                    <i class="fa-solid fa-trophy"></i>
+                                    <h6 class="permission-title">Concours</h6>
+                                    <label class="switch">
+                                        <input type="checkbox" checked disabled>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            {% endif %}
+
+                            
+                            
+                            
+                        </div>
                    </div>
                </div>
                {% endfor %}
+                {% endfor %}
+
             </div>
 
             {% endif %}
@@ -122,103 +186,70 @@
 
         {% endif %}
 
-        {% if not is_granted('ROLE_ADMIN') %}
-        <div class="container-fluid py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col col-xl-10">
+        {# LECTURE SEULE PARTENAIRE #}
+        {% if is_granted('ROLE_PARTENAIRE') %}
+        
+        <div class=" py-5 h-100">
+            <div class="row d-flex h-100">
+                <div class="col col-xl-6">
                     <div class="card" style="border-radius: 1rem;">
                         <div class="col d-flex align-items-center">
                             <div class="card-body text-black text-center">
-                                <div class="d-flex flex-column align-items-center justify-content-center mb-3 pb-1">
-                                    <h4>Vos fonctionnalités activées</h4>
-                                    <small><i>Pour modifier ces fonctionnalités liées à votre contrat, <a href="mailto:admin@admin.fr">veuillez contacter l'administrateur STUDI FITNESS</a></i></small>
+                                <div class="d-flex flex-column align-items-center mb-3 pb-1">
+                                    <h4>Vos fonctionnalités globales (Contrat Partenaire)</h4>
+                                    <small><i>Pour modifier ces fonctionnalités liées à votre contrat, <a href="mailto:admin@admin.fr">veuillez contacter l'administrateur STUDI FITNESS.</a></i></small>
                                 </div>
                                 <div class="toggle-permissions text-center my-5">
                                     <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
-                                        {# Planning #}
+
+
+                                        {% for permission in app.user.partner.permissions %}
+                                            
                                         <div class="col permission planning">
                                             <i class="fa-solid fa-calendar-days"></i>
                                             <h6 class="permission-title">Planning</h6>
-                                                {% if is_granted('ROLE_PARTENAIRE') %}
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if app.user.partner.isPlanning == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if permission.isPlanning == 1 %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
-                                                {% else %}
-                                                    <label class="switch">
-                                                    <input type="checkbox" {% if app.user.structure.isPlanning == 1 %} checked {% endif %} disabled>
-                                                    <span class="slider round"></span>
-                                                </label>
-                                                {% endif %}
                                         </div>
 
-                                        {# Newsletter #}
                                         <div class="col permission newsletter">
                                             <i class="fa-solid fa-envelope"></i>
                                             <h6 class="permission-title">Newsletter</h6>
-                                                {% if is_granted('ROLE_PARTENAIRE') %}
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if app.user.partner.isNewsletter == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if permission.isNewsletter == 1 %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
-                                                {% else %}
-                                                    <label class="switch">
-                                                        <input type="checkbox" {% if app.user.structure.isNewsletter == 1 %} checked {% endif %} disabled>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                {% endif %}
                                         </div>
 
-                                        {# Boissons #}
                                         <div class="col permission boissons">
                                             <i class="fas fa-cocktail"></i>
                                             <h6 class="permission-title">Boissons</h6>
-                                                {% if is_granted('ROLE_PARTENAIRE') %}
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if app.user.partner.isBoissons == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if permission.isBoissons == 1 %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
-                                                {% else %}
-                                                    <label class="switch">
-                                                        <input type="checkbox" {% if app.user.structure.isBoissons == 1 %} checked {% endif %} disabled>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                {% endif %}
                                         </div>
 
-                                        {# SMS #}
                                         <div class="col permission sms">
                                             <i class="fa-solid fa-comment-sms"></i>
                                             <h6 class="permission-title">SMS</h6>
-                                            {% if is_granted('ROLE_PARTENAIRE') %}
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if app.user.partner.isSms == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if permission.isSms == 1 %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
-                                                {% else %}
-                                                    <label class="switch">
-                                                        <input type="checkbox" {% if app.user.structure.isSms == 1 %} checked {% endif %} disabled>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                {% endif %}
                                         </div>
 
-                                        {# Concours #}
                                         <div class="col permission concours">
                                             <i class="fa-solid fa-trophy"></i>
                                             <h6 class="permission-title">Concours</h6>
-                                                {% if is_granted('ROLE_PARTENAIRE') %}
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if app.user.partner.isConcours == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if permission.isConcours == 1 %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
-                                                {% else %}
-                                                    <label class="switch">
-                                                        <input type="checkbox" {% if app.user.structure.isConcours == 1 %} checked {% endif %} disabled>
-                                                        <span class="slider round"></span>
-                                                    </label>
-                                                {% endif %}
                                         </div>
+                                        {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -226,7 +257,84 @@
                 </div>
             </div>
         </div>
+
         {% endif %}
+
+        {# LECTURE SEULE STRUCTURE #}
+        {% if is_granted('ROLE_STRUCTURE') %}
+        
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card" style="border-radius: 1rem;">
+                        <div class="col d-flex align-items-center">
+                            <div class="card-body text-black text-center">
+                                <div class="d-flex flex-column align-items-center mb-3 pb-1">
+                                    <h4>Vos fonctionnalités globales (Contrat Structure)</h4>
+                                    <small><i>Pour modifier ces fonctionnalités liées au contrat de votre partenaire, <a href="mailto:admin@admin.fr">veuillez contacter l'administrateur STUDI FITNESS</a></i></small>
+                                </div>
+                                <div class="toggle-permissions text-center my-5">
+                                    <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
+
+
+                                        {% for permission in app.user.structure.permissions %}
+                                       
+                                        <div class="col permission planning">
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <h6 class="permission-title">Planning</h6>
+                                                    <label class="switch">
+                                                        <input type="checkbox" {% if permission.isPlanning == 1 %} checked {% endif %} disabled>
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                        </div>
+
+                                        <div class="col permission newsletter">
+                                            <i class="fa-solid fa-envelope"></i>
+                                            <h6 class="permission-title">Newsletter</h6>
+                                                    <label class="switch">
+                                                        <input type="checkbox" {% if permission.isNewsletter == 1 %} checked {% endif %} disabled>
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                        </div>
+
+                                        <div class="col permission boissons">
+                                            <i class="fas fa-cocktail"></i>
+                                            <h6 class="permission-title">Boissons</h6>
+                                                    <label class="switch">
+                                                        <input type="checkbox" {% if permission.isBoissons == 1 %} checked {% endif %} disabled>
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                        </div>
+
+                                        <div class="col permission sms">
+                                            <i class="fa-solid fa-comment-sms"></i>
+                                            <h6 class="permission-title">SMS</h6>
+                                                    <label class="switch">
+                                                        <input type="checkbox" {% if permission.isSms == 1 %} checked {% endif %} disabled>
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                        </div>
+
+                                        <div class="col permission concours">
+                                            <i class="fa-solid fa-trophy"></i>
+                                            <h6 class="permission-title">Concours</h6>
+                                                    <label class="switch">
+                                                        <input type="checkbox" {% if permission.isConcours == 1 %} checked {% endif %} disabled>
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                        </div>
+                                        {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+
         {% endif %}
        
         </div>

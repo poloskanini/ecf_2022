@@ -118,7 +118,7 @@ class PartnerController extends AbstractController
 
     // EDIT A PARTNER
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine)
+    public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine, EntityManagerInterface $em)
     {
         $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
@@ -148,8 +148,8 @@ class PartnerController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
-                $password = $passwordHasher->hashPassword($partnerUser, $partnerUser->getPassword());
-                $partnerUser->setPassword($password);
+                // $password = $passwordHasher->hashPassword($partnerUser, $partnerUser->getPassword());
+                // $partnerUser->setPassword($password);
 
                 // $partner->setIsPlanning($userPermissions->isIsPlanning());
                 // $partner->setIsNewsletter($userPermissions->isIsNewsletter());
@@ -160,8 +160,11 @@ class PartnerController extends AbstractController
                 $partner->addPermission($userPermissions);
                 $userPermissions->addPartner($partner);
 
-                $userRepository->add($partnerUser, true);
-                $partnerRepository->add($partner, true);
+                $em->persist($partnerUser);
+                $em->persist($partner);
+                $em->flush();
+                // $userRepository->add($partnerUser, true);
+                // $partnerRepository->add($partner, true);
     
                 $this->addFlash(
                     'success',

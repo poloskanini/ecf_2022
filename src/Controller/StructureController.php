@@ -121,7 +121,7 @@ class StructureController extends AbstractController
 
     // EDIT A STRUCTURE
     #[Route('/edit/{id}', name: 'app_structure_edit', methods: ['GET', 'POST'])]
-    public function edit(int $id, Request $request, UserRepository $userRepository,  StructureRepository $structureRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
+    public function edit(int $id, Request $request, UserRepository $userRepository,  StructureRepository $structureRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine, EntityManagerInterface $em): Response
     {
         $structure = $structureRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $structureUser = $structure->getUser(); // Catch l'utilisateur relié à ce partner
@@ -164,8 +164,8 @@ class StructureController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
-                $password = $passwordHasher->hashPassword($structureUser, $structureUser->getPassword());
-                $structureUser->setPassword($password);
+                // $password = $passwordHasher->hashPassword($structureUser, $structureUser->getPassword());
+                // $structureUser->setPassword($password);
                 
                 // Cabler pour que les données du formulaire permissions aillent dans $structure->addPermissions()
                 // $partner->setIsPlanning($userPermissions->isIsPlanning());
@@ -177,8 +177,12 @@ class StructureController extends AbstractController
                 // dump($form->getData());
                 // die;
 
-                $userRepository->add($structureUser, true);
-                $structureRepository->add($structure, true);
+                $em->persist($structureUser);
+                $em->persist($structure);
+                $em->flush();
+
+                // $userRepository->add($structureUser, true);
+                // $structureRepository->add($structure, true);
     
                 $this->addFlash(
                     'success',
