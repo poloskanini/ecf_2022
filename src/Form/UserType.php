@@ -51,7 +51,7 @@ class UserType extends AbstractType
                 'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
-                    'max' => 30
+                    'max' => 60
                 ]),
                 'attr' => [
                     'placeholder' => 'Merci de saisir votre nom'

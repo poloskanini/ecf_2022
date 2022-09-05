@@ -24,6 +24,7 @@
             
             {% if is_granted('ROLE_PARTENAIRE') %}
 
+            <h4 class="mb-4">VOTRE CONTRAT :</h4>
             <h6 class="form-check form-check-partner d-inline">Vous disposez d'un contrat "Partenaire"</h6>
             <p class="mt-3">
                 <i class="fa fa-handshake"></i>
@@ -31,7 +32,7 @@
             </p>
             <hr>
 
-            <h5>Vos structures :</h5>
+            <h4 class="mb-4">VOS STRUCTURES :</h4>
 
             <div class="row d-flex h-100 mt-3">
                {% for structure in app.user.partner.structures %}
@@ -117,6 +118,7 @@
             {# Endif Role Partenaire #}
 
             {% if is_granted('ROLE_STRUCTURE') %}
+            <h4 class="mb-4">VOTRE CONTRAT :</h4>
             <h6 class=" form-check form-check-structure d-inline">Vous disposez d'un contrat "Structure"</h6>
             <hr>
 
@@ -189,14 +191,14 @@
         {# LECTURE SEULE PARTENAIRE #}
         {% if is_granted('ROLE_PARTENAIRE') %}
         
-        <div class=" py-5 h-100">
+        <div class="py-5 h-100">
             <div class="row d-flex h-100">
                 <div class="col col-xl-6">
                     <div class="card" style="border-radius: 1rem;">
                         <div class="col d-flex align-items-center">
                             <div class="card-body text-black text-center">
                                 <div class="d-flex flex-column align-items-center mb-3 pb-1">
-                                    <h4>Vos fonctionnalités globales (Contrat Partenaire)</h4>
+                                    <h5>Vos fonctionnalités globales (Contrat Partenaire)</h5>
                                     <small><i>Pour modifier ces fonctionnalités liées à votre contrat, <a href="mailto:admin@admin.fr">veuillez contacter l'administrateur STUDI FITNESS.</a></i></small>
                                 </div>
                                 <div class="toggle-permissions text-center my-5">
@@ -265,12 +267,12 @@
         
         <div class="container py-5 h-100">
             <div class="row d-flex align-items-center h-100">
-                <div class="col col-xl-10">
+                <div class="col col-xl-6">
                     <div class="card" style="border-radius: 1rem;">
                         <div class="col d-flex align-items-center">
                             <div class="card-body text-black text-center">
                                 <div class="d-flex flex-column align-items-center mb-3 pb-1">
-                                    <h4>Vos fonctionnalités globales (Contrat Structure)</h4>
+                                    <h5>Vos fonctionnalités globales (Contrat Structure)</h5>
                                     <small><i>Pour modifier ces fonctionnalités liées au contrat de votre partenaire, <a href="mailto:admin@admin.fr">veuillez contacter l'administrateur STUDI FITNESS</a></i></small>
                                 </div>
                                 <div class="toggle-permissions text-center my-5">
