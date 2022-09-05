@@ -29,6 +29,7 @@
 
     <div class="responsive-table-line">
 
+
     <table class="table table-hover text-center">
         <thead>
             <tr class="">
@@ -47,8 +48,20 @@
             </tr>
         </thead>
         <tbody>
+
+                
             {% for structure in structures %}
-                {% for permission in structure.permissions %}
+                {# {{ dump(structure.partner)}} #}
+     
+            {# {{ dump(pp.isConcours)}} #}
+            {# {% for partner in partners %}
+            {% for pp in partner.permissions %}    #}
+
+            {% for permission in structure.permissions %}
+                
+
+             {# {% for partner in partners %}
+            {% for pp in partner.permissions %}    #}
 
                 <tr class="">
                     <td data-title="ID :">{{ structure.id }}</td>
@@ -69,66 +82,73 @@
                         <i class="fa fa-handshake"></i>
                         {{ structure.partner }}
                     </td>
-                    <td data-title="Planning :" class="align-middle">
+
+                    {# {% for partner in partners %}
+            {% for pp in partner.permissions %}    #}
+            
+                    
+                    <td data-title="Planning :" class="align-middle ">
                         {% if permission.isPlanning == true %}
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" id="user_isPlanning" name="user[isPlanning]" class="custom-control-input" value="1" checked disabled>
-                                <label class="switch-custom custom-control-label" for="user_isPlanning"></label>
+                                <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="1" checked disabled>
+                                <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
                             </div>
                             {% else %}
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" id="user_isPlanning" name="user[isPlanning]" class="custom-control-input" value="0" disabled>
-                                <label class="switch-custom custom-control-label" for="user_isPlanning"></label>
+                            <div class="custom-control custom-switch ">
+                                <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="0" disabled>
+                                <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
                             </div>
                         {% endif %}
                     </td>
-                    <td data-title="Newsletter :" class="align-middle">
+                    
+                    <td data-title="Newsletter :" class="align-middle ">
                         {% if permission.isNewsletter == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
                             </div>
                             {% else %}
-                            <div class="custom-control custom-switch">
+                            <div class="custom-control custom-switch ">
                                 <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="0" disabled>
                                 <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
                             </div>
                         {% endif %}
                     </td>
-                    <td data-title="Boissons :" class="align-middle">
+                    <td data-title="Boissons :" class="align-middle ">
                         {% if permission.isBoissons == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isBoissons" name="user[isBoissons]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isBoissons"></label>
                             </div>
                             {% else %}
-                            <div class="custom-control custom-switch">
+                            <div class="custom-control custom-switch ">
                                 <input type="checkbox" id="user_isBoissons" name="user[isBoissons]" class="custom-control-input" value="0" disabled>
                                 <label class="switch-custom custom-control-label" for="user_isBoissons"></label>
                             </div>
                         {% endif %}
                     </td>
-                    <td data-title="SMS :" class="align-middle">
+                    
+                    <td data-title="SMS :" class="align-middle ">
                         {% if permission.isSms == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isSms" name="user[isSms]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isSms"></label>
                             </div>
                             {% else %}
-                            <div class="custom-control custom-switch">
+                            <div class="custom-control custom-switch ">
                                 <input type="checkbox" id="user_isSms" name="user[isSms]" class="custom-control-input" value="0" disabled>
                                 <label class="switch-custom custom-control-label" for="user_isSms"></label>
                             </div>
                         {% endif %}
                     </td>
-                    <td data-title="Concours :" class="align-middle">
+                    <td data-title="Concours :" class="align-middle  ">
                         {% if permission.isConcours == true %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isConcours" name="user[isConcours]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isConcours"></label>
                             </div>
                             {% else %}
-                            <div class="custom-control custom-switch">
+                            <div class="custom-control custom-switch ">
                                 <input type="checkbox" id="user_isConcours" name="user[isConcours]" class="custom-control-input" value="0" disabled>
                                 <label class="switch-custom custom-control-label" for="user_isConcours"></label>
                             </div>
@@ -149,7 +169,9 @@
                 </tr>
                 
             {% endfor %}
-            {% endfor %}
+                        {% endfor %}
+                        {# {% endfor %}
+                                    {% endfor %}             #}
 
             
         </tbody>

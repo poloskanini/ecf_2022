@@ -37,8 +37,8 @@ class StructureController extends AbstractController
     public function index(PartnerRepository $partnerRepository, StructureRepository $structureRepository, PermissionsRepository $permissionsRepository): Response
     {
         return $this->render('structure/index.html.twig', [
-            'partners' => $partnerRepository->findAll(),
             'structures' => $structureRepository->findAll(),
+            'partners' => $partnerRepository->findAll(),
             'permissions' => $permissionsRepository->findAll(),
 
         ]);
@@ -126,7 +126,16 @@ class StructureController extends AbstractController
         $structure = $structureRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $structureUser = $structure->getUser(); // Catch l'utilisateur relié à ce partner
 
-        // dump($structure);
+        // Je récupère les permissions d'ORIGINE du Partner
+        $partnerPermissions = $structure->getPartner()->getPermissions()->getValues();
+        foreach ($partnerPermissions as $pp) {
+            $permPartnerId = $pp->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+        }
+
+        $partnerPermissions = $doctrine->getRepository(Permissions::class)->find($permPartnerId);
+        // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du partner_permissions.
+
+        // dump($partnerPermissions);
         // die;
 
         // Récupérer les permissions du partenaire
@@ -137,7 +146,8 @@ class StructureController extends AbstractController
         }
 
         $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId);
-        // De cette façon, j'ai récupéré mon objet Entity\Permissions
+        // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du structure_permissions.
+
 
         $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
@@ -181,7 +191,8 @@ class StructureController extends AbstractController
         return $this->renderForm('structure/_edit.html.twig', [
             'structure' => $structure,
             'form' => $form,
-            'permissions' => $userPermissions
+            'permissions' => $userPermissions,
+            'partnerPermissions' => $partnerPermissions
         ]);
 
     }

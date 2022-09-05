@@ -67,6 +67,15 @@
                     {{ form_errors(form.structure.postalAdress)}}
                 </div>
 
+                {# {{ dump(structure.partner.permissions)}} #}
+                    Planning {{ (partnerPermissions.isPlanning) }} <br>
+                    Newsletter {{ (partnerPermissions.isNewsletter) }} <br>
+                    Boissons {{ (partnerPermissions.isBoissons) }} <br>
+                    Sms {{ (partnerPermissions.isSms) }} <br>
+                    Concours {{ (partnerPermissions.isConcours) }} <br>
+
+                
+
                 <div class="container-fluid h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col col-xl-10">
@@ -80,7 +89,7 @@
                                             <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
                                                 <div class="row">
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group {% if permissions.isPlanning == false %} disabled {% endif %} ">
+                                                        <div class="form-group {% if partnerPermissions.isPlanning == 0 %} d-none {% endif %} ">
                                                         <i class="fa-solid fa-calendar-days"></i>
                                                         <p class="m-0">Planning</p>
                                                             {{ form_widget(form.permissions.isPlanning)}}
@@ -89,7 +98,7 @@
                                                     </div>
 
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group {% if permissions.isNewsletter == false %} disabled {% endif %} ">
+                                                        <div class="form-group {% if partnerPermissions.isNewsletter == 0 %} d-none {% endif %} ">
                                                         <i class="fa-solid fa-envelope"></i>
                                                         <p class="m-0">Newsletter</p>
                                                             {{ form_label(form.permissions.isNewsletter)}}
@@ -99,7 +108,7 @@
                                                     </div>
 
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group {% if permissions.isBoissons == false %} disabled {% endif %} ">
+                                                        <div class="form-group {% if partnerPermissions.isBoissons == 0 %} d-none {% endif %} ">
                                                         <i class="fas fa-cocktail"></i>
                                                         <p class="m-0">Boissons</p>
                                                             {{ form_label(form.permissions.isBoissons)}}
@@ -109,7 +118,7 @@
                                                     </div>
 
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group {% if permissions.isSms == false %} disabled {% endif %} ">
+                                                        <div class="form-group {% if partnerPermissions.isSms == 0 %} d-none {% endif %} ">
                                                         <i class="fa-solid fa-comment-sms"></i>
                                                         <p class="m-0">SMS</p>
                                                             {{ form_label(form.permissions.isSms)}}
@@ -119,7 +128,7 @@
                                                     </div>
 
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group {% if permissions.isConcours == false %} disabled {% endif %} ">
+                                                        <div class="form-group {% if partnerPermissions.isConcours == 0 %} d-none {% endif %} ">
                                                         <i class="fa-solid fa-trophy"></i>
                                                         <p class="m-0">Concours</p>
                                                             {{ form_label(form.permissions.isConcours)}}
