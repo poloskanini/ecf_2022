@@ -1,4 +1,4 @@
-# Studi Fitness
+# STUDI FITNESS
 
 Projet réalisé dans le cadre de l'ECF Décembre 2022.
 
