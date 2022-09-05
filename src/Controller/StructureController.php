@@ -171,14 +171,18 @@ class StructureController extends AbstractController
                 // $partner->setIsPlanning($userPermissions->isIsPlanning());
     
                 // Je déclare que ma structure a de nouvelles permissions et que cet objet permissions a une nouvelle structure
+                $em->persist($userPermissions);
+                $em->persist($structureUser);
+                $em->persist($structure);
+
                 $structure->addPermission($userPermissions);
                 $userPermissions->addStructure($structure);
+
 
                 // dump($form->getData());
                 // die;
 
-                $em->persist($structureUser);
-                $em->persist($structure);
+                
                 $em->flush();
 
                 // $userRepository->add($structureUser, true);
