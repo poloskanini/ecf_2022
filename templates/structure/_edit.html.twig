@@ -80,52 +80,51 @@
                                             <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
                                                 <div class="row">
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group">
+                                                        <div class="form-group {% if permissions.isPlanning == false %} disabled {% endif %} ">
                                                         <i class="fa-solid fa-calendar-days"></i>
                                                         <p class="m-0">Planning</p>
-                                                            {{ form_widget(form.structure.isPlanning)}}
-                                                            {{ form_errors(form.structure.isPlanning)}}
-                                                            
+                                                            {{ form_widget(form.permissions.isPlanning)}}
+                                                            {{ form_errors(form.permissions.isPlanning)}}
                                                         </div>                                                
                                                     </div>
 
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group">
+                                                        <div class="form-group {% if permissions.isNewsletter == false %} disabled {% endif %} ">
                                                         <i class="fa-solid fa-envelope"></i>
                                                         <p class="m-0">Newsletter</p>
-                                                            {{ form_label(form.structure.isNewsletter)}}
-                                                            {{ form_widget(form.structure.isNewsletter)}}
-                                                            {{ form_errors(form.structure.isNewsletter)}}
+                                                            {{ form_label(form.permissions.isNewsletter)}}
+                                                            {{ form_widget(form.permissions.isNewsletter)}}
+                                                            {{ form_errors(form.permissions.isNewsletter)}}
                                                         </div>                                         
                                                     </div>
 
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group">
+                                                        <div class="form-group {% if permissions.isBoissons == false %} disabled {% endif %} ">
                                                         <i class="fas fa-cocktail"></i>
                                                         <p class="m-0">Boissons</p>
-                                                            {{ form_label(form.structure.isBoissons)}}
-                                                            {{ form_widget(form.structure.isBoissons)}}
-                                                            {{ form_errors(form.structure.isBoissons)}}
+                                                            {{ form_label(form.permissions.isBoissons)}}
+                                                            {{ form_widget(form.permissions.isBoissons)}}
+                                                            {{ form_errors(form.permissions.isBoissons)}}
                                                         </div>
                                                     </div>
 
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group">
+                                                        <div class="form-group {% if permissions.isSms == false %} disabled {% endif %} ">
                                                         <i class="fa-solid fa-comment-sms"></i>
                                                         <p class="m-0">SMS</p>
-                                                            {{ form_label(form.structure.isSms)}}
-                                                            {{ form_widget(form.structure.isSms)}}
-                                                            {{ form_errors(form.structure.isSms)}}
+                                                            {{ form_label(form.permissions.isSms)}}
+                                                            {{ form_widget(form.permissions.isSms)}}
+                                                            {{ form_errors(form.permissions.isSms)}}
                                                         </div>
                                                     </div>
 
                                                     <div class="col permission newsletter">
-                                                        <div class="form-group">
+                                                        <div class="form-group {% if permissions.isConcours == false %} disabled {% endif %} ">
                                                         <i class="fa-solid fa-trophy"></i>
                                                         <p class="m-0">Concours</p>
-                                                            {{ form_label(form.structure.isConcours)}}
-                                                            {{ form_widget(form.structure.isConcours)}}
-                                                            {{ form_errors(form.structure.isConcours)}}
+                                                            {{ form_label(form.permissions.isConcours)}}
+                                                            {{ form_widget(form.permissions.isConcours)}}
+                                                            {{ form_errors(form.permissions.isConcours)}}
                                                         </div>
                                                     </div>
                                                
@@ -139,6 +138,9 @@
                         </div>
                     </div>
                 </div>
+
+                {# {{ dump(form.user.name)}} #}
+
                 
 
                 <a href="{{ path('app_structure_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>

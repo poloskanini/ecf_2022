@@ -7,13 +7,17 @@ use App\Form\UserType;
 use App\Entity\Partner;
 use App\Entity\Structure;
 use App\Form\UserShowType;
+use App\Entity\Permissions;
 use App\Form\StructureType;
+use App\Form\PermissionsType;
 use App\Form\StructureFormType;
 use App\Repository\UserRepository;
 use App\Form\StructureFormShowType;
 use App\Repository\PartnerRepository;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\PermissionsRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,8 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use App\Entity\Permissions;
-use App\Repository\PermissionsRepository;
+
 
 #[Route('/structure')]
 #[IsGranted('ROLE_ADMIN')]
@@ -31,9 +34,10 @@ class StructureController extends AbstractController
 
     // INDEX FOR ALL STRUCTURES IN DB
     #[Route('/', name: 'app_structure_index', methods: ['GET'])]
-    public function index(StructureRepository $structureRepository, PermissionsRepository $permissionsRepository): Response
+    public function index(PartnerRepository $partnerRepository, StructureRepository $structureRepository, PermissionsRepository $permissionsRepository): Response
     {
         return $this->render('structure/index.html.twig', [
+            'partners' => $partnerRepository->findAll(),
             'structures' => $structureRepository->findAll(),
             'permissions' => $permissionsRepository->findAll(),
 
@@ -42,7 +46,7 @@ class StructureController extends AbstractController
 
     // CREATE A NEW STRUCTURE
     #[Route('/new', name: 'app_structure_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository, StructureRepository $structureRepository, UserPasswordHasherInterface $passwordHasher): Response
+    public function new(Request $request, UserRepository $userRepository, StructureRepository $structureRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
     {
 
         $user = new User(); // J'instancie ma classe User()
@@ -67,16 +71,6 @@ class StructureController extends AbstractController
             // Je définis que la nouvelle donnée aura par défaut le ['ROLE_STRUCTURE]
             $user->setRoles(['ROLE_STRUCTURE']);
 
-            // dump($form->get('id')->getData());
-
-            // Je récupère les données non mappées des booléens de mon partner (champ 'id' en ligne 97 du StructureType) et les injecte dans ma structure.
-            // Les booléens du Partner deviennent les booléens de la structure :)
-            $structure->setIsPlanning($form->get('id')->getData()->isIsPlanning());
-            $structure->setIsNewsletter($form->get('id')->getData()->isIsNewsletter());
-            $structure->setIsBoissons($form->get('id')->getData()->isIsBoissons());
-            $structure->setIsSms($form->get('id')->getData()->isIsSms());
-            $structure->setIsConcours($form->get('id')->getData()->isIsConcours());
-            
             //Je définis que la structure de mon User est $structure
             $structure->setUser($user);
             $user->setStructure($structure);
@@ -84,8 +78,28 @@ class StructureController extends AbstractController
             // Je définis que le partenaire de ma structure est la data que contient "id"
             $structure->setPartner($form->get('id')->getData());
 
+            // dump($structure->getPartner()->getPermissions()->getValues());
+            // die;
+            // Récupérer les permissions du partenaire
+            $permArray = ($structure->getPartner()->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+            foreach ($permArray as $p) {
+                $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+            }
+
+            $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
+            
+            
             // dump($user);
             // dump($structure);
+
+            $permissions->setIsPlanning($userPermissions->isIsPlanning());
+            $permissions->setIsNewsletter($userPermissions->isIsNewsletter());
+            $permissions->setIsBoissons($userPermissions->isIsBoissons());
+            $permissions->setIsSms($userPermissions->isIsSms());
+            $permissions->setIsConcours($userPermissions->isIsConcours());
+
+            $structure->addPermission($permissions);
+            $permissions->addStructure($structure);
 
             $userRepository->add($user, true);
             $structureRepository->add($structure, true);
@@ -100,23 +114,39 @@ class StructureController extends AbstractController
 
         return $this->renderForm('structure/_new.html.twig', [
              'user' => $user,
+             'structure' => $structure,
              'form' => $form,
         ]);
     }
 
     // EDIT A STRUCTURE
     #[Route('/edit/{id}', name: 'app_structure_edit', methods: ['GET', 'POST'])]
-    public function edit(int $id, Request $request, UserRepository $userRepository,  StructureRepository $structureRepository, UserPasswordHasherInterface $passwordHasher): Response
+    public function edit(int $id, Request $request, UserRepository $userRepository,  StructureRepository $structureRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
     {
         $structure = $structureRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $structureUser = $structure->getUser(); // Catch l'utilisateur relié à ce partner
-        $items = ['user' => $structureUser, 'structure' => $structure]; // Tableau regroupant les 2 entités
+
+        // dump($structure);
+        // die;
+
+        // Récupérer les permissions du partenaire
+        // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+        $permArray = ($structure->getPermissions()->getValues());
+        foreach ($permArray as $p) {
+            $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+        }
+
+        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId);
+        // De cette façon, j'ai récupéré mon objet Entity\Permissions
+
+        $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
         $form = $this->createFormBuilder($items) // Formulaire regroupant les 2 entités
             ->add('user', UserType::class, [
                 'isEdit' => true,
             ])
             ->add('structure', StructureFormType::class)
+            ->add('permissions', PermissionsType::class)
             // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
             ->getForm();
 
@@ -126,7 +156,17 @@ class StructureController extends AbstractController
                 // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
                 $password = $passwordHasher->hashPassword($structureUser, $structureUser->getPassword());
                 $structureUser->setPassword($password);
+                
+                // Cabler pour que les données du formulaire permissions aillent dans $structure->addPermissions()
+                // $partner->setIsPlanning($userPermissions->isIsPlanning());
     
+                // Je déclare que ma structure a de nouvelles permissions et que cet objet permissions a une nouvelle structure
+                $structure->addPermission($userPermissions);
+                $userPermissions->addStructure($structure);
+
+                // dump($form->getData());
+                // die;
+
                 $userRepository->add($structureUser, true);
                 $structureRepository->add($structure, true);
     
@@ -141,6 +181,7 @@ class StructureController extends AbstractController
         return $this->renderForm('structure/_edit.html.twig', [
             'structure' => $structure,
             'form' => $form,
+            'permissions' => $userPermissions
         ]);
 
     }

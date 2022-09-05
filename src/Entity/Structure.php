@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\StructureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StructureRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: StructureRepository::class)]
 class Structure
@@ -28,20 +30,36 @@ class Structure
     #[ORM\Column(length: 255)]
     private ?string $postalAdress;
 
-    #[ORM\Column]
-    private bool $isPlanning;
+    #[ORM\ManyToMany(targetEntity: Permissions::class, inversedBy: 'structures', cascade: ['persist'])]
+    private Collection $permissions;
 
-    #[ORM\Column]
-    private bool $isNewsletter;
+    public function __construct()
+    {
+        $this->permissions = new ArrayCollection();
+    }
 
-    #[ORM\Column]
-    private bool $isBoissons;
+    // #[ORM\Column]
+    // private bool $isPlanning;
 
-    #[ORM\Column]
-    private bool $isSms;
+    // #[ORM\Column]
+    // private bool $isNewsletter;
 
-    #[ORM\Column]
-    private bool $isConcours;
+    // #[ORM\Column]
+    // private bool $isBoissons;
+
+    // #[ORM\Column]
+    // private bool $isSms;
+
+    // #[ORM\Column]
+    // private bool $isConcours;
+
+    // #[ORM\ManyToMany(targetEntity: Permissions::class, inversedBy: 'structures', cascade: ['persist'])]
+    // private Collection $permissions;
+
+    // public function __construct()
+    // {
+    //     $this->permissions = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -84,69 +102,115 @@ class Structure
         return $this;
     }
 
-    public function isIsPlanning(): ?bool
-    {
-        return $this->isPlanning;
-    }
+    // public function isIsPlanning(): ?bool
+    // {
+    //     return $this->isPlanning;
+    // }
 
-    public function setIsPlanning(bool $isPlanning): self
-    {
-        $this->isPlanning = $isPlanning;
+    // public function setIsPlanning(bool $isPlanning): self
+    // {
+    //     $this->isPlanning = $isPlanning;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function isIsNewsletter(): ?bool
-    {
-        return $this->isNewsletter;
-    }
+    // public function isIsNewsletter(): ?bool
+    // {
+    //     return $this->isNewsletter;
+    // }
 
-    public function setIsNewsletter(bool $isNewsletter): self
-    {
-        $this->isNewsletter = $isNewsletter;
+    // public function setIsNewsletter(bool $isNewsletter): self
+    // {
+    //     $this->isNewsletter = $isNewsletter;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function isIsBoissons(): ?bool
-    {
-        return $this->isBoissons;
-    }
+    // public function isIsBoissons(): ?bool
+    // {
+    //     return $this->isBoissons;
+    // }
 
-    public function setIsBoissons(bool $isBoissons): self
-    {
-        $this->isBoissons = $isBoissons;
+    // public function setIsBoissons(bool $isBoissons): self
+    // {
+    //     $this->isBoissons = $isBoissons;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function isIsSms(): ?bool
-    {
-        return $this->isSms;
-    }
+    // public function isIsSms(): ?bool
+    // {
+    //     return $this->isSms;
+    // }
 
-    public function setIsSms(bool $isSms): self
-    {
-        $this->isSms = $isSms;
+    // public function setIsSms(bool $isSms): self
+    // {
+    //     $this->isSms = $isSms;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function isIsConcours(): ?bool
-    {
-        return $this->isConcours;
-    }
+    // public function isIsConcours(): ?bool
+    // {
+    //     return $this->isConcours;
+    // }
 
-    public function setIsConcours(bool $isConcours): self
-    {
-        $this->isConcours = $isConcours;
+    // public function setIsConcours(bool $isConcours): self
+    // {
+    //     $this->isConcours = $isConcours;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function __toString()
     {
         return $this->name;
+    }
+
+    
+    // public function getPermissions()
+    // {
+    //     return $this->permissions;
+    // }
+
+    // public function addPermission(Permissions $permission): self
+    // {
+    //     if (!$this->permissions->contains($permission)) {
+    //         $this->permissions->add($permission);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removePermission(Permissions $permission): self
+    // {
+    //     $this->permissions->removeElement($permission);
+
+    //     return $this;
+    // }
+
+    /**
+     * @return Collection<int, Permissions>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permissions $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permissions $permission): self
+    {
+        $this->permissions->removeElement($permission);
+
+        return $this;
     }
     
 }

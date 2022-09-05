@@ -123,6 +123,7 @@ class PartnerController extends AbstractController
         $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
 
+        //TODO: to refactoring...
         // Récupérer les permissions du partenaire
         $permArray = ($partner->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
         foreach ($permArray as $p) {

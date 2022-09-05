@@ -33,9 +33,16 @@ class Permissions
     #[ORM\ManyToMany(targetEntity: Partner::class, mappedBy: 'permissions')]
     private Collection $partners;
 
+    #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'permissions')]
+    private Collection $structures;
+
+    // #[ORM\ManyToMany(targetEntity: Structure::class, inversedBy: 'permissions')]
+    // private Collection $structures;
+
     public function __construct()
     {
         $this->partners = new ArrayCollection();
+        $this->structures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -125,6 +132,57 @@ class Permissions
     {
         if ($this->partners->removeElement($partner)) {
             $partner->removePermission($this);
+        }
+
+        return $this;
+    }
+
+    // /**
+    //  * @return Collection<int, Structure>
+    //  */
+    // public function getStructures(): Collection
+    // {
+    //     return $this->structures;
+    // }
+
+    // public function addStructure(Structure $structure): self
+    // {
+    //     if (!$this->structures->contains($structure)) {
+    //         $this->structures->add($structure);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeStructure(Structure $structure): self
+    // {
+    //     $this->structures->removeElement($structure);
+
+    //     return $this;
+    // }
+
+    /**
+     * @return Collection<int, Structure>
+     */
+    public function getStructures(): Collection
+    {
+        return $this->structures;
+    }
+
+    public function addStructure(Structure $structure): self
+    {
+        if (!$this->structures->contains($structure)) {
+            $this->structures->add($structure);
+            $structure->addPermission($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStructure(Structure $structure): self
+    {
+        if ($this->structures->removeElement($structure)) {
+            $structure->removePermission($this);
         }
 
         return $this;
