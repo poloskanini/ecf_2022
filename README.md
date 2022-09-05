@@ -88,11 +88,11 @@ symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
 ```
 
-### Charger des datas en base de données
+<!-- ### Charger des datas en base de données
 
 ```bash
 symfony console doctrine:fixtures:load -n
-```
+``` -->
 
 ## Lancer l'application
 
