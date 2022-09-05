@@ -104,10 +104,14 @@ Pour démarrer l'application
 
 ## Se connecter à l'application
 
-| Email                               | Mot de passe | Role       | Description                               |
-|-------------------------------------|--------------|------------|-------------------------------------------|
-| admin@admin.fr                      | admin        | ADMIN      | Administrateur principal de l'application |
-| orangebleuedunkerque@direction.fr   | orange       | PARTENAIRE | Partenaire possédant des structures       |
-| ruemontmartre@orangebleue.fr        | montmartre   | STRUCTURE  | Structure reliée à orangebleuedunkerque   |
+| Email | Mot de passe     | Role                       | Description |
+| :-------- | :------- | :-------------------------------- | -- |
+| `admin@admin.fr`      | `admin` | ADMIN | Administrateur principal de l'application|
+| `orangebleuedunkerque@partenaire.fr`      | `dunkerque` | PARTENAIRE | Directeur de l'Orange bleue de Dunkerque|
+| `ruedusable@structure.fr`      | `sable` | STRUCTURE | Structure (club de Gym)|
 
-> Les Partenaires et Structures sont en LECTURE SEULE. Pour toute modification sur leurs fonctionnalités, ils doivent contacter l'administrateur qui a les pleins pouvoirs.
+> Chaque PARTENAIRE (franchise) peut posséder plusieurs STRUCTURES (clubs de gym), et leur donne par défaut un nombre de permissions (telles qu'un outil de planning, newsletters, SMS, etc...)
+> Chaque STRUCTURE (club de gym) est rattachée à un partenaire, et elle peut choisir d'activer ou non les permissions données par défaut par le contrat du partenaire.
+
+> Les Partenaires et Structures ont un accès en LECTURE SEULE à leurs informations.
+> Pour toute modification sur leurs permissions ou informations, ils doivent contacter l'administrateur STUDI FITNESS qui a les pleins pouvoirs.
