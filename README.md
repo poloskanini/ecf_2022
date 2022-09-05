@@ -111,6 +111,7 @@ Pour démarrer l'application
 | `ruedusable@structure.fr`      | `sable` | STRUCTURE | Gérant de la Structure de rue du sable à Dunkerque (club de Gym)|
 
 > Chaque PARTENAIRE (franchise) peut posséder plusieurs STRUCTURES (clubs de gym), et leur donne par défaut un nombre de permissions (telles qu'un outil de planning, newsletters, SMS, etc...)
+
 > Chaque STRUCTURE (club de gym) est rattachée à un partenaire, et elle peut choisir d'activer ou non les permissions données par défaut par le contrat du partenaire.
 
 > Les Partenaires et Structures ont un accès en LECTURE SEULE à leurs informations.
