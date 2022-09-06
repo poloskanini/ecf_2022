@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Classe\Search;
 use App\Form\UserType;
 use App\Entity\Partner;
+use App\Form\SearchType;
 use App\Form\PartnerType;
 use App\Form\UserShowType;
 use App\Entity\Permissions;
@@ -39,11 +41,25 @@ class PartnerController extends AbstractController
     
     // INDEX FOR ALL PARTNERS IN DB
     #[Route('/', name: 'app_partner_index', methods: ['GET'])]
-    public function index(PartnerRepository $partnerRepository, PermissionsRepository $permissionsRepository): Response
+    public function index(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, PermissionsRepository $permissionsRepository): Response
     {
+        // $users = $this->entityManager->getRepository(User::class)->findAll();
+
+        $search = new Search();
+        $searchForm = $this->createForm(SearchType::class, $search);
+
+        $searchForm->handleRequest($request);
+
+            $users = $userRepository->findWithSearch($search);
+            // $users = $this->entityManager->getRepository(User::class)->findWithSearch($search);
+            dump($users);
+
+
         return $this->render('partner/index.html.twig', [
+            'users' => $users,
             'partners' => $partnerRepository->findAll(),
             'permissions' => $permissionsRepository->findAll(),
+            'searchForm' => $searchForm->createView()
         ]);
     }
 

@@ -591,6 +591,10 @@ input:checked + .slider:before {
   padding-right: .3rem;
 }
 
+form .form-check {
+  color: #000;
+}
+
 .form-check {
   text-align: center;
   border-radius: 10px;
