@@ -122,9 +122,9 @@ class StructureController extends AbstractController
 
             $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
             
+            // Pour envoi du mail au partenaire rattaché à la structure :
+            // $partnerSelectedEmail = $structure->getPartner()->getUser()->getEmail();
             
-            // dump($user);
-            // dump($structure);
 
             $permissions->setIsPlanning($userPermissions->isIsPlanning());
             $permissions->setIsNewsletter($userPermissions->isIsNewsletter());

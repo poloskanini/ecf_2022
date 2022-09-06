@@ -20,9 +20,6 @@ class HomeController extends AbstractController
     public function index(UserRepository $userRepository, PartnerRepository $partnerRepository, StructureRepository $structureRepository, PermissionsRepository $permissionsRepository): Response
     {
 
-        $mail = new Mail();
-        $mail->send('nicolasbarthes.lana@gmail.com', 'John Doe', 'Mon premier mail', 'Bonjour John et bienvenue chez STUDI FITNESS');
-
         return $this->render('home/index.html.twig', [
             'users' => $userRepository->findAll(),
             'partners' => $partnerRepository->findAll(),

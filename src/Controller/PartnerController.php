@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\User;
 use App\Classe\Search;
 use App\Form\UserType;
@@ -67,6 +68,8 @@ class PartnerController extends AbstractController
     #[Route('/new', name: 'app_partner_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
+        // Notification email
+        $notification = null;
 
         $user = new User(); // J'instancie ma classe User()
         $partner = new Partner(); // J'instancie ma classe Partner()
@@ -79,56 +82,68 @@ class PartnerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Injecte dans mon objet User() toutes les données qui sont récupérées du formulaire
             $user = $form->getData();
-            
-            // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
-            $password = $passwordHasher->hashPassword($user, $user->getPassword());
-            // Je réinjecte $password qui est crypté dans l'objet User()
-            $user->setPassword($password);
 
-            // Je définis que le partenaire de mon User est $partner
-            $user->setPartner($partner);
-            $partner->setUser($user);
+            // Vérifier que mon partner n'est pas déjà présent en BDD
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
-            // Je récupère les données "non mappée" du formulaire UserType et les injecte dans mon instance de Partner.
-            $partner->setName($form->get('partnerName')->getData());
+            if (!$search_email) {
+                // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
+                $password = $passwordHasher->hashPassword($user, $user->getPassword());
+                // Je réinjecte $password qui est crypté dans l'objet User()
+                $user->setPassword($password);
 
-            // Je définis que la nouvelle donnée aura pas défaut le ['ROLE_PARTENAIRE]
-            $user->setRoles(['ROLE_PARTENAIRE']);
+                // Je définis que le partenaire de mon User est $partner
+                $user->setPartner($partner);
+                $partner->setUser($user);
 
-            // $partner->setIsPlanning($form->get('isPlanning')->getData());
-            // $partner->setIsNewsletter($form->get('isNewsletter')->getData());
-            // $partner->setIsBoissons($form->get('isBoissons')->getData());
-            // $partner->setIsSms($form->get('isSms')->getData());
-            // $partner->setIsConcours($form->get('isConcours')->getData());
+                // Je récupère les données "non mappée" du formulaire UserType et les injecte dans mon  instance de Partner.
+                $partner->setName($form->get('partnerName')->getData());
 
-            // Je récupère les données non mappées du formulaire et les injecte dans mon objet Permissions
-            $permissions->setIsPlanning($form->get('isPlanning')->getData());
-            $permissions->setIsNewsletter($form->get('isNewsletter')->getData());
-            $permissions->setIsBoissons($form->get('isBoissons')->getData());
-            $permissions->setIsSms($form->get('isSms')->getData());
-            $permissions->setIsConcours($form->get('isConcours')->getData());
+                // Je définis que la nouvelle donnée aura pas défaut le ['ROLE_PARTENAIRE]
+                $user->setRoles(['ROLE_PARTENAIRE']);
 
-            // Je déclare que mon partenaire a de nouvelles permissions et que cet objet permissions a un nouveau partenaire
-            $partner->addPermission($permissions);
-            $permissions->addPartner($partner);
+                // Je récupère les données non mappées du formulaire et les injecte dans mon objet  Permissions
+                $permissions->setIsPlanning($form->get('isPlanning')->getData());
+                $permissions->setIsNewsletter($form->get('isNewsletter')->getData());
+                $permissions->setIsBoissons($form->get('isBoissons')->getData());
+                $permissions->setIsSms($form->get('isSms')->getData());
+                $permissions->setIsConcours($form->get('isConcours')->getData());
 
-            $userRepository->add($user, true);
-            $partnerRepository->add($partner, true);
-            // $permissionsRepository->add($permissions, true);
-            // Je flush mon objet permissions dans le permissionsRepository
+                // Je déclare que mon partenaire a de nouvelles permissions et que cet objet    permissions a un nouveau partenaire
+                $partner->addPermission($permissions);
+                $permissions->addPartner($partner);
 
-            $this->addFlash(
-                'success',
-                'Le partenaire "' .$user->getName(). '" a été ajouté avec succès'
-            );
+                $userRepository->add($user, true);
+                $partnerRepository->add($partner, true);
+                // $permissionsRepository->add($permissions, true);
+                // Je flush mon objet permissions dans le permissionsRepository
 
-            return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
+                $this->addFlash(
+                    'success',
+                    'Le partenaire "' .$user->getName(). '" a été ajouté avec succès'
+                );
+
+                // ENVOI DE MON MAIL DE CONFIRMATION de création de Partenaire
+                $mail = new Mail();
+                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachés à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour effectuer votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                $mail->send($user->getEmail(), $user->getName(), 'Bienvenue chez STUDI FITNESS, cher nouveau Partenaire !', $content);
+
+                // Notification email
+                $notification = "Votre inscription s'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.";
+
+                return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
+
+            } else {
+                // Notification email
+                $notification = "L'email que vous avez renseigné existe déjà.";
+            }
         }
 
         return $this->renderForm('partner/_new.html.twig', [
              'user' => $user,
              'partner' => $partner,
              'form' => $form,
+             'notification' => $notification
         ]);
     }
 
