@@ -125,7 +125,7 @@ class PartnerController extends AbstractController
 
                 // ENVOI DE MON MAIL DE CONFIRMATION de création de Partenaire
                 $mail = new Mail();
-                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachés à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour effectuer votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour effectuer votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
                 $mail->send($user->getEmail(), $user->getName(), 'Bienvenue chez STUDI FITNESS, cher nouveau Partenaire !', $content);
 
                 // Notification email
