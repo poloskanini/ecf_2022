@@ -45,6 +45,7 @@
                 <th scope="col"></th>
             </tr>
         </thead>
+        
         <tbody>
             {% for partner in partners %}
                 {% for permission in partner.permissions %}
@@ -64,6 +65,8 @@
                         </div>
                     </td>
                     <td data-title="Mail :">{{ partner.user.email }}</td>
+
+
                     <td data-title="Planning :" class="align-middle">
                         {% if permission.isPlanning == true %}
                             <div class="custom-control custom-switch">

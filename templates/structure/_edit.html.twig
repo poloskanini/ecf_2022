@@ -9,9 +9,9 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col col-xl-8">
+        <div class="col col-xl-6">
 
-            <h1 class="my-4 text-center">MODIFIER UNE STRUCTURE</h1>
+            <h1 class="my-4">MODIFIER UNE STRUCTURE</h1>
 
             {{ form_start(form) }}
 
@@ -23,9 +23,9 @@
 
                 <div class="form-group">
                 <p class="m-0">Actif</p>
-                    {{ form_label(form.user.isActive)}}
-                    {{ form_widget(form.user.isActive)}}
-                    {{ form_errors(form.user.isActive)}}
+                    {{ form_label(form.user.isActive) }}
+                    {{ form_widget(form.user.isActive) }}
+                    {{ form_errors(form.user.isActive) }}
                 </div>
 
                 <div class="form-group d-none">
@@ -33,22 +33,22 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form_label(form.user.name)}}
-                    {{ form_widget(form.user.name)}}
-                    {{ form_errors(form.user.name)}}
+                    {{ form_label(form.user.name) }}
+                    {{ form_widget(form.user.name) }}
+                    {{ form_errors(form.user.name) }}
                 </div>
 
                 <div class="form-group">
-                    {{ form_label(form.user.email)}}
-                    {{ form_widget(form.user.email)}}
-                    {{ form_errors(form.user.email)}}
+                    {{ form_label(form.user.email) }}
+                    {{ form_widget(form.user.email) }}
+                    {{ form_errors(form.user.email) }}
                 </div>
 
                 {% if form_form.user.password is defined %}
                     <div class="form-group">
-                        {{ form_label(form.user.password)}}
-                        {{ form_widget(form.user.password)}}
-                        {{ form_errors(form.user.password)}}
+                        {{ form_label(form.user.password) }}
+                        {{ form_widget(form.user.password) }}
+                        {{ form_errors(form.user.password) }}
                     </div>
                 {% endif %}
 
@@ -56,15 +56,15 @@
                 <h4>INFORMATIONS DE LA STRUCTURE</h4>
 
                 <div class="form-group">
-                    {{ form_label(form.structure.partner)}}
-                    {{ form_widget(form.structure.partner)}}
-                    {{ form_errors(form.structure.partner)}}
+                    {{ form_label(form.structure.partner) }}
+                    {{ form_widget(form.structure.partner) }}
+                    {{ form_errors(form.structure.partner) }}
                 </div>
 
                 <div class="form-group">
-                    {{ form_label(form.structure.postalAdress)}}
-                    {{ form_widget(form.structure.postalAdress)}}
-                    {{ form_errors(form.structure.postalAdress)}}
+                    {{ form_label(form.structure.postalAdress) }}
+                    {{ form_widget(form.structure.postalAdress) }}
+                    {{ form_errors(form.structure.postalAdress) }}
                 </div>
                 
 
@@ -81,12 +81,12 @@
                                         <div class="toggle-permissions text-center my-5">
                                             <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
                                                 <div class="row">
-                                                    <div class="col permission newsletter">
+                                                    <div class="col permission planning">
                                                         <div class="form-group {% if partnerPermissions.isPlanning == 0 %} d-none {% endif %} ">
                                                         <i class="fa-solid fa-calendar-days"></i>
                                                         <p class="m-0">Planning</p>
-                                                            {{ form_widget(form.permissions.isPlanning)}}
-                                                            {{ form_errors(form.permissions.isPlanning)}}
+                                                            {{ form_widget(form.permissions.isPlanning) }}
+                                                            {{ form_errors(form.permissions.isPlanning) }}
                                                         </div>                                                
                                                     </div>
 
@@ -94,39 +94,43 @@
                                                         <div class="form-group {% if partnerPermissions.isNewsletter == 0 %} d-none {% endif %} ">
                                                         <i class="fa-solid fa-envelope"></i>
                                                         <p class="m-0">Newsletter</p>
-                                                            {{ form_label(form.permissions.isNewsletter)}}
-                                                            {{ form_widget(form.permissions.isNewsletter)}}
-                                                            {{ form_errors(form.permissions.isNewsletter)}}
+                                                            {{ form_label(form.permissions.isNewsletter) }}
+                                                            {{ form_widget(form.permissions.isNewsletter) }}
+                                                            {{ form_errors(form.permissions.isNewsletter) }}
                                                         </div>                                         
                                                     </div>
 
-                                                    <div class="col permission newsletter">
+                                                    <div class="col permission boissons">
                                                         <div class="form-group {% if partnerPermissions.isBoissons == 0 %} d-none {% endif %} ">
                                                         <i class="fas fa-cocktail"></i>
                                                         <p class="m-0">Boissons</p>
-                                                            {{ form_label(form.permissions.isBoissons)}}
-                                                            {{ form_widget(form.permissions.isBoissons)}}
-                                                            {{ form_errors(form.permissions.isBoissons)}}
+                                                            {{ form_label(form.permissions.isBoissons) }}
+                                                            {{ form_widget(form.permissions.isBoissons) }}
+                                                            {{ form_errors(form.permissions.isBoissons) }}
                                                         </div>
                                                     </div>
 
-                                                    <div class="col permission newsletter">
+                                                    {# {% if partnerPermissions.isBoissons == 0 %}
+                                                        {{ form_row(form.permissions.isBoissons, { 'attr':{'disabled':'disabled'} }) }}
+                                                    {% endif %} #}
+
+                                                    <div class="col permission sms">
                                                         <div class="form-group {% if partnerPermissions.isSms == 0 %} d-none {% endif %} ">
                                                         <i class="fa-solid fa-comment-sms"></i>
                                                         <p class="m-0">SMS</p>
-                                                            {{ form_label(form.permissions.isSms)}}
-                                                            {{ form_widget(form.permissions.isSms)}}
-                                                            {{ form_errors(form.permissions.isSms)}}
+                                                            {{ form_label(form.permissions.isSms) }}
+                                                            {{ form_widget(form.permissions.isSms) }}
+                                                            {{ form_errors(form.permissions.isSms) }}
                                                         </div>
                                                     </div>
 
-                                                    <div class="col permission newsletter">
+                                                    <div class="col permission concours">
                                                         <div class="form-group {% if partnerPermissions.isConcours == 0 %} d-none {% endif %} ">
                                                         <i class="fa-solid fa-trophy"></i>
                                                         <p class="m-0">Concours</p>
-                                                            {{ form_label(form.permissions.isConcours)}}
-                                                            {{ form_widget(form.permissions.isConcours)}}
-                                                            {{ form_errors(form.permissions.isConcours)}}
+                                                            {{ form_label(form.permissions.isConcours) }}
+                                                            {{ form_widget(form.permissions.isConcours) }}
+                                                            {{ form_errors(form.permissions.isConcours) }}
                                                         </div>
                                                     </div>
                                                

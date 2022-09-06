@@ -78,17 +78,18 @@
                         </div>
                     </td>
                     {# <td data-title="Gérant :">{{ structure.user.name }}</td> #}
-                    <td class="text-center">
+                    <td>
                         <i class="fa fa-handshake"></i>
                         {{ structure.partner }}
                     </td>
 
-                    {# {% for partner in partners %}
-            {% for pp in partner.permissions %}    #}
-            
+            {# Je catch les permissions "partenaire" du partner via l'index dans le StructureController ($partnerPermissions) #}
+            {# et je vérifie. Si la fonctionnalité est activée dans les permissions personnalisées de la structure "ET" les permissions partenaire, #}
+            {# alors j'affiche mon toggle switch activé. Sinon, il affiche un toggle switch désactivé #}
+            {% for pp in structure.permissions %}
                     
                     <td data-title="Planning :" class="align-middle ">
-                        {% if permission.isPlanning == true %}
+                        {% if (partnerPermissions.isPlanning == true) and (pp.isPlanning == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
@@ -102,7 +103,7 @@
                     </td>
                     
                     <td data-title="Newsletter :" class="align-middle ">
-                        {% if permission.isNewsletter == true %}
+                        {% if (partnerPermissions.isNewsletter == true) and (pp.isNewsletter == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
@@ -114,8 +115,9 @@
                             </div>
                         {% endif %}
                     </td>
+
                     <td data-title="Boissons :" class="align-middle ">
-                        {% if permission.isBoissons == true %}
+                        {% if (partnerPermissions.isBoissons == true) and (pp.isBoissons == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isBoissons" name="user[isBoissons]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isBoissons"></label>
@@ -129,7 +131,7 @@
                     </td>
                     
                     <td data-title="SMS :" class="align-middle ">
-                        {% if permission.isSms == true %}
+                        {% if (partnerPermissions.isSms == true) and (pp.isSms == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isSms" name="user[isSms]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isSms"></label>
@@ -142,7 +144,7 @@
                         {% endif %}
                     </td>
                     <td data-title="Concours :" class="align-middle  ">
-                        {% if permission.isConcours == true %}
+                        {% if (partnerPermissions.isConcours == true) and (pp.isConcours == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isConcours" name="user[isConcours]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isConcours"></label>
@@ -167,7 +169,7 @@
                         <a class="crud-button link-danger fa fa-trash mx-2 confirm-action" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></a>
                     </td> #}
                 </tr>
-                
+                {% endfor %}
             {% endfor %}
                         {% endfor %}
                         {# {% endfor %}

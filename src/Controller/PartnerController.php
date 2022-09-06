@@ -159,6 +159,7 @@ class PartnerController extends AbstractController
                 $partner->addPermission($userPermissions);
                 $userPermissions->addPartner($partner);
 
+                $em->persist($userPermissions);
                 $em->persist($partnerUser);
                 $em->persist($partner);
                 $em->flush();

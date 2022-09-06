@@ -34,12 +34,46 @@ class StructureController extends AbstractController
 
     // INDEX FOR ALL STRUCTURES IN DB
     #[Route('/', name: 'app_structure_index', methods: ['GET'])]
-    public function index(PartnerRepository $partnerRepository, StructureRepository $structureRepository, PermissionsRepository $permissionsRepository): Response
+    public function index(PartnerRepository $partnerRepository, StructureRepository $structureRepository, PermissionsRepository $permissionsRepository, ManagerRegistry $doctrine): Response
     {
+        //TODO: Début des changements
+        $structures = $structureRepository->findAll();
+        foreach ($structures as $structure) {
+        // Catch le partner qui a l'id ciblée
+        $structureUser = $structure->getUser(); // Catch l'utilisateur relié à ce partner
+        }
+
+        // Je récupère les permissions d'ORIGINE du Partner
+        $partnerPermissions = $structure->getPartner()->getPermissions()->getValues();
+        foreach ($partnerPermissions as $pp) {
+            $permPartnerId = $pp->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+        }
+
+        $partnerPermissions = $doctrine->getRepository(Permissions::class)->find($permPartnerId);
+        // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du partner_permissions.
+
+        // dump($partnerPermissions);
+        // die;
+
+        // Récupérer les permissions du partenaire
+        // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+        $permArray = ($structure->getPermissions()->getValues());
+        foreach ($permArray as $p) {
+            $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+        }
+
+        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId);
+        // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du structure_permissions.
+
+
+        $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
+
+
         return $this->render('structure/index.html.twig', [
             'structures' => $structureRepository->findAll(),
             'partners' => $partnerRepository->findAll(),
             'permissions' => $permissionsRepository->findAll(),
+            'partnerPermissions' => $partnerPermissions
 
         ]);
     }
