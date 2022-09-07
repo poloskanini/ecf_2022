@@ -125,9 +125,9 @@ class PartnerController extends AbstractController
                 );
 
                 //**** ENVOI DU  MAIL DE CONFIRMATION de création de Partenaire ****\\\
-                $mail = new Mail();
-                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
-                $mail->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte PARTENAIRE !', $content);
+                // $mail = new Mail();
+                // $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                // $mail->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte PARTENAIRE !', $content);
                 // ***************************************************************** \\\
 
 
@@ -215,6 +215,7 @@ class PartnerController extends AbstractController
     #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
     public function show(int $id, Request $request, PartnerRepository $partnerRepository, StructureRepository $structureRepository, ManagerRegistry $doctrine, EntityManagerInterface $em)
     {
+
         // $partner = $partnerRepository->findOneBy(['id' => $id]);
         // $partnerUser = $partner->getUser();
         // $items = ['user' => $partnerUser, 'partner' => $partner];
@@ -228,6 +229,7 @@ class PartnerController extends AbstractController
         //     $permissions = $partner->getPermissions();
         // Récupérer les permissions du partenaire
         $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
+        
         $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
         $permArray = ($partner->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
         foreach ($permArray as $p) {
@@ -236,7 +238,8 @@ class PartnerController extends AbstractController
 
         $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
         
-        // dd($userPermissions);
+        
+        $partnerStructures = $partner->getStructures()->getValues();
 
         $items = ['user' => $partnerUser, 'partner' => $partner, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
@@ -254,7 +257,7 @@ class PartnerController extends AbstractController
             'partner' => $partner,
             'form' => $form,
             'permissions' => $userPermissions,
-            'structures' => $structureRepository->findAll(),
+            'partnerStructures' => $partnerStructures
         ]);
     }
  

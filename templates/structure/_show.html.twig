@@ -30,14 +30,14 @@
 
                 <h4>INFORMATIONS DE L'UTILISATEUR</h4>
 
-                <div class="form-group">
+                <div class="form-group pe-none">
                 <p class="m-0">Actif</p>
                     {{ form_label(form.user.isActive)}}
                     {{ form_widget(form.user.isActive)}}
                     {{ form_errors(form.user.isActive)}}
                 </div>
 
-                <div class="form-group">
+                <div class="form-group d-none">
                 {{ form_row(form.user.roles)}}
                 </div>
 
@@ -74,7 +74,7 @@
                     {{ form_errors(form.structure.postalAdress)}}
                 </div>
 
-                {{ dump(permissions)}};
+                {# {{ dump(permissions)}}; #}
                 
 
                 <div class="container-fluid h-100">
@@ -87,7 +87,7 @@
                                             <h4>Fonctionnalités activées</h4>
                                         </div>
                                         <div class="toggle-permissions text-center my-5">
-                                            <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
+                                            <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap pe-none">
                                                 <div class="row">
                                                     <div class="col permission newsletter">
                                                         <div class="form-group">
@@ -103,9 +103,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-envelope"></i>
                                                         <p class="m-0">Newsletter</p>
-                                                            {{ form_label(form.structure.isNewsletter)}}
-                                                            {{ form_widget(form.structure.isNewsletter)}}
-                                                            {{ form_errors(form.structure.isNewsletter)}}
+                                                            {{ form_label(form.permissions.isNewsletter)}}
+                                                            {{ form_widget(form.permissions.isNewsletter)}}
+                                                            {{ form_errors(form.permissions.isNewsletter)}}
                                                         </div>                                         
                                                     </div>
 
@@ -113,9 +113,9 @@
                                                         <div class="form-group">
                                                         <i class="fas fa-cocktail"></i>
                                                         <p class="m-0">Boissons</p>
-                                                            {{ form_label(form.structure.isBoissons)}}
-                                                            {{ form_widget(form.structure.isBoissons)}}
-                                                            {{ form_errors(form.structure.isBoissons)}}
+                                                            {{ form_label(form.permissions.isBoissons)}}
+                                                            {{ form_widget(form.permissions.isBoissons)}}
+                                                            {{ form_errors(form.permissions.isBoissons)}}
                                                         </div>
                                                     </div>
 
@@ -123,9 +123,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-comment-sms"></i>
                                                         <p class="m-0">SMS</p>
-                                                            {{ form_label(form.structure.isSms)}}
-                                                            {{ form_widget(form.structure.isSms)}}
-                                                            {{ form_errors(form.structure.isSms)}}
+                                                            {{ form_label(form.permissions.isSms)}}
+                                                            {{ form_widget(form.permissions.isSms)}}
+                                                            {{ form_errors(form.permissions.isSms)}}
                                                         </div>
                                                     </div>
 
@@ -133,9 +133,9 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-trophy"></i>
                                                         <p class="m-0">Concours</p>
-                                                            {{ form_label(form.structure.isConcours)}}
-                                                            {{ form_widget(form.structure.isConcours)}}
-                                                            {{ form_errors(form.structure.isConcours)}}
+                                                            {{ form_label(form.permissions.isConcours)}}
+                                                            {{ form_widget(form.permissions.isConcours)}}
+                                                            {{ form_errors(form.permissions.isConcours)}}
                                                         </div>
                                                     </div>
                                                

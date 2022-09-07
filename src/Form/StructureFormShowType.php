@@ -22,36 +22,36 @@ class StructureFormShowType extends AbstractType
                 'label' => 'Adresse postale de la structure',
                 'disabled' => true,
             ])
-            ->add('isPlanning', CheckboxType::class, [
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-                'disabled' => true,
-            ])
-            ->add('isNewsletter', CheckboxType::class, [
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-                'disabled' => true,
-            ])
-            ->add('isBoissons', CheckboxType::class, [
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-                'disabled' => true,
-            ])
-            ->add('isSms', CheckboxType::class, [
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-                'disabled' => true,
-            ])
-            ->add('isConcours', CheckboxType::class, [
-                'required' => false,
-                'label' => false,
-                'label_attr' => ['class' => 'switch-custom'],
-                'disabled' => true,
-            ])
+            // ->add('isPlanning', CheckboxType::class, [
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
+            //     'disabled' => true,
+            // ])
+            // ->add('isNewsletter', CheckboxType::class, [
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
+            //     'disabled' => true,
+            // ])
+            // ->add('isBoissons', CheckboxType::class, [
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
+            //     'disabled' => true,
+            // ])
+            // ->add('isSms', CheckboxType::class, [
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
+            //     'disabled' => true,
+            // ])
+            // ->add('isConcours', CheckboxType::class, [
+            //     'required' => false,
+            //     'label' => false,
+            //     'label_attr' => ['class' => 'switch-custom'],
+            //     'disabled' => true,
+            // ])
             ->add('partner', TextType::class, [
                 'disabled' => true,
             ]);

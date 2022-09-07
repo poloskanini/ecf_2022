@@ -152,25 +152,25 @@ class StructureController extends AbstractController
                 );
 
                 //**** ENVOI DU  MAIL DE CONFIRMATION de création de Structure ****\\\
-                $mail1 = new Mail();
-                $mail2 = new Mail();
+                // $mail1 = new Mail();
+                // $mail2 = new Mail();
 
-                // Envoi d'un mail au partenaire rattaché à la structure :
-                $partnerSelectedEmail = $structure->getPartner()->getUser()->getEmail();
-                $partnerSelectedName = $structure->getPartner()->getName();
+                // // Envoi d'un mail au partenaire rattaché à la structure :
+                // $partnerSelectedEmail = $structure->getPartner()->getUser()->getEmail();
+                // $partnerSelectedName = $structure->getPartner()->getName();
 
-                // Contenu
-                $content = "Bonjour " .$partnerSelectedName. "<br/><br/> Félicitations ! Une nouvelle STRUCTURE située à ".$structure->getPostalAdress()." a été ajoutée et liée à votre compte PARTENAIRE. <br/> Son email de connexion est " .$user->getEmail().".<br><br/> <br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                // // Contenu
+                // $content = "Bonjour " .$partnerSelectedName. "<br/><br/> Félicitations ! Une nouvelle STRUCTURE située à ".$structure->getPostalAdress()." a été ajoutée et liée à votre compte PARTENAIRE. <br/> Son email de connexion est " .$user->getEmail().".<br><br/> <br/><br/><br/> A très bientôt chez STUDI FITNESS !";
 
-                // Envoi
-                $mail1->send($partnerSelectedEmail, $user->getName(), 'Une nouvelle structure pour votre franchise a été ajoutée !', $content);
+                // // Envoi
+                // $mail1->send($partnerSelectedEmail, $user->getName(), 'Une nouvelle structure pour votre franchise a été ajoutée !', $content);
 
-                // Envoi d'un mail à la structure :
-                // Contenu :
-                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte STRUCTURE pour votre établissement à l'adresse : ".$structure->getPostalAdress(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos informations sur votre structure et le partenaire auquel vous êtes rattachée.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                // // Envoi d'un mail à la structure :
+                // // Contenu :
+                // $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte STRUCTURE pour votre établissement à l'adresse : ".$structure->getPostalAdress(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos informations sur votre structure et le partenaire auquel vous êtes rattachée.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
 
-                // Envoi
-                $mail2->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte STRUCTURE !', $content);
+                // // Envoi
+                // $mail2->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte STRUCTURE !', $content);
                 // ***************************************************************** \\\
 
 
@@ -215,10 +215,10 @@ class StructureController extends AbstractController
         foreach ($permArray as $p) {
             $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
         }
-
+       
         $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId);
         // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du structure_permissions.
-
+      
 
         $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
@@ -242,15 +242,14 @@ class StructureController extends AbstractController
                 // $partner->setIsPlanning($userPermissions->isIsPlanning());
     
                 // Je déclare que ma structure a de nouvelles permissions et que cet objet permissions a une nouvelle structure
-                $em->persist($userPermissions);
-                $em->persist($partnerPermissions);
-                $em->persist($structureUser);
-                $em->persist($structure);
 
                 $structure->addPermission($userPermissions);
                 $userPermissions->addStructure($structure);
 
-
+                $em->persist($userPermissions);
+                // $em->persist($partnerPermissions);
+                $em->persist($structureUser);
+                $em->persist($structure);
                 // dump($form->getData());
                 // die;
 
@@ -279,36 +278,55 @@ class StructureController extends AbstractController
 
     // SHOW A STRUCTURE
     #[Route('/show/{id}', name: 'app_structure_show', methods: ['GET'])]
+
+    //TODO : Début des modifs
     public function show(int $id, Request $request, StructureRepository $structureRepository, ManagerRegistry $doctrine,): Response
     {
-        $structure = $structureRepository->findOneBy(['id' => $id]);
-        $structureUser = $structure->getUser();
-        $permArray = ($structure->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+        $structure = $structureRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
+        $structureUser = $structure->getUser(); // Catch l'utilisateur relié à ce partner
+
+        // Je récupère les permissions d'ORIGINE du Partner
+        $partnerPermissions = $structure->getPartner()->getPermissions()->getValues();
+        foreach ($partnerPermissions as $pp) {
+            $permPartnerId = $pp->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+        }
+
+        $partnerPermissions = $doctrine->getRepository(Permissions::class)->find($permPartnerId);
+        // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du partner_permissions.
+
+        // dump($partnerPermissions);
+        // die;
+
+        // Récupérer les permissions du partenaire
+        // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+        $permArray = ($structure->getPermissions()->getValues());
         foreach ($permArray as $p) {
             $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
         }
+       
+        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId);
+        // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du structure_permissions.
+      
 
-        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
+        $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
-        dd($userPermissions);
-
-
-        $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions];
-
-        $form = $this->createFormBuilder($items)
+        $form = $this->createFormBuilder($items) // Formulaire regroupant les 2 entités
             ->add('user', UserShowType::class, [
                 'isEdit' => true,
             ])
             ->add('structure', StructureFormShowType::class)
             ->add('permissions', PermissionsType::class)
+            // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
             ->getForm();
 
             $form->handleRequest($request);
+   
 
         return $this->renderForm('structure/_show.html.twig', [
             'structure' => $structure,
             'form' => $form,
-            'permissions' => $userPermissions
+            'permissions' => $userPermissions,
+            'partnerPermissions' => $partnerPermissions
         ]);
     }
 
