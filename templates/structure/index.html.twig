@@ -89,12 +89,14 @@
             {# Je catch les permissions "partenaire" du partner via l'index dans le StructureController ($partnerPermissions) #}
             {# et je vérifie. Si la fonctionnalité est activée dans les permissions personnalisées de la structure "ET" les permissions partenaire, #}
             {# alors j'affiche mon toggle switch activé. Sinon, il affiche un toggle switch désactivé #}
+
+            
             {% for pp in structure.permissions %}
             {# {{ dump(pp)}}
             {{ dump(partnerPermissions)}} #}
                     
                     <td data-title="Planning :" class="align-middle ">
-                        {% if (partnerPermissions.isPlanning == true) or (pp.isPlanning == true) %}
+                        {% if (partnerPermissions.isPlanning == true) and (pp.isPlanning == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
@@ -108,7 +110,7 @@
                     </td>
                     
                     <td data-title="Newsletter :" class="align-middle ">
-                        {% if (partnerPermissions.isNewsletter == true) or (pp.isNewsletter == true) %}
+                        {% if (partnerPermissions.isNewsletter == true) and (pp.isNewsletter == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isNewsletter" name="user[isNewsletter]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isNewsletter"></label>
@@ -122,7 +124,7 @@
                     </td>
 
                     <td data-title="Boissons :" class="align-middle ">
-                        {% if (partnerPermissions.isBoissons == true) or (pp.isBoissons == true) %}
+                        {% if (partnerPermissions.isBoissons == true) and (pp.isBoissons == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isBoissons" name="user[isBoissons]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isBoissons"></label>
@@ -136,7 +138,7 @@
                     </td>
                     
                     <td data-title="SMS :" class="align-middle ">
-                        {% if (partnerPermissions.isSms == true) or (pp.isSms == true) %}
+                        {% if (partnerPermissions.isSms == true) and (pp.isSms == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isSms" name="user[isSms]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isSms"></label>
@@ -149,7 +151,7 @@
                         {% endif %}
                     </td>
                     <td data-title="Concours :" class="align-middle  ">
-                        {% if (partnerPermissions.isConcours == true) or (pp.isConcours == true) %}
+                        {% if (partnerPermissions.isConcours == true) and (pp.isConcours == true) %}
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" id="user_isConcours" name="user[isConcours]" class="custom-control-input" value="1" checked disabled>
                                 <label class="switch-custom custom-control-label" for="user_isConcours"></label>

@@ -243,6 +243,7 @@ class StructureController extends AbstractController
     
                 // Je déclare que ma structure a de nouvelles permissions et que cet objet permissions a une nouvelle structure
                 $em->persist($userPermissions);
+                $em->persist($partnerPermissions);
                 $em->persist($structureUser);
                 $em->persist($structure);
 

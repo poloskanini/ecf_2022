@@ -135,7 +135,6 @@ class PartnerController extends AbstractController
 
             } else {
                 // Notification email si l'utilisateur est déja enregistré
-                $notification = "L'email que vous avez renseigné existe déjà.";
             }
         }
 
