@@ -74,6 +74,9 @@
                     {{ form_errors(form.structure.postalAdress)}}
                 </div>
 
+                {{ dump(permissions)}};
+                
+
                 <div class="container-fluid h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col col-xl-10">
@@ -90,8 +93,8 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-calendar-days"></i>
                                                         <p class="m-0">Planning</p>
-                                                            {{ form_widget(form.structure.isPlanning)}}
-                                                            {{ form_errors(form.structure.isPlanning)}}
+                                                            {{ form_widget(form.permissions.isPlanning)}}
+                                                            {{ form_errors(form.permissions.isPlanning)}}
                                                             
                                                         </div>                                                
                                                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Partner;
@@ -31,6 +32,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[IsGranted('ROLE_ADMIN')]
 class StructureController extends AbstractController
 {
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     // INDEX FOR ALL STRUCTURES IN DB
     #[Route('/', name: 'app_structure_index', methods: ['GET'])]
@@ -82,6 +87,7 @@ class StructureController extends AbstractController
     #[Route('/new', name: 'app_structure_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository, StructureRepository $structureRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
     {
+        $notification = null;
 
         $user = new User(); // J'instancie ma classe User()
         $structure = new Structure(); // J'instancie ma classe User()
@@ -92,64 +98,95 @@ class StructureController extends AbstractController
         $form->handleRequest($request); // Écoute la requête entrante
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             // Injecte dans mon objet User() toutes les données qui sont récupérées du formulaire
             $user = $form->getData();
-            
-            // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
-            $password = $passwordHasher->hashPassword($user, $user->getPassword());
-            // Je réinjecte $password qui est crypté dans l'objet User()
-            $user->setPassword($password);
 
-            // Je récupère les données non mappées de postalAdress et les injecte dans le setPostalAdress de ma structure.
-            $structure->setPostalAdress($form->get('postalAdress')->getData());
-            // Je définis que la nouvelle donnée aura par défaut le ['ROLE_STRUCTURE]
-            $user->setRoles(['ROLE_STRUCTURE']);
+            // Vérifier que mon partner n'est pas déjà présent en BDD
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
-            //Je définis que la structure de mon User est $structure
-            $structure->setUser($user);
-            $user->setStructure($structure);
+            if (!$search_email) {
+                
+                // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
+                $password = $passwordHasher->hashPassword($user, $user->getPassword());
+                // Je réinjecte $password qui est crypté dans l'objet User()
+                $user->setPassword($password);
 
-            // Je définis que le partenaire de ma structure est la data que contient "id"
-            $structure->setPartner($form->get('id')->getData());
+                // Je récupère les données non mappées de postalAdress et les injecte dans le setPostalAdress de ma structure.
+                $structure->setPostalAdress($form->get('postalAdress')->getData());
+                // Je définis que la nouvelle donnée aura par défaut le ['ROLE_STRUCTURE]
+                $user->setRoles(['ROLE_STRUCTURE']);
 
-            // dump($structure->getPartner()->getPermissions()->getValues());
-            // die;
-            // Récupérer les permissions du partenaire
-            $permArray = ($structure->getPartner()->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
-            foreach ($permArray as $p) {
-                $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+                //Je définis que la structure de mon User est $structure
+                $structure->setUser($user);
+                $user->setStructure($structure);
+
+                // Je définis que le partenaire de ma structure est la data que contient "id"
+                $structure->setPartner($form->get('id')->getData());
+
+                // dump($structure->getPartner()->getPermissions()->getValues());
+                // die;
+                // Récupérer les permissions du partenaire
+                $permArray = ($structure->getPartner()->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+                foreach ($permArray as $p) {
+                    $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+                }
+
+                $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
+
+                $permissions->setIsPlanning($userPermissions->isIsPlanning());
+                $permissions->setIsNewsletter($userPermissions->isIsNewsletter());
+                $permissions->setIsBoissons($userPermissions->isIsBoissons());
+                $permissions->setIsSms($userPermissions->isIsSms());
+                $permissions->setIsConcours($userPermissions->isIsConcours());
+
+                $structure->addPermission($permissions);
+                $permissions->addStructure($structure);
+
+                $userRepository->add($user, true);
+                $structureRepository->add($structure, true);
+
+                $this->addFlash(
+                    'success',
+                    'La structure "' .$user->getName(). '" a été ajoutée avec succès. Elle est rattachée au partenaire "' .$structure->getPartner(). '".'
+                );
+
+                //**** ENVOI DU  MAIL DE CONFIRMATION de création de Structure ****\\\
+                $mail1 = new Mail();
+                $mail2 = new Mail();
+
+                // Envoi d'un mail au partenaire rattaché à la structure :
+                $partnerSelectedEmail = $structure->getPartner()->getUser()->getEmail();
+                $partnerSelectedName = $structure->getPartner()->getName();
+
+                // Contenu
+                $content = "Bonjour " .$partnerSelectedName. "<br/><br/> Félicitations ! Une nouvelle STRUCTURE située à ".$structure->getPostalAdress()." a été ajoutée et liée à votre compte PARTENAIRE. <br/> Son email de connexion est " .$user->getEmail().".<br><br/> <br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+
+                // Envoi
+                $mail1->send($partnerSelectedEmail, $user->getName(), 'Une nouvelle structure pour votre franchise a été ajoutée !', $content);
+
+                // Envoi d'un mail à la structure :
+                // Contenu :
+                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte STRUCTURE pour votre établissement à l'adresse : ".$structure->getPostalAdress(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos informations sur votre structure et le partenaire auquel vous êtes rattachée.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+
+                // Envoi
+                $mail2->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte STRUCTURE !', $content);
+                // ***************************************************************** \\\
+
+
+                return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
+
+            } else {
+                // Notification email si l'utilisateur est déja enregistré
+                $notification = "L'email que vous avez renseigné existe déjà.";
             }
-
-            $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
-            
-            // Pour envoi du mail au partenaire rattaché à la structure :
-            // $partnerSelectedEmail = $structure->getPartner()->getUser()->getEmail();
-            
-
-            $permissions->setIsPlanning($userPermissions->isIsPlanning());
-            $permissions->setIsNewsletter($userPermissions->isIsNewsletter());
-            $permissions->setIsBoissons($userPermissions->isIsBoissons());
-            $permissions->setIsSms($userPermissions->isIsSms());
-            $permissions->setIsConcours($userPermissions->isIsConcours());
-
-            $structure->addPermission($permissions);
-            $permissions->addStructure($structure);
-
-            $userRepository->add($user, true);
-            $structureRepository->add($structure, true);
-
-            $this->addFlash(
-                'success',
-                'La structure "' .$user->getName(). '" a été ajoutée avec succès. Elle est rattachée au partenaire "' .$structure->getPartner(). '".'
-            );
-
-            return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->renderForm('structure/_new.html.twig', [
-             'user' => $user,
-             'structure' => $structure,
-             'form' => $form,
+            'user' => $user,
+            'structure' => $structure,
+            'form' => $form,
+            'notification' => $notification,
         ]);
     }
 
@@ -241,23 +278,36 @@ class StructureController extends AbstractController
 
     // SHOW A STRUCTURE
     #[Route('/show/{id}', name: 'app_structure_show', methods: ['GET'])]
-    public function show(int $id, StructureRepository $structureRepository): Response
+    public function show(int $id, Request $request, StructureRepository $structureRepository, ManagerRegistry $doctrine,): Response
     {
         $structure = $structureRepository->findOneBy(['id' => $id]);
         $structureUser = $structure->getUser();
-        $items = ['user' => $structureUser, 'structure' => $structure];
+        $permArray = ($structure->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+        foreach ($permArray as $p) {
+            $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+        }
+
+        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
+
+        dd($userPermissions);
+
+
+        $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions];
 
         $form = $this->createFormBuilder($items)
-            ->add('user', UserShowType::class)
+            ->add('user', UserShowType::class, [
+                'isEdit' => true,
+            ])
             ->add('structure', StructureFormShowType::class)
-            // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
+            ->add('permissions', PermissionsType::class)
             ->getForm();
 
-            // $form->handleRequest($request);
+            $form->handleRequest($request);
 
         return $this->renderForm('structure/_show.html.twig', [
             'structure' => $structure,
             'form' => $form,
+            'permissions' => $userPermissions
         ]);
     }
 

@@ -10,6 +10,15 @@ function activeLink() {
 
 list.forEach((item) => item.addEventListener("mouseover", activeLink));
 
+//OnClick Function pour ajouter la closse hovered à mon lien cliqué
+function activatedLink() {
+  list.forEach((item) => {
+    item.classList.add("hovered");
+  })
+}
+list.forEach((item) => item.addEventListener("onclick", activatedLink));
+
+
 // Toggle menu
 const toggle = document.querySelector(".toggle");
 const navigation = document.querySelector(".navigation");

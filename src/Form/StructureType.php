@@ -97,6 +97,7 @@ class StructureType extends AbstractType
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom is-active-btn'],
                 'required' => false,
+                'attr' => array('checked' => 'checked')
             ]);
 
             // A insérer dans le StructureType, qui est relié au StructureController

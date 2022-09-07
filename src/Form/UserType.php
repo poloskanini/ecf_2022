@@ -71,6 +71,7 @@ class UserType extends AbstractType
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom is-active-btn'],
                 'required' => false,
+                'attr' => array('checked'   => 'checked')
             ]);
 
             // Affichage conditionnel du Password.

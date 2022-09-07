@@ -107,8 +107,9 @@ Pour démarrer l'application
 | Email | Mot de passe     | Role                       | Description |
 | :-------- | :------- | :-------------------------------- | -- |
 | `admin@admin.fr`      | `admin` | ADMIN | Administrateur principal de l'application|
-| `orangebleuedunkerque@partenaire.fr`      | `dunkerque` | PARTENAIRE | Directeur de l'Orange bleue de Dunkerque|
+| `dunkerque@partenaire.fr`      | `dunkerque` | PARTENAIRE | Directeur de l'Orange bleue de Dunkerque|
 | `ruedusable@structure.fr`      | `sable` | STRUCTURE | Gérant de la Structure de rue du sable à Dunkerque (club de Gym)|
+| `ruedupelican@structure.fr`      | `pelican` | STRUCTURE | Gérant de la Structure de rue du pelican à Dunkerque (club de Gym)|
 | `inactif@inactif.fr`      | `inactif` | STRUCTURE | Test d'un compte désactivé par l'admin|
 
 > Chaque PARTENAIRE (franchise) peut posséder plusieurs STRUCTURES (clubs de gym), et leur donne par défaut un nombre de permissions (telles qu'un outil de planning, newsletters, SMS, etc...)

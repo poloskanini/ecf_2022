@@ -80,6 +80,7 @@ class PartnerController extends AbstractController
         $form->handleRequest($request); // Écoute la requête entrante
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             // Injecte dans mon objet User() toutes les données qui sont récupérées du formulaire
             $user = $form->getData();
 
@@ -123,18 +124,17 @@ class PartnerController extends AbstractController
                     'Le partenaire "' .$user->getName(). '" a été ajouté avec succès'
                 );
 
-                // ENVOI DE MON MAIL DE CONFIRMATION de création de Partenaire
+                //**** ENVOI DU  MAIL DE CONFIRMATION de création de Partenaire ****\\\
                 $mail = new Mail();
-                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour effectuer votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
-                $mail->send($user->getEmail(), $user->getName(), 'Bienvenue chez STUDI FITNESS, cher nouveau Partenaire !', $content);
+                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                $mail->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte PARTENAIRE !', $content);
+                // ***************************************************************** \\\
 
-                // Notification email
-                $notification = "Votre inscription s'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte.";
 
                 return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
 
             } else {
-                // Notification email
+                // Notification email si l'utilisateur est déja enregistré
                 $notification = "L'email que vous avez renseigné existe déjà.";
             }
         }
@@ -214,7 +214,7 @@ class PartnerController extends AbstractController
 
     // SHOW A PARTNER
     #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
-    public function show(int $id,Request $request, PartnerRepository $partnerRepository, StructureRepository $structureRepository, ManagerRegistry $doctrine, EntityManagerInterface $em)
+    public function show(int $id, Request $request, PartnerRepository $partnerRepository, StructureRepository $structureRepository, ManagerRegistry $doctrine, EntityManagerInterface $em)
     {
         // $partner = $partnerRepository->findOneBy(['id' => $id]);
         // $partnerUser = $partner->getUser();

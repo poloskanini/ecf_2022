@@ -71,20 +71,28 @@ class PartnerType extends AbstractType
                     'label' => 'Mot de passe',
                     'attr' => [
                         'placeholder' => 'Merci de saisir votre mot de passe'
-                    ]
+                    ],
+                    // 'row_attr' => [
+                    //     'class' => 'col-6', 
+                    // ]
                 ],
                 'second_options' => [
                     'label' => 'Confirmez votre mot de passe',
                     'attr' => [
                         'placeholder' => 'Merci de saisir un mot de passe'
-                    ]
+                    ],
+                    // 'row_attr' => [
+                    //     'class' => 'col-6', 
+                    // ]
                 ],
+                
             ])
 
             ->add('isActive', CheckboxType::class, [
                 'label' => false,
                 'label_attr' => ['class' => 'switch-custom is-active-btn'],
                 'required' => false,
+                'attr' => array('checked' => 'checked')
             ])
             
             ->add('partnerName', TextType::class, [
