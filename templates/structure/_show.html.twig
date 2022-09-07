@@ -72,12 +72,9 @@
                     {{ form_label(form.structure.postalAdress)}}
                     {{ form_widget(form.structure.postalAdress)}}
                     {{ form_errors(form.structure.postalAdress)}}
-                </div>
+                </div>                
 
-                {# {{ dump(permissions)}}; #}
-                
-
-                <div class="container-fluid h-100">
+                <div class="container-fluid h-100 d-none">
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col col-xl-10">
                             <div class="card" style="border-radius: 1rem;">
@@ -93,6 +90,7 @@
                                                         <div class="form-group">
                                                         <i class="fa-solid fa-calendar-days"></i>
                                                         <p class="m-0">Planning</p>
+                                                            {{ form_label(form.permissions.isPlanning)}}
                                                             {{ form_widget(form.permissions.isPlanning)}}
                                                             {{ form_errors(form.permissions.isPlanning)}}
                                                             
