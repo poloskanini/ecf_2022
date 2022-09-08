@@ -240,6 +240,7 @@ class PartnerController extends AbstractController
         
         
         $partnerStructures = $partner->getStructures()->getValues();
+     
 
         $items = ['user' => $partnerUser, 'partner' => $partner, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 

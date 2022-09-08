@@ -54,6 +54,11 @@ class AppFixtures extends Fixture
         $orangeUser4 = new User();
         $orangeStructure4 = new Structure();
         $orangeStructure4Permissions = new Permissions();
+
+        //?  USER 5 (PARTENAIRE)
+        $orangeUser5 = new User();
+        $orangePartner5 = new Partner();
+        $orangePartner5Permissions = new Permissions();
  
         // USER 1
         $orangeUser1
@@ -116,6 +121,20 @@ class AppFixtures extends Fixture
             ->addPermission($orangeStructure4Permissions)
         ;
 
+        // USER 5
+        $orangeUser5
+            ->setName('Directeur Orange Bleue CALAIS')
+            ->setEmail('calais@partenaire.fr')
+            ->setRoles(['ROLE_PARTENAIRE'])
+            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
+        ;
+        // PARTNER 5 (rattaché à User 5)
+        $orangePartner5
+            ->setName('L\'orange Bleue Calais')
+            ->setUser($orangeUser5)
+            ->addPermission($orangePartner5Permissions)
+        ;
+
         // PERMISSIONS PARTNER 1
         $orangePartnerPermissions
             ->setIsPlanning('1')
@@ -123,6 +142,15 @@ class AppFixtures extends Fixture
             ->setIsBoissons('1')
             ->setIsSms('0')
             ->setIsConcours('0')
+        ;
+
+        // PERMISSIONS PARTNER 5
+        $orangePartner5Permissions
+            ->setIsPlanning('0')
+            ->setIsNewsletter('0')
+            ->setIsBoissons('1')
+            ->setIsSms('')
+            ->setIsConcours('1')
         ;
 
         // PERMISSIONS STRUCTURE 2
@@ -152,20 +180,32 @@ class AppFixtures extends Fixture
             ->setIsConcours($orangePartnerPermissions->isIsConcours())
         ;
 
+        // PERMISSIONS PARTENAIRE 5
+        $orangePartner5Permissions
+            ->setIsPlanning($orangePartner5Permissions->isIsPlanning())
+            ->setIsNewsletter($orangePartner5Permissions->isIsNewsletter())
+            ->setIsBoissons($orangePartner5Permissions->isIsBoissons())
+            ->setIsSms($orangePartner5Permissions->isIsSms())
+            ->setIsConcours($orangePartner5Permissions->isIsConcours())
+        ;
+
+
         // Commits
         $manager->persist($adminUser);
         $manager->persist($orangeUser1);
         $manager->persist($orangeUser2);
         $manager->persist($orangeUser3);
         $manager->persist($orangeUser4);
+        $manager->persist($orangeUser5);
         $manager->persist($orangePartner1);
+        $manager->persist($orangePartner5);
         $manager->persist($orangeStructure2);
         $manager->persist($orangeStructure3);
         $manager->persist($orangeStructure4);
         $manager->persist($orangePartnerPermissions);
         $manager->persist($orangeStructure3Permissions);
         $manager->persist($orangeStructure4Permissions);
-
+        $manager->persist($orangePartner5Permissions);
 
         // Push
         $manager->flush();
