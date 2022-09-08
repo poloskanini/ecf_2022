@@ -25,7 +25,6 @@ class HomeController extends AbstractController
             'partners' => $partnerRepository->findAll(),
             'structures' => $structureRepository->findAll(),
             'permissions' => $permissionsRepository->findAll(),
-
         ]);
     }
 }

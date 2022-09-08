@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ResetPassword;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;

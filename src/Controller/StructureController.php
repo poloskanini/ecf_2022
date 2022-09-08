@@ -152,25 +152,27 @@ class StructureController extends AbstractController
                 );
 
                 //**** ENVOI DU  MAIL DE CONFIRMATION de création de Structure ****\\\
-                // $mail1 = new Mail();
-                // $mail2 = new Mail();
+                $resetPasswordUrl = $this->generateUrl('app_reset_password');
 
-                // // Envoi d'un mail au partenaire rattaché à la structure :
-                // $partnerSelectedEmail = $structure->getPartner()->getUser()->getEmail();
-                // $partnerSelectedName = $structure->getPartner()->getName();
+                $mail1 = new Mail();
+                $mail2 = new Mail();
 
-                // // Contenu
-                // $content = "Bonjour " .$partnerSelectedName. "<br/><br/> Félicitations ! Une nouvelle STRUCTURE située à ".$structure->getPostalAdress()." a été ajoutée et liée à votre compte PARTENAIRE. <br/> Son email de connexion est " .$user->getEmail().".<br><br/> <br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                // Envoi d'un mail au partenaire rattaché à la structure :
+                $partnerSelectedEmail = $structure->getPartner()->getUser()->getEmail();
+                $partnerSelectedName = $structure->getPartner()->getName();
 
-                // // Envoi
-                // $mail1->send($partnerSelectedEmail, $user->getName(), 'Une nouvelle structure pour votre franchise a été ajoutée !', $content);
+                // Contenu
+                $content = "Bonjour " .$partnerSelectedName. "<br/><br/> Félicitations ! Une nouvelle STRUCTURE située à ".$structure->getPostalAdress()." a été ajoutée et liée à votre compte PARTENAIRE. <br/> Son email de connexion est " .$user->getEmail().". Elle dispose donc par défaut des mêmes permissions auxquelles votre contrat vous donne droit, et pourra choisir de les activer ou désactiver selon ses souhaits. <br><br/> <br/><br/><br/> A très bientôt chez STUDI FITNESS !";
 
-                // // Envoi d'un mail à la structure :
-                // // Contenu :
-                // $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte STRUCTURE pour votre établissement à l'adresse : ".$structure->getPostalAdress(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos informations sur votre structure et le partenaire auquel vous êtes rattachée.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                // Envoi
+                $mail1->send($partnerSelectedEmail, $user->getName(), 'Une nouvelle structure pour votre franchise a été ajoutée !', $content);
 
-                // // Envoi
-                // $mail2->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte STRUCTURE !', $content);
+                // Envoi d'un mail à la structure :
+                // Contenu :
+                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte STRUCTURE pour votre établissement à l'adresse : ".$structure->getPostalAdress(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos informations sur votre structure et le partenaire auquel vous êtes rattachée.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en <a href='".$resetPasswordUrl."'> cliquant ici </a> .<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+
+                // Envoi
+                $mail2->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte STRUCTURE !', $content);
                 // ***************************************************************** \\\
 
 
@@ -261,7 +263,7 @@ class StructureController extends AbstractController
     
                 $this->addFlash(
                     'success',
-                    'L\'utilisateur "' .$structureUser->getName(). '" a été modifié avec succès'
+                    'La structure "' .$structureUser->getName(). '" a été modifiée avec succès'
                 );
     
                 return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
@@ -349,7 +351,7 @@ class StructureController extends AbstractController
             
             $this->addFlash(
                 'danger',
-                'L\'utilisateur "' .$structure->getPostalAdress(). '" a été supprimé avec succès'
+                'La structure dont l\'adresse postale est "' .$structure->getPostalAdress(). '" a été supprimée avec succès'
         );
 
         return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);

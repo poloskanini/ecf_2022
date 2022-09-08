@@ -41,6 +41,12 @@
         </div>
     {% endif %}
 
+    {% for message in app.flashes('notice') %}
+    <div class="alert alert-info alert-dismissible fade show m-0" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+
     <section class="section-login">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">

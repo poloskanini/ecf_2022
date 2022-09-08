@@ -36,8 +36,7 @@ class SearchType extends AbstractType
       'attr' => [
         'class' => 'btn-block btn-sm btn-secondary'
       ]
-    ]
-    )
+    ])
     
     ;
   }

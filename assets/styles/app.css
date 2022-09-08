@@ -52,6 +52,14 @@ body, html {
   border-bottom-left-radius: 1rem;
 }
 
+.left-picture-reset-confirm {
+  background-image: url("../../assets/images/57813092_m.jpg");
+  background-size: cover;
+  background-position: center;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
 .card {
   border: none;
   box-shadow: 0 1px 1px rgb(0 0 0 / 15%), 0 2px 2px rgb(0 0 0 / 15%), 0 4px 4px rgb(0 0 0 / 15%), 0 8px 8px rgb(0 0 0 / 15%);

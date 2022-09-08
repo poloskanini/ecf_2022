@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ResetPasswordController extends AbstractController
 {
@@ -63,7 +64,7 @@ class ResetPasswordController extends AbstractController
     }
 
     #[Route('/update-password/{token}', name: 'app_update_password')]
-    public function update(Request $request, $token): Response
+    public function update(Request $request, $token, UserPasswordHasherInterface $passwordHasher): Response
     {
         $reset_password = $this->entityManager->getRepository(ResetPassword::class)->findOneByToken($token);
 
@@ -85,18 +86,21 @@ class ResetPasswordController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $new_pwd = $form->get('new_password')->getData();
 
-        }
+            // Encodage des mots de passe
+            $password = $passwordHasher->hashPassword($reset_password->getUser(), $new_pwd);
+            // Je réinjecte $password qui est crypté dans l'objet User()
+            $reset_password->getUser()->setPassword($password);
+            // Flush en base de données
+            $this->entityManager->flush();
+            // Redirection de l'utilisateur vers la page de connexion
+            $this->addFlash('notice', 'Votre mot de passe a bien été mis à jour.');
+            return $this->redirectToRoute('app_login');
+        };
 
         return $this->render('reset_password/update.html.twig', [
             'form' => $form->createView()
         ]);
-
-        // Encodage des mots de passe
-        // Flush en base de données
-        // Redirection de l'utilisateur vers la page de connexion
-
-        dd($reset_password);
-
     }
 }

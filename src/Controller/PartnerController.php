@@ -53,7 +53,7 @@ class PartnerController extends AbstractController
 
             $users = $userRepository->findWithSearch($search);
             // $users = $this->entityManager->getRepository(User::class)->findWithSearch($search);
-            dump($users);
+            
 
 
         return $this->render('partner/index.html.twig', [
@@ -125,9 +125,11 @@ class PartnerController extends AbstractController
                 );
 
                 //**** ENVOI DU  MAIL DE CONFIRMATION de création de Partenaire ****\\\
-                // $mail = new Mail();
-                // $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en cliquant sur le bouton ci-dessous pour votre première connexion.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
-                // $mail->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte PARTENAIRE !', $content);
+                $resetPasswordUrl = $this->generateUrl('app_reset_password');
+                $mail = new Mail();
+                
+                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en <a href='".$resetPasswordUrl."'> cliquant ici </a>.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                $mail->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte PARTENAIRE !', $content);
                 // ***************************************************************** \\\
 
 

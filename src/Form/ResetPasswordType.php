@@ -16,7 +16,6 @@ class ResetPasswordType extends AbstractType
         $builder
             ->add('new_password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'mapped' => false,
                 'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
                 'label' => 'Mon nouveau mot de passe',
                 'required' => true,
