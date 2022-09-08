@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Entity\ResetPassword;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -39,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Structure $structure;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ResetPassword::class, orphanRemoval: true)]
+    private Collection $resetPasswords;
 
     public function getId(): ?int
     {

@@ -13,7 +13,7 @@ class ResetPassword
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'resetPasswords')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

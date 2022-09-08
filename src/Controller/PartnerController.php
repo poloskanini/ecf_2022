@@ -128,7 +128,40 @@ class PartnerController extends AbstractController
                 $resetPasswordUrl = $this->generateUrl('app_reset_password');
                 $mail = new Mail();
                 
-                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en <a href='".$resetPasswordUrl."'> cliquant ici </a>.<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte PARTENAIRE pour votre établissement ".$partner->getName(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos STRUCTURES (clubs) rattachées à votre établissement.<br/><br/>";
+
+                $content .= "<hr>";
+                $content .= "<h3>Vos informations de connexion :";
+                $content .= "<h5>Email de connexion : " .$user->getEmail();
+                $content .= "<h5>Nom de l'utilisateur : " .$user->getName();
+                $content .= "<h5>Nom de votre franchise : " .$partner->getName();
+                $content .= "<hr>";
+                $content .= "<h3>Vos fonctionnalités activées :";
+
+                // Envoi des permissions
+                if ($permissions->isIsPlanning() == true) {
+                    $content .=  "<h5>Planning : OK";
+                }
+                if ($permissions->isIsNewsletter() == true) {
+                    $content .=  "<h5>Newsletter : OK";
+                }
+                if ($permissions->isIsBoissons() == true) {
+                    $content .=  "<h5>Boissons : OK";
+                }
+                if ($permissions->isIsSms() == true) {
+                    $content .=  "<h5>SMS : OK";
+                }
+                if ($permissions->isIsConcours() == true) {
+                    $content .=  "<h5>Concours : OK";
+                }
+
+                $content .= "<hr> <br/><br/><br/>";
+                $content .= "Votre email de connexion est " .$user->getEmail(). ".<br><br>";
+                $content .= "Votre mot de passe est " .$user->getPassword(). "<br><br/>";
+                $content .= "<h3>Ce mot de passe est temporaire, vous pouvez le redéfinir en <a href='".$resetPasswordUrl."'> CLIQUANT ICI </a></h3><br/><br/><br/>";
+
+                $content .= "A très bientôt chez STUDI FITNESS !";
+
                 $mail->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte PARTENAIRE !', $content);
                 // ***************************************************************** \\\
 
@@ -162,8 +195,7 @@ class PartnerController extends AbstractController
         }
 
         $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
-        
-        // dd($userPermissions);
+
 
         $items = ['user' => $partnerUser, 'partner' => $partner, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
@@ -202,6 +234,42 @@ class PartnerController extends AbstractController
                     'success',
                     'Le partenaire "' .$partnerUser->getName(). '" a été modifié avec succès'
                 );
+
+                //**** ENVOI DU MAIL DE MODIFICATION de PARTENAIRE ****\\\
+                $mail = new Mail();
+                
+                $content = "Bonjour " .$partnerUser->getName(). "<br/><br/>";
+                $content .= "Suite à votre demande, les informations de votre partenaire ".$partner->getName(). " ont été mises à jour par un administrateur STUDI FITNESS. Vous les retrouverez ci-dessous :<br/><br/>";
+                $content .= "<hr>";
+                $content .= "<h3>Vos informations de connexion :";
+                $content .= "<h5>Email de connexion : " .$partnerUser->getEmail();
+                $content .= "<h5>Nom de l'utilisateur : " .$partnerUser->getName();
+                $content .= "<h5>Nom de votre franchise : " .$partner->getName();
+                $content .= "<hr>";
+                $content .= "<h3>Vos fonctionnalités activées :";
+
+                // Envoi des permissions
+                if ($userPermissions->isIsPlanning() == true) {
+                    $content .=  "<h5>Planning : OK";
+                }
+                if ($userPermissions->isIsNewsletter() == true) {
+                    $content .=  "<h5>Newsletter : OK";
+                }
+                if ($userPermissions->isIsBoissons() == true) {
+                    $content .=  "<h5>Boissons : OK";
+                }
+                if ($userPermissions->isIsSms() == true) {
+                    $content .=  "<h5>SMS : OK";
+                }
+                if ($userPermissions->isIsConcours() == true) {
+                    $content .=  "<h5>Concours : OK";
+                }
+
+                $content .= "<hr>";
+                $content .= "Pour toute autre besoin de modification, veuillez contacter <a href='#'> l'administrateur STUDI FITNESS </a>";
+                
+                $mail->send($partnerUser->getEmail(), $partnerUser->getName(), 'Mise à jour de vos informations et permissions PARTENAIRE', $content);
+                // ***************************************************************** \\\
     
                 return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
             }
@@ -277,7 +345,7 @@ class PartnerController extends AbstractController
                     'partner' => $partner,
                 ]);
             }
-            
+
             $manager->remove($partner); //REMOVE
             $manager->flush();
             
