@@ -30,7 +30,7 @@ Nicolas Barthès
 
 
 ## Trello du projet
-- [Trello] (https://trello.com/b/CyZoe9QM)
+- [Trello](https://trello.com/b/CyZoe9QM)
 
 <hr>
 
