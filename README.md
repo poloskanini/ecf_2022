@@ -29,6 +29,11 @@ Nicolas Barthès
 - WebPack Encore (JS / CSS)
 
 
+## Trello du projet
+- [Trello] (https://trello.com/b/CyZoe9QM)
+
+<hr>
+
 ## Installation
 
 Suivez les étapes ci-dessous pour installer localement mon projet et le tester.
@@ -45,7 +50,6 @@ Suivez les étapes ci-dessous pour installer localement mon projet et le tester.
 ```bash
 cd ecf_2022
 ```
-
 
 ## Installation des dépendances
 
@@ -74,7 +78,6 @@ cd ecf_2022
   yarn build
   yarn watch
 ```
-
 
 ## Création de la base de données
 
