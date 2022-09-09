@@ -1,3 +1,5 @@
+![alt text](https://www.sngaf.com/wp-content/uploads/2022/09/STUDI-FITNESS-VISUEL-MAIL-1024x614.jpg)
+
 # STUDI FITNESS
 
 Projet réalisé dans le cadre de l'ECF Décembre 2022.
@@ -7,9 +9,8 @@ Projet réalisé dans le cadre de l'ECF Décembre 2022.
 
 - **Frontend:** HTML / CSS / JavaScript / Bootstrap 5
 - **Moteur de Template:** Twig
-- **Backend:** PHP, Symfony 6
-- **Base de données :** MySql
-- **Serveur local :** MAMP
+- **Backend:** PHP, Symfony 5.4.12
+- **Base de données :** MySQL - MariaDB
 
 
 ## Authors
@@ -24,7 +25,7 @@ Nicolas Barthès
 - PHP >= 8.0
 - Composer >= 2
 - Npm (ou Yarn)
-- MySql
+- MySQL - MariaDB
 - WebPack Encore (JS / CSS)
 
 

@@ -162,7 +162,7 @@ class StructureController extends AbstractController
                 $partnerSelectedName = $structure->getPartner()->getName();
 
                 // Contenu
-                $content = "Bonjour " .$partnerSelectedName. "<br/><br/> Félicitations ! Une nouvelle STRUCTURE située à ".$structure->getPostalAdress()." a été ajoutée et liée à votre compte PARTENAIRE. <br/> Son email de connexion est " .$user->getEmail().". Elle dispose donc par défaut des mêmes permissions auxquelles votre contrat vous donne droit, et pourra choisir de les activer ou désactiver selon ses souhaits. <br><br/> <br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                $content = "Bonjour " .$partnerSelectedName. "<br/><br/> Félicitations ! Une nouvelle STRUCTURE appartenant à ".$user->getName()." et située à ".$structure->getPostalAdress()." a été ajoutée et liée à votre compte PARTENAIRE. <br/> Son email de connexion est " .$user->getEmail().". Elle dispose donc par défaut des mêmes permissions auxquelles votre contrat vous donne droit, et pourra choisir de les activer ou désactiver selon ses souhaits. <br><br/> <br/><br/><br/> A très bientôt chez STUDI FITNESS !";
 
                 // Envoi
                 $mail1->send($partnerSelectedEmail, $user->getName(), 'Une nouvelle structure pour votre franchise a été ajoutée !', $content);
