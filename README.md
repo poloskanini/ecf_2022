@@ -106,19 +106,15 @@ Pour démarrer l'application
   symfony serve:start -d
 ```
 
-## Se connecter à l'application
+## Explications du sujet
 
-| Email | Mot de passe     | Role                       | Description |
-| :-------- | :------- | :-------------------------------- | -- |
-| `admin@admin.fr`      | `admin` | ADMIN | Administrateur principal de l'application|
-| `dunkerque@partenaire.fr`      | `dunkerque` | PARTENAIRE | Directeur de l'Orange bleue de Dunkerque|
-| `ruedusable@structure.fr`      | `sable` | STRUCTURE | Gérant de la Structure de rue du sable à Dunkerque (club de Gym)|
-| `ruedupelican@structure.fr`      | `pelican` | STRUCTURE | Gérant de la Structure de rue du pelican à Dunkerque (club de Gym)|
-| `inactif@inactif.fr`      | `inactif` | STRUCTURE | Test d'un compte désactivé par l'admin|
+> Notre client, une grande marque de salles de sport, veut gérer les droits d'accès et de permissions d'une app web pour ses clients
+franchisés qui possèdent des salles de sport.
+> Chaque franchise (PARTENAIRE) a son propre contrat qui dépend de la somme qu’elle verse au client. Plus ou moins de permissions lui seront alors accessibles.
 
-> Chaque PARTENAIRE (franchise) peut posséder plusieurs STRUCTURES (clubs de gym), et leur donne par défaut un nombre de permissions (telles qu'un outil de planning, newsletters, SMS, etc...)
+> Chaque PARTENAIRE (franchise) peut posséder plusieurs STRUCTURES (clubs de gym), et leur donne par défaut un nombre de permissions (outil de planning, newsletters, SMS, etc...) en fonction du contrat qu'il aura souscrit avec la marque.
 
 > Chaque STRUCTURE (club de gym) est rattachée à un partenaire, et elle peut choisir d'activer ou non les permissions données par défaut par le contrat du partenaire.
 
 > Les Partenaires et Structures ont un accès en LECTURE SEULE à leurs informations.
-> Pour toute modification sur leurs permissions ou informations, ils doivent contacter l'administrateur STUDI FITNESS qui a les pleins pouvoirs.
+> Pour toute modification sur leurs permissions ou informations, ils doivent contacter l'administrateur STUDI FITNESS qui est le seul à avoir les pleins pouvoirs.
