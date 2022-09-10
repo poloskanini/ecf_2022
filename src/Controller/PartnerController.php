@@ -35,11 +35,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[IsGranted('ROLE_ADMIN')]
 class PartnerController extends AbstractController
 {
-    private $entityManager;
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+    public function __construct(
+        public EntityManagerInterface $entityManager
+        ) {}
     
     // INDEX FOR ALL PARTNERS IN DB
     #[Route('/', name: 'app_partner_index', methods: ['GET'])]
@@ -186,7 +184,7 @@ class PartnerController extends AbstractController
 
     // EDIT A PARTNER
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine, EntityManagerInterface $em)
+    public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine, EntityManagerInterface $entityManager)
     {
         $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
@@ -226,10 +224,10 @@ class PartnerController extends AbstractController
                 // $partner->addPermission($userPermissions);
                 $userPermissions->addPartner($partner);
 
-                $em->persist($userPermissions);
-                $em->persist($partnerUser);
-                $em->persist($partner);
-                $em->flush();
+                $entityManager->persist($userPermissions);
+                $entityManager->persist($partnerUser);
+                $entityManager->persist($partner);
+                $entityManager->flush();
                 // $userRepository->add($partnerUser, true);
                 // $partnerRepository->add($partner, true);
     

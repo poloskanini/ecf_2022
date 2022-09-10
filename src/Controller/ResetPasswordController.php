@@ -16,12 +16,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ResetPasswordController extends AbstractController
 {
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+    public function __construct(
+        public EntityManagerInterface $entityManager
+        ) {}
 
     #[Route('/reset/password', name: 'app_reset_password')]
     public function index(Request $request): Response
