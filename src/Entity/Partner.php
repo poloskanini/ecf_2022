@@ -98,17 +98,16 @@ class Partner
         return $this;
     }
 
-    public function removeStructure(Structure $structure): self
-    {
-        if ($this->structures->removeElement($structure)) {
-            // set the owning side to null (unless already changed)
-            if ($structure->getPartner() === $this) {
-                $structure->setPartner(null);
-            }
-        }
+    // public function removeStructure(Structure $structure): self
+    // {
+    //     if ($this->structures->removeElement($structure)) {
+    //         if ($structure->getPartner() === $this) {
+    //             $structure->setPartner(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     // public function isIsPlanning(): ?bool
     // {

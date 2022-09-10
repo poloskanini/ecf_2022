@@ -35,6 +35,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[IsGranted('ROLE_ADMIN')]
 class PartnerController extends AbstractController
 {
+    private $entityManager;
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -44,6 +45,8 @@ class PartnerController extends AbstractController
     #[Route('/', name: 'app_partner_index', methods: ['GET'])]
     public function index(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, PermissionsRepository $permissionsRepository): Response
     {
+        $partners = $partnerRepository->findAll();
+       
         // $users = $this->entityManager->getRepository(User::class)->findAll();
 
         $search = new Search();
@@ -51,13 +54,13 @@ class PartnerController extends AbstractController
 
         $searchForm->handleRequest($request);
 
-            $users = $userRepository->findWithSearch($search);
+            // $users = $userRepository->findWithSearch($search);
             // $users = $this->entityManager->getRepository(User::class)->findWithSearch($search);
             
 
 
         return $this->render('partner/index.html.twig', [
-            'users' => $users,
+            // 'users' => $users,
             'partners' => $partnerRepository->findAll(),
             'permissions' => $permissionsRepository->findAll(),
             'searchForm' => $searchForm->createView()
@@ -220,7 +223,7 @@ class PartnerController extends AbstractController
                 // $partner->setIsSms($userPermissions->isIsSms());
                 // $partner->setIsConcours($userPermissions->isIsConcours());
 
-                $partner->addPermission($userPermissions);
+                // $partner->addPermission($userPermissions);
                 $userPermissions->addPartner($partner);
 
                 $em->persist($userPermissions);

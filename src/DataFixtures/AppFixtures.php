@@ -14,12 +14,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $passwordHasher;
     public function __construct(
-        UserPasswordHasherInterface $passwordHasher,
-        SluggerInterface $slugger)
+        UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
-        $this->slugger = $slugger;
     }
 
     public function load(ObjectManager $manager): void
@@ -44,11 +43,6 @@ class AppFixtures extends Fixture
         $orangeUser2 = new User();
         $orangeStructure2 = new Structure();
         $orangeStructurePermissions = new Permissions();
-
-        //?  USER 3 (STRUCTURE)
-        $orangeUser3 = new User();
-        $orangeStructure3 = new Structure();
-        $orangeStructure3Permissions = new Permissions();
 
         //?  USER 4 (STRUCTURE INACTIVE)
         $orangeUser4 = new User();
@@ -75,6 +69,20 @@ class AppFixtures extends Fixture
             ->addPermission($orangePartnerPermissions)
         ;
 
+         // USER 5
+        $orangeUser5
+            ->setName('Directeur Orange Bleue CALAIS')
+            ->setEmail('calais@partenaire.fr')
+            ->setRoles(['ROLE_PARTENAIRE'])
+            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
+        ;
+        // PARTNER 5 (rattaché à User 5)
+        $orangePartner5
+            ->setName('L\'orange Bleue Calais')
+            ->setUser($orangeUser5)
+            ->addPermission($orangePartner5Permissions)
+        ;
+
         // USER 2
         $orangeUser2
             ->setName('Gérant Structure Rue du Sable')
@@ -90,21 +98,6 @@ class AppFixtures extends Fixture
             ->addPermission($orangeStructurePermissions)
         ;
 
-        // USER 3
-        $orangeUser3
-            ->setName('Gérant Structure Rue du Pélican')
-            ->setEmail('ruedupelican@structure.fr')
-            ->setRoles(['ROLE_STRUCTURE'])
-            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('pelican')))
-        ;
-        // STRUCTURE 3 (rattaché à User 3)
-        $orangeStructure3
-            ->setUser($orangeUser3)
-            ->setPartner($orangePartner1)
-            ->setPostalAdress('12 rue du pelican, Dunkerque (Structure 2)')
-            ->addPermission($orangeStructure3Permissions)
-        ;
-
         // USER 4 INACTIF
         $orangeUser4
             ->setName('Inactif')
@@ -116,23 +109,9 @@ class AppFixtures extends Fixture
         // STRUCTURE 4 INACTIVE (rattaché à User 3)
         $orangeStructure4
             ->setUser($orangeUser4)
-            ->setPartner($orangePartner1)
+            ->setPartner($orangePartner5)
             ->setPostalAdress('3 rue inactive')
             ->addPermission($orangeStructure4Permissions)
-        ;
-
-        // USER 5
-        $orangeUser5
-            ->setName('Directeur Orange Bleue CALAIS')
-            ->setEmail('calais@partenaire.fr')
-            ->setRoles(['ROLE_PARTENAIRE'])
-            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
-        ;
-        // PARTNER 5 (rattaché à User 5)
-        $orangePartner5
-            ->setName('L\'orange Bleue Calais')
-            ->setUser($orangeUser5)
-            ->addPermission($orangePartner5Permissions)
         ;
 
         // PERMISSIONS PARTNER 1
@@ -148,8 +127,8 @@ class AppFixtures extends Fixture
         $orangePartner5Permissions
             ->setIsPlanning('0')
             ->setIsNewsletter('0')
-            ->setIsBoissons('1')
-            ->setIsSms('')
+            ->setIsBoissons('0')
+            ->setIsSms('1')
             ->setIsConcours('1')
         ;
 
@@ -162,22 +141,14 @@ class AppFixtures extends Fixture
             ->setIsConcours($orangePartnerPermissions->isIsConcours())
         ;
 
-        // PERMISSIONS STRUCTURE 3
-        $orangeStructure3Permissions
-            ->setIsPlanning($orangePartnerPermissions->isIsPlanning())
-            ->setIsNewsletter($orangePartnerPermissions->isIsNewsletter())
-            ->setIsBoissons($orangePartnerPermissions->isIsBoissons())
-            ->setIsSms($orangePartnerPermissions->isIsSms())
-            ->setIsConcours($orangePartnerPermissions->isIsConcours())
-        ;
 
         // PERMISSIONS STRUCTURE 4
         $orangeStructure4Permissions
-            ->setIsPlanning($orangePartnerPermissions->isIsPlanning())
-            ->setIsNewsletter($orangePartnerPermissions->isIsNewsletter())
-            ->setIsBoissons($orangePartnerPermissions->isIsBoissons())
-            ->setIsSms($orangePartnerPermissions->isIsSms())
-            ->setIsConcours($orangePartnerPermissions->isIsConcours())
+            ->setIsPlanning($orangePartner5Permissions->isIsPlanning())
+            ->setIsNewsletter($orangePartner5Permissions->isIsNewsletter())
+            ->setIsBoissons($orangePartner5Permissions->isIsBoissons())
+            ->setIsSms($orangePartner5Permissions->isIsSms())
+            ->setIsConcours($orangePartner5Permissions->isIsConcours())
         ;
 
         // PERMISSIONS PARTENAIRE 5
@@ -194,16 +165,13 @@ class AppFixtures extends Fixture
         $manager->persist($adminUser);
         $manager->persist($orangeUser1);
         $manager->persist($orangeUser2);
-        $manager->persist($orangeUser3);
         $manager->persist($orangeUser4);
         $manager->persist($orangeUser5);
         $manager->persist($orangePartner1);
         $manager->persist($orangePartner5);
         $manager->persist($orangeStructure2);
-        $manager->persist($orangeStructure3);
         $manager->persist($orangeStructure4);
         $manager->persist($orangePartnerPermissions);
-        $manager->persist($orangeStructure3Permissions);
         $manager->persist($orangeStructure4Permissions);
         $manager->persist($orangePartner5Permissions);
 

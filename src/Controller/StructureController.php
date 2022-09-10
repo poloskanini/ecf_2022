@@ -32,6 +32,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[IsGranted('ROLE_ADMIN')]
 class StructureController extends AbstractController
 {
+    private $entityManager;
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -47,7 +48,7 @@ class StructureController extends AbstractController
         // Catch le partner qui a l'id ciblée
         $structureUser = $structure->getUser(); // Catch l'utilisateur relié à ce partner
         }
-
+        
         // Je récupère les permissions d'ORIGINE du Partner
         $partnerPermissions = $structure->getPartner()->getPermissions()->getValues();
         foreach ($partnerPermissions as $pp) {
@@ -220,6 +221,8 @@ class StructureController extends AbstractController
        
         $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId);
         // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du structure_permissions.
+        // dump($userPermissions);
+        // die;
       
 
         $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités

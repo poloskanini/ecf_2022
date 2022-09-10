@@ -62,10 +62,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * Requête qui me permet de récupérer les utilisateurs en fonction de la recherche effectuée
      * @return User[]
      */
-    public function findWithSearch(Search $search)
-    {
+    // public function findWithSearch(Search $search)
+    // {
         
-    }
+    // }
 
 //    /**
 //     * @return User[] Returns an array of User objects
