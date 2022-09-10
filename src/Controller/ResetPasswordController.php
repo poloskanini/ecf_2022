@@ -39,7 +39,7 @@ class ResetPasswordController extends AbstractController
                 $this->entityManager->persist($reset_password);
                 $this->entityManager->flush();
 
-                // 2 : Envoyer un email à l'utilisateuer avec un lien lui permettant de mettre à jour son mot de passe
+                // 2 : Envoyer un email à l'utilisateur avec un lien lui permettant de mettre à jour son mot de passe
                 $url = $this->generateUrl('app_update_password', [
                     'token' => $reset_password->getToken()
                     ]);

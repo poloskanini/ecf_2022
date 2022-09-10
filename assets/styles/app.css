@@ -78,6 +78,8 @@ body, html {
 .logo-nav {
   object-fit: contain;
   width: clamp(1.3rem, 7vh, 10vh);
+  position: relative;
+  left: -10px;
 
 }
 
@@ -613,7 +615,7 @@ input:checked + .slider:before {
 .crud-button,
 .back-button {
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .back-button::before {
@@ -641,7 +643,7 @@ form .form-check {
 
 .form-check-admin {
   /* background-color: rgb(148, 148, 11); */
-  background-color: rgb(191, 191, 0, 1);
+  background-color: rgb(189, 189, 4);
 }
 
 .form-check-partner {
@@ -649,7 +651,8 @@ form .form-check {
 }
 
 .form-check-structure {
-  background-color: rgb(206, 48, 184);
+  /* background-color: rgb(206, 48, 184); */
+  background-color: rgb(191, 110, 226);
 }
 
 .form-error-icon {

@@ -30,12 +30,6 @@
 
 <body>
 
-{% for message in app.flashes('notice') %}
-    <div class="alert alert-info alert-dismissible fade show m-0" role="alert">
-        {{ message }}
-    </div>
-{% endfor %}
-
 <form method="post">
     {# {% if error %}
         <div class="alert alert-danger position-absolute top-0">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -65,9 +59,19 @@
                                         <span class="col h1 fw-bold mb-0 text-center">STUDI FITNESS GROUP</span>
                                         </div>
                                     </div>
-
+                                    {% for message in app.flashes('notice') %}
+                                        <div class="alert alert-info alert-dismissible fade show m-3" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
 
                                     <h5 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Réinitialisez votre mot de passe</h5>
+
+                                    {% for message in app.flashes('notice') %}
+                                        <div class="alert alert-info alert-dismissible fade show m-0" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
 
                                     <div class="form-outline mb-4">
                                         <label for="inputEmail" class="form-label">Votre email</label>
@@ -91,7 +95,7 @@
                                         <button class="btn btn-dark btn-lg btn-block" type="submit">Réinitialiser mon mot de passe</button>
                                     </div>
 
-                                    <a class="small" href="{{ path('app_login') }}">Ou souhaitez-vous vous connecter ?</a>
+                                    <a href="{{ path('app_login') }}">Ou souhaitez-vous vous connecter ?</a>
                                     
                                     </form>
 

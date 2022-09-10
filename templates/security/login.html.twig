@@ -31,7 +31,7 @@
 <body>
 
 <form method="post">
-    {% if error %}
+    {# {% if error %}
         <div class="alert alert-danger position-absolute top-0">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
@@ -39,13 +39,13 @@
         <div class="mb-3">
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
-    {% endif %}
+    {% endif %} #}
 
-    {% for message in app.flashes('notice') %}
+    {# {% for message in app.flashes('notice') %}
     <div class="alert alert-info alert-dismissible fade show m-0" role="alert">
         {{ message }}
     </div>
-    {% endfor %}
+    {% endfor %} #}
 
     <section class="section-login">
         <div class="container py-5 h-100">
@@ -68,6 +68,22 @@
 
 
                                     <h5 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Connectez-vous à votre compte</h5>
+
+                                    {% if error %}
+                                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+
+                                    {% if app.user %}
+                                        <div class="mb-3">
+                                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                        </div>
+                                    {% endif %}
+
+                                    {% for message in app.flashes('notice') %}
+                                        <div class="alert alert-info alert-dismissible fade show m-0" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
 
                                     <div class="form-outline mb-4">
                                         <label for="inputEmail" class="form-label">Votre email</label>
@@ -92,7 +108,7 @@
                                         <button class="btn btn-dark btn-lg btn-block" type="submit">Se connecter</button>
                                     </div>
 
-                                    <a class="small text-muted" href="{{ path('app_reset_password') }}">Mot de passe oublié ?</a>
+                                    <a class="text-muted" href="{{ path('app_reset_password') }}">Mot de passe oublié ?</a>
                                     
                                     </form>
 

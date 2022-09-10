@@ -207,9 +207,6 @@ class StructureController extends AbstractController
         $partnerPermissions = $doctrine->getRepository(Permissions::class)->find($permPartnerId);
         // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du partner_permissions.
 
-        // dump($partnerPermissions);
-        // die;
-
         // Récupérer les permissions du partenaire
         // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
         $permArray = ($structure->getPermissions()->getValues());
@@ -218,10 +215,7 @@ class StructureController extends AbstractController
         }
        
         $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId);
-        // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du structure_permissions.
-        // dump($userPermissions);
-        // die;
-      
+        // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du structure_permissions.  
 
         $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
@@ -231,7 +225,6 @@ class StructureController extends AbstractController
             ])
             ->add('structure', StructureFormType::class)
             ->add('permissions', PermissionsType::class)
-            // ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
             ->getForm();
 
             $form->handleRequest($request);
@@ -266,6 +259,81 @@ class StructureController extends AbstractController
                     'success',
                     'La structure "' .$structureUser->getName(). '" a été modifiée avec succès'
                 );
+
+                //**** ENVOI DU MAIL DE MODIFICATION de STRUCTURE ****\\\
+                $mail = new Mail();
+                $mail2 = new Mail();
+                
+                $content = "Bonjour " .$structureUser->getName(). "<br/><br/>";
+                $content .= "Suite à votre demande, les informations de votre structure situé ".$structure->getPostalAdress(). " ont été mises à jour par un administrateur STUDI FITNESS. Vous les retrouverez ci-dessous :<br/><br/>";
+                $content .= "<hr>";
+                $content .= "<h3>Vos informations de connexion :";
+                $content .= "<h5>Email de connexion : " .$structureUser->getEmail();
+                $content .= "<h5>Nom de l'utilisateur : " .$structureUser->getName();
+                $content .= "<h5>Nom de votre partenaire : " .$structure->getPartner()->getName();
+                $content .= "<hr>";
+                $content .= "<h3>Vos fonctionnalités activées :";
+
+                // Envoi des permissions
+                if ($userPermissions->isIsPlanning() == true) {
+                    $content .=  "<h5>Planning : OK";
+                }
+                if ($userPermissions->isIsNewsletter() == true) {
+                    $content .=  "<h5>Newsletter : OK";
+                }
+                if ($userPermissions->isIsBoissons() == true) {
+                    $content .=  "<h5>Boissons : OK";
+                }
+                if ($userPermissions->isIsSms() == true) {
+                    $content .=  "<h5>SMS : OK";
+                }
+                if ($userPermissions->isIsConcours() == true) {
+                    $content .=  "<h5>Concours : OK";
+                }
+
+                $content .= "<hr>";
+                $content .= "Pour toute autre besoin de modification, veuillez contacter <a href='#'> l'administrateur STUDI FITNESS </a>";
+                
+                $mail->send($structureUser->getEmail(), $structureUser->getName(), 'Mise à jour de vos informations et permissions STRUCTURE', $content);
+
+
+                //**** ENVOI DU MAIL DE MODIFICATION AU PARTENAIRE DE LA STRUCTURE MODIFIÉE :
+                $partnerSelectedEmail = $structure->getPartner()->getUser()->getEmail();
+                $partnerSelectedName = $structure->getPartner()->getName();
+
+                // Contenu
+                $content = "Bonjour " .$partnerSelectedName. "<br/><br/>";
+                $content .= "Votre STRUCTURE située au ".$structure->getPostalAdress(). " a effectuée des modifications de ses informations auprès de STUDI FITNESS. Vous les retrouverez ci-dessous :<br/><br/>";
+                $content .= "<hr>";
+                $content .= "<h3>Informations de votre structure :";
+                $content .= "<h5>Nom de l'utilisateur : " .$structureUser->getName();
+                $content .= "<h5>Adresse postale : " .$structure->getPostalAdress();
+                $content .= "<hr>";
+                $content .= "<h3>Ses fonctionnalités activées :";
+
+                // Envoi des permissions
+                if ($userPermissions->isIsPlanning() == true) {
+                    $content .=  "<h5>Planning : OK";
+                }
+                if ($userPermissions->isIsNewsletter() == true) {
+                    $content .=  "<h5>Newsletter : OK";
+                }
+                if ($userPermissions->isIsBoissons() == true) {
+                    $content .=  "<h5>Boissons : OK";
+                }
+                if ($userPermissions->isIsSms() == true) {
+                    $content .=  "<h5>SMS : OK";
+                }
+                if ($userPermissions->isIsConcours() == true) {
+                    $content .=  "<h5>Concours : OK";
+                }
+
+                $content .= "<hr>";
+                $content .= "Pour toute autre besoin de modification, veuillez contacter <a href='#'> l'administrateur STUDI FITNESS </a>";
+
+                // Envoi
+                $mail2->send($partnerSelectedEmail, $partnerSelectedName, 'Mise à jour des informations de l\'une de vos structures', $content);
+                // ***************************************************************** \\\
     
                 return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
             }

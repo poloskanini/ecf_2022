@@ -200,9 +200,10 @@
                     </div>
                 </div>
                 
-
-                <a href="{{ path('app_partner_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>
-                <button type="submit" class="btn btn-success my-4" value="Sauvegarder" onclick="return confirm('Êtes-vous sûr de vouloir modifier ce partenaire ?')">Sauvegarder</button>
+                <div class="confirm d-flex justify-content-center align-items-center">
+                    <a href="{{ path('app_partner_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>
+                    <button type="submit" class="btn btn-success my-4" value="Sauvegarder" onclick="return confirm('Êtes-vous sûr de vouloir modifier ce partenaire ?')">Sauvegarder</button>
+                </div>
 
                 {{ form_end(form) }}
             </div>

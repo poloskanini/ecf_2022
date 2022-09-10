@@ -18,7 +18,7 @@ class UserChecker implements UserCheckerInterface
 
         if (!$user->isIsActive()) {
             // the message passed to this exception is meant to be displayed to the user
-            throw new CustomUserMessageAccountStatusException('Votre compte est INACTIF, veuillez contacter l\'administrateur STUDI FITNESS pour le réactiver.');
+            throw new CustomUserMessageAccountStatusException('Votre compte est INACTIF, veuillez contacter STUDI FITNESS pour le réactiver.');
         }
     }
 

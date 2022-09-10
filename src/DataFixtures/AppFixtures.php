@@ -71,21 +71,22 @@ class AppFixtures extends Fixture
 
          // USER 5
         $orangeUser5
-            ->setName('Directeur Orange Bleue CALAIS')
+            ->setName('Directeur Pomme Jaune CALAIS')
             ->setEmail('calais@partenaire.fr')
             ->setRoles(['ROLE_PARTENAIRE'])
             ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
         ;
         // PARTNER 5 (rattaché à User 5)
         $orangePartner5
-            ->setName('L\'orange Bleue Calais')
+            ->setName('La Pomme Jaune Calais')
             ->setUser($orangeUser5)
+            ->addStructure($orangeStructure4)
             ->addPermission($orangePartner5Permissions)
         ;
 
         // USER 2
         $orangeUser2
-            ->setName('Gérant Structure Rue du Sable')
+            ->setName('Club Rue du Sable - Dunkerque')
             ->setEmail('ruedusable@structure.fr')
             ->setRoles(['ROLE_STRUCTURE'])
             ->setPassword($this->passwordHasher->hashPassword($orangeUser2, ('sable')))
@@ -100,7 +101,7 @@ class AppFixtures extends Fixture
 
         // USER 4 INACTIF
         $orangeUser4
-            ->setName('Inactif')
+            ->setName('Club Inactif - Calais')
             ->setEmail('inactif@inactif.fr')
             ->setRoles(['ROLE_STRUCTURE'])
             ->setIsActive(false)
