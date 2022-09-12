@@ -29,6 +29,11 @@ body, html {
   background-size: cover;
 }
 
+.section-reset-password {
+  background-image: url('../../assets/images/46060794_m.jpg');
+  background-size: cover;
+}
+
 .login-title {
   color: var(--blue);
 }
