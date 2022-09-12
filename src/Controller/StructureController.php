@@ -147,7 +147,7 @@ class StructureController extends AbstractController
 
                 $this->addFlash(
                     'success',
-                    'La structure "' .$user->getName(). '" a été ajoutée avec succès. Elle est rattachée au partenaire "' .$structure->getPartner(). '".'
+                    'La structure "' .$user->getName(). '" a été ajoutée avec succès. Elle appartient au partenaire "' .$structure->getPartner(). '".'
                 );
 
                 //**** ENVOI DU  MAIL DE CONFIRMATION de création de Structure ****\\\
@@ -246,8 +246,6 @@ class StructureController extends AbstractController
                 // $em->persist($partnerPermissions);
                 $em->persist($structureUser);
                 $em->persist($structure);
-                // dump($form->getData());
-                // die;
 
                 
                 $em->flush();
@@ -257,7 +255,8 @@ class StructureController extends AbstractController
     
                 $this->addFlash(
                     'success',
-                    'La structure "' .$structureUser->getName(). '" a été modifiée avec succès'
+                    // 'La structure "' .$structureUser->getName(). '" a été modifiée avec succès'
+                    'La structure "' .$structureUser->getName(). '" appartenant au partenaire "' .$structure->getPartner(). '" a été modifiée avec succès.'
                 );
 
                 //**** ENVOI DU MAIL DE MODIFICATION de STRUCTURE ****\\\
@@ -350,7 +349,6 @@ class StructureController extends AbstractController
     // SHOW A STRUCTURE
     #[Route('/show/{id}', name: 'app_structure_show', methods: ['GET'])]
 
-    //TODO : Début des modifs
     public function show(int $id, Request $request, StructureRepository $structureRepository, ManagerRegistry $doctrine,): Response
     {
         $structure = $structureRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
@@ -420,7 +418,7 @@ class StructureController extends AbstractController
             
             $this->addFlash(
                 'danger',
-                'La structure dont l\'adresse postale est "' .$structure->getPostalAdress(). '" a été supprimée avec succès'
+                'La structure localisée "' .$structure->getPostalAdress(). '" a été supprimée avec succès.'
         );
 
         return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);

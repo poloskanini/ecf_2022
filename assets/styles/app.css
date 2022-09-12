@@ -648,11 +648,13 @@ form .form-check {
 
 .form-check-partner {
   background-color: rgb(44, 127, 182);
+  /* background-color: #06a9c6; */
 }
 
 .form-check-structure {
   /* background-color: rgb(206, 48, 184); */
   background-color: rgb(191, 110, 226);
+  background-color: #E45D99;
 }
 
 .form-error-icon {
@@ -770,11 +772,11 @@ form .form-check {
 }
 
 .boxes .box:nth-child(2) i {
-  background-color: #E45D99;
+  background-color: #74daec;
 }
 
 .boxes .box:nth-child(3) i {
-  background-color: #74daec;
+  background-color: #E45D99;
 }
 
 .box-data {
