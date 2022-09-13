@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Classe\Search;
+use App\Entity\Partner;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -25,18 +26,18 @@ class SearchType extends AbstractType
       ]
       ])
     // ->add('users', EntityType::class, [
-    //   'class' => User::class,
+    //   'class' => Partner::class,
     //   'required' => false,
     //   'label' => false,
     //   'multiple' => true,
     //   'expanded' => true
     // ])
-    ->add('submit', SubmitType::class, [
-      'label' => 'Filtrer',
-      'attr' => [
-        'class' => 'btn-block btn-sm btn-secondary'
-      ]
-    ])
+    // ->add('submit', SubmitType::class, [
+    //   'label' => 'Filtrer',
+    //   'attr' => [
+    //     'class' => 'btn-block btn-sm btn-secondary'
+    //   ]
+    // ])
     
     ;
   }

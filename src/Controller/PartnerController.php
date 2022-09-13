@@ -45,12 +45,17 @@ class PartnerController extends AbstractController
     {
         $partners = $partnerRepository->findAll();
        
-        // $users = $this->entityManager->getRepository(User::class)->findAll();
+        // $usersPartners = $this->entityManager->getRepository(Partner::class)->findAll();
 
         $search = new Search();
-        $searchForm = $this->createForm(SearchType::class, $search);
+        $form = $this->createForm(SearchType::class, $search);
 
-        $searchForm->handleRequest($request);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $partners = $this->entityManager->getRepository(Partner::class)->findWithSearch($search);
+            // dd($search);
+        }
 
             // $users = $userRepository->findWithSearch($search);
             // $users = $this->entityManager->getRepository(User::class)->findWithSearch($search);
@@ -59,9 +64,9 @@ class PartnerController extends AbstractController
 
         return $this->render('partner/index.html.twig', [
             // 'users' => $users,
-            'partners' => $partnerRepository->findAll(),
+            'partners' => $partners,
             'permissions' => $permissionsRepository->findAll(),
-            'searchForm' => $searchForm->createView()
+            'form' => $form->createView()
         ]);
     }
 
