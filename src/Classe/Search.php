@@ -17,6 +17,8 @@ class Search
   */
   public $users = [];
 
+  public $active;
+
   // public function __toString()
   //   {
   //       return $this->string;

@@ -404,8 +404,12 @@ input:checked + .slider:before {
 .search i {
   position: absolute;
   top: 12px;
-  left: 10px;
+  left: 20px;
   font-size: 1.2rem;
+  color: var(--blue);
+}
+
+.search form {
   color: var(--blue);
 }
 

@@ -47,7 +47,7 @@ class PartnerRepository extends ServiceEntityRepository
     public function findWithSearch(Search $search)
     {
         $query = $this
-        ->createQueryBuilder('p');
+            ->createQueryBuilder('p');
 
         if(!empty($search->string)) {
             $query = $query

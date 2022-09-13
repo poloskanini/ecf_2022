@@ -54,13 +54,7 @@ class PartnerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $partners = $this->entityManager->getRepository(Partner::class)->findWithSearch($search);
-            // dd($search);
         }
-
-            // $users = $userRepository->findWithSearch($search);
-            // $users = $this->entityManager->getRepository(User::class)->findWithSearch($search);
-            
-
 
         return $this->render('partner/index.html.twig', [
             // 'users' => $users,
