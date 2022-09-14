@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Classe\Search;
 use App\Entity\Structure;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Structure>
@@ -38,6 +39,26 @@ class StructureRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    /**
+     * Requête qui me permet de récupérer les partenaires en fonction de la recherche effectuée dans le form
+     * @return Structure[]
+     */
+    public function findWithSearch(Search $search)
+    {
+        $query = $this
+            ->createQueryBuilder('s')
+            ->join('s.user', 'r');
+                        
+        if(!empty($search->string)) {
+            $query = $query
+                ->where('r.name LIKE :string')
+                ->setParameter('string', "%{$search->string}%");
+        }
+
+        return $query->getQuery()->getResult();
+    }
+    
 
 //    /**
 //     * @return Structure[] Returns an array of Structure objects

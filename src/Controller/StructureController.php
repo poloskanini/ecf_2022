@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Classe\Mail;
 use App\Entity\User;
+use App\Classe\Search;
 use App\Form\UserType;
 use App\Entity\Partner;
+use App\Form\SearchType;
 use App\Entity\Structure;
 use App\Form\UserShowType;
 use App\Entity\Permissions;
@@ -38,9 +40,8 @@ class StructureController extends AbstractController
 
     // INDEX FOR ALL STRUCTURES IN DB
     #[Route('/', name: 'app_structure_index', methods: ['GET'])]
-    public function index(PartnerRepository $partnerRepository, StructureRepository $structureRepository, PermissionsRepository $permissionsRepository, ManagerRegistry $doctrine): Response
+    public function index(Request $request,PartnerRepository $partnerRepository, StructureRepository $structureRepository, PermissionsRepository $permissionsRepository, ManagerRegistry $doctrine): Response
     {
-        //TODO: Début des changements
         $structures = $structureRepository->findAll();
         foreach ($structures as $structure) {
         // Catch le partner qui a l'id ciblée
@@ -69,16 +70,24 @@ class StructureController extends AbstractController
         $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId);
         // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du structure_permissions.
 
-
         $items = ['user' => $structureUser, 'structure' => $structure, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
+
+        $search = new Search();
+        $form = $this->createForm(SearchType::class, $search);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $structures = $this->entityManager->getRepository(Structure::class)->findWithSearch($search);
+        }
 
 
         return $this->render('structure/index.html.twig', [
-            'structures' => $structureRepository->findAll(),
+            'structures' => $structures,
             'partners' => $partnerRepository->findAll(),
             'permissions' => $permissionsRepository->findAll(),
-            'partnerPermissions' => $partnerPermissions
-
+            'partnerPermissions' => $partnerPermissions,
+            'form' => $form->createView()
         ]);
     }
 
