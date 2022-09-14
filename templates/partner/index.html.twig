@@ -8,6 +8,7 @@
 
 {% block content %}
 
+
 <div class="container-fluid index">
 
     {# Flash message "Correctement ajouté" #}
@@ -25,7 +26,7 @@
         </div>
     {% endfor %}
 
-    {# FILTER #}
+    {# SEARCH BAR #}
     <div class="row">
         <div class="col-md-3 search">
             <i class="fa fa-search"></i>
@@ -35,7 +36,7 @@
 
     <h1 class="my-4">PARTENAIRES :</h1>
 
-    <div class="responsive-table-line">
+    <div class="responsive-table-line" id="result-search">
 
     <table class="table table-striped ">
         <thead>
@@ -160,5 +161,32 @@
     
 
 </div>
+
+{# <script>
+    $(document).ready(function() {
+        $("#string").keyup(function() {
+            $('#result-search').html('');
+ 
+            let utilisateur = $(this).val();
+
+            if(utilisateur != "") {
+                $.ajax({
+                    type: 'GET',
+                    url: '/src/Classe/fonctions/recherche_utilisateur.php',
+                    data: 'user=' + encodeURIComponent(utilisateur),
+                    success: function(data){
+                        if(data != "") {
+                            $('#result-search').append(data);
+                        } else {
+                            document.getElementById('result-search').innerHTML = "<div> Aucun utilisateur PROUT</div>";
+                        }
+                    }
+                })
+                $('#result-search').remove(data);
+            }
+        })
+    });
+</script> #}
+
 
 {% endblock %}

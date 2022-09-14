@@ -1,4 +1,6 @@
 {{ form_start(form) }}
     {{ form_errors(form) }}
-    {{ form_row(form.string) }}
+
+        {{ form_row(form.string, {'attr': {'class': 'search-user'}}) }}
+ 
 {{ form_end(form) }}
