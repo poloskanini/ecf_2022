@@ -36,7 +36,9 @@
 
             <div class="row d-flex h-100 mt-3">
                {% for structure in app.user.partner.structures %}
+                {% for partnerPermission in structure.partner.permissions %} 
                 {% for permission in structure.permissions %}
+
                <div class="col col-12 col-xl-3">
                    <div class="card">
                         <h5 class="card-header text-center form-check form-check-structure">{{ structure.user.name }}</h5>
@@ -48,7 +50,7 @@
                         </div>
                         <div class="card-footer d-flex flex-wrap justify-content-center">
                             
-                            {% if permission.isPlanning == 1 %}
+                            {% if (partnerPermission.isPlanning == 1) and (permission.isPlanning == 1) %}
                                 <div class="col col-xl-4 permission planning text-center">
                                     <i class="fa-solid fa-calendar-days"></i>
                                     <h6 class="permission-title">Planning</h6>
@@ -59,7 +61,7 @@
                                 </div>
                             {% endif %}
 
-                            {% if permission.isNewsletter == 1 %}
+                            {% if (partnerPermission.isNewsletter == 1) and (permission.isNewsletter == 1) %}
                                 <div class="col col-xl-4 permission newsletter text-center">
                                     <i class="fa-solid fa-envelope"></i>
                                     <h6 class="permission-title">Newsletter</h6>
@@ -70,7 +72,7 @@
                                 </div>
                             {% endif %}
 
-                            {% if permission.isBoissons == 1 %}
+                            {% if (partnerPermission.isBoissons == 1) and (permission.isBoissons == 1) %}
                                 <div class="col col-xl-4 permission boissons text-center">
                                     <i class="fas fa-cocktail"></i>
                                     <h6 class="permission-title">Boissons</h6>
@@ -81,7 +83,7 @@
                                 </div>
                             {% endif %}
 
-                            {% if permission.isSms == 1 %}
+                            {% if (partnerPermission.isSms == 1) and (permission.isSms == 1) %}
                                 <div class="col col-xl-4 permission sms text-center">
                                     <i class="fa-solid fa-comment-sms"></i>
                                     <h6 class="permission-title">SMS</h6>
@@ -92,7 +94,7 @@
                                 </div>
                             {% endif %}
 
-                            {% if permission.isConcours == 1 %}
+                            {% if (partnerPermission.isConcours == 1) and (permission.isConcours == 1) %}
                                 <div class="col col-xl-4 permission concours text-center">
                                     <i class="fa-solid fa-trophy"></i>
                                     <h6 class="permission-title">Concours</h6>
@@ -110,6 +112,7 @@
                    </div>
                </div>
                {% endfor %}
+                {% endfor %}
                 {% endfor %}
 
             </div>
@@ -280,12 +283,14 @@
 
 
                                         {% for permission in app.user.structure.permissions %}
+                                        {% for pp in app.user.structure.partner.permissions %}
+                                            
                                        
                                         <div class="col permission planning">
                                             <i class="fa-solid fa-calendar-days"></i>
                                             <h6 class="permission-title">Planning</h6>
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if permission.isPlanning == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if (pp.isPlanning == 1) and (permission.isPlanning == 1) %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
                                         </div>
@@ -294,7 +299,7 @@
                                             <i class="fa-solid fa-envelope"></i>
                                             <h6 class="permission-title">Newsletter</h6>
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if permission.isNewsletter == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if (pp.isNewsletter == 1) and (permission.isNewsletter == 1) %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
                                         </div>
@@ -303,7 +308,7 @@
                                             <i class="fas fa-cocktail"></i>
                                             <h6 class="permission-title">Boissons</h6>
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if permission.isBoissons == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if (pp.isBoissons == 1) and (permission.isBoissons == 1) %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
                                         </div>
@@ -312,7 +317,7 @@
                                             <i class="fa-solid fa-comment-sms"></i>
                                             <h6 class="permission-title">SMS</h6>
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if permission.isSms == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if (pp.isSms == 1) and (permission.isSms == 1) %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
                                         </div>
@@ -321,10 +326,11 @@
                                             <i class="fa-solid fa-trophy"></i>
                                             <h6 class="permission-title">Concours</h6>
                                                     <label class="switch">
-                                                        <input type="checkbox" {% if permission.isConcours == 1 %} checked {% endif %} disabled>
+                                                        <input type="checkbox" {% if (pp.isConcours == 1) and (permission.isConcours == 1) %} checked {% endif %} disabled>
                                                         <span class="slider round"></span>
                                                     </label>
                                         </div>
+                                        {% endfor %}
                                         {% endfor %}
                                 </div>
                             </div>
