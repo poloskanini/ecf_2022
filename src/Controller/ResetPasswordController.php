@@ -45,7 +45,7 @@ class ResetPasswordController extends AbstractController
                     ]);
 
                 $content = "Bonjour ".$user->getName()."<br/>Vous avez demandé à réinitialiser votre mot de passe sur le site STUDI FITNESS.<br/><br/>";
-                $content .= "Merci de bien vouloir cliquer sur le lien suivant pour <a href='".$url."'> mettre à jour votre mot de passe.";
+                $content .= "Merci de bien vouloir cliquer sur le lien suivant pour <a href='https://sfg.nicolasbarthes.com".$url."'> mettre à jour votre mot de passe.";
 
                 $mail = new Mail();
                 $mail->send($user->getEmail(), $user->getName(), 'Réinitialiser votre mot de passe STUDI FITNESS', $content );
