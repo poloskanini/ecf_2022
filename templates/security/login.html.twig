@@ -28,7 +28,7 @@
   {% endblock %}
 </head>
 
-<body>
+<body class="position-relative">
 
 <form method="post">
     {# {% if error %}
@@ -48,7 +48,7 @@
     {% endfor %} #}
 
     <section class="section-login">
-        <div class="container py-5 h-100">
+        <div class="container py-5 h-100 position-relative">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
                     <div class="card" style="border-radius: 1rem;">
@@ -118,9 +118,13 @@
                     </div>
                 </div>
             </div>
+            <div class="copyright position-absolute d-flex justify-content-center align-items-center w-100">
+               <small><a class="text-decoration-none text-white p-4" href="http://www.nicolasbarthes.com">handmade by NB | 2022 ©</a></small>
+            </div>
         </div>
     </section>
 </form>
+
 
 </body>
 </html>

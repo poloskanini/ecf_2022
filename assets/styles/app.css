@@ -19,6 +19,7 @@ body, html {
   font-size: 14px;
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: #fcfcfc;
   background-image: url('../../assets/images/41421784_m.jpg');
   background-size: contain;
   background-repeat: no-repeat;
@@ -419,6 +420,7 @@ input:checked + .slider:before {
 @media screen and (max-width: 1024px) {
   .navigation {
     left: -300px;
+    background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgba(118, 75, 162, 1));
   }
 
   .navigation.active {
@@ -504,7 +506,7 @@ input:checked + .slider:before {
   }
 
   .navigation.active {
-    width: 100%;
+    width: 90%;
     left: 0;
   }
 
@@ -773,6 +775,7 @@ form .form-check {
   align-items: center;
   justify-content: space-around;
   box-shadow: 0 1px 1px rgb(0 0 0 / 15%), 0 2px 2px rgb(0 0 0 / 15%), 0 4px 4px rgb(0 0 0 / 15%), 0 8px 8px rgb(0 0 0 / 15%);
+  text-decoration: none;
 }
 
 .boxes .box i {
@@ -801,6 +804,13 @@ form .form-check {
 
 .box-data {
   text-align: center;
+  text-decoration: none;
+  color: #444a53;
+}
+
+/** FOOTER **/
+.copyright a {
+  font-family: 'Mr De Haviland', cursive;
 }
 
 /*^ ###########  Première version de la sideBar Boostrap MDN  ########################### */
