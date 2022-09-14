@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Classe\Search;
 use App\Form\UserType;
 use App\Entity\Partner;
+use App\Form\SearchType;
 use App\Form\UserShowType;
 use App\Repository\UserRepository;
 use App\Repository\PartnerRepository;
@@ -27,13 +29,24 @@ class UserController extends AbstractController
         ) {}
 
     #[Route('/', name: 'app_user_index' ,methods: ['GET'])]
-    public function index(UserRepository $userRepository, PartnerRepository $partnerRepository, StructureRepository $structureRepository): Response
+    public function index(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, StructureRepository $structureRepository): Response
     {
+        $users = $userRepository->findAll();
+
+        $search = new Search();
+        $form = $this->createForm(SearchType::class, $search);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $users = $this->entityManager->getRepository(User::class)->findWithSearch($search);
+        }
         
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
             'partners' => $partnerRepository->findAll(),
             'structures' => $structureRepository->findAll(),
+            'form' => $form->createView()
         ]);
     }
 
