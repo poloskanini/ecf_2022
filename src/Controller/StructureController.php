@@ -177,7 +177,7 @@ class StructureController extends AbstractController
 
                 // Envoi d'un mail à la structure :
                 // Contenu :
-                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte STRUCTURE pour votre établissement à l'adresse : ".$structure->getPostalAdress(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos informations sur votre structure et le partenaire auquel vous êtes rattachée.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en <a href='".$resetPasswordUrl."'> cliquant ici </a> .<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
+                $content = "Bonjour " .$user->getName(). "<br/><br/>Vous disposez désormais d'un compte STRUCTURE pour votre établissement à l'adresse : ".$structure->getPostalAdress(). ", et d'un accès en lecture seule au panel d'administration de STUDI FITNESS.<br/><br/> Vous pourrez y découvrir vos informations sur votre structure et le partenaire auquel vous êtes rattachée.<br/><br/> Votre email de connexion est " .$user->getEmail(). ", et votre mot de passe est " .$user->getPassword(). "<br><br/> Ce mot de passe est temporaire, vous pouvez le redéfinir en <a href='https://sfg.nicolasbarthes.com".$resetPasswordUrl."'> cliquant ici </a> .<br/><br/><br/> A très bientôt chez STUDI FITNESS !";
 
                 // Envoi
                 $mail2->send($user->getEmail(), $user->getName(), 'Vous avez un nouveau compte STRUCTURE !', $content);

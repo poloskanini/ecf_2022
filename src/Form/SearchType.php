@@ -37,12 +37,12 @@ class SearchType extends AbstractType
       'label' => 'Inactif',
       'required' => false
     ])
-    // ->add('submit', SubmitType::class, [
-    //   'label' => 'Filtrer',
-    //   'attr' => [
-    //     'class' => 'btn-sm btn-outline-secondary'
-    //   ],
-    // ])
+    ->add('submit', SubmitType::class, [
+      'label' => 'Filtrer',
+      'attr' => [
+        'class' => 'btn-sm col-12 btn-secondary'
+      ],
+    ])
     
     ;
   }

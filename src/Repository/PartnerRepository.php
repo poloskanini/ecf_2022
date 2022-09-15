@@ -50,7 +50,7 @@ class PartnerRepository extends ServiceEntityRepository
     {
         $query = $this
             ->createQueryBuilder('p');
-            
+
         if(!empty($search->string)) {
             $query = $query
                 ->andWhere('p.name LIKE :string')

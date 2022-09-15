@@ -11,20 +11,7 @@
 
 <div class="container-fluid index">
 
-    
-
-    {# SEARCH BAR #}
-    <div class="row">
-        <div class="col-md-3 search">
-            <i class="fa fa-search"></i>
-            {% include 'partner/_filter.html.twig' %}
-        </div>
-    </div>
-
-
-    <h1 class="my-4">PARTENAIRES :</h1>
-
-    {# Flash message "Correctement ajouté" #}
+ {# Flash message "Correctement ajouté" #}
     {% for message in app.flashes('success') %}
         <div class="alert alert-success alert-dismissible fade show my-4" role="alert">
             <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
@@ -37,7 +24,18 @@
             <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
             {{ message }}
         </div>
-    {% endfor %}
+    {% endfor %}    
+
+    {# SEARCH BAR #}
+    <div class="row">
+        <div class="col-md-3 search">
+            <i class="fa fa-search"></i>
+            {% include 'partner/_filter.html.twig' %}
+        </div>
+    </div>
+
+
+    <h1 class="my-4">PARTENAIRES :</h1>
 
     <div class="responsive-table-line" id="result-search">
 

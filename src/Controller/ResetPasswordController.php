@@ -11,13 +11,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ResetPasswordController extends AbstractController
 {
     public function __construct(
-        public EntityManagerInterface $entityManager
+        public EntityManagerInterface $entityManager,
+        public UrlGeneratorInterface $router
         ) {}
 
     #[Route('/reset/password', name: 'app_reset_password')]
@@ -40,12 +42,12 @@ class ResetPasswordController extends AbstractController
                 $this->entityManager->flush();
 
                 // 2 : Envoyer un email à l'utilisateur avec un lien lui permettant de mettre à jour son mot de passe
-                $url = $this->generateUrl('app_update_password', [
+                $url = $this->router->generate('app_update_password', [
                     'token' => $reset_password->getToken()
-                    ]);
+                    ], urlGeneratorInterface::ABSOLUTE_URL);
 
                 $content = "Bonjour ".$user->getName()."<br/>Vous avez demandé à réinitialiser votre mot de passe sur le site STUDI FITNESS.<br/><br/>";
-                $content .= "Merci de bien vouloir cliquer sur le lien suivant pour <a href='https://sfg.nicolasbarthes.com".$url."'> mettre à jour votre mot de passe.";
+                $content .= "Merci de bien vouloir cliquer sur le lien suivant pour ".$url." mettre à jour votre mot de passe.";
 
                 $mail = new Mail();
                 $mail->send($user->getEmail(), $user->getName(), 'Réinitialiser votre mot de passe STUDI FITNESS', $content );
@@ -92,7 +94,7 @@ class ResetPasswordController extends AbstractController
             // Flush en base de données
             $this->entityManager->flush();
             // Redirection de l'utilisateur vers la page de connexion
-            $this->addFlash('notice', 'Votre mot de passe a bien été mis à jour.');
+            $this->addFlash('notice', 'Votre mot de passe a bien été mis à jour. Vous pouvez vous connecter.');
             return $this->redirectToRoute('app_login');
         };
 
