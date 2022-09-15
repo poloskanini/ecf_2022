@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
@@ -23,8 +24,8 @@ class SearchType extends AbstractType
       'label' => false,
       'required' => false,
       'attr' => [
-        'placeholder' => 'Rechercher...',
-        ]
+        'placeholder' => 'Rechercher...'
+      ]
       ])
     ->add('active', CheckboxType::class, [
       'label' => 'Actif',
@@ -34,22 +35,12 @@ class SearchType extends AbstractType
       'label' => 'Inactif',
       'required' => false
     ])
-    // ->add('users', EntityType::class, [
-    //   'class' => User::class,
-    //   'choice_label' => function ($user) {
-    //     return $user->isIsActive();
-    //   },
-    //   'required' => false,
-    //   'label' => false,
-    //   'multiple' => true,
-    //   'expanded' => true,
+    // ->add('submit', SubmitType::class, [
+    //   'label' => 'Filtrer',
+    //   'attr' => [
+    //     'class' => 'btn-block btn-sm btn-secondary'
+    //   ]
     // ])
-    ->add('submit', SubmitType::class, [
-      'label' => 'Filtrer',
-      'attr' => [
-        'class' => 'btn-block btn-sm btn-secondary'
-      ]
-    ])
     
     ;
   }

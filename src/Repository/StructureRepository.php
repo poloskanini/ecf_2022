@@ -56,6 +56,19 @@ class StructureRepository extends ServiceEntityRepository
                 ->setParameter('string', "%{$search->string}%");
         }
 
+        if(!empty($search->active)) {
+            $query = $query
+                ->leftJoin('s.user', 'u')
+                ->andWhere('u.isActive = 1');
+        }
+
+        if(!empty($search->inactive)) {
+            $query = $query
+                ->leftJoin('s.user', 'i')
+                ->andWhere('i.isActive = 0');
+        }
+
+
         return $query->getQuery()->getResult();
     }
     
