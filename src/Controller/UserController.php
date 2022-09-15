@@ -28,6 +28,7 @@ class UserController extends AbstractController
         public EntityManagerInterface $entityManager
         ) {}
 
+        
     #[Route('/', name: 'app_user_index' ,methods: ['GET'])]
     public function index(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, StructureRepository $structureRepository): Response
     {

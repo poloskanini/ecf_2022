@@ -26,7 +26,9 @@ class SearchType extends AbstractType
       'attr' => [
         'placeholder' => 'Rechercher...'
       ],
-      ])
+    ]);
+
+    $builder
     ->add('active', CheckboxType::class, [
       'label' => 'Actif',
       'required' => false
@@ -39,7 +41,7 @@ class SearchType extends AbstractType
     //   'label' => 'Filtrer',
     //   'attr' => [
     //     'class' => 'btn-sm btn-outline-secondary'
-    //   ]
+    //   ],
     // ])
     
     ;
@@ -50,7 +52,7 @@ class SearchType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Search::class,
             'method' => 'GET',
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 
