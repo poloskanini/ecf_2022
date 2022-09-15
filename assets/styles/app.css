@@ -139,7 +139,7 @@ header {
 
 .navigation li:hover,
 .navigation li.hovered {
-  background-color: #FFF;
+  background-color: #fcfcfc;
 }
 
 .brand-logo {
