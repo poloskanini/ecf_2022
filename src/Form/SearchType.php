@@ -25,7 +25,7 @@ class SearchType extends AbstractType
       'required' => false,
       'attr' => [
         'placeholder' => 'Rechercher...'
-      ]
+      ],
       ])
     ->add('active', CheckboxType::class, [
       'label' => 'Actif',
@@ -38,7 +38,7 @@ class SearchType extends AbstractType
     // ->add('submit', SubmitType::class, [
     //   'label' => 'Filtrer',
     //   'attr' => [
-    //     'class' => 'btn-block btn-sm btn-secondary'
+    //     'class' => 'btn-sm btn-outline-secondary'
     //   ]
     // ])
     

@@ -22,6 +22,7 @@ use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PermissionsRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,9 +42,14 @@ class PartnerController extends AbstractController
     
     // INDEX FOR ALL PARTNERS IN DB
     #[Route('/', name: 'app_partner_index', methods: ['GET'])]
-    public function index(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, PermissionsRepository $permissionsRepository): Response
+    public function index(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, PermissionsRepository $permissionsRepository, PaginatorInterface $paginator): Response
     {
-        $partners = $partnerRepository->findAll();
+        // $partners = $partnerRepository->findAll();
+        $partners = $paginator->paginate(
+            $partnerRepository->findAll(),
+            $request->query->getInt('page', 1),
+            8
+        );
        
         // $usersPartners = $this->entityManager->getRepository(Partner::class)->findAll();
 

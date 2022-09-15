@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Classe\Search;
 use App\Entity\Partner;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -17,9 +19,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class PartnerRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Partner::class);
+        $this->paginator = $paginator;
     }
 
     public function add(Partner $entity, bool $flush = false): void
@@ -42,9 +45,9 @@ class PartnerRepository extends ServiceEntityRepository
 
     /**
      * Requête qui me permet de récupérer les partenaires en fonction de la recherche effectuée dans le form
-     * @return Partner[]
+     * @return PaginationInterface[]
      */
-    public function findWithSearch(Search $search)
+    public function findWithSearch(Search $search): PaginationInterface
     {
         $query = $this
             ->createQueryBuilder('p');
@@ -67,7 +70,12 @@ class PartnerRepository extends ServiceEntityRepository
                 ->andWhere('i.isActive = 0');
         }
 
-        return $query->getQuery()->getResult();
+        $query = $query->getQuery();
+        return $this->paginator->paginate(
+            $query,
+            1,
+            8
+        );
     }
 
 //    /**
