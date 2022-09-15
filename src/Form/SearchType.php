@@ -23,13 +23,17 @@ class SearchType extends AbstractType
       'label' => false,
       'required' => false,
       'attr' => [
-        'placeholder' => 'Rechercher...'
+        'placeholder' => 'Rechercher...',
         ]
       ])
-    // ->add('active', CheckboxType::class, [
-    //   'label' => 'Actif',
-    //   'required' => false
-    // ])
+    ->add('active', CheckboxType::class, [
+      'label' => 'Actif',
+      'required' => false
+    ])
+    ->add('inactive', CheckboxType::class, [
+      'label' => 'Inactif',
+      'required' => false
+    ])
     // ->add('users', EntityType::class, [
     //   'class' => User::class,
     //   'choice_label' => function ($user) {
@@ -40,12 +44,12 @@ class SearchType extends AbstractType
     //   'multiple' => true,
     //   'expanded' => true,
     // ])
-    // ->add('submit', SubmitType::class, [
-    //   'label' => 'Filtrer',
-    //   'attr' => [
-    //     'class' => 'btn-block btn-sm btn-secondary'
-    //   ]
-    // ])
+    ->add('submit', SubmitType::class, [
+      'label' => 'Filtrer',
+      'attr' => [
+        'class' => 'btn-block btn-sm btn-secondary'
+      ]
+    ])
     
     ;
   }

@@ -18,6 +18,7 @@ class Search
   public $users = [];
 
   public $active;
+  public $inactive;
 
   // public function __toString()
   //   {

@@ -55,6 +55,18 @@ class PartnerRepository extends ServiceEntityRepository
                 ->setParameter('string', "%{$search->string}%");
         }
 
+        if(!empty($search->active)) {
+            $query = $query
+                ->leftJoin('p.user', 'u')
+                ->andWhere('u.isActive = 1');
+        }
+
+        if(!empty($search->inactive)) {
+            $query = $query
+                ->leftJoin('p.user', 'i')
+                ->andWhere('i.isActive = 0');
+        }
+
         return $query->getQuery()->getResult();
     }
 
