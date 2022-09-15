@@ -400,6 +400,10 @@ input:checked + .slider:before {
   color: var(--blue);
 }
 
+#submit {
+  margin: 0 .5rem;
+}
+
 .search input::placeholder {
   color: var(--blue);
 }
