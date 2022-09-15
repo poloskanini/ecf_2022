@@ -15,7 +15,7 @@
 
             {% if is_granted('ROLE_USER') %}
 
-            <h3>Bienvenue {{ app.user.name }}.</h3>
+            <h3>Bienvenue, {{ app.user.name }}.</h3>
             <h6>Vous êtes dans l'administration de "STUDI FITNESS GROUP".</h6>
             <p>Votre adresse mail est <a href="mailto:{{ app.user.email }}">{{ app.user.email }}</a>, vous possédez l'ID {{ app.user.id }} et votre compte est {% if app.user.isActive == 1 %} Actif {% else %}
                 Inactif {% endif %}
@@ -162,8 +162,8 @@
 
         {% if is_granted('ROLE_ADMIN') %}
 
-        <div class="boxes container-fluid">
-            <a class="box" href="{{ path('app_user_index') }}">
+        <div class="boxes row">
+            <a class="box col-3" href="{{ path('app_user_index') }}">
                 <i class="fa fa-users"></i>
                 <div class="box-data">
                     <h3>{{ users|length - 1 }}</h3>
@@ -172,7 +172,7 @@
                 </div>
             </a>
 
-            <a class="box" href="{{ path('app_partner_index') }}">
+            <a class="box col-3" href="{{ path('app_partner_index') }}">
                 <i class="fa fa-handshake"></i>
                 <div class="box-data">
                     <h3>{{ partners|length }}</h3>
@@ -180,7 +180,7 @@
                 </div>
             </a>
 
-            <a class="box" href="{{ path('app_structure_index') }}">
+            <a class="box col-3" href="{{ path('app_structure_index') }}">
                 <i class="fa fa-building"></i>
                 <div class="box-data">
                     <h3>{{ structures|length }}</h3>

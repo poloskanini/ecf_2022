@@ -417,7 +417,7 @@ input:checked + .slider:before {
 }
 
 /** SIDEBAR Responsive Design **/
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
   .navigation {
     left: -300px;
     background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgba(118, 75, 162, 1));
@@ -665,9 +665,22 @@ form .form-check {
 
 .form-check-structure {
   /* background-color: rgb(206, 48, 184); */
-  background-color: rgb(191, 110, 226);
+  /* background-color: rgb(191, 110, 226); */
   background-color: #E45D99;
 }
+
+.partner-name:hover {
+  background-color: rgb(56, 167, 241);
+  color: #FFF;
+  transition: .2s;
+}
+
+.structure-name:hover {
+  background-color: #f873af;
+  color: #FFF;
+  transition: .2s;
+}
+
 
 .form-error-icon {
   color: red;
@@ -703,12 +716,8 @@ form .form-check {
 
 /** Table **/  
 
-.responsive-table-line {
-  padding: 1rem;
-}
-
 .table {
-  background-color: #FFF;
+  background-color: #fcfcfc;
   border-radius: 5px;
 }
 
