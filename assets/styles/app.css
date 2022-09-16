@@ -636,6 +636,7 @@ form .form-check {
 }
 
 .form-check {
+  color: #000;
   border-radius: 10px;
   padding: .3rem;
   color: #FFF;

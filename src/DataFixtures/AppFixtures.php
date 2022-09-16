@@ -53,6 +53,12 @@ class AppFixtures extends Fixture
         $orangeUser5 = new User();
         $orangePartner5 = new Partner();
         $orangePartner5Permissions = new Permissions();
+
+        //?  USER 6 (PARTENAIRE)
+        $orangeUser6 = new User();
+        $orangePartner6 = new Partner();
+        $orangePartner6Permissions = new Permissions();
+
  
         // USER 1
         $orangeUser1
@@ -74,6 +80,7 @@ class AppFixtures extends Fixture
             ->setName('Directeur Pomme Jaune CALAIS')
             ->setEmail('calais@partenaire.fr')
             ->setRoles(['ROLE_PARTENAIRE'])
+            ->setIsActive(false)
             ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
         ;
         // PARTNER 5 (rattaché à User 5)
@@ -84,6 +91,20 @@ class AppFixtures extends Fixture
             ->addPermission($orangePartner5Permissions)
         ;
 
+         // USER 6
+        $orangeUser6
+            ->setName('Directeur Pomme Jaune SAINTE CLOTILDE')
+            ->setEmail('sainteclotilde@partenaire.fr')
+            ->setRoles(['ROLE_PARTENAIRE'])
+            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
+        ;
+        // PARTNER 6 (rattaché à User 6)
+        $orangePartner6
+            ->setName('La Pomme Jaune Sainte Clotilde')
+            ->setUser($orangeUser6)
+            ->addPermission($orangePartner6Permissions)
+        ;
+        
         // USER 2
         $orangeUser2
             ->setName('Club Rue du Sable - Dunkerque')
@@ -133,6 +154,15 @@ class AppFixtures extends Fixture
             ->setIsConcours('1')
         ;
 
+        // PERMISSIONS PARTNER 6
+        $orangePartner6Permissions
+            ->setIsPlanning('0')
+            ->setIsNewsletter('1')
+            ->setIsBoissons('1')
+            ->setIsSms('0')
+            ->setIsConcours('1')
+        ;
+
         // PERMISSIONS STRUCTURE 2
         $orangeStructurePermissions
             ->setIsPlanning($orangePartnerPermissions->isIsPlanning())
@@ -161,6 +191,15 @@ class AppFixtures extends Fixture
             ->setIsConcours($orangePartner5Permissions->isIsConcours())
         ;
 
+        // PERMISSIONS PARTENAIRE 6
+        $orangePartner6Permissions
+            ->setIsPlanning($orangePartner6Permissions->isIsPlanning())
+            ->setIsNewsletter($orangePartner6Permissions->isIsNewsletter())
+            ->setIsBoissons($orangePartner6Permissions->isIsBoissons())
+            ->setIsSms($orangePartner6Permissions->isIsSms())
+            ->setIsConcours($orangePartner6Permissions->isIsConcours())
+        ;
+
 
         // Commits
         $manager->persist($adminUser);
@@ -168,13 +207,16 @@ class AppFixtures extends Fixture
         $manager->persist($orangeUser2);
         $manager->persist($orangeUser4);
         $manager->persist($orangeUser5);
+        $manager->persist($orangeUser6);
         $manager->persist($orangePartner1);
         $manager->persist($orangePartner5);
+        $manager->persist($orangePartner6);
         $manager->persist($orangeStructure2);
         $manager->persist($orangeStructure4);
         $manager->persist($orangePartnerPermissions);
         $manager->persist($orangeStructure4Permissions);
         $manager->persist($orangePartner5Permissions);
+        $manager->persist($orangePartner6Permissions);
 
         // Push
         $manager->flush();
