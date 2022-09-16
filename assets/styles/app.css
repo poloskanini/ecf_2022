@@ -659,15 +659,29 @@ form .form-check {
   background-color: rgb(189, 189, 4);
 }
 
-.form-check-partner {
+.form-check-partner,
+.partner {
   background-color: rgb(44, 127, 182);
+  color: white;
   /* background-color: #06a9c6; */
 }
 
-.form-check-structure {
+.partner:hover {
+  background-color: rgb(4, 85, 139);
+  color: white;
+}
+
+.form-check-structure,
+.structure {
   /* background-color: rgb(206, 48, 184); */
   /* background-color: rgb(191, 110, 226); */
   background-color: #E45D99;
+  color: white;
+}
+
+.structure:hover {
+  background-color: #d73980;
+  color: white;
 }
 
 .partner-name:hover {
