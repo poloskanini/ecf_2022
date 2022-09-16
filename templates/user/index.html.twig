@@ -33,7 +33,11 @@
         </div>
     </div>
 
-    <h1 class="my-4">Tous les utilisateurs :</h1>
+    <div class="col d-flex align-items-center">
+        <h1 class="my-4 me-2">Tous les utilisateurs  </h1>
+        <span class="my-4">({{ users|length }})</span> 
+        {# Tous les utilisateurs - 1 (admin) #}
+    </div>
 
     
     <div class="responsive-table-line">

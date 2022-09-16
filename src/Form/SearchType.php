@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 
 class SearchType extends AbstractType
 {
@@ -41,10 +42,9 @@ class SearchType extends AbstractType
       'label' => 'OK',
       'attr' => [
         'class' => 'btn-secondary',
-        'style' => '--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;'
+        'style' => '--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;'
       ],
     ])
-    
     ;
   }
 

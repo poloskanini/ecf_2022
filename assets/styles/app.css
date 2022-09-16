@@ -199,6 +199,10 @@ main.active {
   left: 80px;
 }
 
+span.users-count {
+  font-size: .5rem !important;
+}
+
 /** TOPBAR **/
 .topbar {
   width: 100%;
@@ -617,18 +621,6 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
-/* .login-logout .menu::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  right: 15px;
-  width: 20px;
-  height: 20px;
-  transform: rotate(45deg);
-  background: #FFF;
-  z-index: 1;
-} */
-
 /** Buttons Form and notifications**/
 .crud-button,
 .back-button {
@@ -765,10 +757,6 @@ form .form-check {
     text-align: left;
     padding: 2px;
   }
-
-  /* .form-check {
-    display: inline-block;
-  } */
 }
 
 /** Boxes **/
