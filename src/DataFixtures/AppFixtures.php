@@ -98,6 +98,7 @@ class AppFixtures extends Fixture
             ->setRoles(['ROLE_PARTENAIRE'])
             ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
         ;
+
         // PARTNER 6 (rattaché à User 6)
         $orangePartner6
             ->setName('La Pomme Jaune Sainte Clotilde')
@@ -112,6 +113,7 @@ class AppFixtures extends Fixture
             ->setRoles(['ROLE_STRUCTURE'])
             ->setPassword($this->passwordHasher->hashPassword($orangeUser2, ('sable')))
         ;
+
         // STRUCTURE 2 (rattaché à User 2)
         $orangeStructure2
             ->setUser($orangeUser2)
@@ -128,6 +130,7 @@ class AppFixtures extends Fixture
             ->setIsActive(false)
             ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('inactif')))
         ;
+
         // STRUCTURE 4 INACTIVE (rattaché à User 3)
         $orangeStructure4
             ->setUser($orangeUser4)
@@ -172,7 +175,6 @@ class AppFixtures extends Fixture
             ->setIsConcours($orangePartnerPermissions->isIsConcours())
         ;
 
-
         // PERMISSIONS STRUCTURE 4
         $orangeStructure4Permissions
             ->setIsPlanning($orangePartner5Permissions->isIsPlanning())
@@ -199,7 +201,6 @@ class AppFixtures extends Fixture
             ->setIsSms($orangePartner6Permissions->isIsSms())
             ->setIsConcours($orangePartner6Permissions->isIsConcours())
         ;
-
 
         // Commits
         $manager->persist($adminUser);
