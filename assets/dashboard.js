@@ -37,3 +37,13 @@ const loginMenu = document.querySelector(".menu");
 profile.onclick = function() {
   loginMenu.classList.toggle("active");
 }
+
+// Modale
+const modaleContainer = document.querySelector(".modale-container");
+const modaleTriggers = document.querySelectorAll(".modale-trigger");
+
+modaleTriggers.forEach(trigger => trigger.addEventListener("click", toggleModale));
+
+function toggleModale() {
+  modaleContainer.classList.toggle("active");
+}

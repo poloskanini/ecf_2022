@@ -171,7 +171,7 @@ class PartnerController extends AbstractController
                 return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
 
             } else {
-                // Notification email si l'utilisateur est déja enregistré
+                $notification = 'Cet email est déjà enregistré.';
             }
         }
 
@@ -351,9 +351,11 @@ class PartnerController extends AbstractController
             $manager->remove($partner); //REMOVE
             $manager->flush();
             
+            
             $this->addFlash(
                 'danger',
                 'Le partenaire "' .$partner->getName(). '" a été supprimé avec succès'
+                
         );
 
         return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);

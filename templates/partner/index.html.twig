@@ -151,20 +151,45 @@
                         <a class="crud-button link-danger fa fa-trash mx-2 confirm-action" href="{{ path('app_partner_delete', {'id':partner.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce partenaire ?')"></a>
                     </td>
                 </tr>
+
+                {# Modale Suppression #}
+                <div class="modale-container modale-delete">
+
+                    <div class="overlay modale-trigger">
+
+                        <div class="modale">
+                            <div class="modale-body text-center">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-circle-xmark fa-delete"></i>
+                                </div>
+                                <h3 class="my-4">Êtes-vous sûr ?</h3>
+                            </div>
+                            <div class="modale-content">
+                                <p>Cette action entrainera la suppression définitive de l'utilisateur</p>
+                                <p>Souhaitez-vous continuer ?</p>
+                            </div>
+                            <div class="modale-footer justify-content-center">
+                                <button type="button" class="btn btn-secondary me-3" >Annuler</button>
+                                <button type="submit" name"submit" value="submit" class="btn delete-confirm">Supprimer</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                
                 
             {% endfor %}
             {% endfor %}
 
             
+
+
+            
         </tbody>
     
     </table>
-    
-    {# <div class="row d-flex justify-content-center">
-        <div class="col">
-            {{ knp_pagination_render(partners, 'pagination/pagination.html.twig') }}
-        </div>
-    </div> #}
+
 
     <div class="row my-5">
         <div class="col">

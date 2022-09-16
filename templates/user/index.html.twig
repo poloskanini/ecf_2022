@@ -12,14 +12,14 @@
 
     {# Flash message "Correctement ajouté" #}
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show my-4" role="alert">
             <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
             {{ message }}
         </div>
     {% endfor %}
 
     {% for message in app.flashes('danger') %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show my-4" role="alert">
             <button type="button" data-bs-dismiss="alert" class="btn-close" aria-label="Close"></button>
             {{ message }}
         </div>
