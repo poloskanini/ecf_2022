@@ -212,6 +212,10 @@ span.users-count {
   padding: 0 10px;
 }
 
+.toggle.active .topbar {
+  justify-content: flex-end;
+}
+
 /** TOGGLE MENU BUTTON **/
 .toggle {
   position: relative;
@@ -429,6 +433,7 @@ input:checked + .slider:before {
   .navigation {
     left: -300px;
     background: linear-gradient(to bottom, rgba(67, 100, 247, 1), rgba(118, 75, 162, 1));
+    z-index: 10;
   }
 
   .navigation.active {
@@ -533,10 +538,6 @@ input:checked + .slider:before {
   
   main.active .toggle::after {
     background-color: #FFF;
-  }
-
-  .search {
-    visibility: hidden;
   }
 
   .home-content {
