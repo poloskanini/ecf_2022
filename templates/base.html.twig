@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <title>{% block title %}STUDI FITNESS{% endblock %}</title>
-  {# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> #}
-
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ asset('build/images/faviconstudi.png') }}" />
   <!-- Font Awesome -->
@@ -53,7 +51,7 @@
               </span>
             </a>
           </li>
-          <li class="">
+          <li>
             {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('home') }}">
               <span class="icon">
@@ -118,15 +116,6 @@
       <div class="topbar">
 
         <div class="toggle"></div>
-
-        {# {% if block ('searchBar') is defined %}
-        <div class="search">
-          <label>
-            <input type="text" placeholder="Search...">
-            <i class="fa fa-search"></i>
-          </label>
-        </div>
-        {% endif %} #}
 
         {# Login-Logout #}
         <div class="login-logout">
