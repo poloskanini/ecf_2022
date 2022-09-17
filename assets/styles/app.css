@@ -538,6 +538,10 @@ input:checked + .slider:before {
   .search {
     visibility: hidden;
   }
+
+  .home-content {
+    background-color: #fcfcfc;
+  }
 }
 
 /** LOGIN-LOGOUT BUTTON **/

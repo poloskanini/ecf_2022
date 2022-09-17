@@ -14,13 +14,15 @@
             {% endif %}
 
             {% if is_granted('ROLE_USER') %}
-
-            <h3>Bienvenue, {{ app.user.name }}.</h3>
-            <h6>Vous êtes dans l'administration de "STUDI FITNESS GROUP".</h6>
-            <p>Votre adresse mail est <a href="mailto:{{ app.user.email }}">{{ app.user.email }}</a>, vous possédez l'ID {{ app.user.id }} et votre compte est {% if app.user.isActive == 1 %} Actif {% else %}
-                Inactif {% endif %}
-            </p>
-            <hr>
+            
+            <div class="home-content">
+                <h3>Bienvenue, {{ app.user.name }}.</h3>
+                <h6>Vous êtes dans l'administration de "STUDI FITNESS GROUP".</h6>
+                <p>Votre adresse mail est <a href="mailto:{{ app.user.email }}">{{ app.user.email }}</a>, vous possédez l'ID {{ app.user.id }} et votre compte est {% if app.user.isActive == 1 %} Actif {% else %}
+                    Inactif {% endif %}
+                </p>
+                <hr>
+            </div>
             
             {% if is_granted('ROLE_PARTENAIRE') %}
 
