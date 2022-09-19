@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
 
         $adminUser
         ->setName('Admin')
-        ->setEmail('admin@admin.fr')
+        ->setEmail('admin_sfg@admin.fr')
         ->setRoles(['ROLE_ADMIN'])
         ->setPassword($this->passwordHasher->hashPassword($adminUser, ('admin123$')));
 
@@ -63,7 +63,7 @@ class AppFixtures extends Fixture
         // USER 1
         $orangeUser1
             ->setName('Directeur Orange Bleue DUNKERQUE')
-            ->setEmail('dunkerque@partenaire.fr')
+            ->setEmail('dunkerque_sfg@partenaire.fr')
             ->setRoles(['ROLE_PARTENAIRE'])
             ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('dunkerque123$')))
         ;
@@ -78,7 +78,7 @@ class AppFixtures extends Fixture
          // USER 5
         $orangeUser5
             ->setName('Directeur Pomme Jaune CALAIS')
-            ->setEmail('calais@partenaire.fr')
+            ->setEmail('calais_sfg@partenaire.fr')
             ->setRoles(['ROLE_PARTENAIRE'])
             ->setIsActive(false)
             ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais123$')))
@@ -94,9 +94,9 @@ class AppFixtures extends Fixture
          // USER 6
         $orangeUser6
             ->setName('Directeur Pomme Jaune SAINTE CLOTILDE')
-            ->setEmail('sainteclotilde@partenaire.fr')
+            ->setEmail('sainteclotilde_sfg@partenaire.fr')
             ->setRoles(['ROLE_PARTENAIRE'])
-            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
+            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('sainteclotilde123$')))
         ;
 
         // PARTNER 6 (rattaché à User 6)
@@ -109,9 +109,9 @@ class AppFixtures extends Fixture
         // USER 2
         $orangeUser2
             ->setName('Club Rue du Sable - Dunkerque')
-            ->setEmail('ruedusable@structure.fr')
+            ->setEmail('ruedusable_sfg@structure.fr')
             ->setRoles(['ROLE_STRUCTURE'])
-            ->setPassword($this->passwordHasher->hashPassword($orangeUser2, ('sable')))
+            ->setPassword($this->passwordHasher->hashPassword($orangeUser2, ('sable123$')))
         ;
 
         // STRUCTURE 2 (rattaché à User 2)
@@ -125,10 +125,10 @@ class AppFixtures extends Fixture
         // USER 4 INACTIF
         $orangeUser4
             ->setName('Club Inactif - Calais')
-            ->setEmail('inactif@inactif.fr')
+            ->setEmail('inactif_sfg@inactif.fr')
             ->setRoles(['ROLE_STRUCTURE'])
             ->setIsActive(false)
-            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('inactif')))
+            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('inactif123$')))
         ;
 
         // STRUCTURE 4 INACTIVE (rattaché à User 3)
