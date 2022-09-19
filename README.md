@@ -7,9 +7,9 @@ Projet réalisé dans le cadre de l'ECF Décembre 2022.
 
 ## Tech Stack
 
-- **Frontend:** HTML / CSS / JavaScript / Bootstrap 5
+- **Frontend:** HTML / CSS / JavaScript / Bootstrap 5 / WebPack Encore
 - **Moteur de Template:** Twig
-- **Backend:** PHP, Symfony 5.4.12
+- **Backend:** MySQL / PHP 8.1.8 / Symfony 6.1 / Composer / ORM Doctrine
 - **Base de données :** MySQL - MariaDB
 
 
@@ -65,7 +65,7 @@ cd ecf_2022
   # Avec npm
   npm install
   # Avec yarn
-  yarn
+  yarn install
 ```
 
 ### 3. Compiler les Assets
@@ -81,10 +81,10 @@ cd ecf_2022
 
 ## Création de la base de données
 
-Pour créer la base de données, il faut au préalable démarrer le serveur MySql si il ne l'est pas.
+Pour créer la base de données, il faut au préalable démarrer le serveur MySQL s'il ne l'est pas.
 
 > 💡<b>INFO :</b>
-> Le mot clef `symfony console` peut être remplacé par `php bin/console` si vous n'utilisez pas le CLI de Symfony.
+> Le mot clef `symfony console` peut être remplacé par `php bin/console` si vous n'utilisez pas la CLI de Symfony.
 
 
 ```bash
@@ -92,11 +92,11 @@ symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
 ```
 
-<!-- ### Charger des datas en base de données
+### Charger des datas en base de données
 
 ```bash
 symfony console doctrine:fixtures:load -n
-``` -->
+```
 
 ## Lancer l'application
 
@@ -108,13 +108,17 @@ Pour démarrer l'application
 
 ## Explications du sujet
 
-> Notre client, une grande marque de salles de sport, veut gérer les droits d'accès et de permissions d'une app web pour ses clients
-franchisés qui possèdent des salles de sport.
+> Dans le cadre de ma formation de Développeur Web & Web Mobile chez STUDI, j’ai dû réaliser un projet complet dans un temps imparti.
+
+> Notre client, une grande marque de salles de sport, veut gérer les droits d'accès et de permissions d'une application web pour ses clients franchisés qui possèdent des salles de sport. Pour ce faire, il nous demande de développer un « panel admin » permettant de gérer ses utilisateurs ainsi que leurs droits et permissions.
 > Chaque franchise (PARTENAIRE) a son propre contrat qui dépend de la somme qu’elle verse au client. Plus ou moins de permissions lui seront alors accessibles.
 
-> Chaque PARTENAIRE (franchise) peut posséder plusieurs STRUCTURES (clubs de gym), et leur donne par défaut un nombre de permissions (outil de planning, newsletters, SMS, etc...) en fonction du contrat qu'il aura souscrit avec la marque.
+> Chaque PARTENAIRE (franchise) peut posséder plusieurs STRUCTURES (clubs de gym), et il leur donne par défaut un nombre de permissions (outil de planning, newsletters, SMS, etc.) en fonction du contrat qu'il aura souscrit avec la marque.
 
 > Chaque STRUCTURE (club de gym) est rattachée à un partenaire, et elle peut choisir d'activer ou non les permissions données par défaut par le contrat du partenaire.
 
-> Les Partenaires et Structures ont un accès en LECTURE SEULE à leurs informations.
-> Pour toute modification sur leurs permissions ou informations, ils doivent contacter l'administrateur STUDI FITNESS qui est le seul à avoir les pleins pouvoirs.
+> Les Partenaires et Structures ont un accès en LECTURE SEULE à leurs informations. Pour toute modification sur leurs permissions ou informations, ils doivent contacter l'administrateur STUDI FITNESS qui est le seul à avoir les pleins pouvoirs.
+
+> Le projet a été réalisé avec le framework SYMFONY.
+La partie FRONT-END a été réalisée en HTML / CSS / JavaScript / Bootstrap / Twig / Encore.
+La partie BACK-END a été réalisée en MySQL / Symfony / Composer, ainsi que l’ORM Doctrine pour la création et gestion de la BDD (fichiers de migration).
