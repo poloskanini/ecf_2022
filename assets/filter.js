@@ -33,7 +33,6 @@ export default class Filter {
     data.forEach((value, key) => {
       params.append(key, value)
     })
-    debugger
     return this.loadUrl(url.pathname + '?' + params.toString())
   }
 
