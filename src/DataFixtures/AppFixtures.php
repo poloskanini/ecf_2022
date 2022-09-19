@@ -32,7 +32,7 @@ class AppFixtures extends Fixture
         ->setName('Admin')
         ->setEmail('admin@admin.fr')
         ->setRoles(['ROLE_ADMIN'])
-        ->setPassword($this->passwordHasher->hashPassword($adminUser, ('admin')));
+        ->setPassword($this->passwordHasher->hashPassword($adminUser, ('admin123$')));
 
         //?  USER 1 (PARTENAIRE)
         $orangeUser1 = new User();
@@ -65,7 +65,7 @@ class AppFixtures extends Fixture
             ->setName('Directeur Orange Bleue DUNKERQUE')
             ->setEmail('dunkerque@partenaire.fr')
             ->setRoles(['ROLE_PARTENAIRE'])
-            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('dunkerque')))
+            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('dunkerque123$')))
         ;
         // PARTNER 1 (rattaché à User 1)
         $orangePartner1
@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
             ->setEmail('calais@partenaire.fr')
             ->setRoles(['ROLE_PARTENAIRE'])
             ->setIsActive(false)
-            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais')))
+            ->setPassword($this->passwordHasher->hashPassword($orangeUser1, ('calais123$')))
         ;
         // PARTNER 5 (rattaché à User 5)
         $orangePartner5
