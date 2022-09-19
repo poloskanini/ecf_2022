@@ -31,6 +31,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/partner')]
 #[IsGranted('ROLE_ADMIN')]
@@ -56,6 +57,13 @@ class PartnerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $partners = $this->entityManager->getRepository(Partner::class)->findWithSearch($search);
+        }
+
+        // Si la requête est une requête AJAX
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('partner/_partners.html.twig', ['partners' => $partners])
+            ]);
         }
 
         return $this->render('partner/index.html.twig', [

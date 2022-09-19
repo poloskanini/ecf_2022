@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -42,6 +43,14 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $users = $this->entityManager->getRepository(User::class)->findWithSearch($search);
         }
+
+        // Si la requête est une requête AJAX
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('user/_users.html.twig', ['users' => $users])
+            ]);
+        }
+
         
         return $this->render('user/index.html.twig', [
             'users' => $users,

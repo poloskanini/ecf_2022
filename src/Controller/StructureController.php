@@ -24,6 +24,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,9 +58,6 @@ class StructureController extends AbstractController
         $partnerPermissions = $doctrine->getRepository(Permissions::class)->find($permPartnerId);
         // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du partner_permissions.
 
-        // dump($partnerPermissions);
-        // die;
-
         // Récupérer les permissions du partenaire
         // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
         $permArray = ($structure->getPermissions()->getValues());
@@ -79,6 +77,13 @@ class StructureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $structures = $this->entityManager->getRepository(Structure::class)->findWithSearch($search);
+        }
+
+        // Si la requête est une requête AJAX
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('structure/_structures.html.twig', ['structures' => $structures])
+            ]);
         }
 
 

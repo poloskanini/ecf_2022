@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid js-filter">
 
     {# Flash message "Correctement ajouté" #}
     {% for message in app.flashes('success') %}
@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-md-3 search">
             <i class="fa fa-search"></i>
-            {% include 'partner/_filter.html.twig' %}
+            {% include 'ajaxFilter/_filter.html.twig' %}
         </div>
     </div>
 
@@ -52,45 +52,9 @@
                     <th scope="col">Email</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for user in users %}
-                    <tr class="">
-                        <td data-title="ID :">{{ user.id }}</td>
-                        <td class="align-middle">
-                            {% if user.isActive == true %}
-                                    <div class="form-check form-check-active">Actif</div>
-                                {% else %}
-                                    <div class="form-check form-check-inactive">Inactif</div>
-                                {% endif %}
-                        </td>
-                        {% for role in user.roles %}
-                            {% if role == 'ROLE_ADMIN' %}
-                                <td>
-                                    <div class="form-check form-check-admin">Admin</div>
-                                </td>
-                                {% elseif role == 'ROLE_PARTENAIRE' %}
-                                <td>
-                                    <div class="form-check form-check-partner">Partenaire</div>
-                                </td>
-                                {% elseif role == 'ROLE_STRUCTURE' %}
-                                <td>
-                                    <div class="form-check form-check-structure">Structure</div>
-                                </td>
-                            {% endif %}
-                        {% endfor %}
-                        <td data-title="Nom :">{{ user.name }}</td>
-                        <td data-title="Email :">{{ user.email }}</td>
-                        
-                        
-                        {# <td class="align-middle">
-                            <a class="crud-button link-primary fa fa-pen-square mx-2" aria-label="Editer" href="{{ path('app_user_edit', {'id': user.id}) }}"></a>
-                            <a class="crud-button link-success fa fa-eye mx-2" href="{{ path('app_user_show', {'id': user.id}) }}"></a>
-                            <a class="crud-button link-danger fa fa-trash mx-2 confirm-action" href="{{ path('app_user_delete', {'id': user.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></a>
-                        </td> #}
-                    </tr>
-                    
-                {% endfor %}
-                
+
+            <tbody class="js-filter-content">
+                {% include 'user/_users.html.twig'%}
             </tbody>
         
         </table>
@@ -98,33 +62,8 @@
         {# <a class="btn btn-primary" href="{{ path('app_user_new') }}">Créer un nouvel utilisateur </a>
         <sub>👈🏼 <b>ATTENTION ->INCOMPLET</b> : Ce bouton crée uniquement une instance de USER / L'utilisateur n'est pas relié à une entité Partner ou une entité Structure. Elle en a juste le ROLE (user), qui apparait dans l'index.</sub> #}
 
-
     </div>
-    
 
-
-    <!-- Modal -->
-    {# <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content text-center">
-        <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-            <div class="icon-box">
-                <i class="fa-solid fa-circle-xmark fa-delete"></i>
-            </div>
-            <h3 class="my-4">Êtes-vous sûr ?</h3>
-        </div>
-        <p class="m-0">Cette action entrainera la suppression définitive de l'utilisateur</p>
-        <p>Souhaitez-vous continuer ?</p>
-        <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            <button type="submit" name"submit" value="submit" class="btn delete-confirm">Supprimer</button>
-        </div>
-        </div>
-    </div>
-    </div> #}
 
 </div>
 
