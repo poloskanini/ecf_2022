@@ -28,7 +28,7 @@
             
             {% if is_granted('ROLE_PARTENAIRE') %}
 
-            <h4 class="mb-4">VOTRE CONTRAT :</h4>
+            <h4 class="mb-4">MON CONTRAT :</h4>
             <h6 class="form-check form-check-partner d-inline">Vous disposez d'un contrat "Partenaire"</h6>
             <p class="mt-3">
                 <i class="fa fa-handshake"></i>
@@ -36,7 +36,7 @@
             </p>
             <hr>
 
-            <h4 class="mb-4">VOS STRUCTURES :</h4>
+            <h4 class="mb-4">MES STRUCTURES :</h4>
 
             <div class="row d-flex h-100 mt-3">
                {% for structure in app.user.partner.structures %}
@@ -125,7 +125,7 @@
             {# Endif Role Partenaire #}
 
             {% if is_granted('ROLE_STRUCTURE') %}
-            <h4 class="mb-4">VOTRE CONTRAT :</h4>
+            <h4 class="mb-4">MON CONTRAT :</h4>
             <h6 class=" form-check form-check-structure d-inline">Vous disposez d'un contrat "Structure"</h6>
             <hr>
 
