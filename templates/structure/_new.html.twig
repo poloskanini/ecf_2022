@@ -68,81 +68,34 @@
                     {{ form_widget(form.postalAdress)}}
                     {{ form_errors(form.postalAdress)}}
                 </div>
+                
+                <a href="{{ path('app_structure_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>
+                <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Ajouter la structure
+                </button>
 
-
-                {# <div class="container-fluid h-100">
-                    <div class="row d-flex justify-content-center align-items-center h-100">
-                        <div class="col col-xl-10">
-                            <div class="card" style="border-radius: 1rem;">
-                                <div class="col d-flex align-items-center">
-                                    <div class="card-body text-black text-center">
-                                        <div class="d-flex align-items-center justify-content-center mb-3 pb-1 fs-3 ">
-                                            <h4>Fonctionnalités activées</h4>
-                                        </div>
-                                        <div class="toggle-permissions text-center my-5">
-                                            <div class="toggle-permissions-wrapper d-flex justify-content-around my-4 flex-wrap">
-                                                <div class="row">
-                                                    <div class="col permission newsletter">
-                                                        <div class="form-group">
-                                                        <i class="fa-solid fa-calendar-days"></i>
-                                                        <p class="m-0">Planning</p>
-                                                            {{ form_widget(form.isPlanning)}}
-                                                            {{ form_errors(form.isPlanning)}}
-                                                            
-                                                        </div>                                                
-                                                    </div>
-
-                                                    <div class="col permission newsletter">
-                                                        <div class="form-group">
-                                                        <i class="fa-solid fa-envelope"></i>
-                                                        <p class="m-0">Newsletter</p>
-                                                            {{ form_label(form.isNewsletter)}}
-                                                            {{ form_widget(form.isNewsletter)}}
-                                                            {{ form_errors(form.isNewsletter)}}
-                                                        </div>                                         
-                                                    </div>
-
-                                                    <div class="col permission newsletter">
-                                                        <div class="form-group">
-                                                        <i class="fas fa-cocktail"></i>
-                                                        <p class="m-0">Boissons</p>
-                                                            {{ form_label(form.isBoissons)}}
-                                                            {{ form_widget(form.isBoissons)}}
-                                                            {{ form_errors(form.isBoissons)}}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col permission newsletter">
-                                                        <div class="form-group">
-                                                        <i class="fa-solid fa-comment-sms"></i>
-                                                        <p class="m-0">SMS</p>
-                                                            {{ form_label(form.isSms)}}
-                                                            {{ form_widget(form.isSms)}}
-                                                            {{ form_errors(form.isSms)}}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col permission newsletter">
-                                                        <div class="form-group">
-                                                        <i class="fa-solid fa-trophy"></i>
-                                                        <p class="m-0">Concours</p>
-                                                            {{ form_label(form.isConcours)}}
-                                                            {{ form_widget(form.isConcours)}}
-                                                            {{ form_errors(form.isConcours)}}
-                                                        </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content text-center">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <div class="icon-box box-confirm-structure">
+                                    <i class="fa-solid fa-check"></i>
                                 </div>
+                                <h3 class="my-4">Êtes-vous sûr ?</h3>
+                            </div>
+                            <p class="m-0">Cette action entrainera la création d'une nouvelle structure.</p>
+                            <p>Souhaitez-vous continuer ?</p>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                <button type="submit" name"submit" value="submit" class="btn form-check-structure my-4">Ajouter</button>
                             </div>
                         </div>
                     </div>
-                </div> #}
-                
-
-                <a href="{{ path('app_structure_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>
-                <button type="submit" class="btn btn-primary my-4" value="Enregistrer" onclick="return confirm('Êtes-vous sûr de vouloir ajouter cette nouvelle structure ?')">Confirmer</button>
+                </div>
 
                 {{ form_end(form) }}
             </div>

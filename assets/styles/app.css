@@ -670,13 +670,14 @@ form .form-check {
 
 .form-check-partner,
 .partner {
-  background-color: rgb(44, 127, 182);
+  background-color: rgb(44, 127, 182) !important;
   color: white;
   /* background-color: #06a9c6; */
 }
 
+.form-check-partner:hover,
 .partner:hover {
-  background-color: rgb(4, 85, 139);
+  background-color: rgb(4, 85, 139) !important;
   color: white;
 }
 
@@ -684,12 +685,13 @@ form .form-check {
 .structure {
   /* background-color: rgb(206, 48, 184); */
   /* background-color: rgb(191, 110, 226); */
-  background-color: #E45D99;
+  background-color: #E45D99 !important;
   color: white;
 }
 
+.form-check-structure:hover,
 .structure:hover {
-  background-color: #d73980;
+  background-color: #d73980 !important;
   color: white;
 }
 
@@ -704,7 +706,6 @@ form .form-check {
   color: #FFF;
   transition: .2s;
 }
-
 
 .form-error-icon {
   color: red;
@@ -724,8 +725,18 @@ form .form-check {
 .modal-content {
   color: #636363;
 }
-.icon-box i {
+
+.icon-box-delete i {
   color: var(--red1);
+}
+
+.box-confirm-partner i {
+  color: rgb(44, 127, 182);
+}
+
+.box-confirm-structure i {
+  color: #E45D99;
+
 }
 
 .delete-confirm {
