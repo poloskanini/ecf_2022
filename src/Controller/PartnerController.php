@@ -167,8 +167,7 @@ class PartnerController extends AbstractController
 
                 $content .= "<hr> <br/><br/><br/>";
                 $content .= "Votre email de connexion est " .$user->getEmail(). ".<br><br>";
-                $content .= "Votre mot de passe est " .$user->getPassword(). "<br><br/>";
-                $content .= "<h3>Ce mot de passe est temporaire, vous pouvez le redéfinir en <a href='https://sfg.nicolasbarthes.com".$resetPasswordUrl."'> CLIQUANT ICI </a></h3><br/><br/><br/>";
+                $content .= "<h3>Pour des raisons de sécurité, vous devez demander à redéfinir votre mot de passe en <a href='https://sfg.nicolasbarthes.com".$resetPasswordUrl."'> CLIQUANT ICI </a>. Une fois la demande de réinitialisation effectuée, vous disposerez de 3 heures pour le modifier.</h3><br/><br/><br/>";
 
                 $content .= "A très bientôt chez STUDI FITNESS !";
 
