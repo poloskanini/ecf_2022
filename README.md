@@ -3,8 +3,6 @@
 
 Projet réalisé dans le cadre de l'ECF Décembre 2022.
 
-[TOC]
-
 
 ## Tech Stack
 
