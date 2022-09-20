@@ -72,18 +72,12 @@ class PartnerType extends AbstractType
                     'attr' => [
                         'placeholder' => 'Merci de saisir votre mot de passe'
                     ],
-                    // 'row_attr' => [
-                    //     'class' => 'col-6', 
-                    // ]
                 ],
                 'second_options' => [
                     'label' => 'Confirmez votre mot de passe',
                     'attr' => [
                         'placeholder' => 'Merci de saisir un mot de passe'
                     ],
-                    // 'row_attr' => [
-                    //     'class' => 'col-6', 
-                    // ]
                 ],
                 
             ])

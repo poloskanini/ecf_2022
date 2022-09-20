@@ -29,6 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotCompromisedPassword]
     private ?string $password;
 
     #[ORM\Column(length: 255)]
