@@ -219,25 +219,14 @@ class PartnerController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
-                // $password = $passwordHasher->hashPassword($partnerUser, $partnerUser->getPassword());
-                // $partnerUser->setPassword($password);
-
-                // $partner->setIsPlanning($userPermissions->isIsPlanning());
-                // $partner->setIsNewsletter($userPermissions->isIsNewsletter());
-                // $partner->setIsBoissons($userPermissions->isIsBoissons());
-                // $partner->setIsSms($userPermissions->isIsSms());
-                // $partner->setIsConcours($userPermissions->isIsConcours());
-
-                // $partner->addPermission($userPermissions);
+     
                 $userPermissions->addPartner($partner);
 
                 $entityManager->persist($userPermissions);
                 $entityManager->persist($partnerUser);
                 $entityManager->persist($partner);
                 $entityManager->flush();
-                // $userRepository->add($partnerUser, true);
-                // $partnerRepository->add($partner, true);
+ 
     
                 $this->addFlash(
                     'success',
