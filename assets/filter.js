@@ -21,8 +21,8 @@ export default class Filter {
    * Ajoute les comportements aux différents élements
    */
   bindEvents() {
-    this.form.querySelectorAll('input[type=checkbox]').forEach(input => {
-      input.addEventListener('change', this.loadForm.bind(this))
+    this.form.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', this.loadForm.bind(this))
     })
   }
 
