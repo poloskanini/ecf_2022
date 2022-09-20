@@ -1,8 +1,9 @@
 ![alt text](https://www.sngaf.com/wp-content/uploads/2022/09/STUDI-FITNESS-VISUEL-MAIL-1024x614.jpg)
 
-# STUDI FITNESS
 
 Projet réalisé dans le cadre de l'ECF Décembre 2022.
+
+[TOC]
 
 
 ## Tech Stack
@@ -122,3 +123,26 @@ Pour démarrer l'application
 > Le projet a été réalisé avec le framework SYMFONY.
 La partie FRONT-END a été réalisée en HTML / CSS / JavaScript / Bootstrap / Twig / Encore.
 La partie BACK-END a été réalisée en MySQL / Symfony / Composer, ainsi que l’ORM Doctrine pour la création et gestion de la BDD (fichiers de migration).
+
+
+## Cahier des charges
+
+>	L’équipe technique devra pouvoir ajouter, éditer, voir et supprimer les comptes des nouveaux partenaires et structures qui rejoindront la marque de sport, ainsi que modifier et mettre à jour l’ensemble des permissions et des droits qui leur sont rattachées.
+
+>	Chaque partenaire/structure devra pouvoir être désactivé(e) en 1 clic tout en le(la) conservant en base de données. Si l’utilisateur est désactivé, alors il ne pourra pas se connecter à l’application en lecture seule pour visualiser son compte.
+
+>	Tout changement des permissions du partenaire devra automatiquement être appliqué aux permissions de la structure qui y est rattachée.
+
+>	Les partenaires et structures recevront un email pour chaque mise à jour de leur compte. Le partenaire sera également informé par un mail de toute modification sur l’une de ses structures.
+
+>	A la création d’un nouveau compte, l’utilisateur reçoit un mail avec un mot de passe sécurisé qu’il est invité à remplacer en cliquant sur un lien où il pourra redéfinir son mot de passe. Il disposera de 3h pour le modifier à partir du moment où il aura demandé sa réinitialisation.
+
+>	L’application devra demander une confirmation de sécurité à l’administrateur pour toute création, modification ou suppression d’un utilisateur.
+
+>	Une barre de recherche permettra à l’administrateur de trouver rapidement un utilisateur en tapant les premières lettres de son prénom et d’afficher dynamiquement le résultat. De même, on doit pouvoir trier la liste des partenaires et structures afin de ne présenter que les éléments activés ou désactivés, sans rechargement de la page également.
+
+>	L’équipe technique d’administration qui utilisera notre application n’a aucune connaissance en développement, l’outil que nous devons créer doit donc être facile à prendre en main pour n’importe quel utilisateur (UX/UI).
+
+>	Il n’y a pas de charte graphique définie, seulement des suggestions, le client nous laisse donc les mains libres pour personnaliser et créer l’univers de la marque.
+
+>	Notre application devra bien entendue être responsive-design et pensée mobile-first dans sa conception.
