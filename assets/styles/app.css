@@ -666,14 +666,14 @@ form .form-check {
 
 .form-check-partner,
 .partner {
-  background-color: rgb(44, 127, 182) !important;
+  background-color: rgb(44, 127, 182);
   color: white;
   /* background-color: #06a9c6; */
 }
 
 .form-check-partner:hover,
 .partner:hover {
-  background-color: rgb(4, 85, 139) !important;
+  background-color: rgb(4, 85, 139);
   color: white;
 }
 
@@ -682,12 +682,12 @@ form .form-check {
   /* background-color: rgb(206, 48, 184); */
   /* background-color: rgb(191, 110, 226); */
   background-color: #E45D99 !important;
-  color: white;
+  color: white !important;
 }
 
 .form-check-structure:hover,
 .structure:hover {
-  background-color: #d73980 !important;
+  background-color: #d73980;
   color: white;
 }
 
@@ -715,6 +715,10 @@ form .form-check {
 
 .btn:focus {
   outline: none !important;
+}
+
+.btn-primary {
+  background-color: rgb(44, 127, 182) !important;
 }
 
 /** Modals **/
