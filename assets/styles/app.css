@@ -673,7 +673,12 @@ form .form-check {
 
 .form-check-admin {
   /* background-color: rgb(148, 148, 11); */
-  background-color: rgb(189, 189, 4);
+  background-color: rgb(128, 128, 124);
+}
+
+.partner {
+  background-color: rgb(44, 127, 182);
+  color: white;
 }
 
 .form-check-partner,
@@ -683,7 +688,8 @@ form .form-check {
   /* background-color: #06a9c6; */
 }
 
-.form-check-partner:hover {
+.form-check-partner:hover,
+.partner:hover {
   background-color: rgb(4, 85, 139);
   color: white;
 }

@@ -131,7 +131,7 @@ class PartnerController extends AbstractController
 
                 $this->addFlash(
                     'success',
-                    'Le partenaire "' .$user->getName(). '" a été ajouté avec succès'
+                    'Le partenaire "' .$partner->getName(). '" a été ajouté avec succès'
                 );
 
                 //**** ENVOI DU  MAIL DE CONFIRMATION de création de Partenaire ****\\\
@@ -230,7 +230,7 @@ class PartnerController extends AbstractController
     
                 $this->addFlash(
                     'success',
-                    'Le partenaire "' .$partnerUser->getName(). '" a été modifié avec succès'
+                    'Le partenaire "' .$partner->getName(). '" a été modifié avec succès'
                 );
 
                 //**** ENVOI DU MAIL DE MODIFICATION de PARTENAIRE ****\\\
