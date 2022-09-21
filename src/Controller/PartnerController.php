@@ -107,7 +107,7 @@ class PartnerController extends AbstractController
                 $user->setPartner($partner);
                 $partner->setUser($user);
 
-                // Je récupère les données "non mappée" du formulaire UserType et les injecte dans mon  instance de Partner.
+                // Je récupère les données "non mappées" du formulaire UserType et les injecte dans mon instance de Partner.
                 $partner->setName($form->get('partnerName')->getData());
 
                 // Je définis que la nouvelle donnée aura pas défaut le ['ROLE_PARTENAIRE]

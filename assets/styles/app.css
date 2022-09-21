@@ -683,8 +683,7 @@ form .form-check {
   /* background-color: #06a9c6; */
 }
 
-.form-check-partner:hover,
-.partner:hover {
+.form-check-partner:hover {
   background-color: rgb(4, 85, 139);
   color: white;
 }
@@ -992,3 +991,4 @@ form .form-check {
   margin: 0 2rem;
 }
 /* ################################################################# */
+
