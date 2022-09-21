@@ -721,6 +721,11 @@ form .form-check {
   background-color: rgb(44, 127, 182) !important;
 }
 
+.link-danger {
+  color: rgb(237, 112, 112) !important;
+  cursor: pointer;
+}
+
 /** Modals **/
 .modal-content {
   color: #636363;

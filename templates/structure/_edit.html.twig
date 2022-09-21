@@ -143,7 +143,7 @@
 
                 <div class="confirm d-flex justify-content-center align-items-center">
                     <a href="{{ path('app_structure_index') }}" class="btn btn-secondary my-4 me-3" value="Retour">Annuler</a>
-                    <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn form-check-structure my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Modifier la structure
                 </button>
                 </div>
@@ -161,7 +161,7 @@
                                 </div>
                                 <h3 class="my-4">Êtes-vous sûr ?</h3>
                             </div>
-                            <p class="m-0">Cette action entrainera la modification de la structure.</p>
+                            <p class="m-0">Vous allez modifier la structure <strong>"{{ structure.user.name}}"</strong>.</p>
                             <p>Souhaitez-vous continuer ?</p>
                             <div class="modal-footer justify-content-center">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>

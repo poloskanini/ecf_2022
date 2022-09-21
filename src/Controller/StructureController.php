@@ -432,7 +432,8 @@ class StructureController extends AbstractController
             
             $this->addFlash(
                 'danger',
-                'La structure localisée "' .$structure->getPostalAdress(). '" a été supprimée avec succès.'
+                // 'La structure localisée "' .$structure->getPostalAdress(). '" a été supprimée avec succès.'
+                'La structure "' .$structure->getUser()->getName(). '" a été supprimée avec succès.'
         );
 
         return $this->redirectToRoute('app_structure_index', [], Response::HTTP_SEE_OTHER);
