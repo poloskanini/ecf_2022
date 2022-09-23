@@ -49,25 +49,6 @@ class UserShowType extends AbstractType
                     'placeholder' => 'Merci de saisir une adresse email'
                 ]
             ])
-            // ->add('password', RepeatedType::class, [
-            //     'disabled' => true,
-            //     'type' => PasswordType::class,
-            //     'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
-            //     'label' => false,
-            //     'required' => true,
-            //     'first_options' => [
-            //         'label' => 'Mot de passe',
-            //         'attr' => [
-            //             'placeholder' => 'Merci de saisir votre mot de passe'
-            //         ]
-            //     ],
-            //     'second_options' => [
-            //         'label' => 'Confirmez votre mot de passe',
-            //         'attr' => [
-            //             'placeholder' => 'Merci de saisir un mot de passe'
-            //         ]
-            //     ],
-            // ])
             ->add('roles', ChoiceType::class, [
                 'disabled' => true,
                 'label' => 'Type de client',

@@ -48,8 +48,6 @@ class PartnerController extends AbstractController
     {
         $partners = $partnerRepository->findAll();
        
-        // $usersPartners = $this->entityManager->getRepository(Partner::class)->findAll();
-
         $search = new Search();
         $form = $this->createForm(SearchType::class, $search);
 
@@ -126,8 +124,6 @@ class PartnerController extends AbstractController
 
                 $userRepository->add($user, true);
                 $partnerRepository->add($partner, true);
-                // $permissionsRepository->add($permissions, true);
-                // Je flush mon objet permissions dans le permissionsRepository
 
                 $this->addFlash(
                     'success',
@@ -284,17 +280,6 @@ class PartnerController extends AbstractController
     public function show(int $id, Request $request, PartnerRepository $partnerRepository, StructureRepository $structureRepository, ManagerRegistry $doctrine, EntityManagerInterface $em)
     {
 
-        // $partner = $partnerRepository->findOneBy(['id' => $id]);
-        // $partnerUser = $partner->getUser();
-        // $items = ['user' => $partnerUser, 'partner' => $partner];
-
-        // $form = $this->createFormBuilder($items)
-        //     ->add('user', UserShowType::class)
-        //     ->add('partner', PartnerFormShowType::class)
-        //     ->getForm();
-
-        //     $structures = $partner->getStructures();
-        //     $permissions = $partner->getPermissions();
         // Récupérer les permissions du partenaire
         $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         

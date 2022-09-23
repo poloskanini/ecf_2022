@@ -137,8 +137,6 @@ class StructureController extends AbstractController
                 // Je définis que le partenaire de ma structure est la data que contient "id"
                 $structure->setPartner($form->get('id')->getData());
 
-                // dump($structure->getPartner()->getPermissions()->getValues());
-                // die;
                 // Récupérer les permissions du partenaire
                 $permArray = ($structure->getPartner()->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
                 foreach ($permArray as $p) {
@@ -244,28 +242,13 @@ class StructureController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                // J'utilise UserPasswordHasherInterface pour encoder le mot de passe
-                // $password = $passwordHasher->hashPassword($structureUser, $structureUser->getPassword());
-                // $structureUser->setPassword($password);
-                
-                // Cabler pour que les données du formulaire permissions aillent dans $structure->addPermissions()
-                // $partner->setIsPlanning($userPermissions->isIsPlanning());
-    
-                // Je déclare que ma structure a de nouvelles permissions et que cet objet permissions a une nouvelle structure
-
-                // $structure->addPermission($userPermissions);
-                // $userPermissions->addStructure($structure);
 
                 $em->persist($userPermissions);
-                // $em->persist($partnerPermissions);
                 $em->persist($structureUser);
                 $em->persist($structure);
 
                 
                 $em->flush();
-
-                // $userRepository->add($structureUser, true);
-                // $structureRepository->add($structure, true);
     
                 $this->addFlash(
                     'success',
@@ -376,9 +359,6 @@ class StructureController extends AbstractController
 
         $partnerPermissions = $doctrine->getRepository(Permissions::class)->find($permPartnerId);
         // De cette façon, j'ai récupéré mon objet Entity\Permissions. Il s'agit du partner_permissions.
-
-        // dump($partnerPermissions);
-        // die;
 
         // Récupérer les permissions du partenaire
         // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.

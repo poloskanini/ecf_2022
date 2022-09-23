@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\NotCompromisedPassword]
+    // #[Assert\NotCompromisedPassword]
     private ?string $password;
 
     #[ORM\Column(length: 255)]
@@ -180,3 +180,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 }
+
+// src/Entity/User.php

@@ -31,15 +31,6 @@
 <body>
 
 <form method="post">
-    {# {% if error %}
-        <div class="alert alert-danger position-absolute top-0">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %} #}
 
     <section class="section-login section-reset-password">
         <div class="container py-5 h-100">
@@ -77,19 +68,6 @@
                                         <label for="inputEmail" class="form-label">Votre email</label>
                                         <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Votre adresse email" required autofocus>
                                     </div>
-
-                                    {# <div class="form-outline mb-4">
-                                        <label for="inputPassword" class="form-label">Votre mot de passe</label>
-                                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Votre mot de passe" required>
-                                    </div> #}
-
-                                    {# <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"> #}
-
-                                    {# <div class="checkbox mb-3">
-                                        <label>
-                                            <input type="checkbox" name="_remember_me" class="mx-1">Se souvenir de moi
-                                        </label>
-                                    </div> #}
 
                                     <div class="pt-1 mb-2">
                                         <button class="btn btn-dark btn-lg btn-block" type="submit">Réinitialiser mon mot de passe</button>

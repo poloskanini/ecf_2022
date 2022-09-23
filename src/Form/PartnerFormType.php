@@ -21,45 +21,7 @@ class PartnerFormType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom du partenaire',
-            ])
-            // ->add('isPlanning', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-            // ])
-            // ->add('isNewsletter', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-
-            // ])
-            // ->add('isBoissons', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-
-            // ])
-            // ->add('isSms', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-
-            // ])
-            // ->add('isConcours', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-            // ])
-            // ->add('user', EntityType::class, [
-            //     'class' => User::class,
-            //     'label' => 'Nom de l\'utilisateur',
-            //      'query_builder' => function (UserRepository $er) {
-            //          return $er->createQueryBuilder('u')
-            //              ->where('u.roles LIKE :role')
-            //              ->setParameter('role', '%"ROLE_PARTENAIRE"%');
-            //          },
-            //     ])
-            
+            ]) 
         ;
     }
 

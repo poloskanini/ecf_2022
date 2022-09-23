@@ -20,46 +20,6 @@ class StructureFormType extends AbstractType
             ->add('postalAdress', TextType::class, [
                 'label' => 'Adresse postale de la structure',
             ])
-            // ->add('isPlanning', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-            // ])
-            // ->add('isNewsletter', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-
-            // ])
-            // ->add('isBoissons', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-
-            // ])
-            // ->add('isSms', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-
-            // ])
-            // ->add('isConcours', CheckboxType::class, [
-            //     'required' => false,
-            //     'label' => false,
-            //     'label_attr' => ['class' => 'switch-custom'],
-            // ])
-            // ->add('partner', EntityType::class, [
-            //     'class' => Partner::class,
-            //     'label' => 'Nom du partenaire',
-            //      'query_builder' => function (PartnerRepository $er) {
-            //          return $er->createQueryBuilder('u')
-            //              ->where('u.partner LIKE :partner')
-            //              ->setParameter('role', '%"ROLE_PARTENAIRE"%');
-            //          },
-            //     ])
-      
-        // ;
-            // ->add('user')
             ->add('partner')
         ;
     }

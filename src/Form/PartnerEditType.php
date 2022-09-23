@@ -76,49 +76,7 @@ class PartnerEditType extends AbstractType
                 'label_attr' => ['class' => 'switch-custom'],
 
             ])
-            // ->add('submit', SubmitType::class)
-            
-
-
-            // A insérer dans le StructureType, qui sera relié au StructureController
-            
-            // $builder->add('postalAdress', EntityType::class, [
-            //     'class' => Partner::class,
-            //     'query_builder' => function (PartnerRepository $pr) {
-            //         return $pr->createQueryBuilder('u')
-            //             ->orderBy('u.name', 'ASC');
-            //     },
-            //     'label' => 'Nom du partenaire rattaché à la structure :',
-            //     'mapped' => false
-            // ])
-      
         ;
-
-            // $builder->get('postalAdress')->addEventListener(
-            //     FormEvents::POST_SUBMIT,
-            //     function (FormEvent $event) {
-            //         $form = $event->getForm();
-            //         $form->getParent()->add('isPlanning', EntityType::class, [
-            //             'class' => 'App\Entity\Partner',
-            //             'placeholder' => 'Sélectionnez votre partenaire',
-            //             'mapped' => false,
-            //             'required' => false,
-            //             'choices' => $form->getData()->getPermissions()
-            //         ]);
-            //     }
-            // );
-
-        // Data transformer for Roles array
-        // $builder->get('roles')
-        //     ->addModelTransformer(new CallbackTransformer(
-        //         function ($rolesArray) {
-        //              return count($rolesArray)? $rolesArray[0]: null;
-        //         },
-        //         function ($rolesString) {
-        //              return [$rolesString];
-        //         }
-        // ));
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

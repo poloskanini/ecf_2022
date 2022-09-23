@@ -20,8 +20,4 @@ class Search
   public $active;
   public $inactive;
 
-  // public function __toString()
-  //   {
-  //       return $this->string;
-  //   }
 }

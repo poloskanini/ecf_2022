@@ -117,33 +117,6 @@ class StructureType extends AbstractType
       
         ;
 
-            // $builder->get('id')->addEventListener(
-            //     FormEvents::POST_SUBMIT,
-            //     function (FormEvent $event) {
-           
-            //         $form = $event->getForm();
-            //         $form->getParent()->add('isPlanning', EntityType::class, [
-            //             'class' => 'App\Entity\Partner',
-            //             'placeholder' => 'Sélectionnez votre partenaire',
-            //             'mapped' => false,
-            //             'required' => false,
-            //             'choices' => $form->getData()->getPermissions()
-            //         ]);
-            //     }
-            // );
-
-        // Data transformer for Roles array
-        
-        // $builder->get('roles')
-        //     ->addModelTransformer(new CallbackTransformer(
-        //         function ($rolesArray) {
-        //              return count($rolesArray)? $rolesArray[0]: null;
-        //         },
-        //         function ($rolesString) {
-        //              return [$rolesString];
-        //         }
-        // ));
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

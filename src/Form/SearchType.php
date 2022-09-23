@@ -38,13 +38,6 @@ class SearchType extends AbstractType
       'label' => 'Inactif',
       'required' => false
     ])
-    // ->add('submit', SubmitType::class, [
-    //   'label' => 'OK',
-    //   'attr' => [
-    //     'class' => 'btn-secondary',
-    //     'style' => '--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;'
-    //   ],
-    // ])
     ;
   }
 

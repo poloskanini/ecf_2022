@@ -36,9 +36,6 @@ class Permissions
     #[ORM\ManyToMany(targetEntity: Structure::class, mappedBy: 'permissions')]
     private Collection $structures;
 
-    // #[ORM\ManyToMany(targetEntity: Structure::class, inversedBy: 'permissions')]
-    // private Collection $structures;
-
     public function __construct()
     {
         $this->partners = new ArrayCollection();
@@ -137,30 +134,6 @@ class Permissions
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Structure>
-    //  */
-    // public function getStructures(): Collection
-    // {
-    //     return $this->structures;
-    // }
-
-    // public function addStructure(Structure $structure): self
-    // {
-    //     if (!$this->structures->contains($structure)) {
-    //         $this->structures->add($structure);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeStructure(Structure $structure): self
-    // {
-    //     $this->structures->removeElement($structure);
-
-    //     return $this;
-    // }
-
     /**
      * @return Collection<int, Structure>
      */
@@ -187,10 +160,5 @@ class Permissions
 
         return $this;
     }
-
-    // public function __toString()
-    // {
-    //     return $this->name;
-    // }
 
 }
