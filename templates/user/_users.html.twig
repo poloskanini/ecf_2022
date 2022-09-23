@@ -1,13 +1,6 @@
 {% for user in users %}
                     <tr class="select-none">
                         <td data-title="ID :">{{ user.id }}</td>
-                        <td class="align-middle">
-                            {% if user.isActive == true %}
-                                    <div class="form-check form-check-active">Actif</div>
-                                {% else %}
-                                    <div class="form-check form-check-inactive">Inactif</div>
-                                {% endif %}
-                        </td>
                         {% for role in user.roles %}
                             {% if role == 'ROLE_ADMIN' %}
                                 <td>
@@ -25,7 +18,21 @@
                         {% endfor %}
                         <td data-title="Nom :">{{ user.name }}</td>
                         <td data-title="Email :">{{ user.email }}</td>
-
+                        <td data-title="Actif :">
+                            {% if user.isActive == true %}
+                                    {# <div class="form-check form-check-active">Actif</div> #}
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" id="form_user_isActive" name="form[user][isActive]" class="custom-control-input" value="1" checked="checked" disabled>
+                                        <label class="switch-custom is-active-btn custom-control-label" for="form_user_isActive"></label>
+                                    </div>
+                                {% else %}
+                                    {# <div class="form-check form-check-inactive">Inactif</div> #}
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" id="form_user_isActive" name="form[user][isActive]" class="custom-control-input" value="0" disabled>
+                                        <label class="switch-custom is-active-btn custom-control-label" for="form_user_isActive"></label>
+                                    </div>
+                                {% endif %}
+                        </td>
                     </tr>
                     
                 {% endfor %}

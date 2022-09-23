@@ -160,8 +160,6 @@ header {
   color: var(--blue);
 }
 
-
-
 .brand-logo {
   margin-bottom: 40px;
   pointer-events: none;
@@ -383,7 +381,8 @@ input:checked + .slider:before {
 }
 
 .custom-control-input:checked + .is-active-btn {
-  background: #bada55;
+  /* background: #bada55; */
+  background-color: #5cb85c;
 }
 
 .custom-control input {
@@ -778,6 +777,10 @@ form .form-check {
   border-radius: 5px;
 }
 
+tr {
+  vertical-align: middle;
+}
+
 /** Modale **/  
 .modale-container {
   visibility: hidden;
@@ -865,10 +868,6 @@ form .form-check {
     position: relative;
     white-space: normal;
     text-align: right;
-  }
-
-  .responsive-table-line td:last-child { 
-    text-align: center; 
   }
    
   .responsive-table-line td:before { 

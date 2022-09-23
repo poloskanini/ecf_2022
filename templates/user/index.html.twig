@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<div class="container-fluid js-filter">
+<div class="container-fluid index js-filter">
 
     {# Flash message "Correctement ajouté" #}
     {% for message in app.flashes('success') %}
@@ -46,10 +46,10 @@
             <thead>
                 <tr class="">
                     <th scope="col">ID</th>
-                    <th scope="col">Actif</th>
-                    <th scope="col">Role</th>
+                    <th scope="col">Rôle</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Actif</th>
                 </tr>
             </thead>
 

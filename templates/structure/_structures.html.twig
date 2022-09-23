@@ -7,13 +7,6 @@
 
                 <tr class="">
                     <td data-title="ID :">{{ structure.id }}</td>
-                    <td class="align-middle">
-                        {% if structure.user.isActive == true %}
-                            <div class="form-check form-check-active">Actif</div>
-                            {% else %}
-                            <div class="form-check form-check-inactive">Inactif</div>
-                        {% endif %}
-                    </td>
                     <td class="text-center align-middle">
                         <a class="form-check form-check-structure structure-name text-decoration-none card" href="{{ path('app_structure_edit', {'id': structure.id}) }}">
                             {{ structure.user.name }}
@@ -97,8 +90,24 @@
                             </div>
                         {% endif %}
                     </td>
+
+                    <td data-title="Actif :" class="align-middle">
+                        {% if structure.user.isActive == true %}
+                            {# <div class="form-check form-check-active">Actif</div> #}
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" id="form_user_isActive" name="form[user][isActive]" class="custom-control-input" value="1" checked="checked" disabled>
+                                <label class="switch-custom is-active-btn custom-control-label" for="form_user_isActive"></label>
+                            </div>
+                            {% else %}
+                            {# <div class="form-check form-check-inactive">Inactif</div> #}
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" id="form_user_isActive" name="form[user][isActive]" class="custom-control-input" value="1" disabled>
+                                <label class="switch-custom is-active-btn custom-control-label" for="form_user_isActive"></label>
+                            </div>
+                        {% endif %}
+                    </td>
                   
-                    <td class="align-middle">
+                    <td class="align-middle text-center">
                         <a class="crud-button link-secondary fas fa-edit mx-2" aria-label="Editer" href="{{ path('app_structure_edit', {'id': structure.id}) }}"></a>
                         <a class="crud-button link-success fa fa-eye mx-2" href="{{ path('app_structure_show', {'id': structure.id}) }}"></a>
                         <a class="crud-button link-danger fa fa-trash mx-2" data-bs-toggle="modal" data-bs-target="#deleteModal{{structure.id}}"></a>

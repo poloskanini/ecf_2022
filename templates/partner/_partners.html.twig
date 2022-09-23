@@ -4,18 +4,11 @@
                 <tr class="align-middle ">
                     <td data-title="ID :">{{ partner.id }}</td>
                     <td class="align-middle">
-                        {% if partner.user.isActive == true %}
-                            <div class="form-check form-check-active">Actif</div>
-                            {% else %}
-                            <div class="form-check form-check-inactive">Inactif</div>
-                        {% endif %}
-                    </td>
-                    <td class="align-middle">
                         <a class="form-check form-check-partner partner-name text-decoration-none card" href="{{ path('app_partner_edit', {'id': partner.id}) }}">
                             {{ partner.name }}
                         </a>
                     </td>
-                    <td class="align-middle" data-title="Mail :">{{ partner.user.email }}</td>
+                    <td class="align-middle">{{ partner.user.email }}</td>
 
 
                     <td data-title="Planning :" class="align-middle">
@@ -84,7 +77,23 @@
                         {% endif %}
                     </td>
 
-                    <td class="align-middle">
+                    <td data-title="Actif :" class="align-middle">
+                        {% if partner.user.isActive == true %}
+                            {# <div class="form-check form-check-active">Actif</div> #}
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" id="form_user_isActive" name="form[user][isActive]" class="custom-control-input" value="1" checked="checked" disabled>
+                                <label class="switch-custom is-active-btn custom-control-label" for="form_user_isActive"></label>
+                            </div>
+                            {% else %}
+                            {# <div class="form-check form-check-inactive">Inactif</div> #}
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" id="form_user_isActive" name="form[user][isActive]" class="custom-control-input" value="0" disabled>
+                                <label class="switch-custom is-active-btn custom-control-label" for="form_user_isActive"></label>
+                            </div>
+                        {% endif %}
+                    </td>
+
+                    <td class="align-middle text-center">
                         <a class="crud-button link-secondary fas fa-edit mx-2" aria-label="Editer" href="{{ path('app_partner_edit', {'id': partner.id}) }}"></a>
                         <a class="crud-button link-success fa fa-eye mx-2" href="{{ path('app_partner_show', {'id': partner.id}) }}"></a>
                         <a class="crud-button link-danger fa fa-trash mx-2" data-bs-toggle="modal" data-bs-target="#deleteModal{{partner.id}}"></a>
