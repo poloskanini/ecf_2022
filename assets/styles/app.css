@@ -32,8 +32,10 @@ body {
 
 /*** LOGIN PAGE */
 .section-login {
-  height: 100vh;
-  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   background-image: url('../../assets/images/85057747_m.jpg');
   background-size: cover;
 }
@@ -153,6 +155,11 @@ header {
   background-color: #fcfcfc;
 }
 
+.navigation li:hover a,
+.navigation li.hovered a {
+  color: var(--blue);
+}
+
 .brand-logo {
   margin-bottom: 40px;
   pointer-events: none;
@@ -165,11 +172,6 @@ header {
   display: flex;
   text-decoration: none;
   color: #FFF;
-}
-
-.navigation li:hover a,
-.navigation li.hovered a {
-  color: var(--blue);
 }
 
 .navigation .icon {
@@ -685,8 +687,7 @@ form .form-check {
   /* background-color: #06a9c6; */
 }
 
-.form-check-partner:hover,
-.partner:hover {
+.form-check-partner:hover {
   background-color: rgb(4, 85, 139);
   color: white;
 }
