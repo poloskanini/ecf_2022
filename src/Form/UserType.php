@@ -26,6 +26,8 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // dd($options['csrf_token_manager']);
+
         $user = $options['data'] ?? null;
         $isEdit = $user && $user->getId();
 
@@ -115,7 +117,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'isEdit' => false
+            'isEdit' => false,
         ]);
 
         $resolver->setAllowedTypes('isEdit', 'bool');

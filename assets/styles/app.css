@@ -579,16 +579,16 @@ input:checked + .slider:before {
 
 .login-logout .menu {
   position: absolute;
-  top: 40px;
+  top: 60px;
   right: 5px;
   background: #FFF;
-  width: 200px;
   transition: .5s;
   color: rgb(65, 65, 65);
   color: var(--blue);
   z-index: 2;
   visibility: hidden;
   opacity: 0;
+  width: fit-content;
 }
 
 .login-logout .menu.active {
@@ -597,6 +597,7 @@ input:checked + .slider:before {
   top: 60px;
   border: 1px solid rgba(0,0,0,.15);
   border-radius: 0.25rem;
+  width: fit-content;
 }
 
 .login-logout .menu ul {

@@ -204,7 +204,7 @@ class PartnerController extends AbstractController
 
         $items = ['user' => $partnerUser, 'partner' => $partner, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
 
-        $form = $this->createFormBuilder($items) // Formulaire regroupant les 2 entités
+        $form = $this->createFormBuilder($items) // Formulaire regroupant les 3 entités User, Partner, et Permissions
             ->add('user', UserType::class, [
                 'isEdit' => true,
             ])
