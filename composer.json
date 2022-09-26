@@ -99,9 +99,6 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ],
-        "compile": [
-            "bin/console doctrine:migrations:migrate"
         ]
     },
     "conflict": {
