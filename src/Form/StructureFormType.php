@@ -28,6 +28,7 @@ class StructureFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Structure::class,
+            'csrf_protection' => true,
         ]);
     }
 }

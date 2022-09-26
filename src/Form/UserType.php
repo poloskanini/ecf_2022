@@ -118,6 +118,7 @@ class UserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'isEdit' => false,
+            'csrf_protection' => true,
         ]);
 
         $resolver->setAllowedTypes('isEdit', 'bool');

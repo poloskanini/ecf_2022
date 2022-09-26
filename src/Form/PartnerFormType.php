@@ -29,6 +29,7 @@ class PartnerFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Partner::class,
+            'csrf_protection' => true,
         ]);
     }
 }
