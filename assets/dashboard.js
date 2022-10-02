@@ -1,22 +1,22 @@
 // Class Hovered on navigation li
-const list = document.querySelectorAll(".navigation li");
+// const list = document.querySelectorAll(".navigation li");
 
-function activeLink() {
-  list.forEach((item) => {
-    item.classList.remove("hovered");
-  });
-  this.classList.add("hovered");
-}
+// function activeLink() {
+//   list.forEach((item) => {
+//     item.classList.remove("hovered");
+//   });
+//   this.classList.add("hovered");
+// }
 
-list.forEach((item) => item.addEventListener("mouseover", activeLink));
+// list.forEach((item) => item.addEventListener("mouseover", activeLink));
 
 //OnClick Function pour ajouter la closse hovered à mon lien cliqué
-function activatedLink() {
-  list.forEach((item) => {
-    item.classList.add("hovered");
-  })
-}
-list.forEach((item) => item.addEventListener("onclick", activatedLink));
+// function activatedLink() {
+//   list.forEach((item) => {
+//     item.classList.add("hovered");
+//   })
+// }
+// list.forEach((item) => item.addEventListener("onclick", activatedLink));
 
 
 // Toggle menu

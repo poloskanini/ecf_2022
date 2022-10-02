@@ -29,7 +29,7 @@
   <!-- Ms Madi Font -->
   <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap" rel="stylesheet">
   <!-- CookieBot pour RGPD -->
-  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="cc6e6a66-8a45-4576-a67b-95075bddf7f9" data-blockingmode="auto" type="text/javascript"></script>
+  {# <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="cc6e6a66-8a45-4576-a67b-95075bddf7f9" data-blockingmode="auto" type="text/javascript"></script> #}
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <!-- Boostrap -->
@@ -65,7 +65,7 @@
               </span>
             </a>
           </li>
-          <li>
+          <li class="{% if app.request.attributes.get('_route') == 'home' %}hovered{% endif %}">
             {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('home') }}">
               <span class="icon">
@@ -83,7 +83,7 @@
           </li>
           {% endif %}
           {% if is_granted('ROLE_ADMIN') %}
-          <li>
+          <li class="{% if app.request.attributes.get('_route') == 'app_user_index' %}hovered{% endif %}">
             <a href="{{ path('app_user_index') }}">
               <span class="icon">
                 <i class="fa fa-users"></i>
@@ -91,7 +91,7 @@
               <span class="title">Utilisateurs</span>
             </a>
           </li>
-          <li>
+          <li class="{% if app.request.attributes.get('_route') == 'app_partner_index' %}hovered{% endif %}">
             <a href="{{ path('app_partner_index') }}">
               <span class="icon">
                 <i class="fa fa-handshake"></i>
@@ -99,7 +99,7 @@
               <span class="title">Partenaires</span>
             </a>
           </li>
-          <li>
+          <li class="{% if app.request.attributes.get('_route') == 'app_structure_index' %}hovered{% endif %}">
             <a href="{{ path('app_structure_index') }}">
               <span class="icon">
                 <i class="fa fa-building"></i>
