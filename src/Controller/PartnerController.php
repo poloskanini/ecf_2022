@@ -61,8 +61,8 @@ class PartnerController extends AbstractController
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([
                 'content' => $this->renderView('partner/_partners.html.twig', ['partners' => $partners])
-            ]);
-        }
+            ]); // Renvoie du JSON qui contiendra le contenu
+        }       // Je rends ce contenu dans la vue _partners.html.twig
         
 
         return $this->render('partner/index.html.twig', [
