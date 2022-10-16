@@ -1,93 +1,93 @@
-version: '3'
+# version: '3'
 
-services:
-  ###> doctrine/doctrine-bundle ###
-  db:
-    # Téléchargement de l'image mariadb dernière version
-    image: mariadb:latest
-    # Définition de la plateforme (spécifique à Mac M1)
-    platform: linux/x86_64
-    # Nom du container
-    container_name: db_ecf
-    # Redémarrage automatique du container
-    restart: always
-    # Définition du volume
-    volumes:
-      - db-data:/var/lib/mysql
-    # Définition des variables d'environnement
-    environment:
-      # Nom de la base de données
-      MYSQL_DATABASE: db_ecf
-      # Autorisation de connexion sans mot de passe
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    # Définition du réseau
-    networks:
-      - dev
-    # Définition des ports
-    ports:
-      # Port 3306 du container vers port 3306 du host
-      - "3306:3306"
-  ###< doctrine/doctrine-bundle ###
+# services:
+#   ###> doctrine/doctrine-bundle ###
+#   db:
+#     # Téléchargement de l'image mariadb dernière version
+#     image: mariadb:latest
+#     # Définition de la plateforme (spécifique à Mac M1)
+#     platform: linux/x86_64
+#     # Nom du container
+#     container_name: db_ecf
+#     # Redémarrage automatique du container
+#     restart: always
+#     # Définition du volume
+#     volumes:
+#       - db-data:/var/lib/mysql
+#     # Définition des variables d'environnement
+#     environment:
+#       # Nom de la base de données
+#       MYSQL_DATABASE: db_ecf
+#       # Autorisation de connexion sans mot de passe
+#       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+#     # Définition du réseau
+#     networks:
+#       - dev
+#     # Définition des ports
+#     ports:
+#       # Port 3306 du container vers port 3306 du host
+#       - "3306:3306"
+#   ###< doctrine/doctrine-bundle ###
 
-  ###> phpMyAdmin ###
-  phpmyadmin:
-    # Téléchargement de l'image phpmyadmin
-    image: phpmyadmin
-    # Nom du container
-    container_name: phpmyadmin_ecf
-    # Redémarrage automatique du container
-    restart: always
-    # Dépendance du container phpmyadmin par rapport au container db (ligne 5)
-    depends_on:
-      - db
-    # Définition des ports
-    ports:
-    # Port 8085 du container vers port 80 du host
-      - "8085:80"
-    # Définition des variables d'environnement
-    environment:
-      # Nom du container db
-      PMA_HOST: db
-    networks:
-      - dev
-  ###< phpMyAdmin ###
+#   ###> phpMyAdmin ###
+#   phpmyadmin:
+#     # Téléchargement de l'image phpmyadmin
+#     image: phpmyadmin
+#     # Nom du container
+#     container_name: phpmyadmin_ecf
+#     # Redémarrage automatique du container
+#     restart: always
+#     # Dépendance du container phpmyadmin par rapport au container db (ligne 5)
+#     depends_on:
+#       - db
+#     # Définition des ports
+#     ports:
+#     # Port 8085 du container vers port 80 du host
+#       - "8085:80"
+#     # Définition des variables d'environnement
+#     environment:
+#       # Nom du container db
+#       PMA_HOST: db
+#     networks:
+#       - dev
+#   ###< phpMyAdmin ###
 
-  ###> MailDev ###
-  maildev:
-    # Téléchargement de l'image maildev
-    image: maildev/maildev
-    # Nom du container
-    container_name: maildev_ecf
-    # Définition de la commande (sans cette commande, les emails ne sont pas reçus)
-    command: bin/maildev --web 80 --smtp 1025 --hide-extensions STARTTLS
-    # Définition des ports
-    ports:
-      # Port 8081 du container vers port 80 du host
-      - "8081:80"
-      # Port 1025 du container vers port 1025 du host
-      - "1025:1025"
-    # Redémarrage automatique du container
-    restart: always
-    # Définition du réseau
-    networks:
-      - dev
-###< MailDev ###
+#   ###> MailDev ###
+#   maildev:
+#     # Téléchargement de l'image maildev
+#     image: maildev/maildev
+#     # Nom du container
+#     container_name: maildev_ecf
+#     # Définition de la commande (sans cette commande, les emails ne sont pas reçus)
+#     command: bin/maildev --web 80 --smtp 1025 --hide-extensions STARTTLS
+#     # Définition des ports
+#     ports:
+#       # Port 8081 du container vers port 80 du host
+#       - "8081:80"
+#       # Port 1025 du container vers port 1025 du host
+#       - "1025:1025"
+#     # Redémarrage automatique du container
+#     restart: always
+#     # Définition du réseau
+#     networks:
+#       - dev
+# ###< MailDev ###
 
-###< TypeSense ###
-  # typesense:
-  #   image: typesense/typesense:0.22.2
-  #   environment:
-  #     TYPESENSE_DATA_DIR: /data
-  #     TYPENSENSE_API_KEY: xyz
-  #   volumes:
-  #     - /tmp/typesense-server-data:/data
-  #   ports:
-  #     - 8108:8108
-  #   restart: "no"
-###< TypeSense ###
+# ###< TypeSense ###
+#   # typesense:
+#   #   image: typesense/typesense:0.22.2
+#   #   environment:
+#   #     TYPESENSE_DATA_DIR: /data
+#   #     TYPENSENSE_API_KEY: xyz
+#   #   volumes:
+#   #     - /tmp/typesense-server-data:/data
+#   #   ports:
+#   #     - 8108:8108
+#   #   restart: "no"
+# ###< TypeSense ###
 
-networks:
-  dev:
+# networks:
+#   dev:
 
-volumes:
-  db-data:
+# volumes:
+#   db-data:

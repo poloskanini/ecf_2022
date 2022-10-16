@@ -16,6 +16,10 @@ export default class Filter {
     this.form = element.querySelector('.js-filter-form')
     this.bindEvents()
   }
+  /**
+  *  content = utilisateurs qui sont filtrés
+  *  form = mon formulaire _filter.html.twig
+  */
 
   /**
    * Ajoute les comportements aux différents élements

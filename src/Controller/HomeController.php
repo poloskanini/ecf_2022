@@ -17,7 +17,12 @@ class HomeController extends AbstractController
 {
     #[Route('/accueil', name: 'home')]
     #[IsGranted('ROLE_USER')]
-    public function index(UserRepository $userRepository, PartnerRepository $partnerRepository, StructureRepository $structureRepository, PermissionsRepository $permissionsRepository): Response
+    public function index(
+        UserRepository $userRepository,
+        PartnerRepository $partnerRepository,
+        StructureRepository $structureRepository,
+        PermissionsRepository $permissionsRepository): Response
+        
     {
 
         return $this->render('home/index.html.twig', [

@@ -16,7 +16,8 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            # J'ajoute le user_checker dans mon firewall pour que App\Security\UserChecker soit pris en compte
+            # J'ajoute le user_checker dans mon firewall pour que
+            # App\Security\UserChecker soit pris en compte
             user_checker: App\Security\UserChecker 
             custom_authenticator: App\Security\LoginFormAuthenticator
             logout:

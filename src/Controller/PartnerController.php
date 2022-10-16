@@ -63,6 +63,7 @@ class PartnerController extends AbstractController
                 'content' => $this->renderView('partner/_partners.html.twig', ['partners' => $partners])
             ]);
         }
+        
 
         return $this->render('partner/index.html.twig', [
             // 'users' => $users,
