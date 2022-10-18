@@ -44,7 +44,7 @@ class PartnerController extends AbstractController
         
     // INDEX FOR ALL PARTNERS IN DB
     #[Route('/', name: 'app_partner_index', methods: ['GET'])]
-    public function index(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, PermissionsRepository $permissionsRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request, PartnerRepository $partnerRepository, PermissionsRepository $permissionsRepository): Response
     {
         $partners = $partnerRepository->findAll();
        
