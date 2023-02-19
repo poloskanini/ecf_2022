@@ -75,7 +75,12 @@ class PartnerController extends AbstractController
 
     // CREATE A NEW PARTNER
     #[Route('/new', name: 'app_partner_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher): Response
+    public function new(
+        Request $request,
+        UserRepository $userRepository,
+        PartnerRepository $partnerRepository,
+        UserPasswordHasherInterface $passwordHasher): Response
+
     {
         // Notification email
         $notification = null;
@@ -189,23 +194,30 @@ class PartnerController extends AbstractController
 
     // EDIT A PARTNER
     #[Route('/edit/{id}', name: 'app_partner_edit', methods: ['GET', 'POST'])]
-    public function edit(int $id, Request $request, UserRepository $userRepository, PartnerRepository $partnerRepository, UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine, EntityManagerInterface $entityManager)
+    public function edit(
+        int $id,
+        Request $request,
+        PartnerRepository $partnerRepository,
+        ManagerRegistry $doctrine,
+        EntityManagerInterface $entityManager)
     {
+
         $partner = $partnerRepository->findOneBy(['id' => $id]); // Catch le partner qui a l'id ciblée
         $partnerUser = $partner->getUser(); // Catch l'utilisateur relié à ce partner
 
         // Récupérer les permissions du partenaire
-        $permArray = ($partner->getPermissions()->getValues()); // Ici, on a un Persistent Collection. Je le transforme en array pour pouvoir le parcourir.
+        $permArray = ($partner->getPermissions()->getValues()); 
         foreach ($permArray as $p) {
-            $permId = $p->getId(); // Je récupère l'id de cet objet permission rattaché à l'user.
+            $permId = $p->getId(); 
         }
 
-        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); // De cette façon, j'ai récupéré mon objet Entity\Permissions
+        $userPermissions = $doctrine->getRepository(Permissions::class)->find($permId); 
 
+        // Tableau regroupant les 3 entités
+        $items = ['user' => $partnerUser, 'partner' => $partner, 'permissions' => $userPermissions]; 
 
-        $items = ['user' => $partnerUser, 'partner' => $partner, 'permissions' => $userPermissions]; // Tableau regroupant les 2 entités
-
-        $form = $this->createFormBuilder($items) // Formulaire regroupant les 3 entités User, Partner, et Permissions
+        // Formulaire regroupant les 3 entités User, Partner, et Permissions
+        $form = $this->createFormBuilder($items)
             ->add('user', UserType::class, [
                 'isEdit' => true,
             ])
@@ -223,7 +235,6 @@ class PartnerController extends AbstractController
                 $entityManager->persist($partnerUser);
                 $entityManager->persist($partner);
                 $entityManager->flush();
- 
     
                 $this->addFlash(
                     'success',

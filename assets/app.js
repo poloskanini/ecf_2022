@@ -17,4 +17,7 @@ import './dashboard.js';
 // Filter
 import Filter from './filter.js';
 
+// Cookie
+import './cookie.js';
+
 new Filter(document.querySelector('.js-filter'));

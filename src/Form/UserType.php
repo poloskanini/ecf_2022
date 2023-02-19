@@ -33,6 +33,8 @@ class UserType extends AbstractType
 
         $isEdit = $options['isEdit'];
 
+        // dd($options);
+
         $builder
             ->add('roles', ChoiceType::class, [
                 'label' => 'Type d\'utilisateur',
@@ -77,7 +79,8 @@ class UserType extends AbstractType
         
 
             // Affichage conditionnel du Password.
-            // On vérifie si on se trouve dans le cas ou l’option isEdit est à true. Si ce n’est pas le cas, alors j’affiche l’édition du mot de passe sinon je l’ignore.
+            // On vérifie si on se trouve dans le cas ou l’option isEdit est à true.
+            // Si ce n’est pas le cas, alors j’affiche l’édition du mot de passe sinon je l’ignore.
             if (!$isEdit) {
                 $builder->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,
@@ -93,7 +96,7 @@ class UserType extends AbstractType
                     'second_options' => [
                         'label' => 'Confirmez votre mot de passe',
                         'attr' => [
-                            'placeholder' => 'Merci de saisir un mot de passe'
+                            'placeholder' => 'Merci de saisir votre mot de passe'
                         ]
                     ],
                 ]);

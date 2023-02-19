@@ -18,6 +18,7 @@
 // }
 // list.forEach((item) => item.addEventListener("onclick", activatedLink));
 
+window.onload = function() { 
 
 // Toggle menu
 const toggle = document.querySelector(".toggle");
@@ -47,3 +48,5 @@ modaleTriggers.forEach(trigger => trigger.addEventListener("click", toggleModale
 function toggleModale() {
   modaleContainer.classList.toggle("active");
 }
+
+};

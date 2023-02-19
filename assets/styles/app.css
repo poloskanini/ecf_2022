@@ -949,6 +949,81 @@ tr {
   font-family: 'Ms Madi', cursive;
 }
 
+/** COOKIE POPUP */
+#cookiePopup {
+  background-color: #FFF;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: .8rem;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 0 2em rgba(5, 0, 31, 0.15);
+  text-align: center;
+  padding: 1.5em 1.4em;
+  border-radius: 6px;
+  transition: all 0.5s ease-in;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cookiesTerms {
+  display: flex;
+}
+
+.cookie-unaccept {
+  text-align: right;
+}
+
+.cookie-title {
+  font-weight: 700;
+}
+
+.cookie-image {
+  display: block;
+  width: 3.75em;
+  transform: translateZ(0);
+  position: relative;
+  margin: auto;
+  margin-right: 1rem;
+}
+
+.cookie-text {
+  text-align: center;
+}
+
+#acceptCookie {
+  background-color: var(--blue);
+  color: #FFF;
+  border: none;
+  font-size: 1.2em;
+  padding: 1em 1.2em;
+  position: relative;
+  margin: auto;
+  border-radius: 5px;
+}
+
+#cookiePopup a {
+  color: var(--blue);
+}
+
+.hide {
+  visibility: hidden;
+  bottom: 0;
+  right: 2em;
+}
+
+.show {
+  visibility: visible;
+  bottom: 2em;
+  right: 2em;
+}
+
+
+
+
 /*^ ###########  Première version de la sideBar Bootstrap MDN  ########################### */
 /** SideBar First **/
 /* .sidebar {

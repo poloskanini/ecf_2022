@@ -106,12 +106,31 @@
                <small><a class="text-decoration-none text-white p-4" href="http://www.nicolasbarthes.com">handmade by NB | 2022 ©</a></small>
             </div>
         </div>
+
+        {# Cookie PopUp #}
+        <div id="cookiePopup" class="hide">
+            <div class="cookiesTerms">
+                <img class="cookie-image" src="{{ asset('build/images/cookie.png') }}" alt="profile-picture">
+                <p class="cookie-text">
+                    <strong>La protection de vos données est notre priorité.</strong> <br>
+                    Studi Fitness Group utilise et stocke des cookies afin de vous proposer la meilleure navigation possible.<br>
+                    Cela nous permet de personnaliser et d’adapter l’affichage en fonction de vos centres d’intérêt. <br>
+                    Vous pouvez, à tout moment, retirer ou modifier vos préférences et en savoir plus sur le traitement de vos données personnelles.
+                </p>
+            </div>
+            <div class="acceptTerms">
+                <button id="acceptCookie">Accepter et poursuivre</button>
+                <a href="">Continuer sans accepter</a>
+            </div>
+            
+        </div>
     </section>
 </form>
 
 {# Cookies bar pour le RGPD #}
 
 {# <script class="" id="CookieDeclaration" src="https://consent.cookiebot.com/cc6e6a66-8a45-4576-a67b-95075bddf7f9/cd.js" type="text/javascript" async></script> #}
+
 
 </body>
 </html>
